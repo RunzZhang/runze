@@ -77,14 +77,14 @@ class MainWindow(QtWidgets.QMainWindow):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "image")
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.resize(2400*R, 1400*R)  # Open at center using resized
         self.setMinimumSize(2400*R, 1400*R)
         self.setWindowTitle("SlowDAQ " + VERSION)
-        self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath, "Logo white_resized.png")))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath, "ucsb_phy.jpg")))
 
         # Tabs, backgrounds & labels
 
@@ -100,62 +100,62 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ThermosyphonTab.Background = QtWidgets.QLabel(self.ThermosyphonTab)
         self.ThermosyphonTab.Background.setScaledContents(True)
         self.ThermosyphonTab.Background.setStyleSheet('background-color:black;')
-        pixmap_thermalsyphon = QtGui.QPixmap(os.path.join(self.ImagePath, "Thermosyphon.png"))
+        pixmap_thermalsyphon = QtGui.QPixmap(os.path.join(self.ImagePath, "TS_PID.jpg"))
         pixmap_thermalsyphon = pixmap_thermalsyphon.scaledToWidth(2400*R)
         self.ThermosyphonTab.Background.setPixmap(QtGui.QPixmap(pixmap_thermalsyphon))
         self.ThermosyphonTab.Background.move(0*R, 0*R)
         self.ThermosyphonTab.Background.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.ChamberTab = QtWidgets.QWidget()
-        self.Tab.addTab(self.ChamberTab, "Inner Chamber Components")
-
-        self.ChamberTab.Background = QtWidgets.QLabel(self.ChamberTab)
-        self.ChamberTab.Background.setScaledContents(True)
-        self.ChamberTab.Background.setStyleSheet('background-color:black;')
-        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "Chamber_simplified.png"))
-        pixmap_chamber = pixmap_chamber.scaledToWidth(2400*R)
-        self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
-        self.ChamberTab.Background.move(0*R, 0*R)
-        self.ChamberTab.Background.setObjectName("ChamberBkg")
-
-        self.FluidTab = QtWidgets.QWidget()
-        self.Tab.addTab(self.FluidTab, "Fluid System")
-
-        self.FluidTab.Background = QtWidgets.QLabel(self.FluidTab)
-        self.FluidTab.Background.setScaledContents(True)
-        self.FluidTab.Background.setStyleSheet('background-color:black;')
-        pixmap_Fluid = QtGui.QPixmap(os.path.join(self.ImagePath, "CF4_XeAr_Panel_cryogenic.png"))
-        pixmap_Fluid = pixmap_Fluid.scaledToWidth(2400*R)
-        self.FluidTab.Background.setPixmap(QtGui.QPixmap(pixmap_Fluid))
-        self.FluidTab.Background.move(0*R, 0*R)
-        self.FluidTab.Background.setAlignment(QtCore.Qt.AlignCenter)
-        self.FluidTab.Background.setObjectName("FluidBkg")
-
-        self.HydraulicTab = QtWidgets.QWidget()
-        self.Tab.addTab(self.HydraulicTab, "Hydraulic Apparatus")
-
-        self.HydraulicTab.Background = QtWidgets.QLabel(self.HydraulicTab)
-        self.HydraulicTab.Background.setScaledContents(True)
-        self.HydraulicTab.Background.setStyleSheet('background-color:black;')
-        pixmap_Hydraulic = QtGui.QPixmap(os.path.join(self.ImagePath, "Hydraulic_apparatus.png"))
-        pixmap_Hydraulic = pixmap_Hydraulic.scaledToWidth(2400*R)
-        self.HydraulicTab.Background.setPixmap(QtGui.QPixmap(pixmap_Hydraulic))
-        self.HydraulicTab.Background.move(0*R, 0*R)
-        self.HydraulicTab.Background.setAlignment(QtCore.Qt.AlignCenter)
-        self.HydraulicTab.Background.setObjectName("HydraulicBkg")
-
-        self.DatanSignalTab = QtWidgets.QWidget()
-        self.Tab.addTab(self.DatanSignalTab, "Data and Signal Panel")
-
-        self.DatanSignalTab.Background = QtWidgets.QLabel(self.DatanSignalTab)
-        self.DatanSignalTab.Background.setScaledContents(True)
-        self.DatanSignalTab.Background.setStyleSheet('background-color:black;')
-        pixmap_DatanSignal = QtGui.QPixmap(os.path.join(self.ImagePath, "Default_Background.png"))
-        pixmap_DatanSignal = pixmap_DatanSignal.scaledToWidth(2400*R)
-        self.DatanSignalTab.Background.setPixmap(QtGui.QPixmap(pixmap_DatanSignal))
-        self.DatanSignalTab.Background.move(0*R, 0*R)
-        self.DatanSignalTab.Background.setAlignment(QtCore.Qt.AlignCenter)
-        self.DatanSignalTab.Background.setObjectName("DatanSignalBkg")
+        # self.ChamberTab = QtWidgets.QWidget()
+        # self.Tab.addTab(self.ChamberTab, "Inner Chamber Components")
+        #
+        # self.ChamberTab.Background = QtWidgets.QLabel(self.ChamberTab)
+        # self.ChamberTab.Background.setScaledContents(True)
+        # self.ChamberTab.Background.setStyleSheet('background-color:black;')
+        # pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "Chamber_simplified.png"))
+        # pixmap_chamber = pixmap_chamber.scaledToWidth(2400*R)
+        # self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
+        # self.ChamberTab.Background.move(0*R, 0*R)
+        # self.ChamberTab.Background.setObjectName("ChamberBkg")
+        #
+        # self.FluidTab = QtWidgets.QWidget()
+        # self.Tab.addTab(self.FluidTab, "Fluid System")
+        #
+        # self.FluidTab.Background = QtWidgets.QLabel(self.FluidTab)
+        # self.FluidTab.Background.setScaledContents(True)
+        # self.FluidTab.Background.setStyleSheet('background-color:black;')
+        # pixmap_Fluid = QtGui.QPixmap(os.path.join(self.ImagePath, "CF4_XeAr_Panel_cryogenic.png"))
+        # pixmap_Fluid = pixmap_Fluid.scaledToWidth(2400*R)
+        # self.FluidTab.Background.setPixmap(QtGui.QPixmap(pixmap_Fluid))
+        # self.FluidTab.Background.move(0*R, 0*R)
+        # self.FluidTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        # self.FluidTab.Background.setObjectName("FluidBkg")
+        #
+        # self.HydraulicTab = QtWidgets.QWidget()
+        # self.Tab.addTab(self.HydraulicTab, "Hydraulic Apparatus")
+        #
+        # self.HydraulicTab.Background = QtWidgets.QLabel(self.HydraulicTab)
+        # self.HydraulicTab.Background.setScaledContents(True)
+        # self.HydraulicTab.Background.setStyleSheet('background-color:black;')
+        # pixmap_Hydraulic = QtGui.QPixmap(os.path.join(self.ImagePath, "Hydraulic_apparatus.png"))
+        # pixmap_Hydraulic = pixmap_Hydraulic.scaledToWidth(2400*R)
+        # self.HydraulicTab.Background.setPixmap(QtGui.QPixmap(pixmap_Hydraulic))
+        # self.HydraulicTab.Background.move(0*R, 0*R)
+        # self.HydraulicTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        # self.HydraulicTab.Background.setObjectName("HydraulicBkg")
+        #
+        # self.DatanSignalTab = QtWidgets.QWidget()
+        # self.Tab.addTab(self.DatanSignalTab, "Data and Signal Panel")
+        #
+        # self.DatanSignalTab.Background = QtWidgets.QLabel(self.DatanSignalTab)
+        # self.DatanSignalTab.Background.setScaledContents(True)
+        # self.DatanSignalTab.Background.setStyleSheet('background-color:black;')
+        # pixmap_DatanSignal = QtGui.QPixmap(os.path.join(self.ImagePath, "Default_Background.png"))
+        # pixmap_DatanSignal = pixmap_DatanSignal.scaledToWidth(2400*R)
+        # self.DatanSignalTab.Background.setPixmap(QtGui.QPixmap(pixmap_DatanSignal))
+        # self.DatanSignalTab.Background.move(0*R, 0*R)
+        # self.DatanSignalTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        # self.DatanSignalTab.Background.setObjectName("DatanSignalBkg")
 
         # Data saving and recovery
         # Data setting form is ended with .ini and directory is https://doc.qt.io/archives/qtforpython-5.12/PySide2/QtCore/QSettings.html depending on the System
@@ -176,13 +176,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LoginT.Button.setText("Guest")
 
         # PLC test window
-        self.TT9998 = Indicator(self.ThermosyphonTab)
-        self.TT9998.Label.setText("TT9998")
-        self.TT9998.move(0*R, 900*R)
-
-        self.TT9999 = Indicator(self.ThermosyphonTab)
-        self.TT9999.Label.setText("TT9998")
-        self.TT9999.move(0*R, 950*R)
 
         self.GV4301 = PnID_Alone(self.ThermosyphonTab)
         self.GV4301.Label.setText("GV4301")
@@ -190,11 +183,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PRV4302 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4302.Label.setText("PRV4302")
-<<<<<<< HEAD
+
         self.PRV4302.move(300*R, 32*R)
-=======
-        self.PRV4302.move(300*R, 32)
->>>>>>> ebada16e284f7caf2b5c831e0361e86e534b88bb
+
 
         self.MCV4303 = PnID_Alone(self.ThermosyphonTab)
         self.MCV4303.Label.setText("MCV4303")
@@ -357,443 +348,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Chamber tab buttons
 
-        self.LoginP = SingleButton(self.ChamberTab)
-        self.LoginP.move(140*R, 1200*R)
-        self.LoginP.Label.setText("Login")
-        self.LoginP.Button.setText("Guest")
-
-        self.RTDset1Win = RTDset1()
-        self.RTDSET1Button = FunctionButton(self.RTDset1Win, self.ChamberTab)
-        # self.RTDSET1.StatusWindow.RTDset1()
-        self.RTDSET1Button.move(300*R, 330*R)
-        self.RTDSET1Button.Button.setText("RTDSET1")
-
-        self.RTDset2Win = RTDset2()
-        self.RTDSET2Button = FunctionButton(self.RTDset2Win, self.ChamberTab)
-        # self.RTDSET2.StatusWindow.RTDset2()
-        self.RTDSET2Button.move(300*R, 510*R)
-        self.RTDSET2Button.Button.setText("RTDSET2")
-
-        self.RTDset3Win = RTDset3()
-        self.RTDSET3Button = FunctionButton(self.RTDset3Win, self.ChamberTab)
-        # self.RTDSET3.StatusWindow.RTDset3()
-        self.RTDSET3Button.move(300*R, 610*R)
-        self.RTDSET3Button.Button.setText("RTDSET3")
-
-        self.RTDset4Win = RTDset4()
-        self.RTDSET4Button = FunctionButton(self.RTDset4Win, self.ChamberTab)
-        # self.RTDSET4.StatusWindow.RTDset4()
-        self.RTDSET4Button.move(1780*R, 1150*R)
-        self.RTDSET4Button.Button.setText("RTDSET4")
-
-        self.HT6219 = Heater(self.ChamberTab)
-        self.HT6219.move(820*R, 120*R)
-        self.HT6219.Label.setText("HT6219")
-        self.HT6219.HeaterSubWindow.setWindowTitle("HT6219")
-        self.HT6219SUB = HeaterExpand(self.HT6219.HeaterSubWindow)
-        self.HT6219SUB.Label.setText("HT6219")
-        self.HT6219SUB.FBSwitch.Combobox.setItemText(0, "PT6220")
-        self.HT6219SUB.FBSwitch.Combobox.setItemText(1, "EMPTY")
-        self.HT6219.HeaterSubWindow.VL.addWidget(self.HT6219SUB)
-        self.TT6220 = self.HT6219SUB.RTD1
-        self.TT6220.Label.setText("TT6220")
-        self.HT6219SUB.RTD2.Label.setText("EMPTY")
-
-        self.HT6221 = Heater(self.ChamberTab)
-        self.HT6221.move(1250*R, 120*R)
-        self.HT6221.Label.setText("HT6221")
-        self.HT6221.HeaterSubWindow.setWindowTitle("HT6221")
-        self.HT6221SUB = HeaterExpand(self.HT6221.HeaterSubWindow)
-        self.HT6221SUB.Label.setText("HT6221")
-        self.HT6221.HeaterSubWindow.VL.addWidget(self.HT6221SUB)
-        self.TT6222 = self.HT6221SUB.RTD1
-        self.TT6222.Label.setText("TT6222")
-        self.HT6221SUB.RTD2.Label.setText("EMPTY")
-
-        self.HT6214 = Heater(self.ChamberTab)
-        self.HT6214.move(1780*R, 145*R)
-        self.HT6214.Label.setText("HT6214")
-        self.HT6214.HeaterSubWindow.setWindowTitle("HT6214")
-        self.HT6214SUB = HeaterExpand(self.HT6214.HeaterSubWindow)
-        self.HT6214SUB.Label.setText("HT6214")
-        self.HT6214.HeaterSubWindow.VL.addWidget(self.HT6214SUB)
-        self.TT6213 = self.HT6214SUB.RTD1
-        self.TT6213.Label.setText("TT6213")
-        self.TT6401 = self.HT6214SUB.RTD2
-        self.TT6401.Label.setText("TT6401")
-
-        self.HT6216 = Heater(self.ChamberTab)
-        self.HT6216.move(1780*R, 245*R)
-        self.HT6216.Label.setText("HT6216")
-        self.HT6216.HeaterSubWindow.setWindowTitle("HT6216")
-        self.HT6216SUB = HeaterExpand(self.HT6216.HeaterSubWindow)
-        self.HT6216SUB.Label.setText("HT6216")
-        self.HT6216.HeaterSubWindow.VL.addWidget(self.HT6216SUB)
-        self.TT6215 = self.HT6216SUB.RTD1
-        self.TT6215.Label.setText("TT6215")
-        self.TT6402 = self.HT6216SUB.RTD2
-        self.TT6402.Label.setText("TT6402")
-
-        self.HT6218 = Heater(self.ChamberTab)
-        self.HT6218.move(1780*R, 345*R)
-        self.HT6218.Label.setText("HT6218")
-        self.HT6218.HeaterSubWindow.setWindowTitle("HT6218")
-        self.HT6218SUB = HeaterExpand(self.HT6218.HeaterSubWindow)
-        self.HT6218SUB.Label.setText("HT6218")
-        self.HT6218.HeaterSubWindow.VL.addWidget(self.HT6218SUB)
-        self.TT6217 = self.HT6218SUB.RTD1
-        self.TT6217.Label.setText("TT6217")
-        self.TT6403 = self.HT6218SUB.RTD2
-        self.TT6403.Label.setText("TT6403")
-
-        self.HT6202 = Heater(self.ChamberTab)
-        self.HT6202.move(1780*R, 485*R)
-        self.HT6202.Label.setText("HT6202")
-        self.HT6202.HeaterSubWindow.setWindowTitle("HT6202")
-        self.HT6202SUB = HeaterExpand(self.HT6202.HeaterSubWindow)
-        self.HT6202SUB.Label.setText("HT6202")
-        self.HT6202.HeaterSubWindow.VL.addWidget(self.HT6202SUB)
-        self.TT6203 = self.HT6202SUB.RTD1
-        self.TT6203.Label.setText("TT6203")
-        self.TT6404 = self.HT6202SUB.RTD2
-        self.TT6404.Label.setText("TT6404")
-
-        self.HT6206 = Heater(self.ChamberTab)
-        self.HT6206.move(1780*R, 585*R)
-        self.HT6206.Label.setText("HT6206")
-        self.HT6206.HeaterSubWindow.setWindowTitle("HT6206")
-        self.HT6206SUB = HeaterExpand(self.HT6206.HeaterSubWindow)
-        self.HT6206SUB.Label.setText("HT6206")
-        self.HT6206.HeaterSubWindow.VL.addWidget(self.HT6206SUB)
-        self.TT6207 = self.HT6206SUB.RTD1
-        self.TT6207.Label.setText("TT6207")
-        self.TT6405 = self.HT6206SUB.RTD2
-        self.TT6405.Label.setText("TT6405")
-
-        self.HT6210 = Heater(self.ChamberTab)
-        self.HT6210.move(1780*R, 685*R)
-        self.HT6210.Label.setText("HT6210")
-        self.HT6210.HeaterSubWindow.setWindowTitle("HT6210")
-        self.HT6210SUB = HeaterExpand(self.HT6210.HeaterSubWindow)
-        self.HT6210SUB.Label.setText("HT6210")
-        self.HT6210.HeaterSubWindow.VL.addWidget(self.HT6210SUB)
-        self.TT6211 = self.HT6210SUB.RTD1
-        self.TT6211.Label.setText("TT6211")
-        self.TT6406 = self.HT6210SUB.RTD2
-        self.TT6406.Label.setText("TT6406")
-
-        self.HT6223 = Heater(self.ChamberTab)
-        self.HT6223.move(1780*R, 785*R)
-        self.HT6223.Label.setText("HT6223")
-        self.HT6223.HeaterSubWindow.setWindowTitle("HT6223")
-        self.HT6223SUB = HeaterExpand(self.HT6223.HeaterSubWindow)
-        self.HT6223SUB.Label.setText("HT6223")
-        self.HT6223.HeaterSubWindow.VL.addWidget(self.HT6223SUB)
-        self.TT6407 = self.HT6223SUB.RTD1
-        self.TT6407.Label.setText("TT6407")
-        self.TT6410 = self.HT6223SUB.RTD2
-        self.TT6410.Label.setText("TT6410")
-
-        self.HT6224 = Heater(self.ChamberTab)
-        self.HT6224.move(1780*R, 885*R)
-        self.HT6224.Label.setText("HT6224")
-        self.HT6224.HeaterSubWindow.setWindowTitle("HT6224")
-        self.HT6224SUB = HeaterExpand(self.HT6224.HeaterSubWindow)
-        self.HT6224SUB.Label.setText("HT6224")
-        self.HT6224.HeaterSubWindow.VL.addWidget(self.HT6224SUB)
-        self.TT6408 = self.HT6224SUB.RTD1
-        self.TT6408.Label.setText("TT6408")
-        self.TT6411 = self.HT6224SUB.RTD2
-        self.TT6411.Label.setText("TT6411")
-
-        self.HT6225 = Heater(self.ChamberTab)
-        self.HT6225.move(1780*R, 985*R)
-        self.HT6225.Label.setText("HT6225")
-        self.HT6225.HeaterSubWindow.setWindowTitle("HT6225")
-        self.HT6225SUB = HeaterExpand(self.HT6225.HeaterSubWindow)
-        self.HT6225SUB.Label.setText("HT6225")
-        self.HT6225.HeaterSubWindow.VL.addWidget(self.HT6225SUB)
-        self.TT6409 = self.HT6225SUB.RTD1
-        self.TT6409.Label.setText("TT6409")
-        self.TT6412 = self.HT6225SUB.RTD2
-        self.TT6412.Label.setText("TT6412")
-
-        self.HT2123 = Heater(self.ChamberTab)
-        self.HT2123.move(670*R, 820*R)
-        self.HT2123.Label.setText("HT2123")
-        self.HT2123.HeaterSubWindow.setWindowTitle("HT2123")
-        self.HT2123SUB = HeaterExpand(self.HT2123.HeaterSubWindow)
-        self.HT2123SUB.Label.setText("HT2123")
-        self.HT2123.HeaterSubWindow.VL.addWidget(self.HT2123SUB)
-        self.HT2123SUB.RTD1.Label.setText("EMPTY")
-        self.HT2123SUB.RTD2.Label.setText("EMPTY")
-
-        self.HT2124 = Heater(self.ChamberTab)
-        self.HT2124.move(670*R, 820*R)
-        self.HT2124.Label.setText("HT2124")
-        self.HT2124.HeaterSubWindow.setWindowTitle("HT2124")
-        self.HT2124SUB = HeaterExpand(self.HT2124.HeaterSubWindow)
-        self.HT2124SUB.Label.setText("HT2124")
-        self.HT2124.HeaterSubWindow.VL.addWidget(self.HT2124SUB)
-        self.HT2124SUB.RTD1.Label.setText("EMPTY")
-        self.HT2124SUB.RTD2.Label.setText("EMPTY")
-
-        self.HT2125 = Heater(self.ChamberTab)
-        self.HT2125.move(1030*R, 730*R)
-        self.HT2125.Label.setText("HT2125")
-        self.HT2125.HeaterSubWindow.setWindowTitle("HT2125")
-        self.HT2125SUB = HeaterExpand(self.HT2125.HeaterSubWindow)
-        self.HT2125SUB.Label.setText("HT2125")
-        self.HT2125.HeaterSubWindow.VL.addWidget(self.HT2125SUB)
-        self.HT2125SUB.RTD1.Label.setText("EMPTY")
-        self.HT2125SUB.RTD2.Label.setText("EMPTY")
-
-        self.PT1101 = Indicator(self.ChamberTab)
-        self.PT1101.move(940*R, 990*R)
-        self.PT1101.Label.setText("PT1101")
-        self.PT1101.SetUnit(" psi")
-
-        self.PT2121 = Indicator(self.ChamberTab)
-        self.PT2121.move(1210*R, 990*R)
-        self.PT2121.Label.setText("PT2121")
-        self.PT2121.SetUnit(" psi")
-
-        self.HT1202 = Heater(self.ChamberTab)
-        self.HT1202.move(840*R, 1250*R)
-        self.HT1202.Label.setText("HT1202")
-        self.HT1202.HeaterSubWindow.setWindowTitle("HT1202")
-        self.HT1202SUB = HeaterExpand(self.HT1202.HeaterSubWindow)
-        self.HT1202SUB.Label.setText("HT1202")
-        self.HT1202.HeaterSubWindow.VL.addWidget(self.HT1202SUB)
-        self.TT6413 = self.HT1202SUB.RTD1
-        self.TT6413.Label.setText("TT6413")
-        self.TT6415 = self.HT1202SUB.RTD2
-        self.TT6415.Label.setText("TT6415")
-
-        self.HT2203 = Heater(self.ChamberTab)
-        self.HT2203.move(1260*R, 1215*R)
-        self.HT2203.Label.setText("HT2203")
-        self.HT2203.HeaterSubWindow.setWindowTitle("HT2203")
-        self.HT2203SUB = HeaterExpand(self.HT2203.HeaterSubWindow)
-        self.HT2203SUB.Label.setText("HT2203")
-        self.HT2203.HeaterSubWindow.VL.addWidget(self.HT2203SUB)
-        self.TT6414 = self.HT2203SUB.RTD1
-        self.TT6414.Label.setText("TT6414")
-        self.TT6416 = self.HT2203SUB.RTD2
-        self.TT6416.Label.setText("TT6416")
-
-        # Fluid tab buttons
-
-        self.PT2316 = Indicator(self.FluidTab)
-        self.PT2316.move(1900*R, 360*R)
-        self.PT2316.Label.setText("PT2316")
-        self.PT2316.SetUnit(" psi")
-
-        self.PT2330 = Indicator(self.FluidTab)
-        self.PT2330.move(1780*R, 360*R)
-        self.PT2330.Label.setText("PT2330")
-        self.PT2330.SetUnit(" psi")
-
-        self.PT2335 = Indicator(self.FluidTab)
-        self.PT2335.move(1590*R, 420*R)
-        self.PT2335.Label.setText("PT2335")
-        self.PT2335.SetUnit(" psi")
-
-        self.TT7401 = Indicator(self.FluidTab)
-        self.TT7401.move(1985*R, 250*R)
-        self.TT7401.Label.setText("TT7401")
-
-        self.TT7202 = Indicator(self.FluidTab)
-        self.TT7202.move(910*R, 530*R)
-        self.TT7202.Label.setText("TT7202")
-
-        self.LI2340 = Indicator(self.FluidTab)
-        self.LI2340.move(2250*R, 880*R)
-        self.LI2340.Label.setText("LI2340 ")
-
-        self.PT1101Fluid = Indicator(self.FluidTab)
-        self.PT1101Fluid.move(1030*R, 1300*R)
-        self.PT1101Fluid.Label.setText("PT1101")
-        self.PT1101Fluid.SetUnit(" psi")
-
-        self.PT2121Fluid = Indicator(self.FluidTab)
-        self.PT2121Fluid.move(1260*R, 1300*R)
-        self.PT2121Fluid.Label.setText("PT2121")
-        self.PT2121Fluid.SetUnit(" psi")
-
-        self.MFC1316 = Heater(self.FluidTab)
-        self.MFC1316.move(400*R, 800*R)
-        self.MFC1316.Label.setText("MFC1316")
-        self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
-        self.MFC1316SUB = HeaterExpand(self.MFC1316.HeaterSubWindow)
-        self.MFC1316SUB.Label.setText("MFC1316")
-        self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
-        self.PT1332SUB = self.MFC1316SUB.RTD1
-        self.PT1332SUB.Label.setText("TT6220")
-        self.MFC1316SUB.RTD2.Label.setText("EMPTY")
-
-        self.PT1332 = Indicator(self.FluidTab)
-        self.PT1332.move(630*R, 900*R)
-        self.PT1332.Label.setText("PT1332")
-        self.PT1332.SetUnit(" psi")
-
-<<<<<<< HEAD
-        self.SV5305 = Valve(self.FluidTab)
-        self.SV5305.Label.setText("SV5305")
-        self.SV5305.move(1200*R, 530*R)
-
-        self.SV5306 = Valve(self.FluidTab)
-        self.SV5306.Label.setText("SV5306")
-        self.SV5306.move(1150*R, 800*R)
-
-        self.SV5307 = Valve(self.FluidTab)
-        self.SV5307.Label.setText("SV5307")
-        self.SV5307.move(1030*R, 620*R)
-
-        self.SV5309 = Valve(self.FluidTab)
-        self.SV5309.Label.setText("SV5309")
-        self.SV5309.move(1130*R, 310*R)
-=======
-        self.PV5305 = Valve(self.FluidTab)
-        self.PV5305.Label.setText("PV5305")
-        self.PV5305.move(1200*R, 530*R)
-
-        self.PV5306 = Valve(self.FluidTab)
-        self.PV5306.Label.setText("PV5306")
-        self.PV5306.move(1150*R, 800*R)
-
-        self.PV5307 = Valve(self.FluidTab)
-        self.PV5307.Label.setText("PV5307")
-        self.PV5307.move(1030*R, 620*R)
-
-        self.PV5309 = Valve(self.FluidTab)
-        self.PV5309.Label.setText("PV5309")
-        self.PV5309.move(1130*R, 310*R)
->>>>>>> ebada16e284f7caf2b5c831e0361e86e534b88bb
-
-        # Hydraulic buttons
-        self.PU3305 = Valve(self.HydraulicTab)
-        self.PU3305.Label.setText("PU3305")
-        self.PU3305.move(365*R, 380*R)
-
-        self.TT3401 = Indicator(self.HydraulicTab)
-        self.TT3401.move(385*R, 500*R)
-        self.TT3401.Label.setText("TT3401")
-
-        self.TT3402 = Indicator(self.HydraulicTab)
-<<<<<<< HEAD
-        self.TT3402.move(90*R, 53*R)
-=======
-        self.TT3402.move(90*R, 53)
->>>>>>> ebada16e284f7caf2b5c831e0361e86e534b88bb
-        self.TT3402.Label.setText("TT3402")
-
-        self.PT3314 = Indicator(self.HydraulicTab)
-        self.PT3314.move(700*R, 450*R)
-        self.PT3314.Label.setText("PT3314")
-        self.PT3314.SetUnit(" psi")
-
-        self.PT3320 = Indicator(self.HydraulicTab)
-        self.PT3320.move(880*R, 530*R)
-        self.PT3320.Label.setText("PT3320")
-        self.PT3320.SetUnit(" psi")
-
-        self.PT3308 = Indicator(self.HydraulicTab)
-        self.PT3308.move(440*R, 1080*R)
-        self.PT3308.Label.setText("PT3308")
-        self.PT3308.SetUnit(" psi")
-
-        self.PT3309 = Indicator(self.HydraulicTab)
-        self.PT3309.move(665*R, 1140*R)
-        self.PT3309.Label.setText("PT3309")
-        self.PT3309.SetUnit(" psi")
-
-        self.PT3311 = Indicator(self.HydraulicTab)
-        self.PT3311.move(750*R, 1110*R)
-        self.PT3311.Label.setText("PT3311")
-        self.PT3311.SetUnit(" psi")
-
-        self.HFSV3312 = Valve(self.HydraulicTab)
-        self.HFSV3312.Label.setText("HFSV3312")
-        self.HFSV3312.move(650*R, 1030*R)
-
-        self.HFSV3323 = Valve(self.HydraulicTab)
-        self.HFSV3323.Label.setText("HFSV3323")
-        self.HFSV3323.move(1050*R, 1080*R)
-
-        self.HFSV3331 = Valve(self.HydraulicTab)
-        self.HFSV3331.Label.setText("HFSV3331")
-        self.HFSV3331.move(1100*R, 320*R)
-
-        self.PT3332 = Indicator(self.HydraulicTab)
-        self.PT3332.move(1570*R, 1125*R)
-        self.PT3332.Label.setText("PT3332")
-        self.PT3332.SetUnit(" psi")
-
-        self.PT3333 = Indicator(self.HydraulicTab)
-        self.PT3333.move(1570*R, 1250*R)
-        self.PT3333.Label.setText("PT3333")
-        self.PT3333.SetUnit(" psi")
-
-        self.SV3326 = Valve(self.HydraulicTab)
-        self.SV3326.Label.setText("SV3326")
-        self.SV3326.move(1200*R, 400*R)
-
-        self.SV3329 = Valve(self.HydraulicTab)
-        self.SV3329.Label.setText("SV3329")
-        self.SV3329.move(1570*R, 470*R)
-
-        self.SV3322 = Valve(self.HydraulicTab)
-        self.SV3322.Label.setText("SV3322")
-        self.SV3322.move(1000*R, 780*R)
-
-        self.SERVO3321 = AOMultiLoop(self.HydraulicTab)
-        self.SERVO3321.move(1200*R, 550*R)
-        self.SERVO3321.Label.setText("SERVO3321")
-        self.SERVO3321.HeaterSubWindow.setWindowTitle("SERVO3321")
-        self.SERVO3321SUB = AOMutiLoopExpand(self.SERVO3321.HeaterSubWindow)
-        self.SERVO3321SUB.Label.setText("SERVO3321")
-        self.SERVO3321.HeaterSubWindow.VL.addWidget(self.SERVO3321SUB)
-        self.SERVO3321SUB.RTD1.Label.setText("EMPTY")
-        self.SERVO3321SUB.RTD2.Label.setText("EMPTY")
-
-        self.SV3325 = Valve(self.HydraulicTab)
-        self.SV3325.Label.setText("SV3325")
-        self.SV3325.move(1200*R, 1000*R)
-
-        self.SV3307 = Valve(self.HydraulicTab)
-        self.SV3307.Label.setText("SV3307")
-        self.SV3307.move(200*R, 1030*R)
-
-        self.SV3310 = Valve(self.HydraulicTab)
-        self.SV3310.Label.setText("SV3310")
-        self.SV3310.move(800*R, 1240*R)
-
-        self.TT7403 = Indicator(self.HydraulicTab)
-        self.TT7403.move(1880*R, 950*R)
-        self.TT7403.Label.setText("TT7403")
-
-        self.LI3335 = Indicator(self.HydraulicTab)
-        self.LI3335.move(2100*R, 950*R)
-        self.LI3335.Label.setText("LI3335 ")
-
-        self.LT3338 = Indicator(self.HydraulicTab)
-        self.LT3338.move(2100*R, 990*R)
-        self.LT3338.Label.setText("LT3338 ")
-
-        self.LT3339 = Indicator(self.HydraulicTab)
-        self.LT3339.move(2100*R, 1030*R)
-        self.LT3339.Label.setText("LT3339 ")
-
-        self.PT1101Hy = Indicator(self.HydraulicTab)
-        self.PT1101Hy.move(1900*R, 800*R)
-        self.PT1101Hy.Label.setText("PT1101")
-        self.PT1101Hy.SetUnit(" psi")
-
-        self.PT2121Hy = Indicator(self.HydraulicTab)
-        self.PT2121Hy.move(2100*R, 800*R)
-        self.PT2121Hy.Label.setText("PT2121")
-        self.PT2121Hy.SetUnit(" psi")
 
         # Data and Signal Tab
         self.ReadSettings = Loadfile(self.DatanSignalTab)
