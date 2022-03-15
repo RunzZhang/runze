@@ -11,15 +11,13 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 """
 
 import struct, time, zmq, sys, pickle
-import struct, time, zmq, sys
-
+import numpy as np
 from PySide2 import QtWidgets, QtCore, QtGui
 from Database_SBC import *
 from email.mime.text import MIMEText
 from email.header import Header
 from smtplib import SMTP_SSL
 import requests
-import sys
 import os
 
 # delete random number package when you read real data from PLC
@@ -32,6 +30,22 @@ def exception_hook(exctype, value, traceback):
     # sys._excepthook(exctype, value, traceback)
     sys.exit(1)
 sys.excepthook = exception_hook
+
+#output address to attribute function in FP ()
+def FPADS_OUT_AT(outaddress):
+    # 1e5 digit
+    e5 = outaddress // 10000
+    e4 = (outaddress % 10000) // 1000
+    e3 = (outaddress % 1000) // 100
+    e2 = (outaddress % 100) // 10
+    e1 = (outaddress % 10) // 1
+    new_e5 = e5-2
+    new_e4 = e4
+    new_e321=(e3*100+e2*10+e1)*4
+    new_address=new_e5*10000+new_e4*1000+new_e321
+    print(e5,e4,e3,e2,e1)
+    print(new_address)
+    return new_address
 
 
 class PLC:
@@ -53,230 +67,51 @@ class PLC:
         print(" Beckoff connected: " + str(self.Connected_BO))
 
 
-        self.TT_FP_address = {"TT2420": 31000, "TT2422": 31002, "TT2424": 31004, "TT2425": 31006, "TT2442": 36000,
-                              "TT2403": 31008, "TT2418": 31010, "TT2427": 31012, "TT2429": 31014, "TT2431": 32000,
-                              "TT2441": 36002, "TT2414": 32002, "TT2413": 32004, "TT2412": 32006, "TT2415": 32008,
-                              "TT2409": 36004, "TT2436": 32010, "TT2438": 32012, "TT2440": 32014, "TT2402": 33000,
-                              "TT2411": 38004, "TT2443": 36006, "TT2417": 33004, "TT2404": 33006, "TT2408": 33008,
-                              "TT2407": 33010, "TT2406": 36008, "TT2428": 33012, "TT2432": 33014, "TT2421": 34000,
-                              "TT2416": 38006, "TT2439": 36010, "TT2419": 34004, "TT2423": 34006, "TT2426": 34008,
-                              "TT2430": 34010, "TT2450": 36012, "TT2401": 34012, "TT2449": 34014, "TT2445": 35000,
-                              "TT2444": 35002, "TT2435": 35004, "TT2437": 36014, "TT2446": 35006, "TT2447": 35008,
-                              "TT2448": 35010, "TT2410": 35012, "TT2405": 35014, "TT6220": 37000, "TT6401": 37002,
-                              "TT6404": 37004, "TT6405": 37006, "TT6406": 37008, "TT6410": 37010, "TT6411": 37012,
-                              "TT6412": 37014, "TT6413": 38000, "TT6414": 38002}
-
-        self.TT_BO_address = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
-                           "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
-                           "TT6222": 13008, "TT6407": 13010, "TT6408": 13012, "TT6409": 13014, "TT6415": 13016,
-                           "TT6416": 13018}
-
-        self.PT_address={"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800, "PT2335": 12802,
-                         "PT3308": 12804, "PT3309": 12806, "PT3311": 12808, "PT3314": 12810, "PT3320": 12812,
-                         "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
-                         "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
-
-        self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
-                              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
-                              "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
-                              "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
-                              "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
-                              "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
-                              "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
-                              "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
-                              "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
-                              "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
-                              "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
-                              "TT6412": 0, "TT6413": 0, "TT6414": 0}
-
-        self.TT_BO_dic={"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
-                     "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
-                     "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
-
-        self.PT_dic = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
-                       "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                       "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-                       "PT4322": 0, "PT4325": 0, "PT6302": 0}
-
-        self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
-                              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
-                              "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
-                              "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
-                              "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
-                              "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
-                              "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
-                              "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
-                              "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
-                              "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
-                              "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
-                              "TT6412": 0, "TT6413": 0, "TT6414": 0}
-
-        self.TT_FP_HighLimit = {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30, "TT2442": 30,
-                              "TT2403": 30, "TT2418": 30, "TT2427": 30, "TT2429": 30, "TT2431": 30,
-                              "TT2441": 30, "TT2414": 30, "TT2413": 30, "TT2412": 30, "TT2415": 30,
-                              "TT2409": 30, "TT2436": 30, "TT2438": 30, "TT2440": 30, "TT2402": 30,
-                              "TT2411": 30, "TT2443": 30, "TT2417": 30, "TT2404": 30, "TT2408": 30,
-                              "TT2407": 30, "TT2406": 30, "TT2428": 30, "TT2432": 30, "TT2421": 30,
-                              "TT2416": 30, "TT2439": 30, "TT2419": 30, "TT2423": 30, "TT2426": 30,
-                              "TT2430": 30, "TT2450": 30, "TT2401": 30, "TT2449": 30, "TT2445": 30,
-                              "TT2444": 30, "TT2435": 30, "TT2437": 30, "TT2446": 30, "TT2447": 30,
-                              "TT2448": 30, "TT2410": 30, "TT2405": 30, "TT6220": 30, "TT6401": 30,
-                              "TT6404": 30, "TT6405": 30, "TT6406": 30, "TT6410": 30, "TT6411": 30,
-                              "TT6412": 30, "TT6413": 30, "TT6414": 30}
-
-        self.TT_BO_LowLimit = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
-                            "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
-                            "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
+        self.TT_FP_address = {"TT2420": 10001}
 
 
-        self.TT_BO_HighLimit = {"TT2101": 30, "TT2111": 30, "TT2113": 30, "TT2118": 30, "TT2119": 30, "TT4330": 30,
-                            "TT6203": 30, "TT6207": 30, "TT6211": 30, "TT6213": 30, "TT6222": 30,
-                            "TT6407": 30, "TT6408": 30, "TT6409": 30, "TT6415": 30, "TT6416": 30}
+        self.PT_address={'PT1012':10012,'PT1013':10013,'PT10014':10014}
 
-        self.PT_LowLimit = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
-                            "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                            "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-                            "PT4322": 0, "PT4325": 0, "PT6302": 0}
-        self.PT_HighLimit = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2335": 300,
-                            "PT3308": 300, "PT3309": 300, "PT3311": 300, "PT3314": 300, "PT3320": 300,
-                            "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
-                            "PT4322": 300, "PT4325": 300, "PT6302": 300}
+        self.TT_FP_dic = {"TT2420": 0}
 
-        self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2442": True,
-                              "TT2403": True, "TT2418": True, "TT2427": True, "TT2429": True, "TT2431": True,
-                              "TT2441": True, "TT2414": True, "TT2413": True, "TT2412": True, "TT2415": True,
-                              "TT2409": True, "TT2436": True, "TT2438": True, "TT2440": True, "TT2402": True,
-                              "TT2411": True, "TT2443": True, "TT2417": True, "TT2404": True, "TT2408": True,
-                              "TT2407": True, "TT2406": True, "TT2428": True, "TT2432": True, "TT2421": True,
-                              "TT2416": True, "TT2439": True, "TT2419": True, "TT2423": True, "TT2426": True,
-                              "TT2430": True, "TT2450": True, "TT2401": True, "TT2449": True, "TT2445": True,
-                              "TT2444": True, "TT2435": True, "TT2437": True, "TT2446": True, "TT2447": True,
-                              "TT2448": True, "TT2410": True, "TT2405": True, "TT6220": True, "TT6401": True,
-                              "TT6404": True, "TT6405": True, "TT6406": True, "TT6410": True, "TT6411": True,
-                              "TT6412": True, "TT6413": True, "TT6414": True}
+        self.PT_dic = {'PT1012':0,'PT1013':0,'PT10014':0}
 
-        self.TT_BO_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
-                             "TT6203": True, "TT6207": True, "TT6211": True, "TT6213": True, "TT6222": True,
-                             "TT6407": True, "TT6408": True, "TT6409": True, "TT6415": True, "TT6416": True}
+        self.TT_FP_LowLimit = {"TT2420": 0}
 
-        self.PT_Activated = {"PT1325": True, "PT2121": True, "PT2316": True, "PT2330": True, "PT2335": True,
-                             "PT3308": True, "PT3309": True, "PT3311": True, "PT3314": True, "PT3320": True,
-                             "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, "PT4319": True,
-                             "PT4322": True, "PT4325": True, "PT6302": True}
+        self.TT_FP_HighLimit = {"TT2420": 30}
 
-        self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
-                              "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
-                              "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
-                              "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
-                              "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
-                              "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
-                              "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
-                              "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
-                              "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
-                              "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
-                              "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
-                              "TT6412": False, "TT6413": False, "TT6414": False}
+        self.PT_LowLimit = {'PT1012':0,'PT1013':0,'PT10014':0}
+        self.PT_HighLimit = {'PT1012':300,'PT1013':300,'PT10014':300}
 
-        self.TT_BO_Alarm = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
-                         "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
-                         "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
+        self.TT_FP_Activated = {"TT2420": True}
 
-        self.PT_Alarm = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
-                         "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
-                         "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
-                         "PT4322": False, "PT4325": False, "PT6302": False}
+        self.PT_Activated = {"PT1012": True, "PT1013": True, "PT1014": True}
+
+        self.TT_FP_Alarm = {"TT2420": False}
+
+        self.PT_Alarm = {"PT1012": False, "PT1013": False, "PT1014": False}
+
         self.MainAlarm = False
-        self.nTT_BO = len(self.TT_BO_address)
         self.nTT_FP = len(self.TT_FP_address)
         self.nPT = len(self.PT_address)
-        self.TT_BO_setting = [0.] * self.nTT_BO
-        self.nTT_BO_Attribute = [0.] * self.nTT_BO
         self.PT_setting = [0.] * self.nPT
         self.nPT_Attribute = [0.] * self.nPT
 
-        self.valve_address = {"PV1344": 12288, "PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
-                        "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
-                        "PV5307": 12297, "PV5309": 12298, "SV3307": 12299, "SV3310": 12300, "SV3322": 12301,
-                        "SV3325": 12302, "SV3326": 12303, "SV3329": 12304,
-                        "SV4327": 12305, "SV4328": 12306, "SV4329": 12307, "SV4331": 12308, "SV4332": 12309,
-                        "SV4337": 12310, "HFSV3312":12311, "HFSV3323": 12312, "HFSV3331": 12313}
+        self.valve_address = {'PV1001':10001,'PV1002':10002,'PV1003':10003,'PV1004':10004,'PV1005':10005,'PV1006':10006,'PV1007':10007}
         self.nValve = len(self.valve_address)
         self.Valve = {}
-        self.Valve_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
-                          "PV4324": 0, "PV5305": 0, "PV5306": 0,
-                          "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
-                          "SV3325": 0, "SV3326": 0, "SV3329": 0,
-                          "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
-                          "SV4337": 0, "HFSV3312":0, "HFSV3323": 0, "HFSV3331": 0}
-        self.Valve_MAN = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                          "PV4324": False, "PV5305": True, "PV5306": True,
-                          "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
-                          "SV3325": True, "SV3326": True, "SV3329": True,
-                          "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                          "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True}
-        self.Valve_INTLKD = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                          "PV4324": False, "PV5305": False, "PV5306": False,
-                          "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                          "SV3325": False, "SV3326": False, "SV3329": False,
-                          "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                          "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
-        self.Valve_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                          "PV4324": False, "PV5305": False, "PV5306": False,
-                          "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                          "SV3325": False, "SV3326": False, "SV3329": False,
-                          "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                          "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
-        # self.PT80 = 0.
-        # self.FlowValve = 0.
-        # self.BottomChillerSetpoint = 0.
-        # self.BottomChillerTemp = 0.
-        # self.BottomChillerState = 0
-        # self.BottomChillerPowerReset = 0
-        # self.TopChillerSetpoint = 0.
-        # self.TopChillerTemp = 0.
-        # self.TopChillerState = 0
-        # self.CameraChillerSetpoint = 0.
-        # self.CameraChillerTemp = 0.
-        # self.CameraChillerState = 0
-        # self.WaterChillerSetpoint = 0.
-        # self.WaterChillerTemp = 0.
-        # self.WaterChillerPressure = 0.
-        # self.WaterChillerState = 0
-        # self.InnerPower = 0.
-        # self.OuterClosePower = 0.
-        # self.OuterFarPower = 0.
-        # self.FreonPower = 0.
-        # self.ColdRegionSetpoint = 0.
-        # self.HotRegionSetpoint = 0.
-        # self.HotRegionP = 0.
-        # self.HotRegionI = 0.
-        # self.HotRegionD = 0.
-        # self.ColdRegionP = 0.
-        # self.ColdRegionI = 0.
-        # self.ColdRegionD = 0.
-        # self.HotRegionPIDState = 0
-        # self.ClodRegionPIDState = 0
-        # self.Camera0Temp = 0.
-        # self.Camera0Humidity = 0.
-        # self.Camera0AirTemp = 0.
-        # self.Camera1Temp = 0.
-        # self.Camera1Humidity = 0.
-        # self.Camera1AirTemp = 0.
-        # self.Camera2Temp = 0.
-        # self.Camera2Humidity = 0.
-        # self.Camera2AirTemp = 0.
-        # self.Camera3Temp = 0.
-        # self.Camera3Humidity = 0.
-        # self.Camera3AirTemp = 0.
-        # self.WaterFlow = 0.
-        # self.WaterTemp = 0.
-        # self.WaterConductivityBefore = 0.
-        # self.WaterConductivityAfter = 0.
-        # self.WaterPressure = 0.
-        # self.WaterLevel = 0.
-        # self.WaterPrimingPower = 0
-        # self.WaterPrimingStatus = 0
-        # self.BeetleStatus = 0
+        self.Valve_OUT = {"PV1001": 0, "PV1002": 0, "PV1003": 0, "PV1004": 0, "PV1005": 0, "PV1006": 0,
+                          "PV1007": 0, "MFC1008": 0}
+
+        self.Valve_MAN = {"PV1001": True, "PV1002": True, "PV1003": True, "PV1004": True, "PV1005": True, "PV1006": True,
+                          "PV1007": True, "MFC1008": True}
+
+        self.Valve_INTLKD = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
+                             "PV1007": False, "MFC1008": False}
+
+        self.Valve_ERR = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
+                          "PV1007": False, "MFC1008": False}
+
         self.LiveCounter = 0
         self.NewData_Display = False
         self.NewData_Database = False
@@ -287,6 +122,7 @@ class PLC:
         self.Client_BO.close()
 
     def ReadAll(self):
+
         if self.Connected:
             # Reading all the RTDs
             Raw_RTDs_FP={}
@@ -295,6 +131,19 @@ class PLC:
                 self.TT_FP_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
                 # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
+
+            # # Set Attributes could be commented(disabled) after it is done
+            # Attribute_TTFP_address = {}
+            # Raw_TT_FP_Attribute = {}
+            # for key in self.TT_FP_address:
+            #     Attribute_TTFP_address[key] = FPADS_OUT_AT(self.TT_FP_address[key])
+            # print(Attribute_TTFP_address)
+            # for key in Attribute_TTFP_address:
+            #     print(self.ReadFPAttribute(address = Attribute_TTFP_address[key]))
+            #
+            #     # self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
+
+                ####################################################################################
         #
         #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
         #     for i in range(0, self.nRTD):
@@ -319,8 +168,8 @@ class PLC:
                 Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=2, unit=0x01)
                 self.TT_BO_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
-                print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
-                print(key, "'s' value is", self.TT_BO_dic[key])
+                # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
+                # print(key, "'s' value is", self.TT_BO_dic[key])
 
             # for key in self.TT_BO_address:
             #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=4, unit=0x01)
@@ -361,132 +210,77 @@ class PLC:
                 # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
                 # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
 
-            # PT80 (Cold Vacuum Conduit Pressure)
-            # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
-            # self.PT80 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 7)
+            Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
+            for key in self.LOOPPID_ADR_BASE:
+                self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE1[key] = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE2[key] = self.ReadCoil(2**2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE3[key] = self.ReadCoil(2**3, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_INTLKD[key] = self.ReadCoil(2**8, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MAN[key] = self.ReadCoil(2 ** 9, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_ERR[key] = self.ReadCoil(2 ** 10, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATHI[key] = self.ReadCoil(2 ** 11, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATLO[key] = self.ReadCoil(2 ** 12, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_EN[key] = self.ReadCoil(2 ** 15, self.LOOPPID_ADR_BASE[key])
+                Raw_LOOPPID_2[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key]+2, count=2, unit=0x01)
+                Raw_LOOPPID_4[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 4, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_6[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 6, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_8[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 8, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_10[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 10, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_12[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 12, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_14[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 14, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_16[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 16, count=2,
+                                                                           unit=0x01)
+
+                self.LOOPPID_OUT[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(1),
+                                                    Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
+
+                self.LOOPPID_IN[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
+                self.LOOPPID_HI_LIM[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_6[key].getRegister(0)))[0], 3)
+                self.LOOPPID_LO_LIM[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_8[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET0[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET1[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET2[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET3[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
+
+
+            #test the writing function
+            # print(self.Read_BO_2(14308))
+            # Raw_BO = self.Client_BO.read_holding_registers(14308, count=2, unit=0x01)
+            # print('Raw0',Raw_BO.getRegister(0))
+            # print('Raw1', Raw_BO.getRegister(1))
+            # output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
+            #                       0], 3)
+            # self.Write_BO_2(14308,2.0)
+            # print(self.Read_BO_2(14308))
+
+
+            # print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
             #
-            # Flow valve
-            #            Raw = self.Client.read_holding_registers(0x, count = 2, unit = 0x01)
-            #            self.FlowValve = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1),
-            #            Raw.getRegister(0)))[0], 0)
+            # print("other",self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
+            #           "\n")
 
-            # Bottom chiller
-            # Raw = self.Client.read_holding_registers(0xA8, count = 4, unit = 0x01)
-            # self.BottomChillerSetpoint = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            # self.BottomChillerTemp = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            # Raw = self.Client.read_coils(0x10, count = 1, unit = 0x01)
-            # self.BottomChillerState = Raw.bits[0]
-            #            self.BottomChillerPowerReset = Raw.bits[0]
-
-            # Top chiller
-            # Raw = self.Client.read_holding_registers(0xB0, count = 4, unit = 0x01)
-            # self.TopChillerSetpoint = round(struct.unpack
-            # ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            # self.TopChillerTemp = round(struct.unpack
-            # ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            # Raw = self.Client.read_coils(0x13, count = 1, unit = 0x01)
-            # self.TopChillerState = Raw.bits[0]
-
-            # Camera chiller
-            # Raw = self.Client.read_holding_registers(0xBA, count = 4, unit = 0x01)
-            # self.CameraChillerSetpoint = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            # self.CameraChillerTemp = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            # Raw = self.Client.read_coils(0x15, count = 1, unit = 0x01)
-            # self.CameraChillerState = Raw.bits[0]
-
-            # Water chiller
-            #             Raw = self.Client.read_holding_registers(0xC4, count = 4, unit = 0x01)
-            #             self.WaterChillerSetpoint = round(struct.unpack("<f", struct.pack
-            #             ("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #             self.WaterChillerTemp = round(struct.unpack("<f", struct.pack
-            #             ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.WaterChillerPressure = round(struct.unpack("<f", struct.pack
-            #            ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #             Raw = self.Client.read_coils(0x17, count = 1, unit = 0x01)
-            #             self.WaterChillerState = Raw.bits[0]
-
-            # Heaters
-            # Raw = self.Client.read_holding_registers(0xC8, count = 8, unit = 0x01)
-            # self.InnerPower = round(struct.unpack
-            # ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            # self.OuterClosePower = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 1)
-            # self.OuterFarPower = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(5), Raw.getRegister(4)))[0], 1)
-            # self.FreonPower = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(7), Raw.getRegister(6)))[0], 1)
-
-            # Hot/cold region
-            #             Raw = self.Client.read_holding_registers(0xD0, count = 4, unit = 0x01)
-            #             self.ColdRegionSetpoint = round(struct.unpack
-            #             ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #             self.HotRegionSetpoint = round(struct.unpack
-            #             ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 1)
-            #          self.HotRegionP = round(struct.unpack
-            #          ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.HotRegionI = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.HotRegionD = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.ColdRegionP = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.ColdRegionI = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.ColdRegionD = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #             Raw = self.Client.read_coils(0x19, count = 1, unit = 0x01)
-            #             self.HotRegionPIDState = Raw.bits[0]
-            #            self.ClodRegionPIDState = Raw.bits[0]
-
-            # Cameras
-            #            Raw = self.Client.read_holding_registers(0x, count = 24, unit = 0x01)
-            #            self.Camera0Temp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera0Humidity = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #            self.Camera0AirTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera1Temp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera1Humidity = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #            self.Camera1AirTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera2Temp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera2Humidity = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #            self.Camera2AirTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera3Temp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera3Humidity = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #            self.Camera3AirTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-
-            # Water system
-            #            Raw = self.Client.read_holding_registers(0x, count = 12, unit = 0x01)
-            #            self.WaterFlow = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterConductivityBefore = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterConductivityAfter = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterPressure = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterLevel = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            Raw = self.Client.read_coils(0x, count = 1, unit = 0x01)
-            #            self.WaterPrimingPower = Raw.bits[0]
-            #            self.WaterPrimingStatus = Raw.bits[1]
-            #            self.BeetleStatus = Raw.bits[2]
 
             # PLC
             Raw = self.Client.read_holding_registers(0x3E9, count=1, unit=0x01)
@@ -500,20 +294,47 @@ class PLC:
         else:
             return 1
 
-    def ReadValve(self,address=12296):
+    def Read_BO_1(self,address):
         Raw_BO = self.Client_BO.read_holding_registers(address, count=1, unit=0x01)
         output_BO = struct.pack("H", Raw_BO.getRegister(0))
         # print("valve value is", output_BO)
         return output_BO
 
-    def WriteOpen(self,address=12296):
-        output_BO = self.ReadValve(address)
+    def Read_BO_2(self,address):
+        Raw_BO = self.Client_BO.read_holding_registers(address, count=2, unit=0x01)
+        output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
+                0], 3)
+        # print("valve value is", output_BO)
+        return output_BO
+
+    def float_to_2words(self,value):
+        fl = float(value)
+        x = np.arange(fl, fl+1, dtype='<f4')
+        if len(x) == 1:
+            word = x.tobytes()
+            piece1,piece2 = struct.unpack('<HH',word)
+        else:
+            print("ERROR in float to words")
+        return piece1,piece2
+
+    def Write_BO_2(self,address, value):
+        word1, word2 = self.float_to_2words(value)
+        print('words',word1,word2)
+        # pay attention to endian relationship
+        Raw1 = self.Client_BO.write_register(address, value=word1, unit=0x01)
+        Raw2 = self.Client_BO.write_register(address+1, value=word2, unit=0x01)
+
+        print("write result = ", Raw1, Raw2)
+
+
+    def WriteOpen(self,address):
+        output_BO = self.Read_BO_1(address)
         input_BO= struct.unpack("H",output_BO)[0] | 0x0002
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write open result=", Raw)
 
-    def WriteClose(self,address=12296):
-        output_BO = self.ReadValve(address)
+    def WriteClose(self,address):
+        output_BO = self.Read_BO_1(address)
         input_BO = struct.unpack("H",output_BO)[0] | 0x0004
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write close result=", Raw)
@@ -523,13 +344,89 @@ class PLC:
         print("write reset result=", Raw)
 
     # mask is a number to read a particular digit. for example, if you want to read 3rd digit, the mask is 0100(binary)
-    def ReadCoil(self, mask,address=12296):
-        output_BO = self.ReadValve(address)
-        masked_output= struct.unpack("H",output_BO)[0] & mask
+    def ReadCoil(self, mask,address):
+        output_BO = self.Read_BO_1(address)
+        masked_output = struct.unpack("H",output_BO)[0] & mask
         if masked_output == 0:
             return False
         else:
             return True
+
+
+    def ReadFPAttribute(self,address):
+        Raw = self.Client.read_holding_registers(address, count=1, unit=0x01)
+        output = struct.pack("H", Raw.getRegister(0))
+        print(Raw.getRegister(0))
+        return output
+
+    def SetFPRTDAttri(self,mode,address):
+        # Highly suggested firstly read the value and then set as the FP menu suggests
+        # mode should be wrtten in 0x
+        # we use Read_BO_1 function because it can be used here, i.e read 2 word at a certain address
+        output = self.ReadFPAttribute(address)
+        print("output", address, output)
+        Raw = self.Client.write_register(address, value=mode, unit=0x01)
+        print("write open result=", Raw)
+        return 0
+
+    def LOOPPID_SET_MODE(self, address, mode=0):
+        output_BO = self.Read_BO_1(address)
+        if mode == 0:
+            input_BO = struct.unpack("H", output_BO)[0] | 0x0010
+            Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        elif mode == 1:
+            input_BO = struct.unpack("H", output_BO)[0] | 0x0020
+            Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        elif mode == 2:
+            input_BO = struct.unpack("H", output_BO)[0] | 0x0040
+            Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        elif mode == 3:
+            input_BO = struct.unpack("H", output_BO)[0] | 0x0080
+            Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        else:
+            Raw = "ERROR in LOOPPID SET MODE"
+
+        print("write result:", "mode=",  Raw)
+
+    def LOOPPID_OUT_ENA(self,address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H", output_BO)[0] | 0x2000
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write OUT result=", Raw)
+
+    def LOOPPID_OUT_DIS(self,address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H", output_BO)[0] | 0x4000
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write OUT result=", Raw)
+
+    def LOOPPID_SETPOINT(self, address, setpoint, mode = 0):
+        if mode == 0:
+            self.Write_BO_2(address+10, setpoint)
+        elif mode == 1:
+            self.Write_BO_2(address+12, setpoint)
+        elif mode == 2:
+            self.Write_BO_2(address+14, setpoint)
+        elif mode == 3:
+            self.Write_BO_2(address+16, setpoint)
+        else:
+            pass
+
+        print("LOOPPID_SETPOINT")
+
+    def LOOPPID_SET_HI_LIM(self,address, value):
+        self.Write_BO_2(address + 6, value)
+        print("LOOPPID_HI")
+
+    def LOOPPID_SET_LO_LIM(self,address, value):
+        self.Write_BO_2(address + 8, value)
+        print("LOOPPID_LO")
+
+
+
+        
+    
+
 
     def SaveSetting(self):
         self.WriteBool(0x0, 0, 1)
@@ -771,38 +668,94 @@ class UpdateDataBase(QtCore.QObject):
         self.db = mydatabase()
         self.Running = False
         self.base_period=1
-        self.para_a=0
-        self.rate_a=60
-        self.para_b=0
-        self.rate_b=120
+        self.para_TT=0
+        self.rate_TT=100
+        self.para_PT=0
+        self.rate_PT=100
+        # c is for valve status
+        self.para_Valve = 0
+        self.rate_Valve = 100
+        self.para_LOOPPID = 0
+        self.rate_LOOPPID = 100
+        self.Valve_buffer = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+                          "PV4324": 0, "PV5305": 0, "PV5306": 0,
+                          "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
+                          "SV3325": 0, "SV3326": 0, "SV3329": 0,
+                          "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
+                          "SV4337": 0, "HFSV3312":0, "HFSV3323": 0, "HFSV3331": 0}
+        self.LOOPPID_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                              'HTR2125': False,
+                                              'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
         print("begin updating Database")
 
     @QtCore.Slot()
     def run(self):
         self.Running = True
         while self.Running:
-            self.dt = datetime_in_s()
+            self.dt = datetime_in_1e5micro()
+            self.early_dt= early_datetime()
             print("Database Updating", self.dt)
 
             if self.PLC.NewData_Database:
-                if self.para_a>= self.rate_a:
+                if self.para_TT>= self.rate_TT:
                     for key in self.PLC.TT_FP_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
                     for key in self.PLC.TT_BO_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
                     # print("write RTDS")
-                    self.para_a=0
-                if self.para_b >= self.rate_b:
+                    self.para_TT=0
+                if self.para_PT >= self.rate_PT:
                     for key in self.PLC.PT_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                     # print("write pressure transducer")
-                    self.para_b=0
+                    self.para_PT=0
 
-                # print("a",self.para_a,"b",self.para_b )
+                for key in self.PLC.Valve_OUT:
+                    # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
+                    if self.PLC.Valve_OUT[key] != self.Valve_buffer[key]:
+                        self.db.insert_data_into_datastorage(key + '_OUT', self.early_dt, self.Valve_buffer[key])
+                        self.db.insert_data_into_datastorage(key+'_OUT', self.dt, self.PLC.Valve_OUT[key])
+                        self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
+                        # print(self.PLC.Valve_OUT[key])
+                    else:
+                        pass
+
+                if self.para_Valve >= self.rate_Valve:
+                    for key in self.PLC.Valve_OUT:
+                        self.db.insert_data_into_datastorage(key+'_OUT', self.dt, self.PLC.Valve_OUT[key])
+                        self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
+                    self.para_Valve = 0
+
+                for key in self.PLC.LOOPPID_EN:
+                    # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
+                    if self.PLC.LOOPPID_EN[key] != self.LOOPPID_buffer[key]:
+                        self.db.insert_data_into_datastorage(key + '_EN', self.early_dt, self.LOOPPID_buffer[key])
+                        self.db.insert_data_into_datastorage(key+'_EN', self.dt, self.PLC.LOOPPID_EN[key])
+                        self.LOOPPID_buffer[key] = self.PLC.LOOPPID_EN[key]
+                        # print(self.PLC.Valve_OUT[key])
+                    else:
+                        pass
+
+                if self.para_LOOPPID >= self.rate_LOOPPID:
+                    for key in self.PLC.LOOPPID_EN:
+                        self.db.insert_data_into_datastorage(key+'_EN', self.dt, self.PLC.LOOPPID_EN[key])
+                        self.LOOPPID_buffer[key] = self.PLC.LOOPPID_EN[key]
+                    self.para_LOOPPID = 0
+
+
+
+
+
+
+
+                # print("a",self.para_TT,"b",self.para_PT )
 
                 print("Wrting PLC data to database...")
-                self.para_a += 1
-                self.para_b += 1
+                self.para_TT += 1
+                self.para_PT += 1
+                self.para_Valve += 1
+                self.para_LOOPPID += 1
                 self.PLC.NewData_Database = False
 
             else:
@@ -825,7 +778,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC = PLC
         self.message_manager = message_manager()
         self.Running = False
-        self.period=2
+        self.period=1
 
     @QtCore.Slot()
     def run(self):
@@ -843,6 +796,9 @@ class UpdatePLC(QtCore.QObject):
                     self.check_PT_alarm(keyPT)
                 self.or_alarm_signal()
                 time.sleep(self.period)
+        except KeyboardInterrupt:
+            print("PLC is interrupted by keyboard[Ctrl-C]")
+            self.stop()
         except:
             (type, value, traceback) = sys.exc_info()
             exception_hook(type, value, traceback)
@@ -962,72 +918,79 @@ class UpdateServer(QtCore.QObject):
         self.socket = self.context.socket(zmq.REP)
         self.socket.bind("tcp://*:5555")
         self.Running=False
-        self.period=2
+        self.period=1
         print("connect to the PLC server")
-        self.data_dic={"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
-                                           "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
-                                           "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
-                                           "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
-                                           "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
-                                           "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
-                                           "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
-                                           "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
-                                           "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
-                                           "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
-                                           "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
-                                           "TT6412": 0, "TT6413": 0, "TT6414": 0},
-                                      "BO":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
-                                           "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
-                                           "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}},
-                               "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
-                                     "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-                                     "PT4322": 0, "PT4325": 0, "PT6302": 0},
-                               "Valve":{"OUT":{"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
-                                               "PV4324": 0, "PV5305": 0, "PV5306": 0,
-                                               "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
-                                               "SV3325": 0, "SV3326": 0, "SV3329": 0,
-                                               "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
-                                               "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0},
-                                        "INTLKD":{"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                                                  "PV4324": False, "PV5305": False, "PV5306": False,
-                                                  "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                                                  "SV3325": False, "SV3326": False, "SV3329": False,
-                                                  "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                                                  "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False},
-                                        "MAN":{"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                                               "PV4324": False, "PV5305": True, "PV5306": True,
-                                               "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
-                                               "SV3325": True, "SV3326": True, "SV3329": True,
-                                               "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                                               "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True},
-                                        "ERR":{"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                                               "PV4324": False, "PV5305": False, "PV5306": False,
-                                               "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                                               "SV3325": False, "SV3326": False, "SV3329": False,
-                                               "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                                               "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}}},
-                       "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
-                                            "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
-                                            "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
-                                            "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
-                                            "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
-                                            "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
-                                            "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
-                                            "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
-                                            "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
-                                            "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
-                                            "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
-                                            "TT6412": False, "TT6413": False, "TT6414": False},
-                                      "BO":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
-                                      "TT4330": False,
-                                      "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
-                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}},
-                                "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
-                                      "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
-                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
-                                      "PT4322": False, "PT4325": False, "PT6302": False}},
-                       "MainAlarm":False}
+
+
+        self.TT_FP_dic_ini = self.PLC.TT_FP_dic
+        self.TT_BO_dic_ini = self.PLC.TT_BO_dic
+        self.PT_dic_ini = self.PLC.PT_dic
+        self.TT_FP_LowLimit_ini = self.PLC.TT_FP_LowLimit
+        self.TT_FP_HighLimit_ini = self.PLC.TT_FP_HighLimit
+        self.TT_BO_LowLimit_ini = self.PLC.TT_BO_LowLimit
+        self.TT_BO_HighLimit_ini = self.PLC.TT_BO_HighLimit
+        self.PT_LowLimit_ini = self.PLC.PT_LowLimit
+        self.PT_HighLimit_ini = self.PLC.PT_HighLimit
+        self.TT_FP_Activated = self.PLC.TT_FP_Activated
+        self.TT_BO_Activated_ini = self.PLC.TT_BO_Activated
+        self.PT_Activated_ini = self.PLC.PT_Activated
+        self.TT_FP_Alarm_ini = self.PLC.TT_FP_Alarm
+        self.TT_BO_Alarm_ini = self.PLC.TT_BO_Alarm
+        self.PT_Alarm_ini = self.PLC.PT_Alarm
+        self.MainAlarm_ini = self.PLC.MainAlarm
+        self.Valve_OUT_ini = self.PLC.Valve_OUT
+        self.Valve_MAN_ini = self.PLC.Valve_MAN
+        self.Valve_INTLKD_ini = self.PLC.Valve_INTLKD
+        self.Valve_ERR_ini = self.PLC.Valve_ERR
+        self.LOOPPID_MODE0_ini = self.PLC.LOOPPID_MODE0
+        self.LOOPPID_MODE1_ini = self.PLC.LOOPPID_MODE1
+        self.LOOPPID_MODE2_ini = self.PLC.LOOPPID_MODE2
+        self.LOOPPID_MODE3_ini = self.PLC.LOOPPID_MODE3
+        self.LOOPPID_INTLKD_ini = self.PLC.LOOPPID_INTLKD
+        self.LOOPPID_MAN_ini = self.PLC.LOOPPID_MAN
+        self.LOOPPID_ERR_ini = self.PLC.LOOPPID_ERR
+        self.LOOPPID_SATHI_ini = self.PLC.LOOPPID_SATHI
+        self.LOOPPID_SATLO_ini = self.PLC.LOOPPID_SATLO
+        self.LOOPPID_EN_ini = self.PLC.LOOPPID_EN
+        self.LOOPPID_OUT_ini = self.PLC.LOOPPID_OUT
+        self.LOOPPID_IN_ini = self.PLC.LOOPPID_IN
+        self.LOOPPID_HI_LIM_ini = self.PLC.LOOPPID_HI_LIM
+        self.LOOPPID_LO_LIM_ini = self.PLC.LOOPPID_LO_LIM
+        self.LOOPPID_SET0_ini = self.PLC.LOOPPID_SET0
+        self.LOOPPID_SET1_ini = self.PLC.LOOPPID_SET1
+        self.LOOPPID_SET2_ini = self.PLC.LOOPPID_SET2
+        self.LOOPPID_SET3_ini = self.PLC.LOOPPID_SET3
+
+        self.data_dic={"data":{"TT":{"FP":self.TT_FP_dic_ini,
+                                     "BO":self.TT_BO_dic_ini},
+                               "PT":self.PT_dic_ini,
+                               "Valve":{"OUT":self.Valve_OUT_ini,
+                                        "INTLKD":self.Valve_INTLKD_ini,
+                                        "MAN":self.Valve_MAN_ini,
+                                        "ERR":self.Valve_ERR_ini},
+                               "LOOPPID":{"MODE0": self.LOOPPID_MODE0_ini,
+                                          "MODE1": self.LOOPPID_MODE1_ini,
+                                          "MODE2": self.LOOPPID_MODE2_ini,
+                                          "MODE3": self.LOOPPID_MODE3_ini,
+                                          "INTLKD" : self.LOOPPID_INTLKD_ini,
+                                          "MAN" : self.LOOPPID_MAN_ini,
+                                         "ERR" : self.LOOPPID_ERR_ini,
+                                         "SATHI" : self.LOOPPID_SATHI_ini,
+                                        "SATLO" : self.LOOPPID_SATLO_ini,
+                                        "EN" : self.LOOPPID_EN_ini,
+                                        "OUT" : self.LOOPPID_OUT_ini,
+                                        "IN" : self.LOOPPID_IN_ini,
+                                        "HI_LIM" : self.LOOPPID_HI_LIM_ini,
+                                        "LO_LIM" : self.LOOPPID_LO_LIM_ini,
+                                        "SET0" : self.LOOPPID_SET0_ini,
+                                        "SET1" : self.LOOPPID_SET1_ini,
+                                        "SET2" : self.LOOPPID_SET2_ini,
+                                        "SET3" : self.LOOPPID_SET3_ini}},
+                       "Alarm":{"TT" : {"FP":self.TT_FP_Alarm_ini,
+                                      "BO":self.TT_BO_Alarm_ini},
+                                "PT" : self.PT_Alarm_ini},
+                       "MainAlarm" : self.MainAlarm_ini}
+
         self.data_package=pickle.dumps(self.data_dic)
 
 
@@ -1063,22 +1026,82 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
+
+
         for key in self.PLC.TT_FP_dic:
-            self.data_dic["data"]["TT"]["FP"][key]=self.PLC.TT_FP_dic[key]
+            self.TT_FP_dic_ini[key] = self.PLC.TT_FP_dic[key]
+
         for key in self.PLC.TT_BO_dic:
-            self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
+            self.TT_BO_dic_ini[key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
-            self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
+            self.PT_dic_ini[key]=self.PLC.PT_dic[key]
         for key in self.PLC.Valve_OUT:
-            self.data_dic["data"]["Valve"]["OUT"][key]=self.PLC.Valve_OUT[key]
+            self.Valve_OUT_ini[key]=self.PLC.Valve_OUT[key]
         for key in self.PLC.TT_FP_Alarm:
-            self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
+            self.TT_FP_Alarm_ini[key] = self.PLC.TT_FP_Alarm[key]
         for key in self.PLC.TT_BO_Alarm:
-            self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
+            self.TT_BO_Alarm_ini[key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
-            self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
+            self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
+        for key in self.PLC.LOOPPID_MODE0:
+            self.LOOPPID_MODE0_ini[key] = self.PLC.LOOPPID_MODE0[key]
+        for key in self.PLC.LOOPPID_MODE1:
+            self.LOOPPID_MODE1_ini[key] = self.PLC.LOOPPID_MODE1[key]
+        for key in self.PLC.LOOPPID_MODE2:
+            self.LOOPPID_MODE2_ini[key] = self.PLC.LOOPPID_MODE2[key]
+        for key in self.PLC.LOOPPID_MODE3:
+            self.LOOPPID_MODE3_ini[key] = self.PLC.LOOPPID_MODE3[key]
+        for key in self.PLC.LOOPPID_INTLKD:
+            self.LOOPPID_INTLKD_ini[key] = self.PLC.LOOPPID_INTLKD[key]
+        for key in self.PLC.LOOPPID_MAN:
+            self.LOOPPID_MAN_ini[key] = self.PLC.LOOPPID_MAN[key]
+        for key in self.PLC.LOOPPID_ERR:
+            self.LOOPPID_ERR_ini[key] = self.PLC.LOOPPID_ERR[key]
+        for key in self.PLC.LOOPPID_SATHI:
+            self.LOOPPID_SATHI_ini[key] = self.PLC.LOOPPID_SATHI[key]
+        for key in self.PLC.LOOPPID_SATLO:
+            self.LOOPPID_SATLO_ini[key] = self.PLC.LOOPPID_SATLO[key]
+        for key in self.PLC.LOOPPID_EN:
+            self.LOOPPID_EN_ini[key] = self.PLC.LOOPPID_EN[key]
+        for key in self.PLC.LOOPPID_OUT:
+            self.LOOPPID_OUT_ini[key] = self.PLC.LOOPPID_OUT[key]
+        for key in self.PLC.LOOPPID_IN:
+            self.LOOPPID_IN_ini[key] = self.PLC.LOOPPID_IN[key]
+        for key in self.PLC.LOOPPID_HI_LIM:
+            self.LOOPPID_HI_LIM_ini[key] = self.PLC.LOOPPID_HI_LIM[key]
+        for key in self.PLC.LOOPPID_LO_LIM:
+            self.LOOPPID_LO_LIM_ini[key] = self.PLC.LOOPPID_LO_LIM[key]
+        for key in self.PLC.LOOPPID_SET0:
+            self.LOOPPID_SET0_ini[key] = self.PLC.LOOPPID_SET0[key]
+        for key in self.PLC.LOOPPID_SET1:
+            self.LOOPPID_SET1_ini[key] = self.PLC.LOOPPID_SET1[key]
+        for key in self.PLC.LOOPPID_SET2:
+            self.LOOPPID_SET2_ini[key] = self.PLC.LOOPPID_SET2[key]
+        for key in self.PLC.LOOPPID_SET3:
+            self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
 
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
+        # print("pack",self.data_dic)
+        # print("HTR6214 \n", "MODE0", self.data_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
+        #             "\n","MODE1", self.data_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
+        #             "\n","MODE2", self.data_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
+        #             "\n","MODE3", self.data_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"],
+        #             "\n","INTLKD", self.data_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"],
+        #             "\n","MAN", self.data_dic["data"]["LOOPPID"]["MAN"]["HTR6214"],
+        #             "\n","ERR", self.data_dic["data"]["LOOPPID"]["ERR"]["HTR6214"],
+        #             "\n","SATHI", self.data_dic["data"]["LOOPPID"]["SATHI"]["HTR6214"],
+        #             "\n","SATLO", self.data_dic["data"]["LOOPPID"]["SATLO"]["HTR6214"],
+        #             "\n","EN", self.data_dic["data"]["LOOPPID"]["EN"]["HTR6214"],
+        #             "\n","OUT", self.data_dic["data"]["LOOPPID"]["OUT"]["HTR6214"],
+        #             "\n","IN", self.data_dic["data"]["LOOPPID"]["IN"]["HTR6214"],
+        #             "\n","HI_LIM", self.data_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6214"],
+        #             "\n","LO_LIM", self.data_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6214"],
+        #             "\n","SET0", self.data_dic["data"]["LOOPPID"]["SET0"]["HTR6214"],
+        #             "\n","SET1", self.data_dic["data"]["LOOPPID"]["SET1"]["HTR6214"],
+        #             "\n","SET2", self.data_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
+        #             "\n","SET3", self.data_dic["data"]["LOOPPID"]["SET3"]["HTR6214"])
+
+
         self.data_package=pickle.dumps(self.data_dic)
 
     def write_data(self):
@@ -1097,6 +1120,97 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.WriteClose(address= message[key]["address"])
                     else:
                         pass
+                elif message[key]["type"] == "TT":
+                    if message[key]["server"] == "BO":
+                        self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
+                        self.PLC.TT_BO_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                        self.PLC.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
+
+                    elif message[key]["server"] == "FP":
+                        self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
+                        self.PLC.TT_FP_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                        self.PLC.TT_FP_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                    else:
+                        pass
+                elif message[key]["type"] == "PT":
+                    if message[key]["server"] == "BO":
+                        self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                        self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                        self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                    else:
+                        pass
+                elif message[key]["type"] == "heater_power":
+                    if message[key]["operation"] == "EN":
+                        self.PLC.LOOPPID_OUT_ENA(address = message[key]["address"])
+                    elif message[key]["operation"] == "DISEN":
+                        self.PLC.LOOPPID_OUT_DIS(address=message[key]["address"])
+                    else:
+                        pass
+                    #
+                    # if message[key]["operation"] == "SETMODE":
+                    #     self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
+                    # else:
+                    #     pass
+                elif message[key]["type"] == "heater_para":
+                    if message[key]["operation"] == "SET0":
+                        # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 0)
+                        # self.PLC.LOOPPID_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
+                        # self.PLC.LOOPPID_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
+                        self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                    value=message[key]["value"]["HI_LIM"])
+                        self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                                    value=message[key]["value"]["LO_LIM"])
+
+                    elif message[key]["operation"] == "SET1":
+                        # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 1)
+                        self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                    value=message[key]["value"]["HI_LIM"])
+                        self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                                    value=message[key]["value"]["LO_LIM"])
+                    elif message[key]["operation"] == "SET2":
+                        # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 2)
+                        self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                    value=message[key]["value"]["HI_LIM"])
+                        self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                                    value=message[key]["value"]["LO_LIM"])
+                    elif message[key]["operation"] == "SET3":
+                        # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 3)
+                        self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
+                        self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
+
+                    elif message[key]["type"] == "heater_setmode":
+                        if message[key]["operation"] == "SET0":
+                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
+
+                        elif message[key]["operation"] == "SET1":
+                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode = 1)
+
+                        elif message[key]["operation"] == "SET2":
+                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
+
+                        elif message[key]["operation"] == "SET3":
+                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
+
+                    else:
+                        pass
+
+
+
+
+                    # if message[key]["operation"] == "HI_LIM":
+                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
+                    # else:
+                    #     pass
+                    #
+                    # if message[key]["operation"] == "LO_LIM":
+                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
+
+
+
                 else:
                     pass
 
@@ -1104,11 +1218,11 @@ class UpdateServer(QtCore.QObject):
 
         # if message == b'this is a command':
         #     self.PLC.WriteOpen()
-        #     self.PLC.ReadValve()
+        #     self.PLC.Read_BO_1()
         #     print("I will set valve")
         # elif message == b'no command':
         #     self.PLC.WriteClose()
-        #     self.PLC.ReadValve()
+        #     self.PLC.Read_BO_1()
         #     print("I will stay here")
         # elif message == b'this an anti_conmmand':
         #
@@ -1134,6 +1248,9 @@ class Update(QtCore.QObject):
         self.UpPLC.moveToThread(self.PLCUpdateThread)
         self.PLCUpdateThread.started.connect(self.UpPLC.run)
         self.PLCUpdateThread.start()
+
+        # wait for PLC initialization finished
+        time.sleep(2)
 
         # Update database on another thread
         self.DataUpdateThread = QtCore.QThread()
@@ -1263,10 +1380,14 @@ class message_manager():
 if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
+
     App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
-    PLC=PLC()
-    PLC.ReadAll()
+    Update=Update()
+
+
+    # PLC=PLC()
+    # PLC.ReadAll()
 
     sys.exit(App.exec_())
+
 
