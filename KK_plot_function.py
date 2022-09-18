@@ -33,6 +33,25 @@ N_density = 3.72*Av*10**(3)/(CF_MASS)
 # k = Pi**2*H_bar**3/(M_e**2*A_0)*(diff_sigma_value/E_charge)*((N_desity)/frequency)
 # k = sigma*c*h_bar*N_density/E
 
+
+def line_plot():
+    fig = plt.figure()
+
+    ax = fig.add_subplot()
+    x = [6*10**(-3), 0.78, 78, 70000]
+    y = [0.61,3.23,3.69,3.74]
+
+    ax.plot(x, y, color="green")
+
+
+    ax.set_xscale('log')
+    # ax.set_xlim(0, 700)
+    ax.set_xlabel("Absoprtion Length /m", fontsize=size)
+    ax.set_ylabel("PCE in %", fontsize=size)
+    ax.set_title("PCE vs Absorption length", fontsize=size)
+
+    plt.show()
+
 class k_plot():
     def __init__(self):
         self.A = 0.124523
@@ -452,14 +471,16 @@ class k2_plot():
         plt.show()
        #
 if __name__ == '__main__':
-    KP= k2_plot()
-    # KP.integrate_test()
-    KP.energy_into_frequency()
-    KP.Cauchy_integral()
-    KP.plot_n()
-    KP.plot_k()
-    KP.calulate_ABSL(6)
-    # KP.interpolate()
-    KP.plot_extrapo()
-    KP.plot_function()
-    KP.plot_in_Knumber()
+    # KP= k2_plot()
+    # # KP.integrate_test()
+    # KP.energy_into_frequency()
+    # KP.Cauchy_integral()
+    # KP.plot_n()
+    # KP.plot_k()
+    # KP.calulate_ABSL(6)
+    # # KP.interpolate()
+    # KP.plot_extrapo()
+    # KP.plot_function()
+    # KP.plot_in_Knumber()
+
+    line_plot()
