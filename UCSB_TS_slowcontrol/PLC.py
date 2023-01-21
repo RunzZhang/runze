@@ -13,7 +13,8 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 import struct, time, zmq, sys, pickle
 import numpy as np
 from PySide2 import QtWidgets, QtCore, QtGui
-from Database_SBC import *
+# from Database_SBC import *
+import socket
 from email.mime.text import MIMEText
 from email.header import Header
 from smtplib import SMTP_SSL
@@ -52,15 +53,21 @@ class PLC:
     def __init__(self):
         super().__init__()
 
-        IP_NI = "192.168.137.62"
-        PORT_NI = 502
+        IP_NI = "10.111.19.100"
+        PORT_NI = 7777
+        self.BUFFER_SIZE = 1024
+
 
         self.Client = ModbusTcpClient(IP_NI, port=PORT_NI)
         self.Connected = self.Client.connect()
         print("NI connected: " + str(self.Connected))
 
-        IP_BO = "192.168.137.11"
-        PORT_BO = 502
+        self.socket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        self.socket.connect((IP_NI,PORT_NI))
+
+
+        IP_BO = "10.111.19.102"
+        PORT_BO = 7777
 
         self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
         self.Connected_BO = self.Client_BO.connect()
@@ -120,6 +127,28 @@ class PLC:
     def __del__(self):
         self.Client.close()
         self.Client_BO.close()
+
+    def read_LS(self):
+        # print("socket connection",self.socket.stillconnected())
+        command = "HTR?1\n"
+        print(command)
+        cm_code = command.encode()
+        self.socket.send(cm_code)
+        data = self.socket.recv(self.BUFFER_SIZE)
+        self.socket.close()
+        print(data.decode())
+        # request = pymodbus.Custom
+        # command =1
+        # if self.Connected:
+            # self.Client.send(command)
+            # value = self.Client.execute(request=command)
+            # value = self.Client.execute()
+            # raw_data = self.Client.send(command)
+            # value = self.Client.recv(1024)
+            # value = round(
+            #         struct.unpack("<f", struct.pack("<HH", raw_data.getRegister(1), raw_data.getRegister(0)))[0], 3)
+            # print(value)
+
 
     def ReadAll(self):
 
@@ -1381,13 +1410,13 @@ if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
 
-    App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
+    # App = QtWidgets.QApplication(sys.argv)
+    # Update=Update()
 
 
-    # PLC=PLC()
-    # PLC.ReadAll()
+    PLC=PLC()
+    PLC.read_LS()
 
-    sys.exit(App.exec_())
+    # sys.exit(App.exec_())
 
 
