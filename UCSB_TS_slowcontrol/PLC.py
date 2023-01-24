@@ -1430,6 +1430,7 @@ if __name__ == "__main__":
 
     PLC=PLC()
     PLC.read_LS()
+    PLC.read_AD()
 
     # sys.exit(App.exec_())
 
