@@ -4,7 +4,9 @@ from slack_sdk.errors import SlackApiError
 
 # WebClient instantiates a client that can call API methods
 # When using Bolt, you can use either `app.client` or the `client` passed to listeners.
-# client = WebClient(token=os.environ.get("env"))
+
+# not in channel _eror /invite @SBC_Alarm in slack
+client = WebClient(token=os.environ.get("env"))
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +46,8 @@ def publish_message():
         # Call the conversations.list method using the WebClient
         result = client.chat_postMessage(
             channel=channel_id,
-            text="And I am Bubble :)"
+            # channel="watchdog_alarms",
+            text="TEST"
             # You could also use a blocks[] array to send richer content
         )
         # Print result, which includes information about the message (like TS)
