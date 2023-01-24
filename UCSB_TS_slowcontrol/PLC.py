@@ -68,7 +68,7 @@ class PLC:
 
         #Adam
         IP_BO = "10.111.19.10"
-        PORT_BO = 6000
+        PORT_BO = 5700
         #135,,139, 445,3389,5700,6000,9012
         self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
         self.Connected_BO = self.Client_BO.connect()
