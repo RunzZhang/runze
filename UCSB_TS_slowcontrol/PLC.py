@@ -54,6 +54,7 @@ class PLC:
         super().__init__()
 
         IP_NI = "10.111.19.100"
+        # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         PORT_NI = 7777
         self.BUFFER_SIZE = 1024
 
@@ -65,9 +66,9 @@ class PLC:
         self.socket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.socket.connect((IP_NI,PORT_NI))
 
-
-        IP_BO = "10.111.19.102"
-        PORT_BO = 7777
+        #Adam
+        IP_BO = "10.111.19.10"
+        PORT_BO = 502
 
         self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
         self.Connected_BO = self.Client_BO.connect()
