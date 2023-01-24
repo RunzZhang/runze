@@ -69,9 +69,11 @@ class PLC:
         #Adam
         IP_BO = "10.111.19.10"
         PORT_BO = 5020
-
-        self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
-        self.Connected_BO = self.Client_BO.connect()
+        for i in range(0,10000):
+            self.Client_BO = ModbusTcpClient(IP_BO, port=i)
+            self.Connected_BO = self.Client_BO.connect()
+                if self.Connected_BO == True:
+                    print(i)
         print(" Beckoff connected: " + str(self.Connected_BO))
 
 
