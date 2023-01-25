@@ -79,7 +79,7 @@ class PLC:
         #     if self.Connected_BO == True:
         #         print(i)
 
-        print(" Beckoff connected: " + str(self.Connected_BO))
+        # print(" Beckoff connected: " + str(self.Connected_BO))
 
         self.socket_2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_2.connect((IP_BO, PORT_BO))
@@ -167,7 +167,7 @@ class PLC:
         #             struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[0], 3)
         #     print(TT_BO_dic)
         command2 = "0x000000000006010400010002"
-        print(command2)
+        # print(command2)
         cm_code = command2.encode()
         self.socket_2.send(cm_code)
         data = self.socket_2.recv(self.BUFFER_SIZE)
