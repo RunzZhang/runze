@@ -81,6 +81,9 @@ class PLC:
 
         print(" Beckoff connected: " + str(self.Connected_BO))
 
+        self.socket_2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket_2.connect((IP_BO, PORT_BO))
+
 
         self.TT_FP_address = {"TT2420": 10001}
 
@@ -158,11 +161,18 @@ class PLC:
             # print(value)
 
     def read_AD(self):
-        if self.Connected_BO:
-            Raw_BO_TT_BO = self.Client_BO.read_holding_registers(301, count=2, unit=0x01)
-            TT_BO_dic = round(
-                    struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[0], 3)
-            print(TT_BO_dic)
+        # if self.Connected_BO:
+        #     Raw_BO_TT_BO = self.Client_BO.read_holding_registers(301, count=2, unit=0x01)
+        #     TT_BO_dic = round(
+        #             struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[0], 3)
+        #     print(TT_BO_dic)
+        command2 = "0x000000000006010400010002"
+        print(command2)
+        cm_code = command2.encode()
+        self.socket_2.send(cm_code)
+        data = self.socket_2.recv(self.BUFFER_SIZE)
+        self.socket_2.close()
+        print(data.decode())
 
     def ReadAll(self):
 
