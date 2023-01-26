@@ -70,8 +70,9 @@ class PLC:
         IP_BO = "10.111.19.10"
         PORT_BO = 6000
         #135,,139, 445,3389,5700,6000,9012
-        self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
-        self.Connected_BO = self.Client_BO.connect()
+        self.list=[135,139,445,3389,5700,6000,9012]
+        # self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
+        # self.Connected_BO = self.Client_BO.connect()
 
         # for i in range(0,10000):
         #     self.Client_BO = ModbusTcpClient(IP_BO, port=i)
@@ -161,11 +162,16 @@ class PLC:
             # print(value)
 
     def read_AD(self):
-        if self.Connected_BO:
-            Raw_BO_TT_BO = self.Client_BO.read_holding_registers(40001, count=1, unit=0x01)
-            TT_BO_dic = round(
+        for i in self.list:
+            try:
+                self.Client_BO = ModbusTcpClient("10.111.19.10", port=i)
+                self.Connected_BO = self.Client_BO.connect()
+                Raw_BO_TT_BO = self.Client_BO.read_holding_registers(40001, count=1, unit=0x01)
+                TT_BO_dic = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[0], 3)
-            print(TT_BO_dic)
+                print(TT_BO_dic)
+            except Exception as e:
+                print(e)
         # command2 = "0x000000000006010400010002"
         # # print(command2)
         # cm_code = command2.encode()
