@@ -162,7 +162,7 @@ class PLC:
 
     def read_AD(self):
 
-            Raw_BO_TT_BO = self.Client_BO.read_holding_registers(40201, count=1, unit=0x01)
+            Raw_BO_TT_BO = self.Client_BO.read_holding_registers(40009, count=1, unit=0x01)
             TT_BO_dic = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[0], 3)
             print(TT_BO_dic)
