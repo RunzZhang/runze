@@ -141,7 +141,8 @@ class PLC:
 
     def read_LS(self):
         # print("socket connection",self.socket.stillconnected())
-        command = "HTR?1\n"
+        # command = "HTR?1\n"
+        command = "DISPLAY?\n"
         print(command)
         cm_code = command.encode()
         self.socket.send(cm_code)
