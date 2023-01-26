@@ -79,7 +79,7 @@ class PLC:
         #     if self.Connected_BO == True:
         #         print(i)
 
-        # print(" Beckoff connected: " + str(self.Connected_BO))
+        print(" Beckoff connected: " + str(self.Connected_BO))
 
         self.socket_2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_2.connect((IP_BO, PORT_BO))
