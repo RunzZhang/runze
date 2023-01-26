@@ -167,8 +167,8 @@ class PLC:
             #         struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[0], 3)
             # print(TT_BO_dic)
 
-        command2 = "0x000000000006010400010002"
-        # print(command2)
+        command2 = "000000000006010400010002"
+        print(command2.encode())
         cm_code = command2.encode()
         self.socket_2.send(cm_code)
         data = self.socket_2.recv(self.BUFFER_SIZE)
