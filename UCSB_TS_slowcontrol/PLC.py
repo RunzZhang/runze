@@ -173,6 +173,7 @@ class PLC:
         self.socket_2.send(cm_code)
         data = self.socket_2.recv(self.BUFFER_SIZE)
         self.socket_2.close()
+        print(data)
         print(data.decode())
 
     def ReadAll(self):
