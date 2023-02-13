@@ -169,7 +169,7 @@ class PLC:
         #             struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[0], 3)
         # print(TT_BO_dic)
 
-        command2 = "#010(cr)"
+        command2 = "#010"
         print("coded command",command2.encode())
         cm_code = command2.encode()
         self.socket_2.send(cm_code)
