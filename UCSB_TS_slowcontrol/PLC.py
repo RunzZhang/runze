@@ -170,7 +170,7 @@ class PLC:
         # print(TT_BO_dic)
 
         # command2 = "#010"
-        command2 = "$01M(cr)"
+        command2 = "$01(cr)"
         # print("coded command",command2.encode())
         # cm_code = command2.encode()
         self.socket_2.send(command2)
