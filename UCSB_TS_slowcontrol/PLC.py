@@ -162,22 +162,28 @@ class PLC:
             # print(value)
 
     def read_AD(self):
+        for i in range(99999):
+            try:
+                Raw_BO_TT_BO = self.Client_BO.read_holding_registers(1, count=2, unit=0x01)
+                # print(Raw_BO_TT_BO)
+                TT_BO_dic = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[
+                        0], 3)
+                print(i, TT_BO_dic)
+            except:
+                pass
 
-        # Raw_BO_TT_BO = self.Client_BO.read_holding_registers(1, count=2, unit=0x01)
-        # print(Raw_BO_TT_BO)
-        # TT_BO_dic = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[0], 3)
-        # print(TT_BO_dic)
+
 
         # command2 = "#010"
-        command2 = "#01(cr)"
-        print("coded command",command2.encode('unicode_escape'))
-        cm_code = command2.encode('unicode_escape')
-        self.socket_2.send(cm_code)
-        data = self.socket_2.recv(self.BUFFER_SIZE)
-        self.socket_2.close()
-        print("origin data",data)
-        print("decode data", data.decode('unicode_escape'))
+        # command2 = "#01(cr)"
+        # print("coded command",command2.encode('unicode_escape'))
+        # cm_code = command2.encode('unicode_escape')
+        # self.socket_2.send(cm_code)
+        # data = self.socket_2.recv(self.BUFFER_SIZE)
+        # self.socket_2.close()
+        # print("origin data",data)
+        # print("decode data", data.decode('unicode_escape'))
 
     def ReadAll(self):
 
