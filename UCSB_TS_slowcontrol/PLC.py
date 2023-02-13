@@ -171,8 +171,8 @@ class PLC:
 
         # command2 = "#010"
         command2 = "#01(cr)"
-        print("coded command",command2.encode())
-        cm_code = command2.encode()
+        print("coded command",command2.encode('unicode_escape'))
+        cm_code = command2.encode('unicode_escape')
         self.socket_2.send(cm_code)
         data = self.socket_2.recv(self.BUFFER_SIZE)
         self.socket_2.close()
