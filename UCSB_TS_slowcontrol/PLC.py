@@ -171,9 +171,9 @@ class PLC:
 
         # command2 = "#010"
         command2 = "$01M(cr)"
-        print("coded command",command2.encode())
-        cm_code = command2.encode()
-        self.socket_2.send(cm_code)
+        # print("coded command",command2.encode())
+        # cm_code = command2.encode()
+        self.socket_2.send(command2)
         data = self.socket_2.recv(self.BUFFER_SIZE)
         self.socket_2.close()
         print("origin data",data)
