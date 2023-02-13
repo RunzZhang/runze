@@ -170,7 +170,7 @@ class PLC:
                 TT_BO_dic = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[
                         0], 3)
-                if TT_BO_dic < 30:
+                if TT_BO_dic < 30 and TT_BO_dic >1:
                     result.append([i,TT_BO_dic])
                 print(i, TT_BO_dic)
             except:
