@@ -177,7 +177,7 @@ class PLC:
         data = self.socket_2.recv(self.BUFFER_SIZE)
         self.socket_2.close()
         print("origin data",data)
-        print("decode data", data.decode())
+        print("decode data", data.decode('unicode_escape'))
 
     def ReadAll(self):
 
