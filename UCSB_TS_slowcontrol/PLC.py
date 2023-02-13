@@ -162,20 +162,29 @@ class PLC:
             # print(value)
 
     def read_AD(self):
-        result=[]
-        for i in range(99999):
-            try:
-                Raw_BO_TT_BO = self.Client_BO.read_holding_registers(i, count=2, unit=0x01)
-                # print(Raw_BO_TT_BO)
-                TT_BO_dic = round(
-                    struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[
-                        0], 3)
-                if TT_BO_dic < 30 and TT_BO_dic >1:
-                    result.append([i,TT_BO_dic])
-                print(i, TT_BO_dic)
-            except:
-                pass
-        print(result)
+        # test the port nubmber
+        # result=[]
+        # for i in range(99999):
+        #     try:
+        #         Raw_BO_TT_BO = self.Client_BO.read_holding_registers(i, count=2, unit=0x01)
+        #         # print(Raw_BO_TT_BO)
+        #         TT_BO_dic = round(
+        #             struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[
+        #                 0], 3)
+        #         if TT_BO_dic < 30 and TT_BO_dic >1:
+        #             result.append([i,TT_BO_dic])
+        #         print(i, TT_BO_dic)
+        #     except:
+        #         pass
+        # print(result)
+
+        Raw_BO_TT_BO = self.Client_BO.read_holding_registers(31, count=2, unit=0x01)
+        print(Raw_BO_TT_BO)
+        TT_BO_dic = round(
+            struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[
+                0], 3)
+        print(TT_BO_dic)
+
 
 
 
