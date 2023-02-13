@@ -170,13 +170,13 @@ class PLC:
         # print(TT_BO_dic)
 
         command2 = "#010\n"
-        print(command2.encode())
+        print("coded command",command2.encode())
         cm_code = command2.encode()
         self.socket_2.send(cm_code)
         data = self.socket_2.recv(self.BUFFER_SIZE)
         self.socket_2.close()
-        print(data)
-        print(data.decode())
+        print("origin data",data)
+        print("decode data", data.decode())
 
     def ReadAll(self):
 
