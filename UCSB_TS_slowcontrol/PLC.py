@@ -188,7 +188,7 @@ class PLC:
         # print(result)
 
         # Raw_BO_TT_BO = self.Client_BO.read_holding_registers(30, count=2, unit=0x01)
-        Raw_BO_TT_BO = self.Client_BO.read_holding_registers(31, count=2, unit=0x01)
+        Raw_BO_TT_BO = self.Client_BO.read_holding_registers(30100, count=2, unit=0x01)
         print(Raw_BO_TT_BO)
         TT_BO_dic = round(
             struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[
