@@ -84,6 +84,15 @@ class PLC:
         self.socket_2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_2.connect((IP_BO, PORT_BO))
 
+        IP_BO2 = "10.111.19.105"
+        PORT_BO2 = 502
+        # 135,,139, 445,3389,5700,6000,9012
+        self.Client_BO2 = ModbusTcpClient(IP_BO2, port=PORT_BO2)
+        self.Connected_BO2 = self.Client_BO.connect()
+
+
+        print(" Beckoff2 connected: " + str(self.Connected_BO2))
+
 
         self.TT_FP_address = {"TT2420": 10001}
 
