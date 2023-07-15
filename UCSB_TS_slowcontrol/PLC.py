@@ -209,13 +209,18 @@ class PLC:
 
     def ReadAll(self):
 
-        if self.Connected:
+        if self.Connected_BO2:
+            Raw_RTD = self.Client_BO2.read_holding_registers(17188, count=2, unit=0x01)
+            self.TT_FP_dic = round(
+                struct.unpack("<f",
+                              struct.pack("<HH", Raw_RTD.getRegister(1), Raw_RTD.getRegister(0)))[0], 3)
+            print(self.TT_FP_dic)
             # Reading all the RTDs
-            Raw_RTDs_FP={}
-            for key in self.TT_FP_address:
-                Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
-                self.TT_FP_dic[key] = round(
-                    struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
+            # Raw_RTDs_FP={}
+            # for key in self.TT_FP_address:
+            #     Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
+            #     self.TT_FP_dic[key] = round(
+            #         struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
                 # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
 
             # # Set Attributes could be commented(disabled) after it is done
