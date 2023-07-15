@@ -84,8 +84,8 @@ class PLC:
         self.socket_2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_2.connect((IP_BO, PORT_BO))
 
-        # IP_BO2 = "10.111.19.105"
-        IP_BO2 = "5.115.96.238"
+        IP_BO2 = "10.111.19.105"
+        # IP_BO2 = "5.115.96.238"
 
         PORT_BO2 = 5020
         # 135,,139, 445,3389,5700,6000,9012
