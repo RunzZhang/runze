@@ -214,7 +214,7 @@ class PLC:
             self.TT_FP_dic = round(
                 struct.unpack("<f",
                               struct.pack("<HH", Raw_RTD.getRegister(1), Raw_RTD.getRegister(0)))[0], 3)
-            print(self.TT_FP_dic)
+            print("value",self.TT_FP_dic)
             # Reading all the RTDs
             # Raw_RTDs_FP={}
             # for key in self.TT_FP_address:
