@@ -208,7 +208,7 @@ class PLC:
         # print("decode data", data.decode('unicode_escape'))
 
     def ReadAll(self):
-
+        print("read beckhoff")
         if self.Connected_BO2:
             Raw_RTD = self.Client_BO2.read_holding_registers(17188, count=2, unit=0x01)
             self.TT_FP_dic = round(
