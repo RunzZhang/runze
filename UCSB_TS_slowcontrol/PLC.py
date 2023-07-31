@@ -53,25 +53,27 @@ class PLC:
     def __init__(self):
         super().__init__()
 
-        IP_NI = "10.111.19.100"
+        IP_LS1 = "10.111.19.100"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
-        PORT_NI = 7777
+        PORT_LS1 = 7777
         self.BUFFER_SIZE = 1024
 
 
-        self.Client = ModbusTcpClient(IP_NI, port=PORT_NI)
-        self.Connected = self.Client.connect()
-        print("NI connected: " + str(self.Connected))
+        self.Client_LS1 = ModbusTcpClient(IP_LS1, port=PORT_LS1)
+        self.Connected_LS1 = self.Client_LS1.connect()
+        print("LS1 connected: " + str(self.Connected_LS1))
 
-        self.socket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.socket.connect((IP_NI,PORT_NI))
+        self.socket_LS1= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        self.socket_LS1.connect((IP_LS1,PORT_LS1))
+
+
 
         #Adam
-        IP_BO = "10.111.19.101"
-        PORT_BO = 502
+        IP_AD1 = "10.111.19.101"
+        PORT_AD1 = 502
         #135,,139, 445,3389,5700,6000,9012
-        self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
-        self.Connected_BO = self.Client_BO.connect()
+        self.Client_AD1 = ModbusTcpClient(IP_AD1, port=PORT_AD1)
+        self.Connected_AD1 = self.Client_AD1.connect()
 
         # for i in range(0,10000):
         #     self.Client_BO = ModbusTcpClient(IP_BO, port=i)
@@ -79,21 +81,30 @@ class PLC:
         #     if self.Connected_BO == True:
         #         print(i)
 
-        print(" Beckoff connected: " + str(self.Connected_BO))
+        print(" AD1 connected: " + str(self.Connected_AD1))
 
-        self.socket_2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_2.connect((IP_BO, PORT_BO))
+        self.socket_AD1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket_AD1.connect((IP_AD1, PORT_AD1))
 
-        IP_BO2 = "10.111.19.105"
+        IP_AD2 = "10.111.19.104"
         # IP_BO2 = "5.115.96.238"
 
-        PORT_BO2 = 5020
+        PORT_AD2 = 502
+
         # 135,,139, 445,3389,5700,6000,9012
-        self.Client_BO2 = ModbusTcpClient(IP_BO2, port=PORT_BO2)
-        self.Connected_BO2 = self.Client_BO.connect()
+        self.Client_AD2 = ModbusTcpClient(IP_AD2, port=PORT_AD2)
+        self.Connected_AD2 = self.Client_AD2.connect()
+        print(" AD2 connected: " + str(self.Connected_AD2))
 
+        IP_BO = "10.111.19.105"
 
-        print(" Beckoff2 connected: " + str(self.Connected_BO2))
+        PORT_BO = 502
+
+        # 135,,139, 445,3389,5700,6000,9012
+        self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
+        self.Connected_BO = self.Client_BO.connect()
+
+        print(" BO connected: " + str(self.Connected_BO))
 
 
         self.TT_FP_address = {"TT2420": 10001}
@@ -154,12 +165,12 @@ class PLC:
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
         command = "DISPLAY?\n"
-        print(command)
+        print("command",command)
         cm_code = command.encode()
-        self.socket.send(cm_code)
-        data = self.socket.recv(self.BUFFER_SIZE)
-        self.socket.close()
-        print(data.decode())
+        self.socket_LS1.send(cm_code)
+        data = self.socket_LS1.recv(self.BUFFER_SIZE)
+        self.socket_LS1.close()
+        print("fetched data",data.decode())
         # request = pymodbus.Custom
         # command =1
         # if self.Connected:
@@ -189,13 +200,13 @@ class PLC:
         #         pass
         # print(result)
 
-        Raw_BO_TT_BO = self.Client_BO.read_holding_registers(30, count=2, unit=0x01)
+        Raw_AD1_TT = self.Client_AD1.read_holding_registers(30, count=2, unit=0x01)
         # Raw_BO_TT_BO = self.Client_BO.read_holding_registers(30100, count=2, unit=0x01)
-        print(Raw_BO_TT_BO)
-        TT_BO_dic = round(
-            struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[
+        print(Raw_AD1_TT)
+        TT_AD1_dic = round(
+            struct.unpack(">f", struct.pack(">HH", Raw_AD1_TT.getRegister(1), Raw_AD1_TT.getRegister(0)))[
                 0], 3)
-        print(TT_BO_dic)
+        print("AD1",TT_AD1_dic)
 
 
 
