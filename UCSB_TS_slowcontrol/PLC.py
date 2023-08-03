@@ -106,6 +106,18 @@ class PLC:
 
         print(" BO connected: " + str(self.Connected_BO))
 
+        IP_LL = "10.111.19.108"
+        # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
+        PORT_LL = 7180
+        self.BUFFER_SIZE = 1024
+
+        self.Client_LL = ModbusTcpClient(IP_LL, port=PORT_LL)
+        self.Connected_LL = self.Client_LL.connect()
+        print("LL connected: " + str(self.Connected_LL))
+
+        self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket_LL.connect((IP_LL, PORT_LL))
+
 
         self.TT_FP_address = {"TT2420": 10001}
 
@@ -170,6 +182,27 @@ class PLC:
         self.socket_LS1.send(cm_code)
         data = self.socket_LS1.recv(self.BUFFER_SIZE)
         self.socket_LS1.close()
+        print("fetched data",data.decode())
+        # request = pymodbus.Custom
+        # command =1
+        # if self.Connected:
+            # self.Client.send(command)
+            # value = self.Client.execute(request=command)
+            # value = self.Client.execute()
+            # raw_data = self.Client.send(command)
+            # value = self.Client.recv(1024)
+            # value = round(
+            #         struct.unpack("<f", struct.pack("<HH", raw_data.getRegister(1), raw_data.getRegister(0)))[0], 3)
+            # print(value)
+    def read_LL(self):
+        # print("socket connection",self.socket.stillconnected())
+        # command = "HTR?1\n"
+        command = "N2?\n"
+        print("command",command)
+        cm_code = command.encode()
+        self.socket_LL.send(cm_code)
+        data = self.socket_LL.recv(self.BUFFER_SIZE)
+        self.socket_LL.close()
         print("fetched data",data.decode())
         # request = pymodbus.Custom
         # command =1
@@ -1496,6 +1529,7 @@ if __name__ == "__main__":
     PLC.read_LS()
     PLC.read_AD()
     PLC.ReadAll()
+    PLC.Read_LL()
 
     # sys.exit(App.exec_())
 
