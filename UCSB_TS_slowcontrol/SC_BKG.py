@@ -2944,6 +2944,10 @@ class UpdateServer(QtCore.QObject):
         self.PT_HighLimit_ini = sec.PT_HIGHLIMIT
         self.LEFT_REAL_LowLimit_ini = sec.LEFT_REAL_LOWLIMIT
         self.LEFT_REAL_HighLimit_ini = sec.LEFT_REAL_HIGHLIMIT
+        self.TT_AD1_Alarm_ini = sec.TT_AD1_ALARM
+        self.TT_AD2_Alarm_ini = sec.TT_AD2_ALARM
+        self.TT_AD1_Activated_ini = sec.TT_AD1_ACTIVATED
+        self.TT_AD2_Activated_ini = sec.TT_AD2_ACTIVATED
         self.PT_Activated_ini = sec.PT_ACTIVATED
         self.PT_Alarm_ini = sec.PT_ALARM
         self.LEFT_REAL_Activated_ini = sec.LEFT_REAL_ACTIVATED
