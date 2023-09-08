@@ -71,9 +71,9 @@ class PLC(QtCore.QObject):
         self.Client_LS1 = ModbusTcpClient(IP_LS1, port=PORT_LS1)
         self.Connected_LS1 = self.Client_LS1.connect()
         print("LS1 connected: " + str(self.Connected_LS1))
-
-        self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_LS1.connect((IP_LS1, PORT_LS1))
+        if self.Connected_LS1:
+            self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket_LS1.connect((IP_LS1, PORT_LS1))
 
         IP_LS2 = "10.111.19.102"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
@@ -83,9 +83,9 @@ class PLC(QtCore.QObject):
         self.Client_LS2 = ModbusTcpClient(IP_LS2, port=PORT_LS2)
         self.Connected_LS2 = self.Client_LS2.connect()
         print("LS2 connected: " + str(self.Connected_LS2))
-
-        self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_LS2.connect((IP_LS2, PORT_LS2))
+        if self.Connected_LS2:
+            self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket_LS2.connect((IP_LS2, PORT_LS2))
 
         # Adam
         IP_AD1 = "10.111.19.101"
@@ -125,9 +125,9 @@ class PLC(QtCore.QObject):
         self.Client_LL = ModbusTcpClient(IP_LL, port=PORT_LL)
         self.Connected_LL = self.Client_LL.connect()
         print("LL connected: " + str(self.Connected_LL))
-
-        self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_LL.connect((IP_LL, PORT_LL))
+        if self.Connected_LL:
+            self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket_LL.connect((IP_LL, PORT_LL))
 
         self.TT_AD1_address = copy.copy(sec.TT_AD1_ADDRESS)
         self.TT_AD2_address = copy.copy(sec.TT_AD2_ADDRESS)
@@ -528,22 +528,24 @@ class PLC(QtCore.QObject):
     def read_LL(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
-        commandN2 = "MEASure:N2:LEVel?\n"
-        print("command", commandN2)
-        cm_codeN2 = commandN2.encode()
-        self.socket_LL.send(cm_codeN2)
-        dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
+        if self.Connected_LL:
+            commandN2 = "MEASure:N2:LEVel?\n"
+            print("command", commandN2)
+            cm_codeN2 = commandN2.encode()
+            self.socket_LL.send(cm_codeN2)
+            dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
 
-        print("fetched data N2", dataN2.decode())
+            print("fetched data N2", dataN2.decode())
 
-        commandHE = "MEASure:HE:LEVel?\n"
-        print("command", commandHE)
-        cm_codeHE = commandHE.encode()
-        self.socket_LL.send(cm_codeHE)
-        dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
+            commandHE = "MEASure:HE:LEVel?\n"
+            print("command", commandHE)
+            cm_codeHE = commandHE.encode()
+            self.socket_LL.send(cm_codeHE)
+            dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
 
-        print("fetched data HE", dataHE.decode())
-        # self.socket_LL.close()
+            print("fetched data HE", dataHE.decode())
+            # self.socket_LL.close()
+
 
 
 
@@ -575,9 +577,11 @@ class PLC(QtCore.QObject):
         #     except:
         #         pass
         # print(result)
+        Raw_RTDs_AD1 = {}
+        Raw_RTDs_AD2 = {}
         if self.Connected_AD1:
             # Reading all the RTDs
-            Raw_RTDs_AD1 = {}
+
             for key in self.TT_AD_address:
                 Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
@@ -594,7 +598,7 @@ class PLC(QtCore.QObject):
 
         if self.Connected_AD2:
             # Reading all the RTDs
-            Raw_RTDs_AD2 = {}
+
             for key in self.TT_AD_address:
                 Raw_RTDs_AD2[key] = self.Client_AD2.read_holding_registers(self.TT_AD_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
@@ -668,7 +672,12 @@ class PLC(QtCore.QObject):
 
 
     def __del__(self):
-        self.Client.close()
+        self.socket_LL.close()
+        self.socket_LS1.close()
+        self.socket_LS2.close()
+        self.Client_AD1.close()
+        self.Client_AD2.close()
+        # self.Client.close()
         self.Client_BO.close()
 
     def load_alarm_config(self):
@@ -3932,9 +3941,9 @@ if __name__ == "__main__":
 
 
     PLC=PLC()
-    # PLC.read_LL()
+    PLC.read_LL()
     PLC.read_LS()
-    # PLC.read_AD()
+    PLC.read_AD()
     PLC.ReadAll()
 
     sys.exit(App.exec_())
