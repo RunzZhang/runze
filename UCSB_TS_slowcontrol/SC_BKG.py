@@ -672,7 +672,7 @@ class PLC(QtCore.QObject):
         self.Client_BO.close()
 
     def load_alarm_config(self):
-        self.Connected = self.Client.connect()
+        # self.Connected = self.Client.connect()
         self.Connected_BO = self.Client_BO.connect()
         if self.Connected_BO:
             self.alarm_config = AS.Alarm_Setting()
@@ -3932,10 +3932,10 @@ if __name__ == "__main__":
 
 
     PLC=PLC()
-    # PLC.read_LL()
-    # PLC.read_LS()
-    # PLC.read_AD()
-    # PLC.ReadAll()
+    PLC.read_LL()
+    PLC.read_LS()
+    PLC.read_AD()
+    PLC.ReadAll()
 
     sys.exit(App.exec_())
 
