@@ -3819,7 +3819,7 @@ class Update(QtCore.QObject):
         self.PLCUpdateThread.wait()
         print("PLC is stopped")
 
-        self.UpDatabase.stop()
+        # self.UpDatabase.stop()
         self.DataUpdateThread.quit()
         self.DataUpdateThread.wait()
 
