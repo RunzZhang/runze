@@ -481,7 +481,7 @@ class PLC(QtCore.QObject):
 
     def __del__(self):
         # add self.socket close
-        self.Client.close()
+        # self.Client.close()
         self.Client_BO.close()
 
     def read_LS(self):
