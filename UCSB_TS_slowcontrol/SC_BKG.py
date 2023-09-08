@@ -78,7 +78,7 @@ class PLC(QtCore.QObject):
         IP_LS2 = "10.111.19.102"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         PORT_LS2 = 7777
-        self.BUFFER_SIZE = 2048
+        self.BUFFER_SIZE = 1024
 
         self.Client_LS2 = ModbusTcpClient(IP_LS2, port=PORT_LS2)
         self.Connected_LS2 = self.Client_LS2.connect()
@@ -120,7 +120,7 @@ class PLC(QtCore.QObject):
         IP_LL = "10.111.19.108"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         PORT_LL = 7180
-        self.BUFFER_SIZE = 1024
+        self.BUFFER_SIZE = 2048
 
         self.Client_LL = ModbusTcpClient(IP_LL, port=PORT_LL)
         self.Connected_LL = self.Client_LL.connect()
