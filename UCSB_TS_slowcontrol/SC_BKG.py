@@ -531,7 +531,7 @@ class PLC(QtCore.QObject):
         try:
             if self.Connected_LL:
                 # commandN2 = "MEASure:N2:LEVel?\n"
-                commandN2 = "N2?"
+                commandN2 = "N2?\r\n"
                 print("command", commandN2)
                 cm_codeN2 = commandN2.encode()
                 print(1)
