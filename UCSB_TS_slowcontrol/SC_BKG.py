@@ -535,6 +535,7 @@ class PLC(QtCore.QObject):
                 print("command", commandN2)
                 cm_codeN2 = commandN2.encode()
                 self.socket_LL.send(cm_codeN2)
+                print(1)
                 dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
 
                 print("fetched data N2", dataN2.decode())
