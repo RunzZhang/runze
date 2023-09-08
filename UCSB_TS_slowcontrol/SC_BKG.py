@@ -78,7 +78,7 @@ class PLC(QtCore.QObject):
         IP_LS2 = "10.111.19.102"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         PORT_LS2 = 7777
-        self.BUFFER_SIZE = 1024
+        self.BUFFER_SIZE = 2048
 
         self.Client_LS2 = ModbusTcpClient(IP_LS2, port=PORT_LS2)
         self.Connected_LS2 = self.Client_LS2.connect()
@@ -534,7 +534,7 @@ class PLC(QtCore.QObject):
                 commandN2 = "*IDN?\r\n"
                 print("command", commandN2)
                 cm_codeN2 = commandN2.encode()
-                print(cm_codeN2)
+                # print(cm_codeN2)
                 self.socket_LL.send(cm_codeN2)
 
                 dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
