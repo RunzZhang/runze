@@ -529,7 +529,8 @@ class PLC(QtCore.QObject):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
         if self.Connected_LL:
-            commandN2 = "MEASure:N2:LEVel?\n"
+            # commandN2 = "MEASure:N2:LEVel?\n"
+            commandN2 = "N2?\n"
             print("command", commandN2)
             cm_codeN2 = commandN2.encode()
             self.socket_LL.send(cm_codeN2)
