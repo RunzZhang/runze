@@ -120,7 +120,7 @@ class PLC(QtCore.QObject):
         IP_LL = "10.111.19.108"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         PORT_LL = 7180
-        self.BUFFER_SIZE = 2048
+        self.BUFFER_SIZE = 1024
 
         self.Client_LL = ModbusTcpClient(IP_LL, port=PORT_LL)
         self.Connected_LL = self.Client_LL.connect()
@@ -484,7 +484,7 @@ class PLC(QtCore.QObject):
         # self.Client.close()
         self.Client_BO.close()
 
-    def read_LS(self):
+    def Read_LS(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
         if self.Connected_LS1 and self.Connected_LS2:
@@ -525,7 +525,7 @@ class PLC(QtCore.QObject):
         #         struct.unpack("<f", struct.pack("<HH", raw_data.getRegister(1), raw_data.getRegister(0)))[0], 3)
         # print(value)
 
-    def read_LL(self):
+    def Read_LL(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
         try:
@@ -568,7 +568,7 @@ class PLC(QtCore.QObject):
         #         struct.unpack("<f", struct.pack("<HH", raw_data.getRegister(1), raw_data.getRegister(0)))[0], 3)
         # print(value)
 
-    def read_AD(self):
+    def Read_AD(self):
         # test the port nubmber
         # result=[]
         # for i in range(99999):
@@ -2525,6 +2525,9 @@ class UpdatePLC(QtCore.QObject):
                 try:
                     print("PLC updating", datetime.datetime.now())
                     self.PLC.ReadAll()
+                    self.PLC.Read_AD()
+                    self.PLC.Read_LS()
+                    self.PLC.Read_LL()
                     # test signal
                     # self.AI_slack_alarm.emit("signal")
                     self.alarm_stack = ""
@@ -3944,14 +3947,14 @@ if __name__ == "__main__":
 
 
     App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
+    Update=Update()
 
 
-    PLC=PLC()
-    PLC.read_LL()
-    PLC.read_LS()
-    PLC.read_AD()
-    PLC.ReadAll()
+    # PLC=PLC()
+    # PLC.read_LL()
+    # PLC.read_LS()
+    # PLC.read_AD()
+    # PLC.ReadAll()
 
     sys.exit(App.exec_())
 
