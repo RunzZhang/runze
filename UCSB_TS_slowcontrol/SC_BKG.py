@@ -96,8 +96,8 @@ class PLC(QtCore.QObject):
 
         print(" AD1 connected: " + str(self.Connected_AD1))
 
-        self.socket_AD1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_AD1.connect((IP_AD1, PORT_AD1))
+        # self.socket_AD1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # self.socket_AD1.connect((IP_AD1, PORT_AD1))
 
         IP_AD2 = "10.111.19.104"
 
