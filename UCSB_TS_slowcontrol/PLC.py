@@ -66,8 +66,6 @@ class PLC:
         self.socket_LS1= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.socket_LS1.connect((IP_LS1,PORT_LS1))
 
-
-
         #Adam
         IP_AD1 = "10.111.19.101"
         PORT_AD1 = 502
