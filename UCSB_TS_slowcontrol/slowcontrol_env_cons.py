@@ -132,7 +132,7 @@ VALVE_BUSY = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False
                  "PV2004": False, "PV2005": False,
                  "PV2006": False, "PV2007": False}
 
-LOOPPID_ADR_BASE = {'HTR1001': 14288, 'HTR1002': 14306, 'HTR1003': 14324, 'HTR1004': 14342}
+LOOPPID_ADR_BASE = {'HTR1001': (0,0), 'HTR1002': (0,1), 'HTR1003': (1,0), 'HTR1004': (1,1)}
 
 LOOPPID_MODE0 = {'HTR1001': True, 'HTR1002': True, 'HTR1003': True, 'HTR1004': True}
 
@@ -342,7 +342,7 @@ DIN_RATE = {"LS3338": 30, "LS3339": 30, "ES3347": 30, "PUMP3305_CON": 30, "PUMP3
 LOOPPID_PARA = {'HTR1001': 0, 'HTR1002': 0, 'HTR1003': 0, 'HTR1004': 0}
 LOOPPID_RATE = {'HTR1001': 30, 'HTR1002': 30, 'HTR1003': 30, 'HTR1004': 30}
 
-DIC_PACK = {"data": {"TT": {"AD1": {"value": TT_AD1_DIC, "high": TT_AD1_HIGHLIMIT, "low": TT_AD1_LOWLIMIT},\
+DIC_PACK = {"data": {"TT": {"AD1": {"value": TT_AD1_DIC, "high": TT_AD1_HIGHLIMIT, "low": TT_AD1_LOWLIMIT},
                              "AD2": {"value": TT_AD2_DIC, "high": TT_AD2_HIGHLIMIT, "low": TT_AD2_LOWLIMIT}},
                                   "PT": {"value": PT_DIC, "high": PT_HIGHLIMIT, "low": PT_LOWLIMIT},
                                   "LEFT_REAL": {"value": LEFT_REAL_DIC, "high": LEFT_REAL_HIGHLIMIT, "low": LEFT_REAL_LOWLIMIT},
