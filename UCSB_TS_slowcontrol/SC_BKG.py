@@ -75,6 +75,8 @@ class PLC(QtCore.QObject):
             self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket_LS1.connect((IP_LS1, PORT_LS1))
 
+        self.LS1_updatesignal = False
+
         IP_LS2 = "10.111.19.102"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         PORT_LS2 = 7777
@@ -86,6 +88,7 @@ class PLC(QtCore.QObject):
         if self.Connected_LS2:
             self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket_LS2.connect((IP_LS2, PORT_LS2))
+        self.LS2_updatesignal = False
 
         # Adam
         IP_AD1 = "10.111.19.101"
@@ -95,6 +98,7 @@ class PLC(QtCore.QObject):
         self.Connected_AD1 = self.Client_AD1.connect()
 
         print(" AD1 connected: " + str(self.Connected_AD1))
+        self.AD1_updatesignal = False
 
         # self.socket_AD1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # self.socket_AD1.connect((IP_AD1, PORT_AD1))
@@ -107,6 +111,7 @@ class PLC(QtCore.QObject):
         self.Client_AD2 = ModbusTcpClient(IP_AD2, port=PORT_AD2)
         self.Connected_AD2 = self.Client_AD2.connect()
         print(" AD2 connected: " + str(self.Connected_AD2))
+        self.AD2_updatesignal = False
 
         IP_BO = "10.111.19.105"
 
@@ -116,6 +121,8 @@ class PLC(QtCore.QObject):
         self.Connected_BO = self.Client_BO.connect()
 
         print(" BO connected: " + str(self.Connected_BO))
+
+        self.BO_updatesignal = False
 
         IP_LL = "10.111.19.108"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
@@ -128,6 +135,8 @@ class PLC(QtCore.QObject):
         if self.Connected_LL:
             self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket_LL.connect((IP_LL, PORT_LL))
+        self.LL_updatesignal = False
+
 
         self.TT_AD1_address = copy.copy(sec.TT_AD1_ADDRESS)
         self.TT_AD2_address = copy.copy(sec.TT_AD2_ADDRESS)
@@ -484,6 +493,16 @@ class PLC(QtCore.QObject):
         # self.Client.close()
         self.Client_BO.close()
 
+    def UpdateSignal(self):
+        if self.AD1_updatesignal or self.AD2_updatesignal or self.LS1_updatesignal or self.LS2_updatesignal or self.BO_updatesignal or self.LL_updatesignal:
+            self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
+            self.DATA_TRI_SIGNAL.emit(True)
+            # print("signal sent")
+            # print(True,'\n',True,"\n",True,"\n")
+            self.NewData_Display = True
+            self.NewData_Database = True
+            self.NewData_ZMQ = True
+
     def Read_LS(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
@@ -504,10 +523,15 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.send(cm_code)
                     Raw_LS[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     # self.socket_LS1.close()
+            self.LS1_updatesignal = True
+            self.LS2_updatesignal = True
+
 
 
         else:
             print("LS1 or LS2 lost connection to PLC")
+            self.LS1_updatesignal = False
+            self.LS2_updatesignal = False
             self.PLC_DISCON_SIGNAL.emit()
         print("LS", Raw_LS)
 
@@ -548,8 +572,10 @@ class PLC(QtCore.QObject):
                 dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
 
                 print("fetched data HE", dataHE.decode())
+                self.LL_updatesignal = True
                 # self.socket_LL.close()
         except:
+            self.LL_updatesignal = False
             return 0
 
 
@@ -598,9 +624,11 @@ class PLC(QtCore.QObject):
                     self.TT_AD_dic[key] = 273.15 + read_value
                 else:
                     self.TT_AD_dic[key] = read_value
+            self.AD1_updatesignal = True
         else:
             print("AD1 lost connection to PLC")
             self.PLC_DISCON_SIGNAL.emit()
+            self.AD1_updatesignal = False
         print("AD1", Raw_RTDs_AD1)
 
         if self.Connected_AD2:
@@ -615,8 +643,10 @@ class PLC(QtCore.QObject):
                     self.TT_AD_dic[key] = 273.15 + read_value
                 else:
                     self.TT_AD_dic[key] = read_value
+            self.AD2_updatesignal = True
         else:
             print("AD2 lost connection to PLC")
+            self.AD2_updatesignal = False
             self.PLC_DISCON_SIGNAL.emit()
         print("AD2", Raw_RTDs_AD2)
 
@@ -1171,17 +1201,19 @@ class PLC(QtCore.QObject):
             ##########################################################################################
 
             # print(self.LOOP2PT_MAN)
-            self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
-            self.DATA_TRI_SIGNAL.emit(True)
-            # print("signal sent")
-            # print(True,'\n',True,"\n",True,"\n")
-            self.NewData_Display = True
-            self.NewData_Database = True
-            self.NewData_ZMQ = True
+            # self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
+            # self.DATA_TRI_SIGNAL.emit(True)
+            # # print("signal sent")
+            # # print(True,'\n',True,"\n",True,"\n")
+            # self.NewData_Display = True
+            # self.NewData_Database = True
+            # self.NewData_ZMQ = True
+            self.BO_updatesignal = True
 
             return 0
         else:
             self.PLC_DISCON_SIGNAL.emit()
+            self.BO_updatesignal = False
             # raise Exception('Not connected to PLC')  # will it restart the PLC ?
 
             return 1
@@ -2528,6 +2560,7 @@ class UpdatePLC(QtCore.QObject):
                     self.PLC.Read_AD()
                     self.PLC.Read_LS()
                     self.PLC.Read_LL()
+                    self.PLC.UpdateSignal()
                     # test signal
                     # self.AI_slack_alarm.emit("signal")
                     self.alarm_stack = ""
