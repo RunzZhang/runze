@@ -528,24 +528,28 @@ class PLC(QtCore.QObject):
     def read_LL(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
-        if self.Connected_LL:
-            # commandN2 = "MEASure:N2:LEVel?\n"
-            commandN2 = "N2?\n"
-            print("command", commandN2)
-            cm_codeN2 = commandN2.encode()
-            self.socket_LL.send(cm_codeN2)
-            dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
+        try:
+            if self.Connected_LL:
+                # commandN2 = "MEASure:N2:LEVel?\n"
+                commandN2 = "N2?\n"
+                print("command", commandN2)
+                cm_codeN2 = commandN2.encode()
+                self.socket_LL.send(cm_codeN2)
+                dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
 
-            print("fetched data N2", dataN2.decode())
+                print("fetched data N2", dataN2.decode())
 
-            commandHE = "MEASure:HE:LEVel?\n"
-            print("command", commandHE)
-            cm_codeHE = commandHE.encode()
-            self.socket_LL.send(cm_codeHE)
-            dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
+                commandHE = "MEASure:HE:LEVel?\n"
+                print("command", commandHE)
+                cm_codeHE = commandHE.encode()
+                self.socket_LL.send(cm_codeHE)
+                dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
 
-            print("fetched data HE", dataHE.decode())
-            # self.socket_LL.close()
+                print("fetched data HE", dataHE.decode())
+                # self.socket_LL.close()
+        except:
+            return 0
+
 
 
 
