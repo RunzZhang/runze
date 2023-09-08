@@ -3934,7 +3934,7 @@ if __name__ == "__main__":
     PLC=PLC()
     # PLC.read_LL()
     PLC.read_LS()
-    PLC.read_AD()
+    # PLC.read_AD()
     PLC.ReadAll()
 
     sys.exit(App.exec_())
