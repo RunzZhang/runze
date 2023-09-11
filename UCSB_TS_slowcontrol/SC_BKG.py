@@ -113,7 +113,7 @@ class PLC(QtCore.QObject):
         print(" AD2 connected: " + str(self.Connected_AD2))
         self.AD2_updatesignal = False
 
-        IP_BO = "10.111.19.105"
+        IP_BO = "10.111.19.106"
 
         PORT_BO = 502
 
