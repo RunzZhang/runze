@@ -513,14 +513,14 @@ class PLC(QtCore.QObject):
                 command =  command_base+command_middle+"\n"
                 if self.LOOPPID_ADR_BASE[key][0]==0:
                     self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    self.socket_LS1.connect(self.IP_LS1, self.PORT_LS1)
+                    self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
                     cm_code = command.encode()
                     self.socket_LS1.send(cm_code)
                     Raw_LS[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS1.close()
                 if self.LOOPPID_ADR_BASE[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    self.socket_LS2.connect(self.IP_LS2, self.PORT_LS2)
+                    self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
                     cm_code = command.encode()
                     self.socket_LS2.send(cm_code)
                     Raw_LS[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
