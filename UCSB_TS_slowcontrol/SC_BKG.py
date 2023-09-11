@@ -3982,7 +3982,9 @@ if __name__ == "__main__":
 
 
     App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
+    # Update=Update()
+    Update = UpdatePLC()
+    Update.run()
 
 
     # PLC=PLC()
