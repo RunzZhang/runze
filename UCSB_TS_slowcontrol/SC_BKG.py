@@ -2559,6 +2559,7 @@ class UpdatePLC(QtCore.QObject):
                     self.PLC.Read_LS()
                     self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
+                    print("finished")
                     # test signal
                     # self.AI_slack_alarm.emit("signal")
                     self.alarm_stack = ""
