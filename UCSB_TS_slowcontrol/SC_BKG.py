@@ -2526,7 +2526,7 @@ class UpdatePLC(QtCore.QObject):
     def __init__(self, PLC, parent=None):
         super().__init__(parent)
 
-        self.PLC = PLC
+        self.PLC = PLC()
         # self.alarm_db = COUPP_database()
         # self.message_manager = message_manager()
         self.Running = False
