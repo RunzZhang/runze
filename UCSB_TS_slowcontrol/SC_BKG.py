@@ -494,10 +494,11 @@ class PLC(QtCore.QObject):
         self.Client_BO.close()
 
     def UpdateSignal(self):
+        print("udpate signal")
         if self.AD1_updatesignal or self.AD2_updatesignal or self.LS1_updatesignal or self.LS2_updatesignal or self.BO_updatesignal or self.LL_updatesignal:
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
             self.DATA_TRI_SIGNAL.emit(True)
-            # print("signal sent")
+            print("signal sent")
             # print(True,'\n',True,"\n",True,"\n")
             self.NewData_Display = True
             self.NewData_Database = True
@@ -2549,10 +2550,7 @@ class UpdatePLC(QtCore.QObject):
 
     @QtCore.Slot()
     def run(self):
-
             self.Running = True
-
-
             while self.Running:
                 try:
                     print("PLC updating", datetime.datetime.now())
