@@ -11,16 +11,15 @@ v0.1.3 PLC online detection, poll PLCs only when values are updated, fix Centos 
 
 import os, sys, time, platform, datetime, random, pickle, cgitb
 
+from PySide6 import QtWidgets, QtCore, QtGui
 
-from PySide2 import QtWidgets, QtCore, QtGui
-
-from SlowDAQ_UCSB_v2 import *
+#from SlowDAQ_UCSB_v2 import *
 from PLC import *
 from PICOPW import VerifyPW
 from SlowDAQWidgets_UCSB_v2 import *
 import zmq
 
-VERSION = "v2.1.3"
+VERSION = "v2.1.3" 
 # if platform.system() == "Linux":
 #     QtGui.QFontDatabase.addApplicationFont("/usr/share/fonts/truetype/vista/calibrib.ttf")
 #     SMALL_LABEL_STYLE = "background-color: rgb(204,204,204);  font-family: calibrib;" \
@@ -41,12 +40,12 @@ VERSION = "v2.1.3"
 #               " font-size: 22px; font-weight: bold;"
 
 # Settings adapted to sbc slowcontrol machine
-SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\";" \
+SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Times\";" \
                     " font-size: 10px;" \
                     " font-weight: bold;"
-LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\"; " \
+LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Times\"; " \
               "font-size: 12px; font-weight: bold;"
-TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\";" \
+TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Times\";" \
               " font-size: 14px; font-weight: bold;"
 
 BORDER_STYLE = " border-radius: 2px; border-color: black;"
@@ -115,6 +114,7 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.Path = os.getcwd()
         self.ImagePath = os.path.join(self.Path, "image")
+        #print(self.ImagePath)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
@@ -127,7 +127,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.Tab = QtWidgets.QTabWidget(self)
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
+        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Times;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
 
@@ -137,7 +137,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ThermosyphonTab.Background = QtWidgets.QLabel(self.ThermosyphonTab)
         self.ThermosyphonTab.Background.setScaledContents(True)
         self.ThermosyphonTab.Background.setStyleSheet('background-color:black;')
-        pixmap_thermalsyphon = QtGui.QPixmap(os.path.join(self.ImagePath, "TS_PID.jpg"))
+        pixmap_thermalsyphon = QtGui.QPixmap("/Users/haleyfogg/Desktop/henry_ts_panel")
         pixmap_thermalsyphon = pixmap_thermalsyphon.scaledToWidth(2400*R)
         self.ThermosyphonTab.Background.setPixmap(QtGui.QPixmap(pixmap_thermalsyphon))
         self.ThermosyphonTab.Background.move(0*R, 0*R)
@@ -149,19 +149,31 @@ class MainWindow(QtWidgets.QMainWindow):
         self.GasTab.Background = QtWidgets.QLabel(self.GasTab)
         self.GasTab.Background.setScaledContents(True)
         self.GasTab.Background.setStyleSheet('background-color:black;')
-        pixmap_gas = QtGui.QPixmap(os.path.join(self.ImagePath, "GasPanel_PID.jpg"))
+        pixmap_gas = QtGui.QPixmap("/Users/haleyfogg/Desktop/henry_gas_panel") 
         pixmap_gas = pixmap_gas.scaledToWidth(2400 * R)
         self.GasTab.Background.setPixmap(QtGui.QPixmap(pixmap_gas))
         self.GasTab.Background.move(0 * R, 0 * R)
         self.GasTab.Background.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.DatanSignalTab = QtWidgets.QWidget()
+        self.TubeTab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.TubeTab, "Inner Tube")
+
+        self.TubeTab.Background = QtWidgets.QLabel(self.TubeTab)
+        self.TubeTab.Background.setScaledContents(True)
+        self.TubeTab.Background.setStyleSheet('background-color:black;')
+        pixmap_tube = QtGui.QPixmap("/Users/haleyfogg/Desktop/henry_tube")
+        pixmap_tube = pixmap_tube.scaledToWidth(2400 * R)
+        self.TubeTab.Background.setPixmap(QtGui.QPixmap(pixmap_tube))
+        self.TubeTab.Background.move(0 * R, 0 * R)
+        self.TubeTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.DatanSignalTab = QtWidgets.QWidget(self.Tab)
         self.Tab.addTab(self.DatanSignalTab, "Data and Signal Panel")
 
         self.DatanSignalTab.Background = QtWidgets.QLabel(self.DatanSignalTab)
         self.DatanSignalTab.Background.setScaledContents(True)
         self.DatanSignalTab.Background.setStyleSheet('background-color:black;')
-        pixmap_DatanSignal = QtGui.QPixmap(os.path.join(self.ImagePath, "Default_Background.png"))
+        pixmap_DatanSignal = QtGui.QPixmap("/Users/haleyfogg/Desktop/Default_Background")
         pixmap_DatanSignal = pixmap_DatanSignal.scaledToWidth(2400*R)
         self.DatanSignalTab.Background.setPixmap(QtGui.QPixmap(pixmap_DatanSignal))
         self.DatanSignalTab.Background.move(0*R, 0*R)
@@ -175,12 +187,12 @@ class MainWindow(QtWidgets.QMainWindow):
         # Temperature tab buttons
 
         self.LoginP = SingleButton(self.ThermosyphonTab)
-        self.LoginP.move(140 * R, 1200 * R)
+        self.LoginP.move(2150 * R, 100 * R)
         self.LoginP.Label.setText("Login")
         self.LoginP.Button.setText("Guest")
 
         self.LoginT = SingleButton(self.ThermosyphonTab)
-        self.LoginT.move(340 * R, 1200 * R)
+        self.LoginT.move(2250 * R, 100 * R)
         self.LoginT.Label.setText("Login")
         self.LoginT.Button.setText("Guest")
 
@@ -203,106 +215,115 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.SubWindow.resize(1000*R, 500*R)
         # self.AlarmButton.StatusWindow.AlarmWindow()
 
-        self.AlarmButton.move(0*R, 1300*R)
+        self.AlarmButton.move(2100*R, 50*R)
         self.AlarmButton.Button.setText("Alarm Button")
 
 
         #Thermosyphon Widgets
         self.PV1001 = Valve(self.ThermosyphonTab)
         self.PV1001.Label.setText("PV1001")
-        self.PV1001.move(1360*R,140*R)
+        self.PV1001.move(1015 *R,155*R)
 
         self.PV1002 = Valve(self.ThermosyphonTab)
         self.PV1002.Label.setText("PV1002")
-        self.PV1002.move(1950 * R, 450 * R)
+        self.PV1002.move(2115 * R, 920 * R)
 
         self.PV1003 = Valve(self.ThermosyphonTab)
         self.PV1003.Label.setText("PV1003")
-        self.PV1003.move(1950 * R, 800 * R)
+        self.PV1003.move(2115 * R, 1257 * R)
 
         self.PV1004 = Valve(self.ThermosyphonTab)
         self.PV1004.Label.setText("PV1004")
-        self.PV1004.move(1600 * R, 760 * R)
+        self.PV1004.move(1500 * R, 1100 * R)
 
         self.PV1005 = Valve(self.ThermosyphonTab)
         self.PV1005.Label.setText("PV1005")
-        self.PV1005.move(1350 * R, 400 * R)
+        self.PV1005.move(1440 * R, 585 * R)
 
         self.PV1006 = Valve(self.ThermosyphonTab)
         self.PV1006.Label.setText("PV1006")
-        self.PV1006.move(1330 * R, 540 * R)
+        self.PV1006.move(865 * R, 925 * R)
 
         self.PV1007 = Valve(self.ThermosyphonTab)
         self.PV1007.Label.setText("PV1007")
-        self.PV1007.move(1330 * R, 760 * R)
+        self.PV1007.move(865* R, 1257 * R)
 
         self.MFC1008 = Heater(self.ThermosyphonTab)
-        self.MFC1008.move(1900 * R, 250 * R)
+        self.MFC1008.move(1795 * R, 700 * R)
         self.MFC1008.Label.setText("MFC1008")
         self.MFC1008.HeaterSubWindow.setWindowTitle("MFC1008")
         self.MFC1008.HeaterSubWindow.Label.setText("MFC1008")
 
-        self.PT1012 = Indicator(self.ThermosyphonTab)
+        self.PT1012 = PressureIndicator(self.ThermosyphonTab)
         self.PT1012.Label.setText("PT1012")
-        self.PT1012.move(1040 * R, 120 * R)
+        self.PT1012.move(145 * R, 30 * R)
 
-        self.PT1013 = Indicator(self.ThermosyphonTab)
+        self.PT1013 = PressureIndicator(self.ThermosyphonTab)
         self.PT1013.Label.setText("PT1013")
-        self.PT1013.move(1030 * R, 530 * R)
+        self.PT1013.move(155 * R, 975 * R)
 
-        self.PT1014 = Indicator(self.ThermosyphonTab)
+        self.PT1014 = PressureIndicator(self.ThermosyphonTab)
         self.PT1014.Label.setText("PT1014")
-        self.PT1014.move(1030 * R, 750 * R)
+        self.PT1014.move(160 * R, 1160 * R)
 
         #Gas Panel Widgets
+        
+        #self.PNV001 = Valve(self.GasTab)
+        #self.PNV001.Label.setText("PNV001")
+        #self.PNV001.move(470 * R, 750 * R)
 
-        self.PNV001 = Valve(self.GasTab)
-        self.PNV001.Label.setText("PNV001")
-        self.PNV001.move(470 * R, 750 * R)
+        self.BGA1 = PressureIndicator(self.GasTab)
+        self.BGA1.Label.setText("BGA1")
+        self.BGA1.move(1350 * R, 350 * R)
 
-        self.PT001 =  Indicator(self.GasTab)
+        self.BGA2 = PressureIndicator(self.GasTab)
+        self.BGA2.Label.setText("BGA2")
+        self.BGA2.move(1700 * R, 350 * R)
+
+        self.PT001 = PressureIndicator(self.GasTab)
         self.PT001.Label.setText("PT001")
-        self.PT001.move(100 * R, 490 * R)
+        self.PT001.move(190 * R, 560 * R)
 
-        self.PT002 = Indicator(self.GasTab)
+        self.PT002 = PressureIndicator(self.GasTab)
         self.PT002.Label.setText("PT002")
-        self.PT002.move(470 * R, 950 * R)
-
-        self.PT003 = Indicator(self.GasTab)
+        self.PT002.move(1073 * R, 445 * R)
+        
+        self.PT003 = PressureIndicator(self.GasTab)
         self.PT003.Label.setText("PT003")
-        self.PT003.move(800 * R, 740 * R)
+        self.PT003.move(1091 * R, 740 * R)
 
-        self.PT004 = Indicator(self.GasTab)
+        self.PT004 = PressureIndicator(self.GasTab)
         self.PT004.Label.setText("PT004")
-        self.PT004.move(1670 * R, 450 * R)
+        self.PT004.move(1455 * R, 440 * R)
 
+        """
         self.IDPV001 = PnID_Alone(self.GasTab)
         self.IDPV001.Label.setText("PV001")
-        self.IDPV001.move(1200 * R, 800 * R)
+        self.IDPV001.move(1360 * R, 800 * R)
 
         self.IDPV002 = PnID_Alone(self.GasTab)
         self.IDPV002.Label.setText("PV002")
-        self.IDPV002.move(1280 * R, 800 * R)
+        self.IDPV002.move(1420 * R, 800 * R)
 
         self.IDPV003 = PnID_Alone(self.GasTab)
         self.IDPV003.Label.setText("PV003")
-        self.IDPV003.move(1360 * R, 800 * R)
+        self.IDPV003.move(1500 * R, 800 * R)
 
         self.IDPV004 = PnID_Alone(self.GasTab)
         self.IDPV004.Label.setText("PV004")
-        self.IDPV004.move(1500 * R, 800 * R)
+        self.IDPV004.move(1580 * R, 800 * R)
 
         self.IDPV005 = PnID_Alone(self.GasTab)
         self.IDPV005.Label.setText("PV005")
-        self.IDPV005.move(1580 * R, 800 * R)
+        self.IDPV005.move(1660 * R, 800 * R)
 
         self.IDPV006 = PnID_Alone(self.GasTab)
         self.IDPV006.Label.setText("PV006")
-        self.IDPV006.move(1660 * R, 800 * R)
+        self.IDPV006.move(1740 * R, 800 * R)
 
         self.IDPV007 = PnID_Alone(self.GasTab)
         self.IDPV007.Label.setText("PV007")
-        self.IDPV007.move(1740 * R, 800 * R)
+        self.IDPV007.move(1820 * R, 800 * R)
 
         self.IDPV008 = PnID_Alone(self.GasTab)
         self.IDPV008.Label.setText("PV008")
@@ -319,58 +340,189 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IDPV011 = PnID_Alone(self.GasTab)
         self.IDPV011.Label.setText("PV011")
         self.IDPV011.move(2140 * R, 800 * R)
-
-
+        """
 
         self.PV001 = Valve(self.GasTab)
         self.PV001.Label.setText("PV001")
-        self.PV001.move(1200*R,950*R)
+        self.PV001.move(890*R,960*R)
 
         self.PV002 = Valve(self.GasTab)
         self.PV002.Label.setText("PV002")
-        self.PV002.move(1200 * R, 1050 * R)
+        self.PV002.move(1840 * R, 415 * R)
 
         self.PV003 = Valve(self.GasTab)
         self.PV003.Label.setText("PV003")
-        self.PV003.move(1200 * R, 1150 * R)
+        self.PV003.move(1840 * R, 492 * R)
 
         self.PV004 = Valve(self.GasTab)
         self.PV004.Label.setText("PV004")
-        self.PV004.move(1450 * R, 950 * R)
+        self.PV004.move(1840 * R, 569* R)
 
         self.PV005 = Valve(self.GasTab)
         self.PV005.Label.setText("PV005")
-        self.PV005.move(1670 * R, 950 * R)
+        self.PV005.move(1840 * R, 646 * R)
 
         self.PV006 = Valve(self.GasTab)
         self.PV006.Label.setText("PV006")
-        self.PV006.move(1450 * R, 1050 * R)
+        self.PV006.move(1840 * R, 723 * R)
 
         self.PV007 = Valve(self.GasTab)
         self.PV007.Label.setText("PV007")
-        self.PV007.move(1670 * R, 1050 * R)
+        self.PV007.move(1840 * R, 800 * R)
 
         self.PV008 = Valve(self.GasTab)
         self.PV008.Label.setText("PV008")
-        self.PV008.move(1900 * R, 950 * R)
+        self.PV008.move(1840 * R, 877 * R)
 
         self.PV009 = Valve(self.GasTab)
         self.PV009.Label.setText("PV009")
-        self.PV009.move(2120 * R, 950 * R)
+        self.PV009.move(1840 * R, 954 * R)
 
         self.PV010 = Valve(self.GasTab)
         self.PV010.Label.setText("PV010")
-        self.PV010.move(1900 * R, 1050 * R)
+        self.PV010.move(1840 * R, 1031 * R)
 
         self.PV011 = Valve(self.GasTab)
         self.PV011.Label.setText("PV011")
-        self.PV011.move(2120 * R, 1050 * R)
+        self.PV011.move(1840 * R, 1108 * R)
 
+        self.PV012 = Valve(self.GasTab)
+        self.PV012.Label.setText("PV012")
+        self.PV012.move(1840 * R, 1185 * R)
+
+        self.PV013 = Valve(self.GasTab)
+        self.PV013.Label.setText("PV013")
+        self.PV013.move(1840 * R, 1262 * R)
+
+        self.MFC1 = Heater(self.GasTab)
+        self.MFC1.move(1160 * R, 525 * R)
+        self.MFC1.Label.setText("MFC1")
+        self.MFC1.HeaterSubWindow.setWindowTitle("MFC1")
+        self.MFC1.HeaterSubWindow.Label.setText("MFC1")
+
+        self.MFC2 = Heater(self.GasTab)
+        self.MFC2.move(1525 * R, 525 * R)
+        self.MFC2.Label.setText("MFC2")
+        self.MFC2.HeaterSubWindow.setWindowTitle("MFC2")
+        self.MFC2.HeaterSubWindow.Label.setText("MFC2")
+
+
+        # inner tube widgets 
+
+
+        self.RTD1 = Indicator(self.TubeTab)
+        self.RTD1.Label.setText("RTD1")
+        self.RTD1.move(145 * R, 30 * R)
+
+        self.RTD2 = Indicator(self.TubeTab)
+        self.RTD2.Label.setText("RTD2")
+        self.RTD2.move(145 * R, 80 * R)
+
+        self.RTD3 = Indicator(self.TubeTab)
+        self.RTD3.Label.setText("RTD3")
+        self.RTD3.move(145 * R, 130 * R)
+
+        self.RTD4 = Indicator(self.TubeTab)
+        self.RTD4.Label.setText("RTD4")
+        self.RTD4.move(145 * R, 180 * R)
+
+        self.RTD5 = Indicator(self.TubeTab)
+        self.RTD5.Label.setText("RTD5")
+        self.RTD5.move(145 * R, 230 * R)
+
+        self.RTD6 = Indicator(self.TubeTab)
+        self.RTD6.Label.setText("RTD6")
+        self.RTD6.move(145 * R, 280 * R)
+
+        self.LiqLev = LiquidLevel(self.TubeTab)
+        self.LiqLev.Label.setText("Liq Lev")
+        self.LiqLev.move(145 * R, 330 * R)
+        
+        self.H1 = Heater(self.TubeTab)
+        self.H1.move(295 * R, 30 * R)
+        self.H1.Label.setText("Heater1")
+        self.H1.HeaterSubWindow.setWindowTitle("Heater1")
+        self.H1.HeaterSubWindow.Label.setText("Heater1")
+
+        self.H2 = Heater(self.TubeTab)
+        self.H2.move(295 * R, 130 * R)
+        self.H2.Label.setText("Heater2")
+        self.H2.HeaterSubWindow.setWindowTitle("Heater2")
+        self.H2.HeaterSubWindow.Label.setText("Heater2")
+
+        self.H3 = Heater(self.TubeTab)
+        self.H3.move(295 * R, 230 * R)
+        self.H3.Label.setText("Heater3")
+        self.H3.HeaterSubWindow.setWindowTitle("Heater3")
+        self.H3.HeaterSubWindow.Label.setText("Heater3")
+
+        self.H4 = Heater(self.TubeTab)
+        self.H4.move(295 * R, 330 * R)
+        self.H4.Label.setText("Heater4")
+        self.H4.HeaterSubWindow.setWindowTitle("Heater4")
+        self.H4.HeaterSubWindow.Label.setText("Heater4")
+
+        self.H5 = Heater(self.TubeTab)
+        self.H5.move(295 * R, 430 * R)
+        self.H5.Label.setText("Heater5")
+        self.H5.HeaterSubWindow.setWindowTitle("Heater5")
+        self.H5.HeaterSubWindow.Label.setText("Heater5")
+
+
+        self.IDH1 = PnID_Alone(self.TubeTab)
+        self.IDH1.Label.setText("Heater 1")
+        self.IDH1.move(800 * R, 100 * R)
+
+        self.IDH2 = PnID_Alone(self.TubeTab)
+        self.IDH2.Label.setText("Heater 2")
+        self.IDH2.move(800 * R, 160 * R)
+
+        self.IDH3 = PnID_Alone(self.TubeTab)
+        self.IDH3.Label.setText("Heater 3")
+        self.IDH3.move(1342 * R, 705 * R)
+
+        self.IDH4 = PnID_Alone(self.TubeTab)
+        self.IDH4.Label.setText("Heater 4")
+        self.IDH4.move(1267 * R, 1020 * R)
+
+        self.IDH5 = PnID_Alone(self.TubeTab)
+        self.IDH5.Label.setText("Heater 5")
+        self.IDH5.move(1417 * R, 1020 * R)
+
+        self.IDRTD1 = PnID_Alone(self.TubeTab)
+        self.IDRTD1.Label.setText("RTD 1")
+        self.IDRTD1.move(1150 * R, 940 * R)
+
+        self.IDRTD2 = PnID_Alone(self.TubeTab)
+        self.IDRTD2.Label.setText("RTD 2")
+        self.IDRTD2.move(1515 * R, 940 * R)
+
+        self.IDRTD3 = PnID_Alone(self.TubeTab)
+        self.IDRTD3.Label.setText("RTD 3")
+        self.IDRTD3.move(1342 * R, 725 * R)
+
+        self.IDRTD4 = PnID_Alone(self.TubeTab)
+        self.IDRTD4.Label.setText("RTD 4")
+        self.IDRTD4.move(1342 * R, 685 * R)
+
+        self.IDRTD5 = PnID_Alone(self.TubeTab)
+        self.IDRTD5.Label.setText("RTD 5")
+        self.IDRTD5.move(800 * R, 130 * R)
+
+        #self.IDRTD6 = PnID_Alone(self.TubeTab)
+        #self.IDRTD6.Label.setText("RTD 6")
+        #self.IDRTD6.move(145 * R, 490 * R)
+        
 
 
         #commands stack
         self.address ={'PV1001':10001,'PV1002':10002,'PV1003':10003,'PV1004':10004,'PV1005':10005,'PV1006':10006,'PV1007':10007,'PT1012':10012,
-                       'PT1013':10013,'PT10014':10014}
+                       'PT1013':10013,'PT1014':10014, 
+                       'PV001':20001,'PV002':20002,'PV003':20003,'PV004':20004, 'PV005':20005,'PV006':20006,'PV007':20007,'PV008':20008,
+                       'PV009':20009,'PV010':20010,'PV011':20011,'PV012':20012,'PV013':20013,'PT001':30001,'PT002':30002,'PT003':30003,'PT004':30004,
+                       'BGA1':40001,'BGA2':40002,'MFC1':50001, 'MFC2':50002,
+                       'H1':60001,'H2':60002, 'H3':60003, 'H4':60004, 'LiqLev':70000, 
+                       'RTD1':80001,'RTD2':80002,'RTD3':80003,'RTD4':80004,'RTD5':80005,'RTD6':80006}
         self.commands = {}
 
         self.signal_connection()
@@ -512,7 +664,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def LButtonClicked(self,pid):
         self.commands[pid]={"server":"BO","address": self.address[pid], "type":"valve","operation":"OPEN", "value":1}
         print(self.commands)
-        print(pid,"LButton is clicked")
+        print(pid,"L Button is clicked")
 
     @QtCore.Slot()
     def RButtonClicked(self, pid):
@@ -526,7 +678,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater_power", "operation": "EN",
                               "value": 1}
         print(self.commands)
-        print(pid, "LButton is clicked")
+        print(pid, "L Button is clicked")
 
     @QtCore.Slot()
     def HTRButtonClicked(self, pid):
@@ -885,7 +1037,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.CloseMessage.setStandardButtons(
             QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard | QtWidgets.QMessageBox.Cancel)
         self.CloseMessage.setDefaultButton(QtWidgets.QMessageBox.Save)
-        self.ret = self.CloseMessage.exec_()
+        self.ret = self.CloseMessage.exec()
         if self.ret == QtWidgets.QMessageBox.Save:
             self.Save()
             event.accept()
@@ -1554,7 +1706,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.Tab = QtWidgets.QTabWidget(self)
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
+        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Times;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
 
@@ -2258,12 +2410,12 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(1200*R, 600*R)
-        self.setMinimumSize(1200*R, 600*R)
+        self.resize(1700*R, 600*R)
+        self.setMinimumSize(1700*R, 600*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1700*R, 600*R))
 
         # Groupboxs for alarm/PT/TT
 
@@ -2291,7 +2443,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.Label.setObjectName("Label")
         self.Label.setText("Indicator")
         self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
-        # self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
+        self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
         self.GLWR.addWidget(self.Label)
 
         self.ButtonGroup = ButtonGroup(self.GroupWR)
@@ -2377,6 +2529,23 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.RTD2 = Indicator(self.GroupRD)
         self.RTD2.Label.setText("RTD2")
         self.GLRD.addWidget(self.RTD2)
+
+        self.RTD3 = Indicator(self.GroupRD)
+        self.RTD3.Label.setText("RTD3")
+        self.GLRD.addWidget(self.RTD3)
+
+        self.RTD4 = Indicator(self.GroupRD)
+        self.RTD4.Label.setText("RTD4")
+        self.GLRD.addWidget(self.RTD4)
+
+        self.RTD5 = Indicator(self.GroupRD)
+        self.RTD5.Label.setText("RTD5")
+        self.GLRD.addWidget(self.RTD5)
+
+        self.RTD6 = Indicator(self.GroupRD)
+        self.RTD6.Label.setText("RTD6")
+        self.GLRD.addWidget(self.RTD6)
+
 
 
 # Define a function tab that shows the status of the widgets
@@ -2810,15 +2979,15 @@ class UpdateClient(QtCore.QObject):
 
         self.TT_FP_dic = {"TT2420": 0}
 
-        self.PT_dic = {"PT1012": 0, "PT1013": 0, "PT1014": 0}
+        self.PT_dic = {"PT1012": 0, "PT1013": 0, "PT1014": 0, "PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "BGA1": 0, "BGA2": 0}
 
         self.TT_FP_LowLimit = {"TT2420": 0}
 
         self.TT_FP_HighLimit = {"TT2420": 30}
 
-        self.PT_LowLimit = {"PT1012": 0, "PT1013": 0, "PT1014": 0}
+        self.PT_LowLimit = {"PT1012": 0, "PT1013": 0, "PT1014": 0, "PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "BGA1": 0, "BGA2": 0}
 
-        self.PT_HighLimit = {"PT1012": 0, "PT1013": 0, "PT1014": 0}
+        self.PT_HighLimit = {"PT1012": 0, "PT1013": 0, "PT1014": 0, "PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "BGA1": 0, "BGA2": 0}
 
         self.TT_FP_Activated = {"TT2420": True}
 
@@ -2830,16 +2999,24 @@ class UpdateClient(QtCore.QObject):
         self.MainAlarm = False
 
         self.Valve_OUT = {"PV1001": 0, "PV1002": 0, "PV1003": 0, "PV1004": 0, "PV1005": 0, "PV1006": 0,
-                          "PV1007": 0, "MFC1008": 0}
+                          "PV1007": 0, "MFC1008": 0, "PV001": 0,"PV002": 0, "PV003": 0, "PV004": 0, 
+                          "PV005": 0, "PV006": 0,"PV007": 0, "PV008": 0, "PV009": 0, "PV010": 0, 
+                          "PV011": 0, "PV012": 0, "PV013": 0, "MFC1":0, "MFC2": 0}
 
         self.Valve_MAN = {"PV1001": True, "PV1002": True, "PV1003": True, "PV1004": True, "PV1005": True, "PV1006": True,
-                          "PV1007": True, "MFC1008": True}
+                          "PV1007": True, "MFC1008": True,"PV001": True, "PV002": True, "PV003": True, "PV004": True,
+                          "PV005": True, "PV006": True, "PV007": True, "PV008": True, "PV009": True, "PV010": True, 
+                          "PV011": True, "PV012": True, "PV013": True, "MFC1": True, "MFC2": True}
 
         self.Valve_INTLKD = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
-                          "PV1007": False, "MFC1008": False}
+                          "PV1007": False, "MFC1008": False,"PV001": False, "PV002": False, "PV003": False, "PV004": False,
+                          "PV005": False, "PV006": False, "PV007": False, "PV008": False, "PV009": False, "PV010": False, 
+                          "PV011": False, "PV012": False, "PV013": False, "MFC1": False, "MFC2": False}
 
         self.Valve_ERR = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
-                          "PV1007": False, "MFC1008": False}
+                          "PV1007": False, "MFC1008": False,"PV001": False, "PV002": False, "PV003": False, "PV004": False,
+                          "PV005": False, "PV006": False, "PV007": False, "PV008": False, "PV009": False, "PV010": False, 
+                          "PV011": False, "PV012": False, "PV013": False, "MFC1": False, "MFC2": False}
 
 
         self.receive_dic = {"data":{"TT":{"FP":self.TT_FP_dic,
@@ -2941,6 +3118,20 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.PV1006.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV1006"])
                 self.MW.PV1007.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV1007"])
 
+                self.MW.PV001.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV001"])
+                self.MW.PV002.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV002"])
+                self.MW.PV003.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV003"])
+                self.MW.PV004.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV004"])
+                self.MW.PV005.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV005"])
+                self.MW.PV006.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV006"])
+                self.MW.PV007.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV007"])
+                self.MW.PV008.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV008"])
+                self.MW.PV009.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV009"])
+                self.MW.PV010.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV010"])
+                self.MW.PV011.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV011"])
+                self.MW.PV012.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV012"])
+                self.MW.PV013.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV013"])
+
 
 
                 # refreshing the valve status from PLC every 30s
@@ -2981,12 +3172,94 @@ class UpdateDisplay(QtCore.QObject):
                     else:
                         self.MW.PV1007.Set.ButtonRClicked()
 
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV001.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV001.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV002.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV002.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV003.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV1003.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV004.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV004.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV005.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV005.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV006.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV006.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV007.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV007.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV008.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV008.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV009.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV009.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV010.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV010.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV010.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV010.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV011.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV011.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV012.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV012.Set.ButtonRClicked()
+                    
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1007"]:
+                        self.MW.PV013.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV013.Set.ButtonRClicked()
+
+            
+
                     self.count = 0
                 self.count += 1
 
                 self.MW.PT1012.SetValue(self.Client.receive_dic["data"]["PT"]["PT1012"])
                 self.MW.PT1013.SetValue(self.Client.receive_dic["data"]["PT"]["PT1013"])
                 self.MW.PT1014.SetValue(self.Client.receive_dic["data"]["PT"]["PT1014"])
+
+                self.MW.PT001.SetValue(self.Client.receive_dic["data"]["PT"]["PT001"])
+                self.MW.PT002.SetValue(self.Client.receive_dic["data"]["PT"]["PT002"])
+                self.MW.PT003.SetValue(self.Client.receive_dic["data"]["PT"]["PT003"])
+                self.MW.PT004.SetValue(self.Client.receive_dic["data"]["PT"]["PT004"])
+
+                self.MW.BGA1.SetValue(self.Client.receive_dic["data"]["PT"]["BGA1"])
+                self.MW.BGA2.SetValue(self.Client.receive_dic["data"]["PT"]["BGA2"])
+        
+    
 
                 # self.MW.TT2118.SetValue(self.MW.PLC.RTD[0])
 
@@ -3092,7 +3365,7 @@ if __name__ == "__main__":
     MW.activateWindow()
     # save data
 
-    sys.exit(App.exec_())
+    sys.exit(App.exec())
 
     # AW = AlarmWin()
     # if platform.system() == "Linux":
