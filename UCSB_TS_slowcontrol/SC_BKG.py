@@ -63,31 +63,28 @@ class PLC(QtCore.QObject):
     PLC_DISCON_SIGNAL = QtCore.Signal()
     def __init__(self):
         super().__init__()
-        IP_LS1 = "10.111.19.100"
+        self.IP_LS1 = "10.111.19.100"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
-        PORT_LS1 = 7777
+        self.PORT_LS1 = 7777
         self.BUFFER_SIZE = 1024
 
-        self.Client_LS1 = ModbusTcpClient(IP_LS1, port=PORT_LS1)
+        self.Client_LS1 = ModbusTcpClient(self.IP_LS1, port=self.PORT_LS1)
         self.Connected_LS1 = self.Client_LS1.connect()
         print("LS1 connected: " + str(self.Connected_LS1))
-        if self.Connected_LS1:
-            self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.socket_LS1.connect((IP_LS1, PORT_LS1))
 
         self.LS1_updatesignal = False
 
-        IP_LS2 = "10.111.19.102"
+        self.IP_LS2 = "10.111.19.102"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
-        PORT_LS2 = 7777
+        self.PORT_LS2 = 7777
         self.BUFFER_SIZE = 1024
 
-        self.Client_LS2 = ModbusTcpClient(IP_LS2, port=PORT_LS2)
+        self.Client_LS2 = ModbusTcpClient(self.IP_LS2, port=self.PORT_LS2)
         self.Connected_LS2 = self.Client_LS2.connect()
         print("LS2 connected: " + str(self.Connected_LS2))
-        if self.Connected_LS2:
-            self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.socket_LS2.connect((IP_LS2, PORT_LS2))
+        # if self.Connected_LS2:
+        #     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        #     self.socket_LS2.connect((IP_LS2, PORT_LS2))
         self.LS2_updatesignal = False
 
         # Adam
@@ -515,15 +512,19 @@ class PLC(QtCore.QObject):
                 command_middle=str(self.LOOPPID_ADR_BASE[key][1])
                 command =  command_base+command_middle+"\n"
                 if self.LOOPPID_ADR_BASE[key][0]==0:
+                    self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LS1.connect(self.IP_LS1, self.PORT_LS1)
                     cm_code = command.encode()
                     self.socket_LS1.send(cm_code)
                     Raw_LS[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
-                    # self.socket_LS1.close()
+                    self.socket_LS1.close()
                 if self.LOOPPID_ADR_BASE[key][0]==1:
+                    self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LS2.connect(self.IP_LS2, self.PORT_LS2)
                     cm_code = command.encode()
                     self.socket_LS2.send(cm_code)
                     Raw_LS[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
-                    # self.socket_LS1.close()
+                    self.socket_LS2.close()
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
 
