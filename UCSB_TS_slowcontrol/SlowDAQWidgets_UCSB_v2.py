@@ -7,12 +7,12 @@ v1.0 Initial code 29/11/19 ML
 v1.1 Alarm on state widget 04/03/20 ML
 """
 
-from PySide2 import QtCore, QtWidgets, QtGui
+from PySide6 import QtCore, QtWidgets, QtGui
 import time, platform
 import os
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
-FONT = "font-family: \"Calibri\"; font-size: 8px;"
+FONT = "font-family: \"Times\"; font-size: 8px;"
 
 # FONT = " "
 
@@ -40,7 +40,7 @@ C_ORANGE = "background-color: rgb(255,132,27);"
 
 #this title style is for SBC slowcontrol machine
 TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: " \
-              "\"Calibri\"; font-size: 14px; font-weight: bold;"
+              "\"Times\"; font-size: 14px; font-weight: bold;"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
                " border-color: black;"
 TITLE_STYLE = "background-color: rgb(204,204,204); "
@@ -203,14 +203,13 @@ class ColorIndicator(QtWidgets.QWidget):
         self.Label.setStyleSheet("QLabel {" +FONT+"}")
 
         # unfinished part of the function, should change color when the reading changes
-        # self.Field = QtWidgets.QLineEdit(self)
-        # self.Field.setObjectName("value")
-        # self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
-        # self.Field.setAlignment(QtCore.Qt.AlignCenter)
-        # self.Field.setStyleSheet(
-        # "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE + "}
-        # QWidget[Alarm = false]{" + C_MEDIUM_GREY + "}")
-        # self.Field.setProperty("Alarm", False)
+        self.Field = QtWidgets.QLineEdit(self)
+        self.Field.setObjectName("value")
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
+        self.Field.setAlignment(QtCore.Qt.AlignCenter)
+        self.Field.setStyleSheet(
+        "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE + "} QWidget[Alarm = false]{" + C_MEDIUM_GREY + "}")
+        self.Field.setProperty("Alarm", False)
 
         # test part.
         self.ColorButton = QtWidgets.QPushButton(self)
@@ -238,14 +237,14 @@ class ColorIndicator(QtWidgets.QWidget):
 
 
 # unfinished part of change button color every 2 seconds
-# def ColorNumberLoop(self, loopnumber=10):
-#     while loopnumber>1:
-#         self.ColorButton.setProperty("ColorStyle", str(self.ColorNumber))
-#         self.ColorButton.setStyle(self.ColorButton.style())
-#         self.ColorNumber += 1
-#         loopnumber -= 1
-#         time.sleep(2)
-#         self.ColorNumber = self.ColorNumber%3
+def ColorNumberLoop(self, loopnumber=10):
+    while loopnumber>1:
+         self.ColorButton.setProperty("ColorStyle", str(self.ColorNumber))
+         self.ColorButton.setStyle(self.ColorButton.style())
+         self.ColorNumber += 1
+         loopnumber -= 1
+         time.sleep(2)
+         self.ColorNumber = self.ColorNumber%3
 
 
 class SetPoint(QtWidgets.QWidget):
@@ -320,7 +319,7 @@ class Loadfile(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("LoadFile")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 1000*R))
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 100*R))
         self.setMinimumSize(600*R, 1000*R)
         self.setSizePolicy(sizePolicy)
 
@@ -339,11 +338,11 @@ class Loadfile(QtWidgets.QWidget):
         self.LoadPathButton = QtWidgets.QPushButton(self)
         self.LoadPathButton.clicked.connect(self.LoadPath)
         self.LoadPathButton.setText("LoadPath")
-        self.LoadPathButton.setFixedSize(100*R, 50*R)
+        self.LoadPathButton.setFixedSize(180*R, 50*R)
         self.HL.addWidget(self.LoadPathButton)
 
         self.LoadFileButton = QtWidgets.QPushButton(self)
-        self.LoadFileButton.setFixedSize(100*R, 50*R)
+        self.LoadFileButton.setFixedSize(180*R, 50*R)
         self.LoadFileButton.setText("ReadFile")
         self.HL.addWidget(self.LoadFileButton)
 
@@ -391,13 +390,13 @@ class CustomSave(QtWidgets.QWidget):
         self.LoadPathButton = QtWidgets.QPushButton(self)
         self.LoadPathButton.clicked.connect(self.LoadPath)
         self.LoadPathButton.setText("ChoosePath")
-        self.LoadPathButton.setFixedSize(100*R, 50*R)
+        self.LoadPathButton.setFixedSize(200*R, 50*R)
         self.LoadPathButton.move(400*R, 0*R)
         self.VL.addWidget(self.LoadPathButton)
 
         self.SaveFileButton = QtWidgets.QPushButton(self)
-        self.SaveFileButton.setFixedSize(100*R, 50*R)
-        self.SaveFileButton.move(500*R, 0*R)
+        self.SaveFileButton.setFixedSize(150*R, 50*R)
+        self.SaveFileButton.move(400*R, 50*R)
         self.SaveFileButton.setText("SaveFile")
         self.VL.addWidget(self.SaveFileButton)
 
@@ -644,25 +643,25 @@ class Indicator(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("Indicator")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
-        self.setMinimumSize(70*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 40*R))
+        self.setMinimumSize(80*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 40*R))
         self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Indicator")
-        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet("QLabel {" +FONT+"}")
 
         self.Field = QtWidgets.QLineEdit(self)
         self.Field.setObjectName("indicator value")
-        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 80*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
@@ -696,6 +695,124 @@ class Indicator(QtWidgets.QWidget):
     def SetAlarmMode(self, Mode):
         self.AlarmMode = Mode
 
+class PressureIndicator(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("PressureIndicator")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 40*R))
+        self.setMinimumSize(80*R, 40*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 40*R))
+        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("PressureIndicator")
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 20*R))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet("QLabel {" +FONT+"}")
+
+        self.Field = QtWidgets.QLineEdit(self)
+        self.Field.setObjectName("indicator value")
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 80*R, 20*R))
+        self.Field.setAlignment(QtCore.Qt.AlignCenter)
+        self.Field.setReadOnly(True)
+        self.Field.setStyleSheet(
+            "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
+            "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
+        self.Field.Property = False
+        self.Field.setProperty("Alarm", False)
+
+        self.Unit = " mA"
+        self.SetValue(0.)
+
+    def SetValue(self, value):
+        self.value = value
+        self.Field.setText(format(value, '#.2f') + self.Unit)
+
+    def SetAlarm(self):
+        self.Field.Property = True
+        self.Field.setProperty("Alarm", self.Field.Property)
+        self.Field.setStyle(self.Field.style())
+
+    def ResetAlarm(self):
+        self.Field.Property = False
+        self.Field.setProperty("Alarm", self.Field.Property)
+        self.Field.setStyle(self.Field.style())
+
+    def SetUnit(self, unit=" °C"):
+        self.Unit = unit
+        self.Field.setText(format(self.value, '#.2f') + self.Unit)
+
+    # set alarm mode, if the mode is false, then the alarm will not be triggered despite of alarm value
+    def SetAlarmMode(self, Mode):
+        self.AlarmMode = Mode
+
+
+class LiquidLevel(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("LiquidLevel")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 40*R))
+        self.setMinimumSize(80*R, 40*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 40*R))
+        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("LiquidLevel")
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 20*R))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet("QLabel {" +FONT+"}")
+
+        self.Field = QtWidgets.QLineEdit(self)
+        self.Field.setObjectName("indicator value")
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 80*R, 20*R))
+        self.Field.setAlignment(QtCore.Qt.AlignCenter)
+        self.Field.setReadOnly(True)
+        self.Field.setStyleSheet(
+            "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
+            "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
+        self.Field.Property = False
+        self.Field.setProperty("Alarm", False)
+
+        self.Unit = " cm"
+        self.SetValue(0.)
+
+    def SetValue(self, value):
+        self.value = value
+        self.Field.setText(format(value, '#.2f') + self.Unit)
+
+    def SetAlarm(self):
+        self.Field.Property = True
+        self.Field.setProperty("Alarm", self.Field.Property)
+        self.Field.setStyle(self.Field.style())
+
+    def ResetAlarm(self):
+        self.Field.Property = False
+        self.Field.setProperty("Alarm", self.Field.Property)
+        self.Field.setStyle(self.Field.style())
+
+    def SetUnit(self, unit=" °C"):
+        self.Unit = unit
+        self.Field.setText(format(self.value, '#.2f') + self.Unit)
+
+    # set alarm mode, if the mode is false, then the alarm will not be triggered despite of alarm value
+    def SetAlarmMode(self, Mode):
+        self.AlarmMode = Mode
 
 class Control(QtWidgets.QWidget):
     def __init__(self, parent=None):
