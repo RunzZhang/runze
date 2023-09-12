@@ -790,30 +790,31 @@ class MainWindow(QtWidgets.QMainWindow):
     # Change user and lock/unlock controls
     @QtCore.Slot()
     def ChangeUser(self):
-        if self.User == "Guest":
-            Dialog = QtWidgets.QInputDialog()
-            Dialog.setInputMode(QtWidgets.QInputDialog.TextInput)
-            Dialog.setLabelText("Please entre password")
-            Dialog.setModal(True)
-            Dialog.setWindowTitle("Login")
-            Dialog.exec()
-            if Dialog.result():
-                if VerifyPW(ADMIN_PASSWORD, Dialog.textValue()):
-                    self.User = "Admin"
-                    self.LoginT.Button.setText("Admin")
-                    self.LoginP.Button.setText("Admin")
-                    self.LoginW.Button.setText("Admin")
-
-                    self.ActivateControls(True)
-
-                    self.UserTimer.start(ADMIN_TIMER)
-        else:
-            self.User = "Guest"
-            self.LoginT.Button.setText("Guest")
-            self.LoginP.Button.setText("Guest")
-            self.LoginW.Button.setText("Guest")
-
-            self.ActivateControls(False)
+        return 0
+        # if self.User == "Guest":
+        #     Dialog = QtWidgets.QInputDialog()
+        #     Dialog.setInputMode(QtWidgets.QInputDialog.TextInput)
+        #     Dialog.setLabelText("Please entre password")
+        #     Dialog.setModal(True)
+        #     Dialog.setWindowTitle("Login")
+        #     Dialog.exec()
+        #     if Dialog.result():
+        #         if VerifyPW(ADMIN_PASSWORD, Dialog.textValue()):
+        #             self.User = "Admin"
+        #             self.LoginT.Button.setText("Admin")
+        #             self.LoginP.Button.setText("Admin")
+        #             self.LoginW.Button.setText("Admin")
+        #
+        #             self.ActivateControls(True)
+        #
+        #             self.UserTimer.start(ADMIN_TIMER)
+        # else:
+        #     self.User = "Guest"
+        #     self.LoginT.Button.setText("Guest")
+        #     self.LoginP.Button.setText("Guest")
+        #     self.LoginW.Button.setText("Guest")
+        #
+        #     self.ActivateControls(False)
 
     @QtCore.Slot()
     def update_alarmwindow(self,dic):

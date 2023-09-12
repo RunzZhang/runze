@@ -862,19 +862,20 @@ class Control(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def Changevalue(self):
-        Dialog = QtWidgets.QInputDialog()
-        Dialog.setInputMode(QtWidgets.QInputDialog.DoubleInput)
-        Dialog.setDoubleDecimals(self.Decimals)
-        Dialog.setDoubleRange(self.Min, self.Max)
-        Dialog.setDoubleStep(self.Step)
-        Dialog.setDoublevalue(self.value)
-        Dialog.setLabelText("Please entre a new value (min = " + str(self.Min) + ", max = " + str(self.Max) + ")")
-        Dialog.setModal(True)
-        Dialog.setWindowTitle("Modify value")
-        Dialog.exec()
-        if Dialog.result():
-            self.SetValue(Dialog.doublevalue())
-            self.Signals.fSignal.emit(self.value)
+        return 0
+        # Dialog = QtWidgets.QInputDialog()
+        # Dialog.setInputMode(QtWidgets.QInputDialog.DoubleInput)
+        # Dialog.setDoubleDecimals(self.Decimals)
+        # Dialog.setDoubleRange(self.Min, self.Max)
+        # Dialog.setDoubleStep(self.Step)
+        # Dialog.setDoublevalue(self.value)
+        # Dialog.setLabelText("Please entre a new value (min = " + str(self.Min) + ", max = " + str(self.Max) + ")")
+        # Dialog.setModal(True)
+        # Dialog.setWindowTitle("Modify value")
+        # Dialog.exec()
+        # if Dialog.result():
+        #     self.SetValue(Dialog.doublevalue())
+        #     self.Signals.fSignal.emit(self.value)
 
     def Activate(self, Activate):
         if Activate:
