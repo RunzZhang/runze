@@ -322,7 +322,7 @@ if __name__ == "__main__":
     print(datetime_in_1e5micro())
     print(early_datetime())
 
-test NW sbc alarm database
+# test NW sbc alarm database
 
 # if __name__ == "__main__":
 #     db = COUPP_database()
