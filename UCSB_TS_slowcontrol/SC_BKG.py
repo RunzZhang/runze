@@ -1931,53 +1931,53 @@ class UpdateDataBase(QtCore.QObject):
             # if self.PLC.NewData_Database:
             if self.status:
                 self.Running_pointer = 0
-                try:
-                    # print(0)
-                    # print(self.para_alarm)
-                    # print("ALARM:\n", "\n", self.COUPP_ALARM)
-                    # if self.para_alarm >= self.rate_alarm:
-
-                    # if coupp alarm is blank which only comes from the PLC module, then write ok status
-                    # if coupp alarm is "k", which means no new data from PLC module, then keep the previous status: if previous was ok, then update the ok, if it was alarm, then do nothing. waiting for next command from PLC
-                    #if coupp alarm is neither blank nor k, then it should be a alarm from PLC module, so write the alarm to the COUPP database.
-
-
-
-                        # if self.COUPP_ALARM == "":
-                        #     self.COUPP_ERROR = True
-                        #     self.alarm_db.ssh_write()
-                        #     # if the ssh write fails, the ERROR will be True
-                        #     self.COUPP_ERROR = False
-                        #     self.para_alarm = 0
-                        # elif self.COUPP_ALARM == "k":
-                        #         if self.alarm_db.ssh_state_only()=="OK":
-                        #             self.COUPP_ERROR = True
-                        #             self.alarm_db.ssh_write()
-                        #             # if the ssh write fails, the ERROR will be True
-                        #             self.COUPP_ERROR = False
-                        #             self.para_alarm = 0
-                        #         elif self.alarm_db.ssh_state_only()=="ALARM":
-                        #             self.COUPP_ERROR = True
-                        #             self.COUPP_ERROR = False
-                        #             self.para_alarm = 0
-                        #
-                        #
-                        # else:
-                        #     self.COUPP_ERROR = True
-                        #     self.alarm_db.ssh_alarm(message=self.COUPP_ALARM)
-                        #     self.COUPP_ERROR = False
-                        #     self.para_alarm = 0
-                        # if not self.COUPP_HOLD:
-                        #     self.COUPP_ALARM = "k"
-
-
-                except Exception as e:
-                    if self.COUPP_ERROR == True:
-                        self.DB_ERROR_SIG.emit("Failed to update PICO watchdog Database.")
-                        self.COUPP_ERROR = False
-                    print(e)
-                    logging.error(e)
-
+                # try:
+                #     # print(0)
+                #     # print(self.para_alarm)
+                #     # print("ALARM:\n", "\n", self.COUPP_ALARM)
+                #     if self.para_alarm >= self.rate_alarm:
+                #
+                #     # if coupp alarm is blank which only comes from the PLC module, then write ok status
+                #     # if coupp alarm is "k", which means no new data from PLC module, then keep the previous status: if previous was ok, then update the ok, if it was alarm, then do nothing. waiting for next command from PLC
+                #     #if coupp alarm is neither blank nor k, then it should be a alarm from PLC module, so write the alarm to the COUPP database.
+                #
+                #
+                #
+                #         if self.COUPP_ALARM == "":
+                #             self.COUPP_ERROR = True
+                #             self.alarm_db.ssh_write()
+                #             # if the ssh write fails, the ERROR will be True
+                #             self.COUPP_ERROR = False
+                #             self.para_alarm = 0
+                #         elif self.COUPP_ALARM == "k":
+                #                 if self.alarm_db.ssh_state_only()=="OK":
+                #                     self.COUPP_ERROR = True
+                #                     self.alarm_db.ssh_write()
+                #                     # if the ssh write fails, the ERROR will be True
+                #                     self.COUPP_ERROR = False
+                #                     self.para_alarm = 0
+                #                 elif self.alarm_db.ssh_state_only()=="ALARM":
+                #                     self.COUPP_ERROR = True
+                #                     self.COUPP_ERROR = False
+                #                     self.para_alarm = 0
+                #
+                #
+                #         else:
+                #             self.COUPP_ERROR = True
+                #             self.alarm_db.ssh_alarm(message=self.COUPP_ALARM)
+                #             self.COUPP_ERROR = False
+                #             self.para_alarm = 0
+                #         if not self.COUPP_HOLD:
+                #             self.COUPP_ALARM = "k"
+                #
+                #
+                # except Exception as e:
+                #     if self.COUPP_ERROR == True:
+                #         self.DB_ERROR_SIG.emit("Failed to update PICO watchdog Database.")
+                #         self.COUPP_ERROR = False
+                #     print(e)
+                #     logging.error(e)
+                #
 
 
                 try:
