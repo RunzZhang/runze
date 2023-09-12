@@ -13,7 +13,7 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 import struct, time, zmq, sys, pickle, copy, logging
 import numpy as np
 from PySide2 import QtWidgets, QtCore, QtGui
-from Database_SBC import *
+from Database_UCSB import *
 from email.mime.text import MIMEText
 from email.header import Header
 from smtplib import SMTP_SSL
@@ -1706,7 +1706,7 @@ class UpdateDataBase(QtCore.QObject):
 
         # self.PLC = PLC
         self.db = mydatabase()
-        self.alarm_db = COUPP_database()
+        # self.alarm_db = COUPP_database()
         self.Running = False
         # if loop runs with _counts times with New_Database = False(No written Data), then send alarm to slack. Otherwise, the code normally run(reset the pointer)
         self.Running_counts = 600
@@ -1943,32 +1943,32 @@ class UpdateDataBase(QtCore.QObject):
 
 
 
-                        if self.COUPP_ALARM == "":
-                            self.COUPP_ERROR = True
-                            self.alarm_db.ssh_write()
-                            # if the ssh write fails, the ERROR will be True
-                            self.COUPP_ERROR = False
-                            self.para_alarm = 0
-                        elif self.COUPP_ALARM == "k":
-                                if self.alarm_db.ssh_state_only()=="OK":
-                                    self.COUPP_ERROR = True
-                                    self.alarm_db.ssh_write()
-                                    # if the ssh write fails, the ERROR will be True
-                                    self.COUPP_ERROR = False
-                                    self.para_alarm = 0
-                                elif self.alarm_db.ssh_state_only()=="ALARM":
-                                    self.COUPP_ERROR = True
-                                    self.COUPP_ERROR = False
-                                    self.para_alarm = 0
-
-
-                        else:
-                            self.COUPP_ERROR = True
-                            self.alarm_db.ssh_alarm(message=self.COUPP_ALARM)
-                            self.COUPP_ERROR = False
-                            self.para_alarm = 0
-                        if not self.COUPP_HOLD:
-                            self.COUPP_ALARM = "k"
+                        # if self.COUPP_ALARM == "":
+                        #     self.COUPP_ERROR = True
+                        #     self.alarm_db.ssh_write()
+                        #     # if the ssh write fails, the ERROR will be True
+                        #     self.COUPP_ERROR = False
+                        #     self.para_alarm = 0
+                        # elif self.COUPP_ALARM == "k":
+                        #         if self.alarm_db.ssh_state_only()=="OK":
+                        #             self.COUPP_ERROR = True
+                        #             self.alarm_db.ssh_write()
+                        #             # if the ssh write fails, the ERROR will be True
+                        #             self.COUPP_ERROR = False
+                        #             self.para_alarm = 0
+                        #         elif self.alarm_db.ssh_state_only()=="ALARM":
+                        #             self.COUPP_ERROR = True
+                        #             self.COUPP_ERROR = False
+                        #             self.para_alarm = 0
+                        #
+                        #
+                        # else:
+                        #     self.COUPP_ERROR = True
+                        #     self.alarm_db.ssh_alarm(message=self.COUPP_ALARM)
+                        #     self.COUPP_ERROR = False
+                        #     self.para_alarm = 0
+                        # if not self.COUPP_HOLD:
+                        #     self.COUPP_ALARM = "k"
 
 
                 except Exception as e:
@@ -2556,7 +2556,7 @@ class UpdatePLC(QtCore.QObject):
                 try:
                     print("PLC updating", datetime.datetime.now())
                     self.PLC.ReadAll()
-                    # self.PLC.Read_AD()
+                    self.PLC.Read_AD()
                     self.PLC.Read_LS()
                     # self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
@@ -3827,12 +3827,12 @@ class Update(QtCore.QObject):
         time.sleep(2)
 
         # Update database on another thread
-        # self.DataUpdateThread = QtCore.QThread()
-        # self.UpDatabase = UpdateDataBase()
-        # # self.UpDatabase = UpdateDataBase(self.PLC)
-        # self.UpDatabase.moveToThread(self.DataUpdateThread)
-        # self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        # self.DataUpdateThread.start()
+        self.DataUpdateThread = QtCore.QThread()
+        self.UpDatabase = UpdateDataBase()
+        # self.UpDatabase = UpdateDataBase(self.PLC)
+        self.UpDatabase.moveToThread(self.DataUpdateThread)
+        self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        self.DataUpdateThread.start()
 
         time.sleep(2)
 
@@ -3852,9 +3852,9 @@ class Update(QtCore.QObject):
         self.PLCUpdateThread.wait()
         print("PLC is stopped")
 
-        # self.UpDatabase.stop()
-        # self.DataUpdateThread.quit()
-        # self.DataUpdateThread.wait()
+        self.UpDatabase.stop()
+        self.DataUpdateThread.quit()
+        self.DataUpdateThread.wait()
 
         print("Database is stopped")
         self.UpServer.stop()
@@ -3890,17 +3890,17 @@ class Update(QtCore.QObject):
 
 
         self.UpPLC.AI_slack_alarm.connect(self.message_manager.slack_alarm)
-        # self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
+        self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
 
     def connect_signals(self):
-        # self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
+        self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
 
-        # self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
+        self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
-        # self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
+        self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
 
         self.UpPLC.PLC.DATA_TRI_SIGNAL.connect(self.PLCstatus_transfer)
-        # self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
+        self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
 
         self.UpPLC.PLC.PLC_DISCON_SIGNAL.connect(self.StopUpdater)
         print("signal established")
