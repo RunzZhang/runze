@@ -310,9 +310,9 @@ if __name__ == "__main__":
 
     db.show_data_datastorage()
 
-    db.create_table("PV1204")
+    # db.create_table("PV1204")
     # db.insert_data("PV1102", now, random.randrange(100))
-    db.show_data("PV1102")
+    # db.show_data("PV1102")
 
     db.show_tables()
 
