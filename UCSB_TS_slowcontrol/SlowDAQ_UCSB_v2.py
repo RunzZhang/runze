@@ -173,7 +173,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DatanSignalTab.Background = QtWidgets.QLabel(self.DatanSignalTab)
         self.DatanSignalTab.Background.setScaledContents(True)
         self.DatanSignalTab.Background.setStyleSheet('background-color:black;')
-        pixmap_DatanSignal = QtGui.QPixmap("/Users/haleyfogg/Desktop/Default_Background")
+        pixmap_DatanSignal = QtGui.QPixmap(os.path.join(self.ImagePath,"Default_Background"))
         pixmap_DatanSignal = pixmap_DatanSignal.scaledToWidth(2400*R)
         self.DatanSignalTab.Background.setPixmap(QtGui.QPixmap(pixmap_DatanSignal))
         self.DatanSignalTab.Background.move(0*R, 0*R)
