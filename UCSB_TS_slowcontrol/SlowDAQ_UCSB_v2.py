@@ -3366,7 +3366,7 @@ if __name__ == "__main__":
     MW.activateWindow()
     # save data
 
-    sys.exit(App.exec())
+    sys.exit(App.exec_())
 
     # AW = AlarmWin()
     # if platform.system() == "Linux":
