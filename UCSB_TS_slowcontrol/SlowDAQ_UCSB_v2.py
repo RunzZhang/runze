@@ -11,7 +11,7 @@ v0.1.3 PLC online detection, poll PLCs only when values are updated, fix Centos 
 
 import os, sys, time, platform, datetime, random, pickle, cgitb
 
-from PySide2 import QtWidgets, QtCore, QtGui
+from PySide6 import QtWidgets, QtCore, QtGui
 
 #from SlowDAQ_UCSB_v2 import *
 from PLC import *

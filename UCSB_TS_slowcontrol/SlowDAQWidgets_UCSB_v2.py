@@ -7,7 +7,7 @@ v1.0 Initial code 29/11/19 ML
 v1.1 Alarm on state widget 04/03/20 ML
 """
 
-from PySide2 import QtCore, QtWidgets, QtGui
+from PySide6 import QtCore, QtWidgets, QtGui
 import time, platform
 import os
 
