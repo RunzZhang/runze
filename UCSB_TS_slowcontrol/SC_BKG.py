@@ -121,17 +121,16 @@ class PLC(QtCore.QObject):
 
         self.BO_updatesignal = False
 
-        IP_LL = "10.111.19.108"
+        self.IP_LL = "10.111.19.108"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
-        PORT_LL = 7180
+        self.PORT_LL = 7180
         self.BUFFER_SIZE = 1024
 
-        self.Client_LL = ModbusTcpClient(IP_LL, port=PORT_LL)
+        self.Client_LL = ModbusTcpClient(self.IP_LL, port=self.PORT_LL)
         self.Connected_LL = self.Client_LL.connect()
         print("LL connected: " + str(self.Connected_LL))
-        if self.Connected_LL:
-            self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.socket_LL.connect((IP_LL, PORT_LL))
+
+
         self.LL_updatesignal = False
 
 
@@ -577,6 +576,8 @@ class PLC(QtCore.QObject):
         # command = "HTR?1\n"
         try:
             if self.Connected_LL:
+                self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.socket_LL.connect((self.IP_LL, self.PORT_LL))
                 # commandN2 = "MEASure:N2:LEVel?\n"
                 commandN2 = "*IDN?\r\n"
                 print("command", commandN2)
@@ -585,17 +586,18 @@ class PLC(QtCore.QObject):
                 self.socket_LL.send(cm_codeN2)
 
                 dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
+                self.socket_LL.close()
 
                 print("fetched data N2", dataN2.decode())
 
-                commandHE = "MEASure:HE:LEVel?\n"
-                print("command", commandHE)
-                cm_codeHE = commandHE.encode()
-                self.socket_LL.send(cm_codeHE)
-                dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
-
-                print("fetched data HE", dataHE.decode())
-                self.LL_updatesignal = True
+                # commandHE = "MEASure:HE:LEVel?\n"
+                # print("command", commandHE)
+                # cm_codeHE = commandHE.encode()
+                # self.socket_LL.send(cm_codeHE)
+                # dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
+                #
+                # print("fetched data HE", dataHE.decode())
+                # self.LL_updatesignal = True
                 # self.socket_LL.close()
         except:
             self.LL_updatesignal = False
@@ -2579,7 +2581,7 @@ class UpdatePLC(QtCore.QObject):
                     self.PLC.ReadAll()
                     self.PLC.Read_AD()
                     self.PLC.Read_LS()
-                    # self.PLC.Read_LL()
+                    self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
                     print("finished")
                     # test signal
