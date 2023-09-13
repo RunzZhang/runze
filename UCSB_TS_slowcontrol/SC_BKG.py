@@ -578,7 +578,7 @@ class PLC(QtCore.QObject):
             if self.Connected_LL:
                 self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.socket_LL.connect((self.IP_LL, self.PORT_LL))
-                self.socket_LL.settimeout(1)
+                # self.socket_LL.settimeout(1)
                 # commandN2 = "MEASure:N2:LEVel?\n"
                 commandN2 = "*IDN?\r\n"
                 print("command", commandN2)
