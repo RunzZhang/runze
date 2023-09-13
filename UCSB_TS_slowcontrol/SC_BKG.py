@@ -4006,16 +4006,16 @@ if __name__ == "__main__":
     # msg_mana.tencent_alarm("this is a test message")
 
 
-    App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
+    # App = QtWidgets.QApplication(sys.argv)
+    # Update=Update()
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
     # Update.run()
 
 
-    # PLC=PLC()
-    # PLC.read_LL()
+    PLC=PLC()
+    PLC.read_LL()
     # PLC.read_LS()
     # PLC.read_AD()
     # PLC.ReadAll()
