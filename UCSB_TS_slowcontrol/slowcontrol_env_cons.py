@@ -2,15 +2,15 @@ BASE_ADDRESS= 12288
 # real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
 TT_AD1_ADDRESS = {"TT1001": 30, "TT1002": 32, "TT1003": 34, "TT1004": 36, "TT1005": 38,
-                              "TT1006": 40, "TT1007": 42, "TT1008": 44, "TT1009": 30}
+                              "TT1006": 40, "TT1007": 42, "TT1008": 44}
 
 TT_AD2_ADDRESS = { "TT1009": 30}
 
 
-PT_ADDRESS = {"PT1001": 12794, "PT1002": 12796, "1003": 12798, "PT1004": 12800, "PT2012": 12802,
-              "PT2013": 12804, "PT2014": 12806}
+PT_ADDRESS = {"PT001": 12796, "PT002": 12798, "PT003": 12800, "PT004": 12802, "PT1000": 12804,
+              "PT1001": 12806, "PT1002": 12808}
 
-LEFT_REAL_ADDRESS = {'FCV1001': 12788, 'FCV1002': 12790, 'LL1001': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292,  "TS_ADDREM_N2MASSTX": 16818}
+LEFT_REAL_ADDRESS = {'FCV1001': 12782, 'FCV1002': 12784, "BGA01": 12804, "BGA02": 12806}
 
 TT_AD1_DIC = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
                               "TT1006": 0, "TT1007": 0, "TT1008": 0}
@@ -18,10 +18,10 @@ TT_AD1_DIC = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
 
 TT_AD2_DIC = { "TT1009": 0}
 
-PT_DIC = {"PT1001": 0, "PT1002": 0, "1003": 0, "PT1004": 0, "PT2012": 0,
-              "PT2013": 0, "PT2014": 0}
+PT_DIC = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
+              "PT1001": 0, "PT1002": 0}
 
-LEFT_REAL_DIC = {'FCV1001': 0, 'FCV1002': 0, 'LL1001': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0}
+LEFT_REAL_DIC = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0}
 
 TT_AD1_LOWLIMIT = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
                               "TT1006": 0, "TT1007": 0, "TT1008": 0}
@@ -34,13 +34,13 @@ TT_AD2_LOWLIMIT = { "TT1009": 0}
 TT_AD2_HIGHLIMIT = {"TT1009": 30}
 
 
-PT_LOWLIMIT = {"PT1001": 0, "PT1002": 0, "1003": 0, "PT1004": 0, "PT2012": 0,
-              "PT2013": 0, "PT2014": 0}
-PT_HIGHLIMIT = {"PT1001": 300, "PT1002": 300, "1003": 300, "PT1004": 300, "PT2012": 300,
-              "PT2013": 300, "PT2014": 300}
+PT_LOWLIMIT = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
+              "PT1001": 0, "PT1002": 0}
+PT_HIGHLIMIT = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
+              "PT1001": 0, "PT1002": 0}
 
-LEFT_REAL_HIGHLIMIT = {'FCV1001': 0, 'FCV1002': 0, 'LL1001': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0,"TS_ADDREM_N2MASSTX": 0}
-LEFT_REAL_LOWLIMIT = {'FCV1001': 0, 'FCV1002': 0, 'LL1001': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0 , "TS_ADDREM_N2MASSTX": 0}
+LEFT_REAL_HIGHLIMIT = {'FCV1001': 100, 'FCV1002': 100, "BGA01": 100, "BGA02": 100}
+LEFT_REAL_LOWLIMIT = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0}
 
 TT_AD1_ACTIVATED = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004": False, "TT1005": False,
                               "TT1006": False, "TT1007": False, "TT1008": False}
@@ -48,19 +48,18 @@ TT_AD1_ACTIVATED = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004":
 TT_AD2_ACTIVATED = {"TT1009": False}
 
 
-PT_ACTIVATED = {"PT1001": False, "PT1002": False, "1003": False, "PT1004": False, "PT2012": False,
-              "PT2013": False, "PT2014": False}
-LEFT_REAL_ACTIVATED = {'FCV1001': False, 'FCV1002': False, 'LL1001': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
-
+PT_ACTIVATED = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1000": False,
+              "PT1001": False, "PT1002": False}
+LEFT_REAL_ACTIVATED = {'FCV1001': False, 'FCVFalse2': False, "BGA01": False, "BGA02": 100}
 TT_AD1_ALARM = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004": False, "TT1005": False,
                               "TT1006": False, "TT1007": False, "TT1008": False}
 
 TT_AD2_ALARM = {"TT1009": False}
 
 
-PT_ALARM = {"PT1001": False, "PT1002": False, "1003": False, "PT1004": False, "PT2012": False,
-              "PT2013": False, "PT2014": False}
-LEFT_REAL_ALARM = {'FCV1001': False, 'FCV1002': False, 'LL1001': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
+PT_ALARM = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1000": False,
+              "PT1001": False, "PT1002": False}
+LEFT_REAL_ALARM = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": False}
 MAINALARM = False
 MAN_SET = False
 NTT_AD1 = len(TT_AD1_ADDRESS)
@@ -94,43 +93,43 @@ DIN_ACTIVATED = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CO
 
 DIN_ALARM = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
 
-VALVE_ADDRESS = {"PV1001": 12288, "PV1002": 12289, "PV1003": 12290, "PV1004": 12291, "PV1005": 12292, "PV1006": 12293,
-                 "PV1007": 12294, "PV1008": 12295, "PV1009": 12296,
-                 "PV1010": 12297, "PV1011": 12298, "PV2001": 12299, "PV2002": 12300, "PV2003": 12301,
-                 "PV2004": 12302, "PV2005": 12304,
-                 "PV2006": 12305, "PV2007": 12306}
+VALVE_ADDRESS = {"PV1": 12288, "PV2": 12289, "PV3": 12290, "PV4": 12291, "PV5": 12292, "PV6": 12293,
+                 "PV7": 12294, "PV8": 12295, "PV9": 12296,
+                 "PV10": 12297, "PV11": 12298,"PV12": 12299, "PV1000": 12300, "PV1001": 12301, "PV1002": 12302,
+                 "PV1003": 12303, "PV1004": 12304,
+                 "PV1005": 12305, "PV1006": 12306,"PV1007": 12307}
 NVALVE = len(VALVE_ADDRESS)
 VALVE = {}
-VALVE_OUT = {"PV1001": 0, "PV1002": 0, "PV1003": 0, "PV1004": 0, "PV1005": 0, "PV1006": 0,
-                 "PV1007": 0, "PV1008": 0, "PV1009": 0,
-                 "PV1010": 0, "PV1011": 0, "PV2001": 0, "PV2002": 0, "PV2003": 0,
-                 "PV2004": 0, "PV2005": 0,
-                 "PV2006": 0, "PV2007": 0}
-VALVE_MAN = {"PV1001": True, "PV1002": True, "PV1003": True, "PV1004": True, "PV1005": True, "PV1006": True,
-                 "PV1007": True, "PV1008": True, "PV1009": True,
-                 "PV1010": True, "PV1011": True, "PV2001": True, "PV2002": True, "PV2003": True,
-                 "PV2004": True, "PV2005": True,
-                 "PV2006": True, "PV2007": True}
-VALVE_INTLKD = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
-                 "PV1007": False, "PV1008": False, "PV1009": False,
-                 "PV1010": False, "PV1011": False, "PV2001": False, "PV2002": False, "PV2003": False,
-                 "PV2004": False, "PV2005": False,
-                 "PV2006": False, "PV2007": False}
-VALVE_ERR = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
-                 "PV1007": False, "PV1008": False, "PV1009": False,
-                 "PV1010": False, "PV1011": False, "PV2001": False, "PV2002": False, "PV2003": False,
-                 "PV2004": False, "PV2005": False,
-                 "PV2006": False, "PV2007": False}
-VALVE_COMMAND_CACHE = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
-                 "PV1007": False, "PV1008": False, "PV1009": False,
-                 "PV1010": False, "PV1011": False, "PV2001": False, "PV2002": False, "PV2003": False,
-                 "PV2004": False, "PV2005": False,
-                 "PV2006": False, "PV2007": False}
-VALVE_BUSY = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
-                 "PV1007": False, "PV1008": False, "PV1009": False,
-                 "PV1010": False, "PV1011": False, "PV2001": False, "PV2002": False, "PV2003": False,
-                 "PV2004": False, "PV2005": False,
-                 "PV2006": False, "PV2007": False}
+VALVE_OUT = {"PV1": 0, "PV2": 0, "PV3": 0, "PV4": 0, "PV5": 0, "PV6": 0,
+                 "PV7": 0, "PV8": 0, "PV9": 0,
+                 "PV10": 0, "PV11": 0,"PV12": 0, "PV1000": 0, "PV1001": 0, "PV1002": 0,
+                 "PV1003": 0, "PV1004": 0,
+                 "PV1005": 0, "PV1006": 0,"PV1007": 0}
+VALVE_MAN = {"PV1": True, "PV2": True, "PV3": True, "PV4": True, "PV5": True, "PV6": True,
+                 "PV7": True, "PV8": True, "PV9": True,
+                 "PV10": True, "PV11": True,"PV12": True, "PV1000": True, "PV1001": True, "PV1002": True,
+                 "PV1003": True, "PV1004": True,
+                 "PV1005": True, "PV1006": True,"PV1007":True}
+VALVE_INTLKD = {"PV1": False, "PV2": False, "PV3": False, "PV4": False, "PV5": False, "PV6": False,
+                 "PV7": False, "PV8": False, "PV9": False,
+                 "PV10": False, "PV11": False,"PV12": False, "PV1000": False, "PV1001": False, "PV1002": False,
+                 "PV1003": False, "PV1004": False,
+                 "PV1005": False, "PV1006": False,"PV1007":False}
+VALVE_ERR = {"PV1": False, "PV2": False, "PV3": False, "PV4": False, "PV5": False, "PV6": False,
+                 "PV7": False, "PV8": False, "PV9": False,
+                 "PV10": False, "PV11": False,"PV12": False, "PV1000": False, "PV1001": False, "PV1002": False,
+                 "PV1003": False, "PV1004": False,
+                 "PV1005": False, "PV1006": False,"PV1007":False}
+VALVE_COMMAND_CACHE = {"PV1": False, "PV2": False, "PV3": False, "PV4": False, "PV5": False, "PV6": False,
+                 "PV7": False, "PV8": False, "PV9": False,
+                 "PV10": False, "PV11": False,"PV12": False, "PV1000": False, "PV1001": False, "PV1002": False,
+                 "PV1003": False, "PV1004": False,
+                 "PV1005": False, "PV1006": False,"PV1007":False}
+VALVE_BUSY = {"PV1": False, "PV2": False, "PV3": False, "PV4": False, "PV5": False, "PV6": False,
+                 "PV7": False, "PV8": False, "PV9": False,
+                 "PV10": False, "PV11": False,"PV12": False, "PV1000": False, "PV1001": False, "PV1002": False,
+                 "PV1003": False, "PV1004": False,
+                 "PV1005": False, "PV1006": False,"PV1007":False}
 
 LOOPPID_ADR_BASE = {'HTR1001': (0,0), 'HTR1002': (0,1), 'HTR1003': (1,0), 'HTR1004': (1,1)}
 
@@ -309,11 +308,11 @@ TIME_DIC = {'PCYCLE_EXPTIME': 0}
 INI_CHECK= True
 
 TT_AD1_PARA = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
-                              "TT1006": 0, "TT1007": 0, "TT1008": 0, "TT1009": 0}
+                              "TT1006": 0, "TT1007": 0, "TT1008": 0}
 
 
 TT_AD1_RATE = {"TT1001": 30, "TT1002": 30, "TT1003": 30, "TT1004": 30, "TT1005": 30,
-                              "TT1006": 30, "TT1007": 30, "TT1008": 30, "TT1009": 30}
+                              "TT1006": 30, "TT1007": 30, "TT1008": 30}
 
 TT_AD2_PARA = { "TT1009": 0}
 
@@ -321,19 +320,15 @@ TT_AD2_PARA = { "TT1009": 0}
 TT_AD2_RATE = { "TT1009": 30}
 
 
-PT_PARA = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
-               "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-               "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-               "PT4322": 0, "PT4325": 0, "PT6302": 0,  "PT1101": 0, "PT5304": 0}
+PT_PARA = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
+              "PT1001": 0, "PT1002": 0}
 
-PT_RATE = {"PT1325": 30, "PT2121": 30, "PT2316": 30, "PT2330": 30, "PT2335": 30,
-                "PT3308": 30, "PT3309": 30, "PT3311": 30, "PT3314": 30, "PT3320": 30,
-                "PT3332": 30, "PT3333": 30, "PT4306": 30, "PT4315": 30, "PT4319": 30,
-                "PT4322": 30, "PT4325": 30, "PT6302": 30,  "PT1101": 30, "PT5304": 30}
+PT_RATE = {"PT001": 30, "PT002": 30, "PT003": 30, "PT004": 30, "PT1000": 30,
+              "PT1001": 30, "PT1002": 30}
 
-LEFT_REAL_PARA = {'FCV1001': 0, 'FCV1002': 0, 'LL1001': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0}
+LEFT_REAL_PARA = {'FCV1001': 0, 'FCV1002': 0, "BGA01":0, "BGA02": 0}
 
-LEFT_REAL_RATE = {'FCV1001': 30, 'FCV1002': 30, 'LL1001': 30, "CYL3334_FCALC": 30, "SERVO3321_IN_REAL": 30, "TS1_MASS": 30, "TS2_MASS": 30, "TS3_MASS": 30, "TS_ADDREM_N2MASSTX": 30}
+LEFT_REAL_RATE = {'FCV1001': 30, 'FCV1002': 30, "BGA01": 30, "BGA02": 30}
 
 DIN_PARA = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
 

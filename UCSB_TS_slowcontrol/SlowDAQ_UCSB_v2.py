@@ -9,7 +9,7 @@ v0.1.2 Alarm implemented 07/01/20 ML
 v0.1.3 PLC online detection, poll PLCs only when values are updated, fix Centos window size bug 04/03/20 ML
 """
 
-import os, sys, time, platform, datetime, random, pickle, cgitb
+import os, sys, time, platform, datetime, random, pickle, cgitb, copy
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
@@ -18,6 +18,7 @@ from PLC import *
 from PICOPW import VerifyPW
 from SlowDAQWidgets_UCSB_v2 import *
 import zmq
+import slowcontrol_env_cons as sec
 
 VERSION = "v2.1.3" 
 # if platform.system() == "Linux":
@@ -516,13 +517,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #commands stack
-        self.address ={'PV1001':10001,'PV1002':10002,'PV1003':10003,'PV1004':10004,'PV1005':10005,'PV1006':10006,'PV1007':10007,'PT1012':10012,
-                       'PT1013':10013,'PT1014':10014, 
-                       'PV001':20001,'PV002':20002,'PV003':20003,'PV004':20004, 'PV005':20005,'PV006':20006,'PV007':20007,'PV008':20008,
-                       'PV009':20009,'PV010':20010,'PV011':20011,'PV012':20012,'PV013':20013,'PT001':30001,'PT002':30002,'PT003':30003,'PT004':30004,
-                       'BGA1':40001,'BGA2':40002,'MFC1':50001, 'MFC2':50002,
-                       'H1':60001,'H2':60002, 'H3':60003, 'H4':60004, 'LiqLev':70000, 
-                       'RTD1':80001,'RTD2':80002,'RTD3':80003,'RTD4':80004,'RTD5':80005,'RTD6':80006}
+        self.address ={"TT1001": 30, "TT1002": 32, "TT1003": 34, "TT1004": 36, "TT1005": 38,
+                              "TT1006": 40, "TT1007": 42, "TT1008": 44, "TT1009": 30,"PT001": 12796, "PT002": 12798, "PT003": 12800, "PT004": 12802, "PT1000": 12804,
+              "PT1001": 12806, "PT1002": 12808,'FCV1001': 12782, 'FCV1002': 12784, "BGA01": 12804, "BGA02": 12806,'FCV1001': 12782, 'FCV1002': 12784, "BGA01": 12804, "BGA02": 12806,"PV1": 12288, "PV2": 12289, "PV3": 12290, "PV4": 12291, "PV5": 12292, "PV6": 12293,
+                 "PV7": 12294, "PV8": 12295, "PV9": 12296,
+                 "PV10": 12297, "PV11": 12298,"PV12": 12299, "PV1000": 12300, "PV1001": 12301, "PV1002": 12302,
+                 "PV1003": 12303, "PV1004": 12304,
+                 "PV1005": 12305, "PV1006": 12306,"PV1007": 12307,'HTR1001': (0,0), 'HTR1002': (0,1), 'HTR1003': (1,0), 'HTR1004': (1,1)}
         self.commands = {}
 
         self.signal_connection()
@@ -2978,60 +2979,198 @@ class UpdateClient(QtCore.QObject):
         self.period=1
         print("client is connecting to the ZMQ server")
 
-        self.TT_FP_dic = {"TT2420": 0}
+        self.TT_AD1_dic_ini = copy.deepcopy(sec.TT_AD1_DIC)
+        self.TT_AD2_dic_ini = copy.deepcopy(sec.TT_AD2_DIC)
+        self.PT_dic_ini = copy.deepcopy(sec.PT_DIC)
+        self.LEFT_REAL_ini = copy.deepcopy(sec.LEFT_REAL_DIC)
+        self.TT_AD1_LowLimit_ini = copy.deepcopy(sec.TT_AD1_LOWLIMIT)
+        self.TT_AD1_HighLimit_ini = copy.deepcopy(sec.TT_AD1_HIGHLIMIT)
+        self.TT_AD2_LowLimit_ini = copy.deepcopy(sec.TT_AD2_LOWLIMIT)
+        self.TT_AD2_HighLimit_ini = copy.deepcopy(sec.TT_AD2_HIGHLIMIT)
+        self.PT_LowLimit_ini = copy.deepcopy(sec.PT_LOWLIMIT)
+        self.PT_HighLimit_ini = copy.deepcopy(sec.PT_HIGHLIMIT)
+        self.LEFT_REAL_LowLimit_ini = copy.deepcopy(sec.LEFT_REAL_LOWLIMIT)
+        self.LEFT_REAL_HighLimit_ini = copy.deepcopy(sec.LEFT_REAL_HIGHLIMIT)
+        self.TT_AD1_Alarm_ini = copy.deepcopy(sec.TT_AD1_ALARM)
+        self.TT_AD2_Alarm_ini = copy.deepcopy(sec.TT_AD2_ALARM)
+        self.TT_AD1_Activated_ini = copy.deepcopy(sec.TT_AD1_ACTIVATED)
+        self.TT_AD2_Activated_ini = copy.deepcopy(sec.TT_AD2_ACTIVATED)
+        self.PT_Activated_ini = copy.deepcopy(sec.PT_ACTIVATED)
+        self.PT_Alarm_ini = copy.deepcopy(sec.PT_ALARM)
+        self.LEFT_REAL_Activated_ini = copy.deepcopy(sec.LEFT_REAL_ACTIVATED)
+        self.LEFT_REAL_Alarm_ini = copy.deepcopy(sec.LEFT_REAL_ALARM)
+        self.MainAlarm_ini = copy.deepcopy(sec.MAINALARM)
+        self.MAN_SET = copy.deepcopy(sec.MAN_SET)
+        self.Valve_OUT_ini = copy.deepcopy(sec.VALVE_OUT)
+        self.Valve_MAN_ini = copy.deepcopy(sec.VALVE_MAN)
+        self.Valve_INTLKD_ini = copy.deepcopy(sec.VALVE_INTLKD)
+        self.Valve_ERR_ini = copy.deepcopy(sec.VALVE_ERR)
+        self.Valve_Busy_ini = copy.deepcopy(sec.VALVE_BUSY)
+        self.Switch_OUT_ini = copy.deepcopy(sec.SWITCH_OUT)
+        self.Switch_MAN_ini = copy.deepcopy(sec.SWITCH_MAN)
+        self.Switch_INTLKD_ini = copy.deepcopy(sec.SWITCH_INTLKD)
+        self.Switch_ERR_ini = copy.deepcopy(sec.SWITCH_ERR)
+        self.Din_dic_ini = copy.deepcopy(sec.DIN_DIC)
+        self.Din_HighLimit_ini = copy.deepcopy(sec.DIN_HIGHLIMIT)
+        self.Din_LowLimit_ini = copy.deepcopy(sec.DIN_LOWLIMIT)
+        self.Din_Activated_ini = copy.deepcopy(sec.DIN_ACTIVATED)
+        self.Din_Alarm_ini = copy.deepcopy(sec.DIN_ALARM)
 
-        self.PT_dic = {"PT1012": 0, "PT1013": 0, "PT1014": 0, "PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "BGA1": 0, "BGA2": 0}
+        self.LOOPPID_MODE0_ini = copy.deepcopy(sec.LOOPPID_MODE0)
+        self.LOOPPID_MODE1_ini = copy.deepcopy(sec.LOOPPID_MODE1)
+        self.LOOPPID_MODE2_ini = copy.deepcopy(sec.LOOPPID_MODE2)
+        self.LOOPPID_MODE3_ini = copy.deepcopy(sec.LOOPPID_MODE3)
+        self.LOOPPID_INTLKD_ini = copy.deepcopy(sec.LOOPPID_INTLKD)
+        self.LOOPPID_MAN_ini = copy.deepcopy(sec.LOOPPID_MAN)
+        self.LOOPPID_ERR_ini = copy.deepcopy(sec.LOOPPID_ERR)
+        self.LOOPPID_SATHI_ini = copy.deepcopy(sec.LOOPPID_SATHI)
+        self.LOOPPID_SATLO_ini = copy.deepcopy(sec.LOOPPID_SATLO)
+        self.LOOPPID_EN_ini = copy.deepcopy(sec.LOOPPID_EN)
+        self.LOOPPID_OUT_ini = copy.deepcopy(sec.LOOPPID_OUT)
+        self.LOOPPID_IN_ini = copy.deepcopy(sec.LOOPPID_IN)
+        self.LOOPPID_HI_LIM_ini = copy.deepcopy(sec.LOOPPID_HI_LIM)
+        self.LOOPPID_LO_LIM_ini = copy.deepcopy(sec.LOOPPID_LO_LIM)
+        self.LOOPPID_SET0_ini = copy.deepcopy(sec.LOOPPID_SET0)
+        self.LOOPPID_SET1_ini = copy.deepcopy(sec.LOOPPID_SET1)
+        self.LOOPPID_SET2_ini = copy.deepcopy(sec.LOOPPID_SET2)
+        self.LOOPPID_SET3_ini = copy.deepcopy(sec.LOOPPID_SET3)
+        self.LOOPPID_Busy_ini = copy.deepcopy(sec.LOOPPID_BUSY)
+        self.LOOPPID_Alarm_ini = copy.deepcopy(sec.LOOPPID_ALARM)
+        self.LOOPPID_Activated_ini = copy.deepcopy(sec.LOOPPID_ACTIVATED)
+        self.LOOPPID_Alarm_HighLimit_ini = copy.deepcopy(sec.LOOPPID_ALARM_HI_LIM)
+        self.LOOPPID_Alarm_LowLimit_ini = copy.deepcopy(sec.LOOPPID_ALARM_LO_LIM)
 
-        self.TT_FP_LowLimit = {"TT2420": 0}
+        self.LOOP2PT_MODE0_ini = copy.deepcopy(sec.LOOP2PT_MODE0)
+        self.LOOP2PT_MODE1_ini = copy.deepcopy(sec.LOOP2PT_MODE1)
+        self.LOOP2PT_MODE2_ini = copy.deepcopy(sec.LOOP2PT_MODE2)
+        self.LOOP2PT_MODE3_ini = copy.deepcopy(sec.LOOP2PT_MODE3)
+        self.LOOP2PT_INTLKD_ini = copy.deepcopy(sec.LOOP2PT_INTLKD)
+        self.LOOP2PT_MAN_ini = copy.deepcopy(sec.LOOP2PT_MAN)
+        self.LOOP2PT_ERR_ini = copy.deepcopy(sec.LOOP2PT_ERR)
+        self.LOOP2PT_OUT_ini = copy.deepcopy(sec.LOOP2PT_OUT)
+        self.LOOP2PT_SET1_ini = copy.deepcopy(sec.LOOP2PT_SET1)
+        self.LOOP2PT_SET2_ini = copy.deepcopy(sec.LOOP2PT_SET2)
+        self.LOOP2PT_SET3_ini = copy.deepcopy(sec.LOOP2PT_SET3)
+        self.LOOP2PT_Busy_ini = copy.deepcopy(sec.LOOP2PT_BUSY)
 
-        self.TT_FP_HighLimit = {"TT2420": 30}
+        self.Procedure_running_ini = copy.deepcopy(sec.PROCEDURE_RUNNING)
+        self.Procedure_INTLKD_ini = copy.deepcopy(sec.PROCEDURE_INTLKD)
+        self.Procedure_EXIT_ini = copy.deepcopy(sec.PROCEDURE_EXIT)
 
-        self.PT_LowLimit = {"PT1012": 0, "PT1013": 0, "PT1014": 0, "PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "BGA1": 0, "BGA2": 0}
+        self.INTLK_D_ADDRESS_ini = copy.deepcopy(sec.INTLK_D_ADDRESS)
+        self.INTLK_D_DIC_ini = copy.deepcopy(sec.INTLK_D_DIC)
+        self.INTLK_D_EN_ini = copy.deepcopy(sec.INTLK_D_EN)
+        self.INTLK_D_COND_ini = copy.deepcopy(sec.INTLK_D_COND)
+        self.INTLK_D_Busy_ini = copy.deepcopy(sec.INTLK_D_BUSY)
+        self.INTLK_A_ADDRESS_ini = copy.deepcopy(sec.INTLK_A_ADDRESS)
+        self.INTLK_A_DIC_ini = copy.deepcopy(sec.INTLK_A_DIC)
+        self.INTLK_A_EN_ini = copy.deepcopy(sec.INTLK_A_EN)
+        self.INTLK_A_COND_ini = copy.deepcopy(sec.INTLK_A_COND)
+        self.INTLK_A_SET_ini = copy.deepcopy(sec.INTLK_A_SET)
+        self.INTLK_A_Busy_ini = copy.deepcopy(sec.INTLK_A_BUSY)
 
-        self.PT_HighLimit = {"PT1012": 0, "PT1013": 0, "PT1014": 0, "PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "BGA1": 0, "BGA2": 0}
+        self.FLAG_ADDRESS_ini = copy.deepcopy(sec.FLAG_ADDRESS)
+        self.FLAG_DIC_ini = copy.deepcopy(sec.FLAG_DIC)
+        self.FLAG_INTLKD_ini = copy.deepcopy(sec.FLAG_INTLKD)
+        self.FLAG_Busy_ini = copy.deepcopy(sec.FLAG_BUSY)
 
-        self.TT_FP_Activated = {"TT2420": True}
+        self.FF_DIC_ini = copy.deepcopy(sec.FF_DIC)
+        self.PARAM_F_DIC_ini = copy.deepcopy(sec.PARAM_F_DIC)
+        self.PARAM_I_DIC_ini = copy.deepcopy(sec.PARAM_I_DIC)
+        self.PARAM_B_DIC_ini = copy.deepcopy(sec.PARAM_B_DIC)
+        self.PARAM_T_DIC_ini = copy.deepcopy(sec.PARAM_T_DIC)
+        self.TIME_DIC_ini = copy.deepcopy(sec.TIME_DIC)
 
-        self.PT_Activated = {"PT1012": True, "PT1013": True, "PT1014": True}
+        self.Ini_Check_ini = sec.INI_CHECK
 
-        self.TT_FP_Alarm = {"TT2420": False}
-
-        self.PT_Alarm = {"PT1012": False, "PT1013": False, "PT1014": False}
-        self.MainAlarm = False
-
-        self.Valve_OUT = {"PV1001": 0, "PV1002": 0, "PV1003": 0, "PV1004": 0, "PV1005": 0, "PV1006": 0,
-                          "PV1007": 0, "MFC1008": 0, "PV001": 0,"PV002": 0, "PV003": 0, "PV004": 0, 
-                          "PV005": 0, "PV006": 0,"PV007": 0, "PV008": 0, "PV009": 0, "PV010": 0, 
-                          "PV011": 0, "PV012": 0, "PV013": 0, "MFC1":0, "MFC2": 0}
-
-        self.Valve_MAN = {"PV1001": True, "PV1002": True, "PV1003": True, "PV1004": True, "PV1005": True, "PV1006": True,
-                          "PV1007": True, "MFC1008": True,"PV001": True, "PV002": True, "PV003": True, "PV004": True,
-                          "PV005": True, "PV006": True, "PV007": True, "PV008": True, "PV009": True, "PV010": True, 
-                          "PV011": True, "PV012": True, "PV013": True, "MFC1": True, "MFC2": True}
-
-        self.Valve_INTLKD = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
-                          "PV1007": False, "MFC1008": False,"PV001": False, "PV002": False, "PV003": False, "PV004": False,
-                          "PV005": False, "PV006": False, "PV007": False, "PV008": False, "PV009": False, "PV010": False, 
-                          "PV011": False, "PV012": False, "PV013": False, "MFC1": False, "MFC2": False}
-
-        self.Valve_ERR = {"PV1001": False, "PV1002": False, "PV1003": False, "PV1004": False, "PV1005": False, "PV1006": False,
-                          "PV1007": False, "MFC1008": False,"PV001": False, "PV002": False, "PV003": False, "PV004": False,
-                          "PV005": False, "PV006": False, "PV007": False, "PV008": False, "PV009": False, "PV010": False, 
-                          "PV011": False, "PV012": False, "PV013": False, "MFC1": False, "MFC2": False}
-
-
-        self.receive_dic = {"data":{"TT":{"FP":self.TT_FP_dic,
+        self.data_dic = {"data": {"TT": {
+            "AD1": {"value": self.TT_AD1_dic_ini, "high": self.TT_AD1_HighLimit_ini, "low": self.TT_AD1_LowLimit_ini},
+            "AD2": {"value": self.TT_AD2_dic_ini, "high": self.TT_AD2_HighLimit_ini, "low": self.TT_AD2_LowLimit_ini}},
+                                  "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini,
+                                         "low": self.PT_LowLimit_ini},
+                                  "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini,
+                                                "low": self.LEFT_REAL_LowLimit_ini},
+                                  "Valve": {"OUT": self.Valve_OUT_ini,
+                                            "INTLKD": self.Valve_INTLKD_ini,
+                                            "MAN": self.Valve_MAN_ini,
+                                            "ERR": self.Valve_ERR_ini,
+                                            "Busy": self.Valve_Busy_ini},
+                                  "Switch": {"OUT": self.Switch_OUT_ini,
+                                             "INTLKD": self.Switch_INTLKD_ini,
+                                             "MAN": self.Switch_MAN_ini,
+                                             "ERR": self.Switch_ERR_ini},
+                                  "Din": {'value': self.Din_dic_ini, "high": self.Din_HighLimit_ini,
+                                          "low": self.Din_LowLimit_ini},
+                                  "LOOPPID": {"MODE0": self.LOOPPID_MODE0_ini,
+                                              "MODE1": self.LOOPPID_MODE1_ini,
+                                              "MODE2": self.LOOPPID_MODE2_ini,
+                                              "MODE3": self.LOOPPID_MODE3_ini,
+                                              "INTLKD": self.LOOPPID_INTLKD_ini,
+                                              "MAN": self.LOOPPID_MAN_ini,
+                                              "ERR": self.LOOPPID_ERR_ini,
+                                              "SATHI": self.LOOPPID_SATHI_ini,
+                                              "SATLO": self.LOOPPID_SATLO_ini,
+                                              "EN": self.LOOPPID_EN_ini,
+                                              "OUT": self.LOOPPID_OUT_ini,
+                                              "IN": self.LOOPPID_IN_ini,
+                                              "HI_LIM": self.LOOPPID_HI_LIM_ini,
+                                              "LO_LIM": self.LOOPPID_LO_LIM_ini,
+                                              "SET0": self.LOOPPID_SET0_ini,
+                                              "SET1": self.LOOPPID_SET1_ini,
+                                              "SET2": self.LOOPPID_SET2_ini,
+                                              "SET3": self.LOOPPID_SET3_ini,
+                                              "Busy": self.LOOPPID_Busy_ini,
+                                              "Alarm": self.LOOPPID_Alarm_ini,
+                                              "Alarm_HighLimit": self.LOOPPID_Alarm_HighLimit_ini,
+                                              "Alarm_LowLimit": self.LOOPPID_Alarm_LowLimit_ini},
+                                  "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
+                                              "MODE1": self.LOOP2PT_MODE1_ini,
+                                              "MODE2": self.LOOP2PT_MODE2_ini,
+                                              "MODE3": self.LOOP2PT_MODE3_ini,
+                                              "INTLKD": self.LOOP2PT_INTLKD_ini,
+                                              "MAN": self.LOOP2PT_MAN_ini,
+                                              "ERR": self.LOOP2PT_ERR_ini,
+                                              "OUT": self.LOOP2PT_OUT_ini,
+                                              "SET1": self.LOOP2PT_SET1_ini,
+                                              "SET2": self.LOOP2PT_SET2_ini,
+                                              "SET3": self.LOOP2PT_SET3_ini,
+                                              "Busy": self.LOOP2PT_Busy_ini},
+                                  "INTLK_D": {"value": self.INTLK_D_DIC_ini,
+                                              "EN": self.INTLK_D_EN_ini,
+                                              "COND": self.INTLK_D_COND_ini,
+                                              "Busy": self.INTLK_D_Busy_ini},
+                                  "INTLK_A": {"value": self.INTLK_A_DIC_ini,
+                                              "EN": self.INTLK_A_EN_ini,
+                                              "COND": self.INTLK_A_COND_ini,
+                                              "SET": self.INTLK_A_SET_ini,
+                                              "Busy": self.INTLK_A_Busy_ini},
+                                  "FLAG": {"value": self.FLAG_DIC_ini,
+                                           "INTLKD": self.FLAG_INTLKD_ini,
+                                           "Busy": self.FLAG_Busy_ini},
+                                  "Procedure": {"Running": self.Procedure_running_ini,
+                                                "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini},
+                                  "FF": self.FF_DIC_ini,
+                                  "PARA_I": self.PARAM_I_DIC_ini,
+                                  "PARA_F": self.PARAM_F_DIC_ini,
+                                  "PARA_B": self.PARAM_B_DIC_ini,
+                                  "PARA_T": self.PARAM_T_DIC_ini,
+                                  "TIME": self.TIME_DIC_ini},
+                         "Alarm": {"TT": {"AD1": self.TT_AD1_Alarm_ini,
+                                          "AD2": self.TT_AD2_Alarm_ini
                                           },
-                                    "PT":self.PT_dic,
-                                    "Valve":{"OUT":self.Valve_OUT,
-                                             "INTLKD":self.Valve_INTLKD,
-                                             "MAN":self.Valve_MAN,
-                                             "ERR":self.Valve_ERR},
-                                   },
-                             "Alarm":{"TT" : {"FP":self.TT_FP_Alarm,
-                                              },
-                                      "PT" : self.PT_Alarm},
-                             "MainAlarm" : self.MainAlarm}
+                                   "PT": self.PT_Alarm_ini,
+                                   "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
+                                   "Din": self.Din_Alarm_ini,
+                                   "LOOPPID": self.LOOPPID_Alarm_ini},
+                         "Active": {"TT": {"AD1": self.TT_AD1_Activated_ini,
+                                           "AD2": self.TT_AD2_Activated_ini},
+                                    "PT": self.PT_Activated_ini,
+                                    "LEFT_REAL": self.LEFT_REAL_Activated_ini,
+                                    "Din": self.Din_Activated_ini,
+                                    "LOOPPID": self.LOOPPID_Activated_ini,
+                                    "INI_CHECK": self.Ini_Check_ini},
+                         "MainAlarm": self.MainAlarm_ini
+                         }
         self.commands_package= pickle.dumps({})
     @QtCore.Slot()
     def run(self):

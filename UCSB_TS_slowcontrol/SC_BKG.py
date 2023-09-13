@@ -506,7 +506,8 @@ class PLC(QtCore.QObject):
         # command = "HTR?1\n"
         if self.Connected_LS1 and self.Connected_LS2:
             # Reading all the RTDs
-            Raw_LS = {}
+            Raw_LS_power = {}
+            Raw_LS_TT = {}
             for key in self.LOOPPID_ADR_BASE:
                 command_base = "HTR?"
                 command_middle=str(self.LOOPPID_ADR_BASE[key][1])
@@ -516,14 +517,32 @@ class PLC(QtCore.QObject):
                     self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
                     cm_code = command.encode()
                     self.socket_LS1.send(cm_code)
-                    Raw_LS[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
+                    Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS1.close()
                 if self.LOOPPID_ADR_BASE[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
                     cm_code = command.encode()
                     self.socket_LS2.send(cm_code)
-                    Raw_LS[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
+                    Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
+                    self.socket_LS2.close()
+            for key in self.LOOPPID_ADR_BASE:
+                command_base = "TEMP?"
+                command_middle=str(self.LOOPPID_ADR_BASE[key][1])
+                command =  command_base+command_middle+"\n"
+                if self.LOOPPID_ADR_BASE[key][0]==0:
+                    self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
+                    cm_code = command.encode()
+                    self.socket_LS1.send(cm_code)
+                    Raw_LS_TT[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
+                    self.socket_LS1.close()
+                if self.LOOPPID_ADR_BASE[key][0]==1:
+                    self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
+                    cm_code = command.encode()
+                    self.socket_LS2.send(cm_code)
+                    Raw_LS_TT[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS2.close()
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
@@ -535,7 +554,8 @@ class PLC(QtCore.QObject):
             self.LS1_updatesignal = False
             self.LS2_updatesignal = False
             self.PLC_DISCON_SIGNAL.emit()
-        print("LS", Raw_LS)
+        print("LS_power", Raw_LS_power)
+        print("LS_TT", Raw_LS_TT)
 
 
 
