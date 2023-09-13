@@ -4008,6 +4008,7 @@ if __name__ == "__main__":
 
     # App = QtWidgets.QApplication(sys.argv)
     # Update=Update()
+    # sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
@@ -4015,11 +4016,11 @@ if __name__ == "__main__":
 
 
     PLC=PLC()
-    PLC.read_LL()
-    # PLC.read_LS()
-    # PLC.read_AD()
+    PLC.Read_LL()
+    # PLC.Read_LS()
+    # PLC.Read_AD()
     # PLC.ReadAll()
 
-    sys.exit(App.exec_())
+
 
 
