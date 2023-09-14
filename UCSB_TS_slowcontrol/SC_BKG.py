@@ -536,7 +536,7 @@ class PLC(QtCore.QObject):
                     Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
-                command_base = "OUTMODE?"
+                command_base = "KRDG?"
                 command_middle=str(self.LOOPPID_ADR_BASE[key][1])
                 command =  command_base+command_middle+"\n"
                 command = command_base + "\n"
