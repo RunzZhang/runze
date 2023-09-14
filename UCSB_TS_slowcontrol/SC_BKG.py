@@ -537,9 +537,10 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
                 command_base = "KRDG?"
-                command_middle=str(self.LOOPPID_ADR_BASE[key][1])
-                command =  command_base+command_middle+"\n"
-                command = command_base + "\n"
+                # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
+                command_middle = 0
+                command = command_base+command_middle+"\n"
+                # command = command_base + "\n"
                 if self.LOOPPID_ADR_BASE[key][0]==0:
                     self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
