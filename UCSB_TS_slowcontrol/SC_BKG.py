@@ -126,9 +126,10 @@ class PLC(QtCore.QObject):
         self.PORT_LL = 7180
         self.BUFFER_SIZE = 1024
 
-        # self.Client_LL = ModbusTcpClient(self.IP_LL, port=self.PORT_LL)
-        # self.Connected_LL = self.Client_LL.connect()
-        # print("LL connected: " + str(self.Connected_LL))
+        self.Client_LL = ModbusTcpClient(self.IP_LL, port=self.PORT_LL)
+        self.Connected_LL = self.Client_LL.connect()
+        print("LL connected: " + str(self.Connected_LL))
+        self.Client_LL.close()
 
 
         self.LL_updatesignal = False
