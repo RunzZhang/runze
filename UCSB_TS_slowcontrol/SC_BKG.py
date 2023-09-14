@@ -129,9 +129,9 @@ class PLC(QtCore.QObject):
             self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket_LL.connect((self.IP_LL, self.PORT_LL))
             self.socket_LL.close()
-            print("LL connected: " + True)
+            print("LL connected: " + "True")
         except:
-            print("LL connected: " + False)
+            print("LL connected: " + "False")
 
 
 
