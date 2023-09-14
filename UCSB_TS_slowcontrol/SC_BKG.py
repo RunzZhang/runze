@@ -536,9 +536,9 @@ class PLC(QtCore.QObject):
                     Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
-                command_base = "TEMP?"
-                # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
-                # command =  command_base+command_middle+"\n"
+                command_base = "OUTMODE?"
+                command_middle=str(self.LOOPPID_ADR_BASE[key][1])
+                command =  command_base+command_middle+"\n"
                 command = command_base + "\n"
                 if self.LOOPPID_ADR_BASE[key][0]==0:
                     self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
