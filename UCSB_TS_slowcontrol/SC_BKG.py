@@ -126,9 +126,9 @@ class PLC(QtCore.QObject):
         self.PORT_LL = 7180
         self.BUFFER_SIZE = 1024
 
-        self.Client_LL = ModbusTcpClient(self.IP_LL, port=self.PORT_LL)
-        self.Connected_LL = self.Client_LL.connect()
-        print("LL connected: " + str(self.Connected_LL))
+        # self.Client_LL = ModbusTcpClient(self.IP_LL, port=self.PORT_LL)
+        # self.Connected_LL = self.Client_LL.connect()
+        # print("LL connected: " + str(self.Connected_LL))
 
 
         self.LL_updatesignal = False
@@ -575,7 +575,8 @@ class PLC(QtCore.QObject):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
         try:
-            if self.Connected_LL:
+            # if self.Connected_LL:
+            if True:
                 self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.socket_LL.connect((self.IP_LL, self.PORT_LL))
                 # self.socket_LL.settimeout(1)
