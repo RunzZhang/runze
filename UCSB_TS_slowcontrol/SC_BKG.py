@@ -125,11 +125,20 @@ class PLC(QtCore.QObject):
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         self.PORT_LL = 7180
         self.BUFFER_SIZE = 1024
+        try:
+            self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket_LL.connect((self.IP_LL, self.PORT_LL))
+            self.socket_LL.close()
+            print("LL connected: " + True)
+        except:
+            print("LL connected: " + False)
 
-        self.Client_LL = ModbusTcpClient(self.IP_LL, port=self.PORT_LL)
-        self.Connected_LL = self.Client_LL.connect()
-        print("LL connected: " + str(self.Connected_LL))
-        self.Client_LL.close()
+
+
+        # self.Client_LL = ModbusTcpClient(self.IP_LL, port=self.PORT_LL)
+        # self.Connected_LL = self.Client_LL.connect()
+        # print("LL connected: " + str(self.Connected_LL))
+        # self.Client_LL.close()
 
 
         self.LL_updatesignal = False
@@ -4009,17 +4018,17 @@ if __name__ == "__main__":
     # msg_mana.tencent_alarm("this is a test message")
 
 
-    # App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
-    # sys.exit(App.exec_())
+    App = QtWidgets.QApplication(sys.argv)
+    Update=Update()
+    sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
     # Update.run()
 
 
-    PLC=PLC()
-    PLC.Read_LL()
+    # PLC=PLC()
+    # PLC.Read_LL()
     # PLC.Read_LS()
     # PLC.Read_AD()
     # PLC.ReadAll()
