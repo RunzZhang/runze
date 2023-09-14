@@ -580,8 +580,8 @@ class PLC(QtCore.QObject):
                 self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.socket_LL.connect((self.IP_LL, self.PORT_LL))
                 # self.socket_LL.settimeout(1)
-                # commandN2 = "MEASure:N2:LEVel?\n"
-                commandN2 = "*IDN?\n"
+                commandN2 = "MEASure:N2:LEVel?\n"
+                # commandN2 = "*IDN?\n"
                 print("command", commandN2)
                 cm_codeN2 = commandN2.encode()
                 # print(cm_codeN2)
