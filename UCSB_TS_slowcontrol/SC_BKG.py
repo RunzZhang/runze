@@ -538,7 +538,7 @@ class PLC(QtCore.QObject):
             for key in self.LOOPPID_ADR_BASE:
                 command_base = "KRDG?"
                 # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
-                command_middle = 0
+                command_middle = "0"
                 command = command_base+command_middle+"\n"
                 # command = command_base + "\n"
                 if self.LOOPPID_ADR_BASE[key][0]==0:
