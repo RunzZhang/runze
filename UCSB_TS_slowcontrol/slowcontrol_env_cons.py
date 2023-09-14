@@ -50,7 +50,7 @@ TT_AD2_ACTIVATED = {"TT1009": False}
 
 PT_ACTIVATED = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1000": False,
               "PT1001": False, "PT1002": False}
-LEFT_REAL_ACTIVATED = {'FCV1001': False, 'FCVFalse2': False, "BGA01": False, "BGA02": 100}
+LEFT_REAL_ACTIVATED = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": 100}
 TT_AD1_ALARM = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004": False, "TT1005": False,
                               "TT1006": False, "TT1007": False, "TT1008": False}
 
