@@ -513,10 +513,9 @@ class PLC(QtCore.QObject):
     def Read_LS(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
+        Raw_LS_power = {}
+        Raw_LS_TT = {}
         if self.Connected_LS1 and self.Connected_LS2:
-            # Reading all the RTDs
-            Raw_LS_power = {}
-            Raw_LS_TT = {}
             for key in self.LOOPPID_ADR_BASE:
                 command_base = "HTR?"
                 command_middle=str(self.LOOPPID_ADR_BASE[key][1])
