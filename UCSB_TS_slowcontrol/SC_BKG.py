@@ -2228,23 +2228,23 @@ class UpdateDataBase(QtCore.QObject):
                 self.commit_bool = True
             self.para_Valve = 0
         # print(3)
-        for key in self.Switch_OUT:
-            # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
-            if self.Switch_OUT[key] != self.Switch_buffer[key]:
-                self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.Switch_buffer[key])
-                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
-                self.Switch_buffer[key] = self.Switch_OUT[key]
-                self.commit_bool = True
-                # print(self.Switch_OUT[key])
-            else:
-                pass
-
-        if self.para_Switch >= self.rate_Switch:
-            for key in self.Switch_OUT:
-                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
-                self.Switch_buffer[key] = self.Switch_OUT[key]
-                self.commit_bool = True
-            self.para_Switch = 0
+        # for key in self.Switch_OUT:
+        #     # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+        #     if self.Switch_OUT[key] != self.Switch_buffer[key]:
+        #         self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.Switch_buffer[key])
+        #         self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
+        #         self.Switch_buffer[key] = self.Switch_OUT[key]
+        #         self.commit_bool = True
+        #         # print(self.Switch_OUT[key])
+        #     else:
+        #         pass
+        #
+        # if self.para_Switch >= self.rate_Switch:
+        #     for key in self.Switch_OUT:
+        #         self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
+        #         self.Switch_buffer[key] = self.Switch_OUT[key]
+        #         self.commit_bool = True
+        #     self.para_Switch = 0
         # print(4)
         for key in self.Din_dic:
             # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
