@@ -199,13 +199,13 @@ class PLC(QtCore.QObject):
         self.PT_setting = copy.copy(sec.PT_SETTING)
         self.nPT_Attribute = copy.copy(sec.NPT_ATTRIBUTE)
 
-        self.Switch_address = copy.copy(sec.SWITCH_ADDRESS)
-        self.nSwitch = copy.copy(sec.NSWITCH)
-        self.Switch = copy.copy(sec.SWITCH)
-        self.Switch_OUT = copy.copy(sec.SWITCH_OUT)
-        self.Switch_MAN = copy.copy(sec.SWITCH_MAN)
-        self.Switch_INTLKD = copy.copy(sec.SWITCH_INTLKD)
-        self.Switch_ERR = copy.copy(sec.SWITCH)
+        # self.Switch_address = copy.copy(sec.SWITCH_ADDRESS)
+        # self.nSwitch = copy.copy(sec.NSWITCH)
+        # self.Switch = copy.copy(sec.SWITCH)
+        # self.Switch_OUT = copy.copy(sec.SWITCH_OUT)
+        # self.Switch_MAN = copy.copy(sec.SWITCH_MAN)
+        # self.Switch_INTLKD = copy.copy(sec.SWITCH_INTLKD)
+        # self.Switch_ERR = copy.copy(sec.SWITCH)
 
         self.Din_address = copy.copy(sec.DIN_ADDRESS)
         self.nDin = copy.copy(sec.NDIN)
@@ -392,13 +392,13 @@ class PLC(QtCore.QObject):
                             "nREAL": self.nREAL,
                             "PT_setting": self.PT_setting,
                             "nPT_Attribute": self.nPT_Attribute,
-                            "Switch_address": self.Switch_address,
-                            "nSwitch": self.nSwitch,
-                            "Switch": self.Switch,
-                            "Switch_OUT": self.Switch_OUT,
-                            "Switch_MAN": self.Switch_MAN,
-                            "Switch_INTLKD": self.Switch_INTLKD,
-                            "Switch_ERR": self.Switch_ERR,
+                            # "Switch_address": self.Switch_address,
+                            # "nSwitch": self.nSwitch,
+                            # "Switch": self.Switch,
+                            # "Switch_OUT": self.Switch_OUT,
+                            # "Switch_MAN": self.Switch_MAN,
+                            # "Switch_INTLKD": self.Switch_INTLKD,
+                            # "Switch_ERR": self.Switch_ERR,
                             "Din_address": self.Din_address,
                             "nDin": self.nDin,
                             "Din": self.Din,
@@ -1835,13 +1835,13 @@ class UpdateDataBase(QtCore.QObject):
         self.PT_setting = copy.copy(sec.PT_SETTING)
         self.nPT_Attribute = copy.copy(sec.NPT_ATTRIBUTE)
 
-        self.Switch_address = copy.copy(sec.SWITCH_ADDRESS)
-        self.nSwitch = copy.copy(sec.NSWITCH)
-        self.Switch = copy.copy(sec.SWITCH)
-        self.Switch_OUT = copy.copy(sec.SWITCH_OUT)
-        self.Switch_MAN = copy.copy(sec.SWITCH_MAN)
-        self.Switch_INTLKD = copy.copy(sec.SWITCH_INTLKD)
-        self.Switch_ERR = copy.copy(sec.SWITCH_ERR)
+        # self.Switch_address = copy.copy(sec.SWITCH_ADDRESS)
+        # self.nSwitch = copy.copy(sec.NSWITCH)
+        # self.Switch = copy.copy(sec.SWITCH)
+        # self.Switch_OUT = copy.copy(sec.SWITCH_OUT)
+        # self.Switch_MAN = copy.copy(sec.SWITCH_MAN)
+        # self.Switch_INTLKD = copy.copy(sec.SWITCH_INTLKD)
+        # self.Switch_ERR = copy.copy(sec.SWITCH_ERR)
         self.Din_address = copy.copy(sec.DIN_ADDRESS)
         self.nDin = copy.copy(sec.NDIN)
         self.Din = copy.copy(sec.DIN)
@@ -1921,7 +1921,7 @@ class UpdateDataBase(QtCore.QObject):
 
         # BUFFER parts
         self.Valve_buffer = copy.copy(sec.VALVE_OUT)
-        self.Switch_buffer = copy.copy(sec.SWITCH_OUT)
+        # self.Switch_buffer = copy.copy(sec.SWITCH_OUT)
         self.Din_buffer = copy.copy(sec.DIN_DIC)
         self.LOOPPID_EN_buffer = copy.copy(sec.LOOPPID_EN)
         self.LOOPPID_MODE0_buffer = copy.copy(sec.LOOPPID_MODE0)
@@ -2092,14 +2092,14 @@ class UpdateDataBase(QtCore.QObject):
             self.Valve_MAN[key] = dic["Valve_MAN"][key]
         for key in self.Valve_ERR:
             self.Valve_ERR[key] = dic["Valve_ERR"][key]
-        for key in self.Switch_OUT:
-            self.Switch_OUT[key] = dic["Switch_OUT"][key]
-        for key in self.Switch_INTLKD:
-            self.Switch_INTLKD[key] = dic["Switch_INTLKD"][key]
-        for key in self.Switch_MAN:
-            self.Switch_MAN[key] = dic["Switch_MAN"][key]
-        for key in self.Switch_ERR:
-            self.Switch_ERR[key] = dic["Switch_ERR"][key]
+        # for key in self.Switch_OUT:
+        #     self.Switch_OUT[key] = dic["Switch_OUT"][key]
+        # for key in self.Switch_INTLKD:
+        #     self.Switch_INTLKD[key] = dic["Switch_INTLKD"][key]
+        # for key in self.Switch_MAN:
+        #     self.Switch_MAN[key] = dic["Switch_MAN"][key]
+        # for key in self.Switch_ERR:
+        #     self.Switch_ERR[key] = dic["Switch_ERR"][key]
         for key in self.Din_dic:
             self.Din_dic[key] = dic["Din_dic"][key]
 
@@ -2536,7 +2536,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_TT += 1
         self.para_PT += 1
         self.para_Valve += 1
-        self.para_Switch += 1
+        # self.para_Switch += 1
         self.para_LOOPPID += 1
         self.para_LOOP2PT += 1
         self.para_REAL += 1
@@ -3027,10 +3027,10 @@ class UpdateServer(QtCore.QObject):
         self.Valve_INTLKD_ini = sec.VALVE_INTLKD
         self.Valve_ERR_ini = sec.VALVE_ERR
         self.Valve_Busy_ini = sec.VALVE_BUSY
-        self.Switch_OUT_ini = sec.SWITCH_OUT
-        self.Switch_MAN_ini = sec.SWITCH_MAN
-        self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
-        self.Switch_ERR_ini = sec.SWITCH_ERR
+        # self.Switch_OUT_ini = sec.SWITCH_OUT
+        # self.Switch_MAN_ini = sec.SWITCH_MAN
+        # self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
+        # self.Switch_ERR_ini = sec.SWITCH_ERR
         self.Din_dic_ini = sec.DIN_DIC
         self.Din_HighLimit_ini = sec.DIN_HIGHLIMIT
         self.Din_LowLimit_ini = sec.DIN_LOWLIMIT
@@ -3114,10 +3114,10 @@ class UpdateServer(QtCore.QObject):
                                             "MAN": self.Valve_MAN_ini,
                                             "ERR": self.Valve_ERR_ini,
                                             "Busy":self.Valve_Busy_ini},
-                                  "Switch": {"OUT": self.Switch_OUT_ini,
-                                             "INTLKD": self.Switch_INTLKD_ini,
-                                             "MAN": self.Switch_MAN_ini,
-                                             "ERR": self.Switch_ERR_ini},
+                                  # "Switch": {"OUT": self.Switch_OUT_ini,
+                                  #            "INTLKD": self.Switch_INTLKD_ini,
+                                  #            "MAN": self.Switch_MAN_ini,
+                                  #            "ERR": self.Switch_ERR_ini},
                                   "Din": {'value': self.Din_dic_ini,"high": self.Din_HighLimit_ini, "low": self.Din_LowLimit_ini},
                                   "LOOPPID": {"MODE0": self.LOOPPID_MODE0_ini,
                                               "MODE1": self.LOOPPID_MODE1_ini,
@@ -3279,14 +3279,14 @@ class UpdateServer(QtCore.QObject):
             self.Valve_ERR_ini[key] = self.PLC.Valve_ERR[key]
         for key in self.PLC.Valve_Busy:
             self.Valve_Busy_ini[key] = self.PLC.Valve_Busy[key]
-        for key in self.PLC.Switch_OUT:
-            self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
-        for key in self.PLC.Switch_INTLKD:
-            self.Switch_INTLKD_ini[key] = self.PLC.Switch_INTLKD[key]
-        for key in self.PLC.Switch_MAN:
-            self.Switch_MAN_ini[key] = self.PLC.Switch_MAN[key]
-        for key in self.PLC.Switch_ERR:
-            self.Switch_ERR_ini[key] = self.PLC.Switch_ERR[key]
+        # for key in self.PLC.Switch_OUT:
+        #     self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
+        # for key in self.PLC.Switch_INTLKD:
+        #     self.Switch_INTLKD_ini[key] = self.PLC.Switch_INTLKD[key]
+        # for key in self.PLC.Switch_MAN:
+        #     self.Switch_MAN_ini[key] = self.PLC.Switch_MAN[key]
+        # for key in self.PLC.Switch_ERR:
+        #     self.Switch_ERR_ini[key] = self.PLC.Switch_ERR[key]
         for key in self.PLC.Din_dic:
             self.Din_dic_ini[key] = self.PLC.Din_dic[key]
         for key in self.PLC.Din_LowLimit:
@@ -3459,13 +3459,13 @@ class UpdateServer(QtCore.QObject):
                             pass
                         # write success signal
 
-                    if message[key]["type"] == "switch":
-                        if message[key]["operation"] == "ON":
-                            self.PLC.WriteBase2(address=message[key]["address"])
-                        elif message[key]["operation"] == "OFF":
-                            self.PLC.WriteBase4(address=message[key]["address"])
-                        else:
-                            pass
+                    # if message[key]["type"] == "switch":
+                    #     if message[key]["operation"] == "ON":
+                    #         self.PLC.WriteBase2(address=message[key]["address"])
+                    #     elif message[key]["operation"] == "OFF":
+                    #         self.PLC.WriteBase4(address=message[key]["address"])
+                    #     else:
+                    #         pass
                     elif message[key]["type"] == "TT":
 
 
