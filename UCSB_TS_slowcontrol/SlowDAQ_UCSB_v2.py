@@ -255,17 +255,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1008.HeaterSubWindow.setWindowTitle("MFC1008")
         self.MFC1008.HeaterSubWindow.Label.setText("MFC1008")
 
-        self.PT1012 = PressureIndicator(self.ThermosyphonTab)
-        self.PT1012.Label.setText("PT1012")
-        self.PT1012.move(145 * R, 30 * R)
+        self.PT1000 = PressureIndicator(self.ThermosyphonTab)
+        self.PT1000.Label.setText("PT1000")
+        self.PT1000.move(145 * R, 30 * R)
 
-        self.PT1013 = PressureIndicator(self.ThermosyphonTab)
-        self.PT1013.Label.setText("PT1013")
-        self.PT1013.move(155 * R, 975 * R)
+        self.PT1001 = PressureIndicator(self.ThermosyphonTab)
+        self.PT1001.Label.setText("PT1001")
+        self.PT1001.move(155 * R, 975 * R)
 
-        self.PT1014 = PressureIndicator(self.ThermosyphonTab)
-        self.PT1014.Label.setText("PT1014")
-        self.PT1014.move(160 * R, 1160 * R)
+        self.PT1002 = PressureIndicator(self.ThermosyphonTab)
+        self.PT1002.Label.setText("PT1002")
+        self.PT1002.move(160 * R, 1160 * R)
 
         #Gas Panel Widgets
         
@@ -517,16 +517,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #commands stack
-        self.address ={"TT1001": 30, "TT1002": 32, "TT1003": 34, "TT1004": 36, "TT1005": 38,
-                              "TT1006": 40, "TT1007": 42, "TT1008": 44, "TT1009": 30,"PT001": 12796, "PT002": 12798, "PT003": 12800, "PT004": 12802, "PT1000": 12804,
-              "PT1001": 12806, "PT1002": 12808,'FCV1001': 12782, 'FCV1002': 12784, "BGA01": 12804, "BGA02": 12806,'FCV1001': 12782, 'FCV1002': 12784, "BGA01": 12804, "BGA02": 12806,"PV1": 12288, "PV2": 12289, "PV3": 12290, "PV4": 12291, "PV5": 12292, "PV6": 12293,
-                 "PV7": 12294, "PV8": 12295, "PV9": 12296,
-                 "PV10": 12297, "PV11": 12298,"PV12": 12299, "PV1000": 12300, "PV1001": 12301, "PV1002": 12302,
-                 "PV1003": 12303, "PV1004": 12304,
-                 "PV1005": 12305, "PV1006": 12306,"PV1007": 12307,'HTR1001': (0,0), 'HTR1002': (0,1), 'HTR1003': (1,0), 'HTR1004': (1,1)}
+        self.address = sec.merge_dic(sec.TT_AD1_ADDRESS,sec.TT_AD2_ADDRESS,sec.PT_ADDRESS,sec.LEFT_REAL_ADDRESS,sec.VALVE_ADDRESS,sec.LOOPPID_ADR_BASE,sec.PROCEDURE_ADDRESS, sec.INTLK_A_ADDRESS)
         self.commands = {}
 
         self.signal_connection()
+
+        self.command_buffer_waiting = 1
+        # self.statustransition={}
+
+        self.Valve_buffer = copy.copy(sec.VALVE_OUT)
+        self.CHECKED = False
+
+        self.LOOPPID_EN_buffer = copy.copy(sec.LOOPPID_EN)
+
 
         # Set user to guest by default
         self.User = "Guest"
@@ -642,23 +645,23 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #PT settings
 
-        self.AlarmButton.SubWindow.PT1012.updatebutton.clicked.connect(
-            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1012.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.PT1012.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.PT1012.Low_Limit.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.PT1012.High_Limit.Field.text()))
+        self.AlarmButton.SubWindow.PT1000.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1000.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.PT1000.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.PT1000.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.PT1000.High_Limit.Field.text()))
 
-        self.AlarmButton.SubWindow.PT1013.updatebutton.clicked.connect(
-            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1013.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.PT1013.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.PT1013.Low_Limit.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.PT1013.High_Limit.Field.text()))
+        self.AlarmButton.SubWindow.PT1001.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1001.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.PT1001.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.PT1001.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.PT1001.High_Limit.Field.text()))
 
-        self.AlarmButton.SubWindow.PT1014.updatebutton.clicked.connect(
-            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1014.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.PT1014.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.PT1014.Low_Limit.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.PT1014.High_Limit.Field.text()))
+        self.AlarmButton.SubWindow.PT1002.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1002.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.PT1002.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.PT1002.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.PT1002.High_Limit.Field.text()))
 
 
     @QtCore.Slot()
@@ -820,9 +823,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def update_alarmwindow(self,dic):
 
-        self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.PT1012.Alarm,
-                                          self.AlarmButton.SubWindow.PT1013.Alarm,
-                                          self.AlarmButton.SubWindow.PT1014.Alarm])
+        self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.PT1000.Alarm,
+                                          self.AlarmButton.SubWindow.PT1001.Alarm,
+                                          self.AlarmButton.SubWindow.PT1002.Alarm])
         # print("Alarm Status=", self.AlarmButton.Button.Alarm)
         if self.AlarmButton.Button.Alarm:
             self.AlarmButton.ButtonAlarmSetSignal()
@@ -1692,722 +1695,6 @@ class RegionPID(QtWidgets.QWidget):
 
 
 
-
-class AlarmWin(QtWidgets.QMainWindow):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-
-        self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
-
-        # reset the size of the window
-        self.setMinimumSize(2000*R, 1100*R)
-        self.resize(2000*R, 1100*R)
-        self.setWindowTitle("Alarm Window")
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1100*R))
-
-        self.Tab = QtWidgets.QTabWidget(self)
-        self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Times;")
-        self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
-
-        self.PressureTab = QtWidgets.QTabWidget(self.Tab)
-        self.Tab.addTab(self.PressureTab, "Pressure Transducers")
-
-        self.RTDSET12Tab = QtWidgets.QTabWidget(self.Tab)
-        self.Tab.addTab(self.RTDSET12Tab, "RTD SET 1&2")
-
-        self.RTDSET34Tab = QtWidgets.QTabWidget(self.Tab)
-        self.Tab.addTab(self.RTDSET34Tab, "RTD SET 3&4")
-
-        self.RTDLEFTTab = QtWidgets.QTabWidget(self.Tab)
-        self.Tab.addTab(self.RTDLEFTTab, "HEATER RTDs and ETC")
-
-        # Groupboxs for alarm/PT/TT
-
-        self.GLPT = QtWidgets.QGridLayout()
-        # self.GLPT = QtWidgets.QGridLayout(self)
-        self.GLPT.setContentsMargins(20*R, 20*R, 20*R, 20*R)
-        self.GLPT.setSpacing(20*R)
-        self.GLPT.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupPT = QtWidgets.QGroupBox(self.PressureTab)
-        self.GroupPT.setTitle("Pressure Transducer")
-        self.GroupPT.setLayout(self.GLPT)
-        self.GroupPT.move(0*R, 0*R)
-
-        self.GLRTD1 = QtWidgets.QGridLayout()
-        # self.GLRTD1 = QtWidgets.QGridLayout(self)
-        self.GLRTD1.setContentsMargins(20*R, 20*R, 20*R, 20*R)
-        self.GLRTD1.setSpacing(20*R)
-        self.GLRTD1.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupRTD1 = QtWidgets.QGroupBox(self.RTDSET12Tab)
-        self.GroupRTD1.setTitle("RTD SET 1")
-        self.GroupRTD1.setLayout(self.GLRTD1)
-        self.GroupRTD1.move(0*R, 0*R)
-
-        self.GLRTD2 = QtWidgets.QGridLayout()
-        # self.GLRTD2 = QtWidgets.QGridLayout(self)
-        self.GLRTD2.setContentsMargins(20*R, 20*R, 20*R, 20*R)
-        self.GLRTD2.setSpacing(20*R)
-        self.GLRTD2.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupRTD2 = QtWidgets.QGroupBox(self.RTDSET12Tab)
-        self.GroupRTD2.setTitle("RTD SET 2")
-        self.GroupRTD2.setLayout(self.GLRTD2)
-        self.GroupRTD2.move(0*R, 300*R)
-
-        self.GLRTD3 = QtWidgets.QGridLayout()
-        # self.GLRTD3 = QtWidgets.QGridLayout(self)
-        self.GLRTD3.setContentsMargins(20*R, 20*R, 20*R, 20*R)
-        self.GLRTD3.setSpacing(20*R)
-        self.GLRTD3.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupRTD3 = QtWidgets.QGroupBox(self.RTDSET34Tab)
-        self.GroupRTD3.setTitle("RTD SET 3")
-        self.GroupRTD3.setLayout(self.GLRTD3)
-        self.GroupRTD3.move(0*R, 0*R)
-
-        self.GLRTD4 = QtWidgets.QGridLayout()
-        # self.GLRTD4 = QtWidgets.QGridLayout(self)
-        self.GLRTD4.setContentsMargins(20*R, 20*R, 20*R, 20*R)
-        self.GLRTD4.setSpacing(20*R)
-        self.GLRTD4.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupRTD4 = QtWidgets.QGroupBox(self.RTDSET34Tab)
-        self.GroupRTD4.setTitle("RTD SET 4")
-        self.GroupRTD4.setLayout(self.GLRTD4)
-        self.GroupRTD4.move(0*R, 500*R)
-
-        self.GLRTDLEFT = QtWidgets.QGridLayout()
-        # self.GLRTDLEFT = QtWidgets.QGridLayout(self)
-        self.GLRTDLEFT.setContentsMargins(20*R, 20*R, 20*R, 20*R)
-        self.GLRTDLEFT.setSpacing(20*R)
-        self.GLRTDLEFT.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupRTDLEFT = QtWidgets.QGroupBox(self.RTDLEFTTab)
-        self.GroupRTDLEFT.setTitle(" LEFT RTDs ")
-        self.GroupRTDLEFT.setLayout(self.GLRTDLEFT)
-        self.GroupRTDLEFT.move(0*R, 0*R)
-
-
-        # PT part
-        self.PT1012 = AlarmStatusWidget(self.PressureTab)
-        self.PT1012.Label.setText("PT1012")
-
-        self.PT1013 = AlarmStatusWidget(self.PressureTab)
-        self.PT1013.Label.setText("PT1013")
-
-        self.PT1014 = AlarmStatusWidget(self.PressureTab)
-        self.PT1014.Label.setText("PT1014")
-
-
-
-        # make a directory for the alarm instrument and assign instrument to certain position
-        # self.AlarmRTD1dir = {0: {0: self.TT2111, 1: self.TT2112, 2: self.TT2113, 3: self.TT2114, 4: self.TT2115},
-        #                      1: {0: self.TT2116, 1: self.TT2117, 2: self.TT2118, 3: self.TT2119, 4: self.TT2120}}
-        #
-        # self.AlarmRTD1list1D = [self.TT2111, self.TT2112, self.TT2113,  self.TT2114,  self.TT2115, self.TT2116,
-        #                        self.TT2117, self.TT2118, self.TT2119,  self.TT2120]
-        #
-        # self.AlarmRTD2dir = {0: {0: self.TT2401, 1: self.TT2402, 2: self.TT2403, 3: self.TT2404, 4: self.TT2405},
-        #                      1: {0: self.TT2406, 1: self.TT2407, 2: self.TT2408, 3: self.TT2409, 4: self.TT2410},
-        #                      2: {0: self.TT2411, 1: self.TT2412, 2: self.TT2413, 3: self.TT2414, 4: self.TT2415},
-        #                      3: {0: self.TT2416, 1: self.TT2417, 2: self.TT2418, 3: self.TT2419, 4: self.TT2420},
-        #                      4: {0: self.TT2421, 1: self.TT2422, 2: self.TT2423, 3: self.TT2424, 4: self.TT2425},
-        #                      5: {0: self.TT2426, 1: self.TT2427, 2: self.TT2428, 3: self.TT2429, 4: self.TT2430},
-        #                      6: {0: self.TT2431, 1: self.TT2432}}
-        #
-        #
-        # self.AlarmRTD3dir = {0: {0: self.TT2435, 1: self.TT2436, 2: self.TT2437, 3: self.TT2438, 4: self.TT2439},
-        #                      1: {0: self.TT2440, 1: self.TT2441, 2: self.TT2442, 3: self.TT2443, 4: self.TT2444},
-        #                      2: {0: self.TT2445, 1: self.TT2446, 2: self.TT2447, 3: self.TT2448, 4: self.TT2449},
-        #                      3: {0: self.TT2450}}
-        #
-        # self.AlarmRTD4dir = {0: {0: self.TT2101, 1: self.TT2102, 2: self.TT2103, 3: self.TT2104, 4: self.TT2105},
-        #                      1: {0: self.TT2106, 1: self.TT2107, 2: self.TT2108, 3: self.TT2109, 4: self.TT2110}}
-        #
-        self.AlarmPTdir = {0: {0: self.PT1012, 1: self.PT1013, 2: self.PT1014}}
-        #
-        # self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6203},
-        #                         1: {0: self.TT6404, 1: self.TT6207, 2: self.TT6405, 3: self.TT6211, 4: self.TT6406},
-        #                         2: {0: self.TT6223, 1: self.TT6410, 2: self.TT6408, 3: self.TT6409, 4: self.TT6412},
-        #                         3: {0: self.TT3402, 1: self.TT3401, 2: self.TT7401, 3: self.TT7202, 4: self.TT7403},
-        #                         4: {0: self.TT6222, 1: self.TT6407, 2: self.TT6415, 3: self.TT6416, 4: self.TT6411},
-        #                         5: {0: self.TT6413, 1: self.TT6414}}
-
-        # # variables usable for building widgets
-        # # i is row number, j is column number
-        # # RTD1 is for temperature transducer while PT is for pressure transducer
-        # # max is max row and column number
-        # # last is the last widget's row and column index in gridbox
-        # self.i_RTD1_max = len(self.AlarmRTD1dir)
-        # self.j_RTD1_max = len(self.AlarmRTD1dir[0])
-
-        # self.i_RTD2_max = len(self.AlarmRTD2dir)
-        # self.j_RTD2_max = len(self.AlarmRTD2dir[0])
-        # self.i_RTD3_max = len(self.AlarmRTD3dir)
-        # self.j_RTD3_max = len(self.AlarmRTD3dir[0])
-        # self.i_RTD4_max = len(self.AlarmRTD4dir)
-        # self.j_RTD4_max = len(self.AlarmRTD4dir[0])
-        # self.i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
-        # self.j_RTDLEFT_max = len(self.AlarmRTDLEFTdir[0])
-
-        self.i_PT_max = len(self.AlarmPTdir)
-        self.j_PT_max = len(self.AlarmPTdir[0])
-        # self.i_RTD1_last = len(self.AlarmRTD1dir) - 1
-        # self.j_RTD1_last = len(self.AlarmRTD1dir[self.i_RTD1_last]) - 1
-        # self.i_RTD2_last = len(self.AlarmRTD2dir) - 1
-        # self.j_RTD2_last = len(self.AlarmRTD2dir[self.i_RTD2_last]) - 1
-        # self.i_RTD3_last = len(self.AlarmRTD3dir) - 1
-        # self.j_RTD3_last = len(self.AlarmRTD3dir[self.i_RTD3_last]) - 1
-        # self.i_RTD4_last = len(self.AlarmRTD4dir) - 1
-        # self.j_RTD4_last = len(self.AlarmRTD4dir[self.i_RTD4_last]) - 1
-        # self.i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
-        # self.j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[self.i_RTDLEFT_last]) - 1
-        self.i_PT_last = len(self.AlarmPTdir) - 1
-        # which is 3
-        self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last]) - 1
-        # which is 1
-        self.ResetOrder()
-
-    @QtCore.Slot()
-    def ResetOrder(self):
-        # for i in range(0, self.i_RTD1_max):
-        #     for j in range(0, self.j_RTD1_max):
-        #         # self.GLRTD1.addWidget(eval(self.AlarmRTD1dir[i][j]), i, j)
-        #         self.GLRTD1.addWidget(self.AlarmRTD1dir[i][j], i, j)
-        #         # end the position generator when i= last element's row number, j= last element's column number
-        #         if (i, j) == (self.i_RTD1_last, self.j_RTD1_last):
-        #             break
-        #     if (i, j) == (self.i_RTD1_last, self.j_RTD1_last):
-        #         break
-        #
-        # for i in range(0, self.i_RTD2_max):
-        #     for j in range(0, self.j_RTD2_max):
-        #         # self.GLRTD2.addWidget(eval(self.AlarmRTD2dir[i][j]), i, j)
-        #         self.GLRTD2.addWidget(self.AlarmRTD2dir[i][j], i, j)
-        #         # end the position generator when i= last element's row number, j= last element's column number
-        #         if (i, j) == (self.i_RTD2_last, self.j_RTD2_last):
-        #             break
-        #     if (i, j) == (self.i_RTD2_last, self.j_RTD2_last):
-        #         break
-        #
-        # for i in range(0, self.i_RTD3_max):
-        #     for j in range(0, self.j_RTD3_max):
-        #         # self.GLRTD3.addWidget(eval(self.AlarmRTD3dir[i][j]), i, j)
-        #         self.GLRTD3.addWidget(self.AlarmRTD3dir[i][j], i, j)
-        #         # end the position generator when i= last element's row number, j= last element's column number
-        #         if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
-        #             break
-        #     if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
-        #         break
-        #
-        # for i in range(0, self.i_RTD4_max):
-        #     for j in range(0, self.j_RTD4_max):
-        #         # self.GLRTD4.addWidget(eval(self.AlarmRTD4dir[i][j]), i, j)
-        #         self.GLRTD4.addWidget(self.AlarmRTD4dir[i][j], i, j)
-        #         # end the position generator when i= last element's row number, j= last element's column number
-        #         if (i, j) == (self.i_RTD4_last, self.j_RTD4_last):
-        #             break
-        #     if (i, j) == (self.i_RTD4_last, self.j_RTD4_last):
-        #         break
-        #
-        # for i in range(0, self.i_RTDLEFT_max):
-        #     for j in range(0, self.j_RTDLEFT_max):
-        #         # self.GLRTDLEFT.addWidget(eval(self.AlarmRTDLEFTdir[i][j]), i, j)
-        #         self.GLRTDLEFT.addWidget(self.AlarmRTDLEFTdir[i][j], i, j)
-        #         # end the position generator when i= last element's row number, j= last element's column number
-        #         if (i, j) == (self.i_RTDLEFT_last, self.j_RTDLEFT_last):
-        #             break
-        #     if (i, j) == (self.i_RTDLEFT_last, self.j_RTDLEFT_last):
-        #         break
-
-        for i in range(0, self.i_PT_max):
-            for j in range(0, self.j_PT_max):
-                # self.GLPT.addWidget(eval(self.AlarmPTdir[i][j]), i, j)
-                self.GLPT.addWidget(self.AlarmPTdir[i][j], i, j)
-                # end the position generator when i= last element's row number -1, j= last element's column number
-                if (i, j) == (self.i_PT_last, self.j_PT_last):
-                    break
-            if (i, j) == (self.i_PT_last, self.j_PT_last):
-                break
-
-    @QtCore.Slot()
-    def ReassignRTD1Order(self):
-        # check the status of the Widget and reassign the diretory
-        # establish 2 diretory, reorder TempDic to reorder the widgets
-        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
-        # i_max, j_max are max row and column number
-        # l max are max column number+1
-        # i_last,j_last are last elements's diretory coordinate
-        TempRefRTD1dir = self.AlarmRTD1dir
-        TempRTD1dir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
-                       1: {0: None, 1: None, 2: None, 3: None, 4: None}}
-
-        # l_RTD1_max is max number of column
-        l_RTD1 = 0
-        k_RTD1 = 0
-
-        # i_RTD1_max = 3
-        # j_RTD1_max = 5
-        # i_PT_max = 4
-        # j_PT_max = 5
-        # l_RTD1_max = 4
-        # l_PT_max = 4
-        # i_RTD1_last = 2
-        # j_RTD1_last = 4
-        # i_PT_last = 3
-        # j_PT_last = 1
-        i_RTD1_max = len(self.AlarmRTD1dir)
-        # which is 3
-        j_RTD1_max = len(self.AlarmRTD1dir[0])
-        # which is 5
-
-        i_RTD1_last = len(self.AlarmRTD1dir) - 1
-        # which is 2
-        j_RTD1_last = len(self.AlarmRTD1dir[i_RTD1_last]) - 1
-        # which is 4
-        # print(i_RTD1_max,j_RTD1_max,i_RTD1_last, j_RTD1_last)
-
-        l_RTD1_max = j_RTD1_max - 1
-
-        # RTD1 put alarm true widget to the begining of the diretory
-        for i in range(0, i_RTD1_max):
-            for j in range(0, j_RTD1_max):
-                if TempRefRTD1dir[i][j].Alarm:
-                    TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
-                    l_RTD1 = l_RTD1 + 1
-                    if l_RTD1 == l_RTD1_max + 1:
-                        l_RTD1 = 0
-                        k_RTD1 = k_RTD1 + 1
-                if (i, j) == (i_RTD1_last, j_RTD1_last):
-                    break
-            if (i, j) == (i_RTD1_last, j_RTD1_last):
-                break
-        # print("1st part")
-        #
-        #
-        # # RTD1 put alarm false widget after that
-        for i in range(0, i_RTD1_max):
-            for j in range(0, j_RTD1_max):
-                if not TempRefRTD1dir[i][j].Alarm:
-                    TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
-                    l_RTD1 = l_RTD1 + 1
-                    if l_RTD1 == l_RTD1_max + 1:
-                        l_RTD1 = 0
-                        k_RTD1 = k_RTD1 + 1
-                if (i, j) == (i_RTD1_last, j_RTD1_last):
-                    break
-            if (i, j) == (i_RTD1_last, j_RTD1_last):
-                break
-        # print("2nd part")
-        # Reassign position
-        # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_RTD1_max):
-            for j in range(0, j_RTD1_max):
-                self.GLRTD1.addWidget(TempRTD1dir[i][j], i, j)
-                if (i, j) == (i_RTD1_last, j_RTD1_last):
-                    break
-            if (i, j) == (i_RTD1_last, j_RTD1_last):
-                break
-        # print("3rd part")
-
-    @QtCore.Slot()
-    def ReassignRTD2Order(self):
-        # check the status of the Widget and reassign the diretory
-        # establish 2 diretory, reorder TempDic to reorder the widgets
-        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
-        # i_max, j_max are max row and column number
-        # l max are max column number+1
-        # i_last,j_last are last elements's diretory coordinate
-
-        TempRefRTD2dir = self.AlarmRTD2dir
-
-        TempRTD2dir = self.AlarmRTD2dir
-
-        # l_RTD1_max is max number of column
-
-        l_RTD2 = 0
-        k_RTD2 = 0
-
-        # i_RTD1_max = 3
-        # j_RTD1_max = 5
-        # i_PT_max = 4
-        # j_PT_max = 5
-        # l_RTD1_max = 4
-        # l_PT_max = 4
-        # i_RTD1_last = 2
-        # j_RTD1_last = 4
-        # i_PT_last = 3
-        # j_PT_last = 1
-
-        i_RTD2_max = len(self.AlarmRTD2dir)
-        j_RTD2_max = len(self.AlarmRTD2dir[0])
-
-        i_RTD2_last = len(self.AlarmRTD2dir) - 1
-        j_RTD2_last = len(self.AlarmRTD2dir[i_RTD2_last]) - 1
-
-
-        l_RTD2_max = j_RTD2_max - 1
-
-        # RTD1 put alarm true widget to the begining of the diretory
-
-        for i in range(0, i_RTD2_max):
-            for j in range(0, j_RTD2_max):
-                if TempRefRTD2dir[i][j].Alarm:
-                    TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
-                    l_RTD2 = l_RTD2 + 1
-                    if l_RTD2 == l_RTD2_max+1:
-                        l_RTD2 = 0
-                        k_RTD2 = k_RTD2 + 1
-                if (i, j) == (i_RTD2_last, j_RTD2_last):
-                    break
-            if (i, j) == (i_RTD2_last, j_RTD2_last):
-                break
-
-        # RTD2 put alarm false widget after that
-        for i in range(0, i_RTD2_max):
-            for j in range(0, j_RTD2_max):
-                if not TempRefRTD2dir[i][j].Alarm:
-                    TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
-                    l_RTD2 = l_RTD2 + 1
-                    if l_RTD2 == l_RTD2_max+1:
-                        l_RTD2 = 0
-                        k_RTD2 = k_RTD2 + 1
-                if (i, j) == (i_RTD2_last, j_RTD2_last):
-                    break
-            if (i, j) == (i_RTD2_last, j_RTD2_last):
-                break
-
-
-        # Reassign position
-        # end the position generator when i= last element's row number, j= last element's column number
-
-        for i in range(0, i_RTD2_max):
-            for j in range(0, j_RTD2_max):
-                self.GLRTD2.addWidget(TempRTD2dir[i][j], i, j)
-                if (i, j) == (i_RTD2_last, j_RTD2_last):
-                    break
-            if (i, j) == (i_RTD2_last, j_RTD2_last):
-                break
-
-
-    @QtCore.Slot()
-    def ReassignRTD3Order(self):
-        # check the status of the Widget and reassign the diretory
-        # establish 2 diretory, reorder TempDic to reorder the widgets
-        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
-        # i_max, j_max are max row and column number
-        # l max are max column number+1
-        # i_last,j_last are last elements's diretory coordinate
-
-        TempRefRTD3dir = self.AlarmRTD3dir
-
-        TempRTD3dir = self.AlarmRTD3dir
-
-        # l_RTD1_max is max number of column
-
-        l_RTD3 = 0
-        k_RTD3 = 0
-
-        # i_RTD1_max = 3
-        # j_RTD1_max = 5
-        # i_PT_max = 4
-        # j_PT_max = 5
-        # l_RTD1_max = 4
-        # l_PT_max = 4
-        # i_RTD1_last = 2
-        # j_RTD1_last = 4
-        # i_PT_last = 3
-        # j_PT_last = 1
-        i_RTD3_max = len(self.AlarmRTD3dir)
-        j_RTD3_max = len(self.AlarmRTD3dir[0])
-
-        i_RTD3_last = len(self.AlarmRTD3dir) - 1
-        j_RTD3_last = len(self.AlarmRTD3dir[i_RTD3_last]) - 1
-
-        l_RTD3_max = j_RTD3_max - 1
-
-        for i in range(0, i_RTD3_max):
-            for j in range(0, j_RTD3_max):
-                if TempRefRTD3dir[i][j].Alarm:
-                    TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
-                    l_RTD3 = l_RTD3 + 1
-                    if l_RTD3 == l_RTD3_max+1:
-                        l_RTD3 = 0
-                        k_RTD3 = k_RTD3 + 1
-                if (i, j) == (i_RTD3_last, j_RTD3_last):
-                    break
-            if (i, j) == (i_RTD3_last, j_RTD3_last):
-                break
-
-        # RTD3 put alarm false widget after that
-        for i in range(0, i_RTD3_max):
-            for j in range(0, j_RTD3_max):
-                if not TempRefRTD3dir[i][j].Alarm:
-                    TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
-                    l_RTD3 = l_RTD3 + 1
-                    if l_RTD3 == l_RTD3_max+1:
-                        l_RTD3 = 0
-                        k_RTD3 = k_RTD3 + 1
-                if (i, j) == (i_RTD3_last, j_RTD3_last):
-                    break
-            if (i, j) == (i_RTD3_last, j_RTD3_last):
-                break
-
-
-        # Reassign position
-        # end the position generator when i= last element's row number, j= last element's column number
-
-
-        for i in range(0, i_RTD3_max):
-            for j in range(0, j_RTD3_max):
-                self.GLRTD3.addWidget(TempRTD3dir[i][j], i, j)
-                if (i, j) == (i_RTD3_last, j_RTD3_last):
-                    break
-            if (i, j) == (i_RTD3_last, j_RTD3_last):
-                break
-
-    @QtCore.Slot()
-    def ReassignRTD4Order(self):
-        # check the status of the Widget and reassign the diretory
-        # establish 2 diretory, reorder TempDic to reorder the widgets
-        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
-        # i_max, j_max are max row and column number
-        # l max are max column number+1
-        # i_last,j_last are last elements's diretory coordinate
-
-        TempRefRTD4dir = self.AlarmRTD4dir
-
-        TempRTD4dir = self.AlarmRTD4dir
-
-        # l_RTD1_max is max number of column
-
-        l_RTD4 = 0
-        k_RTD4 = 0
-
-        # i_RTD1_max = 3
-        # j_RTD1_max = 5
-        # i_PT_max = 4
-        # j_PT_max = 5
-        # l_RTD1_max = 4
-        # l_PT_max = 4
-        # i_RTD1_last = 2
-        # j_RTD1_last = 4
-        # i_PT_last = 3
-        # j_PT_last = 1
-
-        i_RTD4_max = len(self.AlarmRTD4dir)
-        j_RTD4_max = len(self.AlarmRTD4dir[0])
-
-        i_RTD4_last = len(self.AlarmRTD4dir) - 1
-        j_RTD4_last = len(self.AlarmRTD4dir[i_RTD4_last]) - 1
-
-        l_RTD4_max = j_RTD4_max - 1
-
-        for i in range(0, i_RTD4_max):
-            for j in range(0, j_RTD4_max):
-                if TempRefRTD4dir[i][j].Alarm:
-                    TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
-                    l_RTD4 = l_RTD4 + 1
-                    if l_RTD4 == l_RTD4_max+1:
-                        l_RTD4 = 0
-                        k_RTD4 = k_RTD4 + 1
-                if (i, j) == (i_RTD4_last, j_RTD4_last):
-                    break
-            if (i, j) == (i_RTD4_last, j_RTD4_last):
-                break
-
-        # RTD4 put alarm false widget after that
-        for i in range(0, i_RTD4_max):
-            for j in range(0, j_RTD4_max):
-                if not TempRefRTD4dir[i][j].Alarm:
-                    TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
-                    l_RTD4 = l_RTD4 + 1
-                    if l_RTD4 == l_RTD4_max+1:
-                        l_RTD4 = 0
-                        k_RTD4 = k_RTD4 + 1
-                if (i, j) == (i_RTD4_last, j_RTD4_last):
-                    break
-            if (i, j) == (i_RTD4_last, j_RTD4_last):
-                break
-
-
-        # Reassign position
-        # end the position generator when i= last element's row number, j= last element's column number
-
-            # for i in range(0, i_RTD4_max):
-            for j in range(0, j_RTD4_max):
-                self.GLRTD4.addWidget(TempRTD4dir[i][j], i, j)
-                if (i, j) == (i_RTD4_last, j_RTD4_last):
-                    break
-            if (i, j) == (i_RTD4_last, j_RTD4_last):
-                break
-        # end the position generator when i= last element's row number, j= last element's column number
-
-
-    @QtCore.Slot()
-    def ReassignRTDLEFTOrder(self):
-        # check the status of the Widget and reassign the diretory
-        # establish 2 diretory, reorder TempDic to reorder the widgets
-        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
-        # i_max, j_max are max row and column number
-        # l max are max column number+1
-        # i_last,j_last are last elements's diretory coordinate
-
-
-        TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
-
-
-        TempRTDLEFTdir = self.AlarmRTDLEFTdir
-
-        # l_RTD1_max is max number of column
-
-        l_RTDLEFT = 0
-        k_RTDLEFT = 0
-
-
-        # i_RTD1_max = 3
-        # j_RTD1_max = 5
-        # i_PT_max = 4
-        # j_PT_max = 5
-        # l_RTD1_max = 4
-        # l_PT_max = 4
-        # i_RTD1_last = 2
-        # j_RTD1_last = 4
-        # i_PT_last = 3
-        # j_PT_last = 1
-
-        i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
-        j_RTDLEFT_max = len(self.AlarmRTDLEFTdir[0])
-
-        i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
-        j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[i_RTDLEFT_last]) - 1
-
-        l_RTDLEFT_max = j_RTDLEFT_max - 1
-
-        for i in range(0, i_RTDLEFT_max):
-            for j in range(0, j_RTDLEFT_max):
-                if TempRefRTDLEFTdir[i][j].Alarm:
-                    TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
-                    l_RTDLEFT = l_RTDLEFT + 1
-                    if l_RTDLEFT == l_RTDLEFT_max+1:
-                        l_RTDLEFT = 0
-                        k_RTDLEFT = k_RTDLEFT + 1
-                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                    break
-            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                break
-
-        # RTDLEFT put alarm false widget after that
-        for i in range(0, i_RTDLEFT_max):
-            for j in range(0, j_RTDLEFT_max):
-                if not TempRefRTDLEFTdir[i][j].Alarm:
-                    TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
-                    l_RTDLEFT = l_RTDLEFT + 1
-                    if l_RTDLEFT == l_RTDLEFT_max+1:
-                        l_RTDLEFT = 0
-                        k_RTDLEFT = k_RTDLEFT + 1
-                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                    break
-            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                break
-
-        # Reassign position
-        # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_RTDLEFT_max):
-            for j in range(0, j_RTDLEFT_max):
-                self.GLRTDLEFT.addWidget(TempRTDLEFTdir[i][j], i, j)
-                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                    break
-            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                break
-
-        # end the position generator when i= last element's row number, j= last element's column number
-
-    @QtCore.Slot()
-    def ReassignPTOrder(self):
-        # check the status of the Widget and reassign the diretory
-        # establish 2 diretory, reorder TempDic to reorder the widgets
-        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
-        # i_max, j_max are max row and column number
-        # l max are max column number+1
-        # i_last,j_last are last elements's diretory coordinate
-
-
-        TempRefPTdir = self.AlarmPTdir
-
-        TempPTdir = self.AlarmPTdir
-        # l_RTD1_max is max number of column
-
-        l_PT = 0
-        k_PT = 0
-        # i_RTD1_max = 3
-        # j_RTD1_max = 5
-        # i_PT_max = 4
-        # j_PT_max = 5
-        # l_RTD1_max = 4
-        # l_PT_max = 4
-        # i_RTD1_last = 2
-        # j_RTD1_last = 4
-        # i_PT_last = 3
-        # j_PT_last = 1
-
-        i_PT_max = len(self.AlarmPTdir)
-        # which is 4
-        j_PT_max = len(self.AlarmPTdir[0])
-        # which is 5
-
-        i_PT_last = len(self.AlarmPTdir) - 1
-        # which is 3
-        j_PT_last = len(self.AlarmPTdir[i_PT_last]) - 1
-        # which is 1
-
-        l_PT_max = j_PT_max - 1
-
-        # PT
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
-                if TempRefPTdir[i][j].Alarm:
-                    TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
-                    l_PT = l_PT + 1
-                    if l_PT == l_PT_max+1:
-                        l_PT = 0
-                        k_PT = k_PT + 1
-                if (i, j) == (i_PT_last, j_PT_last):
-                    break
-            if (i, j) == (i_PT_last, j_PT_last):
-                break
-
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
-                if not TempRefPTdir[i][j].Alarm:
-                    TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
-                    l_PT = l_PT + 1
-                    if l_PT == l_PT_max+1:
-                        l_PT = 0
-                        k_PT = k_PT + 1
-                    if (i, j) == (i_PT_last, j_PT_last):
-                        break
-                if (i, j) == (i_PT_last, j_PT_last):
-                    break
-
-        # Reassign position
-        # end the position generator when i= last element's row number, j= last element's column number
-
-        # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
-                self.GLPT.addWidget(TempPTdir[i][j], i, j)
-                if (i, j) == (i_PT_last, j_PT_last):
-                    break
-            if (i, j) == (i_PT_last, j_PT_last):
-                break
-
-
 class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -3236,17 +2523,17 @@ class UpdateDisplay(QtCore.QObject):
                 # print(dic)
                 # print(type(dic))
 
-                self.MW.AlarmButton.SubWindow.PT1012.UpdateAlarm(self.Client.receive_dic["Alarm"]["PT"]["PT1012"])
-                self.MW.AlarmButton.SubWindow.PT1012.Indicator.SetValue(
-                    self.Client.receive_dic["data"]["PT"]["PT1012"])
+                self.MW.AlarmButton.SubWindow.PT1000.UpdateAlarm(self.Client.receive_dic["Alarm"]["PT"]["PT1000"])
+                self.MW.AlarmButton.SubWindow.PT1000.Indicator.SetValue(
+                    self.Client.receive_dic["data"]["PT"]["PT1000"])
 
-                self.MW.AlarmButton.SubWindow.PT1013.UpdateAlarm(self.Client.receive_dic["Alarm"]["PT"]["PT1013"])
-                self.MW.AlarmButton.SubWindow.PT1013.Indicator.SetValue(
-                    self.Client.receive_dic["data"]["PT"]["PT1013"])
+                self.MW.AlarmButton.SubWindow.PT1001.UpdateAlarm(self.Client.receive_dic["Alarm"]["PT"]["PT1001"])
+                self.MW.AlarmButton.SubWindow.PT1001.Indicator.SetValue(
+                    self.Client.receive_dic["data"]["PT"]["PT1001"])
 
-                self.MW.AlarmButton.SubWindow.PT1014.UpdateAlarm(self.Client.receive_dic["Alarm"]["PT"]["PT1014"])
-                self.MW.AlarmButton.SubWindow.PT1014.Indicator.SetValue(
-                    self.Client.receive_dic["data"]["PT"]["PT1014"])
+                self.MW.AlarmButton.SubWindow.PT1002.UpdateAlarm(self.Client.receive_dic["Alarm"]["PT"]["PT1002"])
+                self.MW.AlarmButton.SubWindow.PT1002.Indicator.SetValue(
+                    self.Client.receive_dic["data"]["PT"]["PT1002"])
 
                 self.display_update.emit(dic)
 
@@ -3387,9 +2674,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.count = 0
                 self.count += 1
 
-                self.MW.PT1012.SetValue(self.Client.receive_dic["data"]["PT"]["PT1012"])
-                self.MW.PT1013.SetValue(self.Client.receive_dic["data"]["PT"]["PT1013"])
-                self.MW.PT1014.SetValue(self.Client.receive_dic["data"]["PT"]["PT1014"])
+                self.MW.PT1000.SetValue(self.Client.receive_dic["data"]["PT"]["PT1000"])
+                self.MW.PT1001.SetValue(self.Client.receive_dic["data"]["PT"]["PT1001"])
+                self.MW.PT1002.SetValue(self.Client.receive_dic["data"]["PT"]["PT1002"])
 
                 self.MW.PT001.SetValue(self.Client.receive_dic["data"]["PT"]["PT001"])
                 self.MW.PT002.SetValue(self.Client.receive_dic["data"]["PT"]["PT002"])
