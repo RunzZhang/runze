@@ -2920,159 +2920,159 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        self.HTR1.LOOPPIDWindow.Interlock.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR1"])
-        self.HTR1.LOOPPIDWindow.Error.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR1"])
-        self.HTR1.LOOPPIDWindow.MANSP.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1"])
-        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR1"],
-                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR1"]]:
+        self.HTR1001.LOOPPIDWindow.Interlock.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR1001"])
+        self.HTR1001.LOOPPIDWindow.Error.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR1001"])
+        self.HTR1001.LOOPPIDWindow.MANSP.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1001"])
+        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR1001"],
+                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR1001"]]:
 
-            self.HTR1.LOOPPIDWindow.SAT.UpdateColor(True)
+            self.HTR1001.LOOPPIDWindow.SAT.UpdateColor(True)
         else:
-            self.HTR1.LOOPPIDWindow.SAT.UpdateColor(False)
-        self.HTR1.LOOPPIDWindow.ModeREAD.Field.setText(
+            self.HTR1001.LOOPPIDWindow.SAT.UpdateColor(False)
+        self.HTR1001.LOOPPIDWindow.ModeREAD.Field.setText(
 
-            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1"]))
-        self.HTR1.LOOPPIDWindow.EN.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["EN"]["HTR1"])
-        self.HTR1.LOOPPIDWindow.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1"])
-        self.HTR1.LOOPPIDWindow.HIGH.SetValue(
-            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR1"])
-        self.HTR1.LOOPPIDWindow.LOW.SetValue(
-            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR1"])
-        self.HTR1.LOOPPIDWindow.SETSP.SetValue(
-            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1"],
-                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1"],
-                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1"],
-                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1"],
-                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR1"],
-                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR1"],
-                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR1"],
-                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR1"]))
-        self.HTR1.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1"])
+            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1001"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1001"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1001"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1001"]))
+        self.HTR1001.LOOPPIDWindow.EN.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
+        self.HTR1001.LOOPPIDWindow.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1001"])
+        self.HTR1001.LOOPPIDWindow.HIGH.SetValue(
+            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR1001"])
+        self.HTR1001.LOOPPIDWindow.LOW.SetValue(
+            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR1001"])
+        self.HTR1001.LOOPPIDWindow.SETSP.SetValue(
+            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1001"],
+                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1001"],
+                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1001"],
+                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1001"],
+                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR1001"],
+                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR1001"],
+                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR1001"],
+                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR1001"]))
+        self.HTR1001.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1001"])
 
-        self.HTR2.LOOPPIDWindow.Interlock.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR2"])
-        self.HTR2.LOOPPIDWindow.Error.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR2"])
-        self.HTR2.LOOPPIDWindow.MANSP.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2"])
-        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR2"],
-                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR2"]]:
+        self.HTR1002.LOOPPIDWindow.Interlock.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR1002"])
+        self.HTR1002.LOOPPIDWindow.Error.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR1002"])
+        self.HTR1002.LOOPPIDWindow.MANSP.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1002"])
+        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR1002"],
+                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR1002"]]:
 
-            self.HTR2.LOOPPIDWindow.SAT.UpdateColor(True)
+            self.HTR1002.LOOPPIDWindow.SAT.UpdateColor(True)
         else:
-            self.HTR2.LOOPPIDWindow.SAT.UpdateColor(False)
-        self.HTR2.LOOPPIDWindow.ModeREAD.Field.setText(
+            self.HTR1002.LOOPPIDWindow.SAT.UpdateColor(False)
+        self.HTR1002.LOOPPIDWindow.ModeREAD.Field.setText(
 
-            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR2"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR2"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR2"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR2"]))
-        self.HTR2.LOOPPIDWindow.EN.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["EN"]["HTR2"])
-        self.HTR2.LOOPPIDWindow.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR2"])
-        self.HTR2.LOOPPIDWindow.HIGH.SetValue(
-            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR2"])
-        self.HTR2.LOOPPIDWindow.LOW.SetValue(
-            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR2"])
-        self.HTR2.LOOPPIDWindow.SETSP.SetValue(
-            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR2"],
-                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR2"],
-                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR2"],
-                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR2"],
-                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR2"],
-                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR2"],
-                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR2"],
-                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR2"]))
-        self.HTR2.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR2"])
+            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1002"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1002"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1002"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1002"]))
+        self.HTR1002.LOOPPIDWindow.EN.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"])
+        self.HTR1002.LOOPPIDWindow.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1002"])
+        self.HTR1002.LOOPPIDWindow.HIGH.SetValue(
+            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR1002"])
+        self.HTR1002.LOOPPIDWindow.LOW.SetValue(
+            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR1002"])
+        self.HTR1002.LOOPPIDWindow.SETSP.SetValue(
+            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1002"],
+                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1002"],
+                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1002"],
+                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1002"],
+                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR1002"],
+                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR1002"],
+                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR1002"],
+                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR1002"]))
+        self.HTR1002.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1002"])
 
-        self.HTR3.LOOPPIDWindow.Interlock.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR3"])
-        self.HTR3.LOOPPIDWindow.Error.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR3"])
-        self.HTR3.LOOPPIDWindow.MANSP.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR3"])
-        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR3"],
-                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR3"]]:
+        self.HTR1003.LOOPPIDWindow.Interlock.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR1003"])
+        self.HTR1003.LOOPPIDWindow.Error.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR1003"])
+        self.HTR1003.LOOPPIDWindow.MANSP.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1003"])
+        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR1003"],
+                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR1003"]]:
 
-            self.HTR3.LOOPPIDWindow.SAT.UpdateColor(True)
+            self.HTR1003.LOOPPIDWindow.SAT.UpdateColor(True)
         else:
-            self.HTR3.LOOPPIDWindow.SAT.UpdateColor(False)
-        self.HTR3.LOOPPIDWindow.ModeREAD.Field.setText(
+            self.HTR1003.LOOPPIDWindow.SAT.UpdateColor(False)
+        self.HTR1003.LOOPPIDWindow.ModeREAD.Field.setText(
 
-            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR3"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR3"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR3"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR3"]))
-        self.HTR3.LOOPPIDWindow.EN.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["EN"]["HTR3"])
-        self.HTR3.LOOPPIDWindow.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR3"])
-        self.HTR3.LOOPPIDWindow.HIGH.SetValue(
-            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR3"])
-        self.HTR3.LOOPPIDWindow.LOW.SetValue(
-            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR3"])
-        self.HTR3.LOOPPIDWindow.SETSP.SetValue(
-            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR3"],
-                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR3"],
-                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR3"],
-                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR3"],
-                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR3"],
-                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR3"],
-                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR3"],
-                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR3"]))
-        self.HTR3.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR3"])
+            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1003"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1003"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1003"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1003"]))
+        self.HTR1003.LOOPPIDWindow.EN.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"])
+        self.HTR1003.LOOPPIDWindow.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1003"])
+        self.HTR1003.LOOPPIDWindow.HIGH.SetValue(
+            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR1003"])
+        self.HTR1003.LOOPPIDWindow.LOW.SetValue(
+            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR1003"])
+        self.HTR1003.LOOPPIDWindow.SETSP.SetValue(
+            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1003"],
+                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1003"],
+                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1003"],
+                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1003"],
+                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR1003"],
+                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR1003"],
+                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR1003"],
+                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR1003"]))
+        self.HTR1003.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1003"])
 
 
 
-        self.HTR4.LOOPPIDWindow.Interlock.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR4"])
-        self.HTR4.LOOPPIDWindow.Error.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR4"])
-        self.HTR4.LOOPPIDWindow.MANSP.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR4"])
-        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR4"],
-                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR4"]]:
+        self.HTR1004.LOOPPIDWindow.Interlock.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR1004"])
+        self.HTR1004.LOOPPIDWindow.Error.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR1004"])
+        self.HTR1004.LOOPPIDWindow.MANSP.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1004"])
+        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR1004"],
+                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR1004"]]:
 
-            self.HTR4.LOOPPIDWindow.SAT.UpdateColor(True)
+            self.HTR1004.LOOPPIDWindow.SAT.UpdateColor(True)
         else:
-            self.HTR4.LOOPPIDWindow.SAT.UpdateColor(False)
-        self.HTR4.LOOPPIDWindow.ModeREAD.Field.setText(
+            self.HTR1004.LOOPPIDWindow.SAT.UpdateColor(False)
+        self.HTR1004.LOOPPIDWindow.ModeREAD.Field.setText(
 
-            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR4"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR4"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR4"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR4"]))
-        self.HTR4.LOOPPIDWindow.EN.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["EN"]["HTR4"])
-        self.HTR4.LOOPPIDWindow.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR4"])
-        self.HTR4.LOOPPIDWindow.HIGH.SetValue(
-            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR4"])
-        self.HTR4.LOOPPIDWindow.LOW.SetValue(
-            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR4"])
-        self.HTR4.LOOPPIDWindow.SETSP.SetValue(
-            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR4"],
-                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR4"],
-                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR4"],
-                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR4"],
-                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR4"],
-                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR4"],
-                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR4"],
-                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR4"]))
-        self.HTR4.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR4"])
+            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1004"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1004"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1004"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1004"]))
+        self.HTR1004.LOOPPIDWindow.EN.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"])
+        self.HTR1004.LOOPPIDWindow.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1004"])
+        self.HTR1004.LOOPPIDWindow.HIGH.SetValue(
+            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR1004"])
+        self.HTR1004.LOOPPIDWindow.LOW.SetValue(
+            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR1004"])
+        self.HTR1004.LOOPPIDWindow.SETSP.SetValue(
+            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1004"],
+                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1004"],
+                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1004"],
+                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1004"],
+                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR1004"],
+                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR1004"],
+                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR1004"],
+                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR1004"]))
+        self.HTR1004.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1004"])
 
         self.MFC1.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
         self.MFC1.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
