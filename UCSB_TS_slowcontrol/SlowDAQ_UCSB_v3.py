@@ -396,10 +396,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV12.Label.setText("PV12")
         self.PV12.move(1840 * R, 1185 * R)
 
-        self.PV13 = Valve_v2(self.GasTab)
-        self.PV13.Label.setText("PV13")
-        self.PV13.move(1840 * R, 1262 * R)
-
         self.MFC1 = LOOPPID_v2(self.GasTab)
         self.MFC1.move(1160 * R, 525 * R)
         self.MFC1.Label.setText("MFC1")
@@ -1537,7 +1533,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.PV10.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV10"])
         # self.PV11.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV11"])
         # self.PV12.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV12"])
-        # self.PV13.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV13"])
 
         # refreshing the valve status from PLC every 30s
 
@@ -1641,10 +1636,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.PV12.Set.ButtonRClicked()
 
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV13.Set.ButtonLClicked()
-        else:
-            self.PV13.Set.ButtonRClicked()
 
         self.PT1000.SetValue(received_dic_c["data"]["PT"]["value"]["PT1000"])
         self.PT1001.SetValue(received_dic_c["data"]["PT"]["value"]["PT1001"])
@@ -1724,7 +1715,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV10.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV10"])
         self.PV11.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV11"])
         self.PV12.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV12"])
-        self.PV13.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV13"])
 
 
         # show whether the widgets status are normal: manully controlled and no error signal
@@ -1849,11 +1839,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.PV12.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV13"] and not received_dic_c["data"]["Valve"]["ERR"]["PV13"]:
-
-            self.PV13.ActiveState.UpdateColor(True)
-        else:
-            self.PV13.ActiveState.UpdateColor(False)
 
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1001"] == True:
@@ -2007,14 +1992,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
             self.PV12.ButtonTransitionState(True)
-
-        if received_dic_c["data"]["Valve"]["Busy"]["PV13"] == True:
-            self.PV13.ButtonTransitionState(False)
-            # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
-
-        else:
-            # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV13.ButtonTransitionState(True)
 
 
 
@@ -2620,11 +2597,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.PV1344_icon.Turnoff()
 
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1344"]:
-            self.PV1344_icon.Turnon()
-        else:
-            self.PV01_icon.Turnoff()
-
         if received_dic_c["data"]["Valve"]["OUT"]["PV02"]:
             self.PV02_icon.Turnon()
         else:
@@ -2679,12 +2651,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.PV12_icon.Turnon()
         else:
             self.PV12_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV13"]:
-            self.PV13_icon.Turnon()
-        else:
-            self.PV13_icon.Turnoff()
-
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV1000"]:
             self.PV1000_icon.Turnon()
