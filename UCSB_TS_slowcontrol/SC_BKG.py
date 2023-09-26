@@ -551,6 +551,7 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_OUT[key] = Raw_LS_power[key]
+            print(self.LOOPPID_OUT)
             for key in self.LOOPPID_ADR_BASE:
                 if float(self.LOOPPID_OUT[key])>0:
                     self.LOOPPID_EN[key] = True
