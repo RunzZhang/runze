@@ -2911,9 +2911,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT1004.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1004"])
         self.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1005"])
         self.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1006"])
-        self.TT1007.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1007"])
-        self.TT1008.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1008"])
-        self.TT1009.SetValue(received_dic_c["data"]["TT"]["AD2"]["value"]["TT1009"])
+        # self.TT1007.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1007"])
+        # self.TT1008.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1008"])
+        # self.TT1009.SetValue(received_dic_c["data"]["TT"]["AD2"]["value"]["TT1009"])
         self.LiqLev.SetValue(received_dic_c["data"]["LL"]["value"]["LL"])
 
 
