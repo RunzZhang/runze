@@ -2593,101 +2593,106 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Valve icons
 
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV2"]:
-            self.PV2_icon.Turnon()
-        else:
-            self.PV2_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV3"]:
-            self.PV3_icon.Turnon()
-        else:
-            self.PV3_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV4"]:
-            self.PV4_icon.Turnon()
-        else:
-            self.PV4_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV5"]:
-            self.PV5_icon.Turnon()
-        else:
-            self.PV5_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV6"]:
-            self.PV6_icon.Turnon()
-        else:
-            self.PV6_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV7"]:
-            self.PV7_icon.Turnon()
-        else:
-            self.PV7_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV8"]:
-            self.PV8_icon.Turnon()
-        else:
-            self.PV8_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV9"]:
-            self.PV9_icon.Turnon()
-        else:
-            self.PV9_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV10"]:
-            self.PV10_icon.Turnon()
-        else:
-            self.PV10_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV11"]:
-            self.PV11_icon.Turnon()
-        else:
-            self.PV11_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV12"]:
-            self.PV12_icon.Turnon()
-        else:
-            self.PV12_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1000"]:
-            self.PV1000_icon.Turnon()
-        else:
-            self.PV1000_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1001"]:
-            self.PV1001_icon.Turnon()
-        else:
-            self.PV1001_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1002"]:
-            self.PV1002_icon.Turnon()
-        else:
-            self.PV1002_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1003"]:
-            self.PV1003_icon.Turnon()
-        else:
-            self.PV1003_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1004"]:
-            self.PV1004_icon.Turnon()
-        else:
-            self.PV1004_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1005"]:
-            self.PV1005_icon.Turnon()
-        else:
-            self.PV1005_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1006"]:
-            self.PV1006_icon.Turnon()
-        else:
-            self.PV1006_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV1007_icon.Turnon()
-        else:
-            self.PV1007_icon.Turnoff()
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
+        #     self.PV1_icon.Turnon()
+        # else:
+        #     self.PV1_icon.Turnoff()
+        #
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV2"]:
+        #     self.PV2_icon.Turnon()
+        # else:
+        #     self.PV2_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV3"]:
+        #     self.PV3_icon.Turnon()
+        # else:
+        #     self.PV3_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV4"]:
+        #     self.PV4_icon.Turnon()
+        # else:
+        #     self.PV4_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV5"]:
+        #     self.PV5_icon.Turnon()
+        # else:
+        #     self.PV5_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV6"]:
+        #     self.PV6_icon.Turnon()
+        # else:
+        #     self.PV6_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV7"]:
+        #     self.PV7_icon.Turnon()
+        # else:
+        #     self.PV7_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV8"]:
+        #     self.PV8_icon.Turnon()
+        # else:
+        #     self.PV8_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV9"]:
+        #     self.PV9_icon.Turnon()
+        # else:
+        #     self.PV9_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV10"]:
+        #     self.PV10_icon.Turnon()
+        # else:
+        #     self.PV10_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV11"]:
+        #     self.PV11_icon.Turnon()
+        # else:
+        #     self.PV11_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV12"]:
+        #     self.PV12_icon.Turnon()
+        # else:
+        #     self.PV12_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1000"]:
+        #     self.PV1000_icon.Turnon()
+        # else:
+        #     self.PV1000_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1001"]:
+        #     self.PV1001_icon.Turnon()
+        # else:
+        #     self.PV1001_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1002"]:
+        #     self.PV1002_icon.Turnon()
+        # else:
+        #     self.PV1002_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1003"]:
+        #     self.PV1003_icon.Turnon()
+        # else:
+        #     self.PV1003_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1004"]:
+        #     self.PV1004_icon.Turnon()
+        # else:
+        #     self.PV1004_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1005"]:
+        #     self.PV1005_icon.Turnon()
+        # else:
+        #     self.PV1005_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1006"]:
+        #     self.PV1006_icon.Turnon()
+        # else:
+        #     self.PV1006_icon.Turnoff()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV1007_icon.Turnon()
+        # else:
+        #     self.PV1007_icon.Turnoff()
 
         #      FLAGs
         # if received_dic_c["data"]["FLAG"]["Busy"]["MAN_TS"]:
