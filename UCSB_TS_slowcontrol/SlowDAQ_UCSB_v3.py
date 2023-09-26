@@ -3074,11 +3074,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1004.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1004"])
 
-        self.MFC1.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
-        self.MFC1.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
+        self.MFC1.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["FCV1001"])
+        self.MFC1.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["FCV1001"])
 
-        self.MFC2.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1002"])
-        self.MFC2.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1002"])
+        self.MFC2.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["FCV1002"])
+        self.MFC2.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["FCV1002"])
 
         # self.MFC1008.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
         # self.MFC1008.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
