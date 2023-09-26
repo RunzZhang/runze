@@ -2592,10 +2592,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         # Valve icons
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
-            self.PV1_icon.Turnon()
-        else:
-            self.PV1344_icon.Turnoff()
+
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV2"]:
             self.PV2_icon.Turnon()
