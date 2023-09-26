@@ -156,6 +156,8 @@ LOOPPID_MODE3 = {'HTR1001': False, 'HTR1002': False, 'HTR1003': False, 'HTR1004'
 
 LOOPPID_INTLKD = {'HTR1001': False, 'HTR1002': False, 'HTR1003': False, 'HTR1004': False}
 
+LOOPPID_TT = {'HTR1001': 0, 'HTR1002': 0, 'HTR1003': 0, 'HTR1004': 0}
+
 LOOPPID_MAN = {'HTR1001': True, 'HTR1002': True, 'HTR1003': True, 'HTR1004': True}
 
 LOOPPID_ERR = {'HTR1001': False, 'HTR1002': False, 'HTR1003': False, 'HTR1004': False}
@@ -376,6 +378,7 @@ DIC_PACK = {"data": {"TT": {"AD1": {"value": TT_AD1_DIC, "high": TT_AD1_HIGHLIMI
                                               "MODE3": LOOPPID_MODE3,
                                               "INTLKD": LOOPPID_INTLKD,
                                               "MAN": LOOPPID_MAN,
+                                              "TT":LOOPPID_TT,
                                               "ERR": LOOPPID_ERR,
                                               "SATHI": LOOPPID_SATHI,
                                               "SATLO": LOOPPID_SATLO,

@@ -2411,8 +2411,9 @@ class AlarmButton(QtWidgets.QWidget):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "image")
         self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "alarm_button.png"))
+        print(self.ImagePath)
         self.pixmap = self.pixmap.scaledToHeight(70 * R)
 
         self.Button = QtWidgets.QPushButton(self)

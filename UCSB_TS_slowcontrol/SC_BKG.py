@@ -236,6 +236,7 @@ class PLC(QtCore.QObject):
         self.LOOPPID_MODE3 = copy.copy(sec.LOOPPID_MODE3)
 
         self.LOOPPID_INTLKD = copy.copy(sec.LOOPPID_INTLKD)
+        self.LOOPPID_TT = copy.copy(sec.LOOPPID_TT)
 
         self.LOOPPID_MAN = copy.copy(sec.LOOPPID_MAN)
 
@@ -360,12 +361,12 @@ class PLC(QtCore.QObject):
         self.TIME_ADDRESS = copy.copy(sec.TIME_ADDRESS)
         self.TIME_DIC = copy.copy(sec.TIME_DIC)
 
-        self.LL_dic_ini = copy.copy(sec.LL_DIC)
-        self.LL_lowLimit_ini = copy.copy(sec.LL_LOWLIMIT)
-        self.LL_HighLimit_ini = copy.copy(sec.LL_HIGHLIMIT)
-        self.LL_Alarm_ini = copy.copy(sec.LL_ALARM)
-        self.LL_Activated_ini = copy.copy(sec.LL_ACTIVATED)
-        self.nLL_ini = copy.copy(sec.NLL)
+        self.LL_dic = copy.copy(sec.LL_DIC)
+        self.LL_lowLimit = copy.copy(sec.LL_LOWLIMIT)
+        self.LL_HighLimit = copy.copy(sec.LL_HIGHLIMIT)
+        self.LL_Alarm= copy.copy(sec.LL_ALARM)
+        self.LL_Activated = copy.copy(sec.LL_ACTIVATED)
+        self.nLL= copy.copy(sec.NLL)
 
         self.signal_data = {"TT_AD1_address": self.TT_AD1_address,
                             "TT_AD2_address": self.TT_AD2_address,
@@ -399,12 +400,12 @@ class PLC(QtCore.QObject):
                             "nREAL": self.nREAL,
                             "PT_setting": self.PT_setting,
                             "nPT_Attribute": self.nPT_Attribute,
-                            "LL_address":self.LL_dic_ini,
-                            "LL_LowLimit":self.LL_lowLimit_ini,
-                            "LL_HighLimit":self.LL_HighLimit_ini,
-                            "LL_Activated":self.LL_Activated_ini,
-                            "LL_Alarm":self.LL_Alarm_ini,
-                            "nLL":self.nLL_ini,
+                            "LL_address":self.LL_dic,
+                            "LL_LowLimit":self.LL_lowLimit,
+                            "LL_HighLimit":self.LL_HighLimit,
+                            "LL_Activated":self.LL_Activated,
+                            "LL_Alarm":self.LL_Alarm,
+                            "nLL":self.nLL,
                             # "Switch_address": self.Switch_address,
                             # "nSwitch": self.nSwitch,
                             # "Switch": self.Switch,
@@ -434,6 +435,7 @@ class PLC(QtCore.QObject):
                             "LOOPPID_MODE3": self.LOOPPID_MODE3,
                             "LOOPPID_INTLKD": self.LOOPPID_INTLKD,
                             "LOOPPID_MAN": self.LOOPPID_MAN,
+                            "LOOPPID_TT":self.LOOPPID_TT,
                             "LOOPPID_ERR": self.LOOPPID_ERR,
                             "LOOPPID_SATHI": self.LOOPPID_SATHI,
                             "LOOPPID_SATLO": self.LOOPPID_SATLO,
@@ -548,6 +550,14 @@ class PLC(QtCore.QObject):
                     Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
+                self.LOOPPID_OUT[key] = Raw_LS_power[key]
+            for key in self.LOOPPID_ADR_BASE:
+                if self.LOOPPID_OUT[key]>0:
+                    self.LOOPPID_EN[key] = True
+                else:
+                    self.LOOPPID_EN[key] = False
+
+            for key in self.LOOPPID_ADR_BASE:
                 command_base = "KRDG?"
                 # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
                 command_middle = "0"
@@ -567,8 +577,12 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.send(cm_code)
                     Raw_LS_TT[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS2.close()
+            for key in self.LOOPPID_ADR_BASE:
+                self.LOOPPID_TT[key] = Raw_LS_TT[key]
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
+
+
 
 
 
@@ -611,9 +625,11 @@ class PLC(QtCore.QObject):
                 self.socket_LL.send(cm_codeN2)
 
                 dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
+
                 self.socket_LL.close()
 
                 print("fetched data N2", dataN2.decode())
+                self.LL_dic["LL"] = dataN2.decode()
 
                 # commandHE = "MEASure:HE:LEVel?\n"
                 # print("command", commandHE)
@@ -3056,6 +3072,7 @@ class UpdateServer(QtCore.QObject):
         self.LOOPPID_MODE3_ini = sec.LOOPPID_MODE3
         self.LOOPPID_INTLKD_ini = sec.LOOPPID_INTLKD
         self.LOOPPID_MAN_ini = sec.LOOPPID_MAN
+        self.LOOPPID_TT_ini = sec.LOOPPID_TT
         self.LOOPPID_ERR_ini = sec.LOOPPID_ERR
         self.LOOPPID_SATHI_ini = sec.LOOPPID_SATHI
         self.LOOPPID_SATLO_ini = sec.LOOPPID_SATLO
@@ -3145,6 +3162,7 @@ class UpdateServer(QtCore.QObject):
                                               "MODE2": self.LOOPPID_MODE2_ini,
                                               "MODE3": self.LOOPPID_MODE3_ini,
                                               "INTLKD": self.LOOPPID_INTLKD_ini,
+                                              "TT":self.LOOPPID_TT_ini,
                                               "MAN": self.LOOPPID_MAN_ini,
                                               "ERR": self.LOOPPID_ERR_ini,
                                               "SATHI": self.LOOPPID_SATHI_ini,
@@ -3320,7 +3338,7 @@ class UpdateServer(QtCore.QObject):
             self.Din_Alarm_ini[key] = self.PLC.Din_Alarm[key]
         for key in self.PLC.Din_Activated:
             self.Din_Activated_ini[key] = self.PLC.Din_Activated[key]
-        for key in self.PLC.TT_A1_Alarm:
+        for key in self.PLC.TT_AD1_Alarm:
             self.TT_AD1_Alarm_ini[key] = self.PLC.TT_AD1_Alarm[key]
         for key in self.PLC.TT_AD2_Alarm:
             self.TT_AD2_Alarm_ini[key] = self.PLC.TT_AD2_Alarm[key]
@@ -3350,6 +3368,8 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_EN_ini[key] = self.PLC.LOOPPID_EN[key]
         for key in self.PLC.LOOPPID_OUT:
             self.LOOPPID_OUT_ini[key] = self.PLC.LOOPPID_OUT[key]
+        for key in self.PLC.LOOPPID_TT:
+            self.LOOPPID_TT_ini[key] = self.PLC.LOOPPID_TT[key]
         for key in self.PLC.LOOPPID_IN:
             self.LOOPPID_IN_ini[key] = self.PLC.LOOPPID_IN[key]
         for key in self.PLC.LOOPPID_HI_LIM:
@@ -3378,69 +3398,69 @@ class UpdateServer(QtCore.QObject):
 
 
 
-        for key in self.PLC.LOOP2PT_MODE0:
-            self.LOOP2PT_MODE0_ini[key] = self.PLC.LOOP2PT_MODE0[key]
-        for key in self.PLC.LOOP2PT_MODE1:
-            self.LOOP2PT_MODE1_ini[key] = self.PLC.LOOP2PT_MODE1[key]
-        for key in self.PLC.LOOP2PT_MODE2:
-            self.LOOP2PT_MODE2_ini[key] = self.PLC.LOOP2PT_MODE2[key]
-        for key in self.PLC.LOOP2PT_MODE3:
-            self.LOOP2PT_MODE3_ini[key] = self.PLC.LOOP2PT_MODE3[key]
-        for key in self.PLC.LOOP2PT_INTLKD:
-            self.LOOP2PT_INTLKD_ini[key] = self.PLC.LOOP2PT_INTLKD[key]
-        for key in self.PLC.LOOP2PT_MAN:
-            self.LOOP2PT_MAN_ini[key] = self.PLC.LOOP2PT_MAN[key]
-        for key in self.PLC.LOOP2PT_ERR:
-            self.LOOP2PT_ERR_ini[key] = self.PLC.LOOP2PT_ERR[key]
-        for key in self.PLC.LOOP2PT_OUT:
-            self.LOOP2PT_OUT_ini[key] = self.PLC.LOOP2PT_OUT[key]
-        for key in self.PLC.LOOP2PT_SET1:
-            self.LOOP2PT_SET1_ini[key] = self.PLC.LOOP2PT_SET1[key]
-        for key in self.PLC.LOOP2PT_SET2:
-            self.LOOP2PT_SET2_ini[key] = self.PLC.LOOP2PT_SET2[key]
-        for key in self.PLC.LOOP2PT_SET3:
-            self.LOOP2PT_SET3_ini[key] = self.PLC.LOOP2PT_SET3[key]
-        for key in self.PLC.LOOP2PT_Busy:
-            self.LOOP2PT_Busy_ini[key] = self.PLC.LOOP2PT_Busy[key]
+        # for key in self.PLC.LOOP2PT_MODE0:
+        #     self.LOOP2PT_MODE0_ini[key] = self.PLC.LOOP2PT_MODE0[key]
+        # for key in self.PLC.LOOP2PT_MODE1:
+        #     self.LOOP2PT_MODE1_ini[key] = self.PLC.LOOP2PT_MODE1[key]
+        # for key in self.PLC.LOOP2PT_MODE2:
+        #     self.LOOP2PT_MODE2_ini[key] = self.PLC.LOOP2PT_MODE2[key]
+        # for key in self.PLC.LOOP2PT_MODE3:
+        #     self.LOOP2PT_MODE3_ini[key] = self.PLC.LOOP2PT_MODE3[key]
+        # for key in self.PLC.LOOP2PT_INTLKD:
+        #     self.LOOP2PT_INTLKD_ini[key] = self.PLC.LOOP2PT_INTLKD[key]
+        # for key in self.PLC.LOOP2PT_MAN:
+        #     self.LOOP2PT_MAN_ini[key] = self.PLC.LOOP2PT_MAN[key]
+        # for key in self.PLC.LOOP2PT_ERR:
+        #     self.LOOP2PT_ERR_ini[key] = self.PLC.LOOP2PT_ERR[key]
+        # for key in self.PLC.LOOP2PT_OUT:
+        #     self.LOOP2PT_OUT_ini[key] = self.PLC.LOOP2PT_OUT[key]
+        # for key in self.PLC.LOOP2PT_SET1:
+        #     self.LOOP2PT_SET1_ini[key] = self.PLC.LOOP2PT_SET1[key]
+        # for key in self.PLC.LOOP2PT_SET2:
+        #     self.LOOP2PT_SET2_ini[key] = self.PLC.LOOP2PT_SET2[key]
+        # for key in self.PLC.LOOP2PT_SET3:
+        #     self.LOOP2PT_SET3_ini[key] = self.PLC.LOOP2PT_SET3[key]
+        # for key in self.PLC.LOOP2PT_Busy:
+        #     self.LOOP2PT_Busy_ini[key] = self.PLC.LOOP2PT_Busy[key]
 
-        for key in self.PLC.Procedure_running:
-            self.Procedure_running_ini[key] = self.PLC.Procedure_running[key]
-        for key in self.PLC.Procedure_INTLKD:
-            self.Procedure_INTLKD_ini[key] = self.PLC.Procedure_INTLKD[key]
-        for key in self.PLC.Procedure_EXIT:
-            self.Procedure_EXIT_ini[key] = self.PLC.Procedure_EXIT[key]
-        for key in self.PLC.INTLK_D_DIC:
-            self.INTLK_D_DIC_ini[key] = self.PLC.INTLK_D_DIC[key]
-        for key in self.PLC.INTLK_D_EN:
-            self.INTLK_D_EN_ini[key] = self.PLC.INTLK_D_EN[key]
-        for key in self.PLC.INTLK_D_COND:
-            self.INTLK_D_COND_ini[key] = self.PLC.INTLK_D_COND[key]
-        for key in self.PLC.INTLK_A_DIC:
-            self.INTLK_A_DIC_ini[key] = self.PLC.INTLK_A_DIC[key]
-        for key in self.PLC.INTLK_A_EN:
-            self.INTLK_A_EN_ini[key] = self.PLC.INTLK_A_EN[key]
-        for key in self.PLC.INTLK_A_COND:
-            self.INTLK_A_COND_ini[key] = self.PLC.INTLK_A_COND[key]
-        for key in self.PLC.INTLK_A_SET:
-            self.INTLK_A_SET_ini[key] = self.PLC.INTLK_A_SET[key]
-        for key in self.PLC.FLAG_DIC:
-            self.FLAG_DIC_ini[key] = self.PLC.FLAG_DIC[key]
-        for key in self.PLC.FLAG_INTLKD:
-            self.FLAG_INTLKD_ini[key] = self.PLC.FLAG_INTLKD[key]
-        for key in self.PLC.FLAG_Busy:
-            self.FLAG_Busy_ini[key] = self.PLC.FLAG_Busy[key]
-        for key in self.PLC.FF_DIC:
-            self.FF_DIC_ini[key] = self.PLC.FF_DIC[key]
-        for key in self.PLC.PARAM_I_DIC:
-            self.PARAM_I_DIC_ini[key] = self.PLC.PARAM_I_DIC[key]
-        for key in self.PLC.PARAM_F_DIC:
-            self.PARAM_F_DIC_ini[key] = self.PLC.PARAM_F_DIC[key]
-        for key in self.PLC.PARAM_B_DIC:
-            self.PARAM_B_DIC_ini[key] = self.PLC.PARAM_B_DIC[key]
-        for key in self.PLC.PARAM_T_DIC:
-            self.PARAM_T_DIC_ini[key] = self.PLC.PARAM_T_DIC[key]
-        for key in self.PLC.TIME_DIC:
-            self.TIME_DIC_ini[key] = self.PLC.TIME_DIC[key]
+        # for key in self.PLC.Procedure_running:
+        #     self.Procedure_running_ini[key] = self.PLC.Procedure_running[key]
+        # for key in self.PLC.Procedure_INTLKD:
+        #     self.Procedure_INTLKD_ini[key] = self.PLC.Procedure_INTLKD[key]
+        # for key in self.PLC.Procedure_EXIT:
+        #     self.Procedure_EXIT_ini[key] = self.PLC.Procedure_EXIT[key]
+        # for key in self.PLC.INTLK_D_DIC:
+        #     self.INTLK_D_DIC_ini[key] = self.PLC.INTLK_D_DIC[key]
+        # for key in self.PLC.INTLK_D_EN:
+        #     self.INTLK_D_EN_ini[key] = self.PLC.INTLK_D_EN[key]
+        # for key in self.PLC.INTLK_D_COND:
+        #     self.INTLK_D_COND_ini[key] = self.PLC.INTLK_D_COND[key]
+        # for key in self.PLC.INTLK_A_DIC:
+        #     self.INTLK_A_DIC_ini[key] = self.PLC.INTLK_A_DIC[key]
+        # for key in self.PLC.INTLK_A_EN:
+        #     self.INTLK_A_EN_ini[key] = self.PLC.INTLK_A_EN[key]
+        # for key in self.PLC.INTLK_A_COND:
+        #     self.INTLK_A_COND_ini[key] = self.PLC.INTLK_A_COND[key]
+        # for key in self.PLC.INTLK_A_SET:
+        #     self.INTLK_A_SET_ini[key] = self.PLC.INTLK_A_SET[key]
+        # for key in self.PLC.FLAG_DIC:
+        #     self.FLAG_DIC_ini[key] = self.PLC.FLAG_DIC[key]
+        # for key in self.PLC.FLAG_INTLKD:
+        #     self.FLAG_INTLKD_ini[key] = self.PLC.FLAG_INTLKD[key]
+        # for key in self.PLC.FLAG_Busy:
+        #     self.FLAG_Busy_ini[key] = self.PLC.FLAG_Busy[key]
+        # for key in self.PLC.FF_DIC:
+        #     self.FF_DIC_ini[key] = self.PLC.FF_DIC[key]
+        # for key in self.PLC.PARAM_I_DIC:
+        #     self.PARAM_I_DIC_ini[key] = self.PLC.PARAM_I_DIC[key]
+        # for key in self.PLC.PARAM_F_DIC:
+        #     self.PARAM_F_DIC_ini[key] = self.PLC.PARAM_F_DIC[key]
+        # for key in self.PLC.PARAM_B_DIC:
+        #     self.PARAM_B_DIC_ini[key] = self.PLC.PARAM_B_DIC[key]
+        # for key in self.PLC.PARAM_T_DIC:
+        #     self.PARAM_T_DIC_ini[key] = self.PLC.PARAM_T_DIC[key]
+        # for key in self.PLC.TIME_DIC:
+        #     self.TIME_DIC_ini[key] = self.PLC.TIME_DIC[key]
 
 
 

@@ -222,43 +222,43 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.SubWindow.resize(1000 * R, 500 * R)
         # self.AlarmButton.StatusWindow.AlarmWindow()
 
-        self.AlarmButton.move(2100 * R, 50 * R)
-        self.AlarmButton.Button.setText("Alarm Button")
+        self.AlarmButton.move(2200 * R, 65 * R)
+        # self.AlarmButton.Button.setText("Alarm Button")
 
         # Thermosyphon Widgets
-        self.PV1001 = Valve(self.ThermosyphonTab)
+        self.PV1001 = Valve_v2(self.ThermosyphonTab)
         self.PV1001.Label.setText("PV1001")
         self.PV1001.move(1015 * R, 155 * R)
 
-        self.PV1002 = Valve(self.ThermosyphonTab)
+        self.PV1002 = Valve_v2(self.ThermosyphonTab)
         self.PV1002.Label.setText("PV1002")
         self.PV1002.move(2115 * R, 920 * R)
 
-        self.PV1003 = Valve(self.ThermosyphonTab)
+        self.PV1003 = Valve_v2(self.ThermosyphonTab)
         self.PV1003.Label.setText("PV1003")
         self.PV1003.move(2115 * R, 1257 * R)
 
-        self.PV1004 = Valve(self.ThermosyphonTab)
+        self.PV1004 = Valve_v2(self.ThermosyphonTab)
         self.PV1004.Label.setText("PV1004")
         self.PV1004.move(1500 * R, 1100 * R)
 
-        self.PV1005 = Valve(self.ThermosyphonTab)
+        self.PV1005 = Valve_v2(self.ThermosyphonTab)
         self.PV1005.Label.setText("PV1005")
         self.PV1005.move(1440 * R, 585 * R)
 
-        self.PV1006 = Valve(self.ThermosyphonTab)
+        self.PV1006 = Valve_v2(self.ThermosyphonTab)
         self.PV1006.Label.setText("PV1006")
         self.PV1006.move(865 * R, 925 * R)
 
-        self.PV1007 = Valve(self.ThermosyphonTab)
+        self.PV1007 = Valve_v2(self.ThermosyphonTab)
         self.PV1007.Label.setText("PV1007")
         self.PV1007.move(865 * R, 1257 * R)
 
-        self.MFC1008 = Heater(self.ThermosyphonTab)
+        self.MFC1008 = LOOPPID_v2(self.ThermosyphonTab)
         self.MFC1008.move(1795 * R, 700 * R)
         self.MFC1008.Label.setText("MFC1008")
-        self.MFC1008.HeaterSubWindow.setWindowTitle("MFC1008")
-        self.MFC1008.HeaterSubWindow.Label.setText("MFC1008")
+        self.MFC1008.LOOPPIDWindow.setWindowTitle("MFC1008")
+        self.MFC1008.LOOPPIDWindow.Label.setText("MFC1008")
 
         self.PT1012 = PressureIndicator(self.ThermosyphonTab)
         self.PT1012.Label.setText("PT1012")
@@ -348,129 +348,129 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IDPV11.move(2140 * R, 800 * R)
         """
 
-        self.PV1 = Valve(self.GasTab)
+        self.PV1 = Valve_v2(self.GasTab)
         self.PV1.Label.setText("PV1")
         self.PV1.move(890 * R, 960 * R)
 
-        self.PV2 = Valve(self.GasTab)
+        self.PV2 = Valve_v2(self.GasTab)
         self.PV2.Label.setText("PV2")
         self.PV2.move(1840 * R, 415 * R)
 
-        self.PV3 = Valve(self.GasTab)
+        self.PV3 = Valve_v2(self.GasTab)
         self.PV3.Label.setText("PV3")
         self.PV3.move(1840 * R, 492 * R)
 
-        self.PV4 = Valve(self.GasTab)
+        self.PV4 = Valve_v2(self.GasTab)
         self.PV4.Label.setText("PV4")
         self.PV4.move(1840 * R, 569 * R)
 
-        self.PV5 = Valve(self.GasTab)
+        self.PV5 = Valve_v2(self.GasTab)
         self.PV5.Label.setText("PV5")
         self.PV5.move(1840 * R, 646 * R)
 
-        self.PV6 = Valve(self.GasTab)
+        self.PV6 = Valve_v2(self.GasTab)
         self.PV6.Label.setText("PV6")
         self.PV6.move(1840 * R, 723 * R)
 
-        self.PV7 = Valve(self.GasTab)
+        self.PV7 = Valve_v2(self.GasTab)
         self.PV7.Label.setText("PV7")
         self.PV7.move(1840 * R, 800 * R)
 
-        self.PV8 = Valve(self.GasTab)
+        self.PV8 = Valve_v2(self.GasTab)
         self.PV8.Label.setText("PV8")
         self.PV8.move(1840 * R, 877 * R)
 
-        self.PV9 = Valve(self.GasTab)
+        self.PV9 = Valve_v2(self.GasTab)
         self.PV9.Label.setText("PV9")
         self.PV9.move(1840 * R, 954 * R)
 
-        self.PV10 = Valve(self.GasTab)
+        self.PV10 = Valve_v2(self.GasTab)
         self.PV10.Label.setText("PV10")
         self.PV10.move(1840 * R, 1031 * R)
 
-        self.PV11 = Valve(self.GasTab)
+        self.PV11 = Valve_v2(self.GasTab)
         self.PV11.Label.setText("PV11")
         self.PV11.move(1840 * R, 1108 * R)
 
-        self.PV12 = Valve(self.GasTab)
+        self.PV12 = Valve_v2(self.GasTab)
         self.PV12.Label.setText("PV12")
         self.PV12.move(1840 * R, 1185 * R)
 
-        self.PV13 = Valve(self.GasTab)
+        self.PV13 = Valve_v2(self.GasTab)
         self.PV13.Label.setText("PV13")
         self.PV13.move(1840 * R, 1262 * R)
 
-        self.MFC1 = Heater(self.GasTab)
+        self.MFC1 = LOOPPID_v2(self.GasTab)
         self.MFC1.move(1160 * R, 525 * R)
         self.MFC1.Label.setText("MFC1")
-        self.MFC1.HeaterSubWindow.setWindowTitle("MFC1")
-        self.MFC1.HeaterSubWindow.Label.setText("MFC1")
+        self.MFC1.LOOPPIDWindow.setWindowTitle("MFC1")
+        self.MFC1.LOOPPIDWindow.Label.setText("MFC1")
 
-        self.MFC2 = Heater(self.GasTab)
+        self.MFC2 = LOOPPID_v2(self.GasTab)
         self.MFC2.move(1525 * R, 525 * R)
         self.MFC2.Label.setText("MFC2")
-        self.MFC2.HeaterSubWindow.setWindowTitle("MFC2")
-        self.MFC2.HeaterSubWindow.Label.setText("MFC2")
+        self.MFC2.LOOPPIDWindow.setWindowTitle("MFC2")
+        self.MFC2.LOOPPIDWindow.Label.setText("MFC2")
 
         # inner tube widgets
 
-        self.RTD1 = Indicator(self.TubeTab)
-        self.RTD1.Label.setText("RTD1")
-        self.RTD1.move(145 * R, 30 * R)
+        self.TT1001 = Indicator(self.TubeTab)
+        self.TT1001.Label.setText("TT1001")
+        self.TT1001.move(145 * R, 30 * R)
 
-        self.RTD2 = Indicator(self.TubeTab)
-        self.RTD2.Label.setText("RTD2")
-        self.RTD2.move(145 * R, 80 * R)
+        self.TT1002 = Indicator(self.TubeTab)
+        self.TT1002.Label.setText("TT1002")
+        self.TT1002.move(145 * R, 80 * R)
 
-        self.RTD3 = Indicator(self.TubeTab)
-        self.RTD3.Label.setText("RTD3")
-        self.RTD3.move(145 * R, 130 * R)
+        self.TT1003 = Indicator(self.TubeTab)
+        self.TT1003.Label.setText("TT1003")
+        self.TT1003.move(145 * R, 130 * R)
 
-        self.RTD4 = Indicator(self.TubeTab)
-        self.RTD4.Label.setText("RTD4")
-        self.RTD4.move(145 * R, 180 * R)
+        self.TT1004 = Indicator(self.TubeTab)
+        self.TT1004.Label.setText("TT1004")
+        self.TT1004.move(145 * R, 180 * R)
 
-        self.RTD5 = Indicator(self.TubeTab)
-        self.RTD5.Label.setText("RTD5")
-        self.RTD5.move(145 * R, 230 * R)
+        self.TT1005 = Indicator(self.TubeTab)
+        self.TT1005.Label.setText("TT1005")
+        self.TT1005.move(145 * R, 230 * R)
 
-        self.RTD6 = Indicator(self.TubeTab)
-        self.RTD6.Label.setText("RTD6")
-        self.RTD6.move(145 * R, 280 * R)
+        self.TT1006 = Indicator(self.TubeTab)
+        self.TT1006.Label.setText("TT1006")
+        self.TT1006.move(145 * R, 280 * R)
 
         self.LiqLev = LiquidLevel(self.TubeTab)
         self.LiqLev.Label.setText("Liq Lev")
         self.LiqLev.move(145 * R, 330 * R)
 
-        self.H1 = Heater(self.TubeTab)
+        self.H1 = LOOPPID_v2(self.TubeTab)
         self.H1.move(295 * R, 30 * R)
         self.H1.Label.setText("Heater1")
-        self.H1.HeaterSubWindow.setWindowTitle("Heater1")
-        self.H1.HeaterSubWindow.Label.setText("Heater1")
+        self.H1.LOOPPIDWindow.setWindowTitle("Heater1")
+        self.H1.LOOPPIDWindow.Label.setText("Heater1")
 
-        self.H2 = Heater(self.TubeTab)
+        self.H2 = LOOPPID_v2(self.TubeTab)
         self.H2.move(295 * R, 130 * R)
         self.H2.Label.setText("Heater2")
-        self.H2.HeaterSubWindow.setWindowTitle("Heater2")
-        self.H2.HeaterSubWindow.Label.setText("Heater2")
+        self.H2.LOOPPIDWindow.setWindowTitle("Heater2")
+        self.H2.LOOPPIDWindow.Label.setText("Heater2")
 
-        self.H3 = Heater(self.TubeTab)
+        self.H3 = LOOPPID_v2(self.TubeTab)
         self.H3.move(295 * R, 230 * R)
         self.H3.Label.setText("Heater3")
-        self.H3.HeaterSubWindow.setWindowTitle("Heater3")
-        self.H3.HeaterSubWindow.Label.setText("Heater3")
+        self.H3.LOOPPIDWindow.setWindowTitle("Heater3")
+        self.H3.LOOPPIDWindow.Label.setText("Heater3")
 
-        self.H4 = Heater(self.TubeTab)
+        self.H4 = LOOPPID_v2(self.TubeTab)
         self.H4.move(295 * R, 330 * R)
         self.H4.Label.setText("Heater4")
-        self.H4.HeaterSubWindow.setWindowTitle("Heater4")
-        self.H4.HeaterSubWindow.Label.setText("Heater4")
+        self.H4.LOOPPIDWindow.setWindowTitle("Heater4")
+        self.H4.LOOPPIDWindow.Label.setText("Heater4")
 
-        self.H5 = Heater(self.TubeTab)
+        self.H5 = LOOPPID_v2(self.TubeTab)
         self.H5.move(295 * R, 430 * R)
         self.H5.Label.setText("Heater5")
-        self.H5.HeaterSubWindow.setWindowTitle("Heater5")
-        self.H5.HeaterSubWindow.Label.setText("Heater5")
+        self.H5.LOOPPIDWindow.setWindowTitle("Heater5")
+        self.H5.LOOPPIDWindow.Label.setText("Heater5")
 
         self.IDH1 = PnID_Alone(self.TubeTab)
         self.IDH1.Label.setText("Heater 1")
@@ -492,25 +492,25 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IDH5.Label.setText("Heater 5")
         self.IDH5.move(1417 * R, 1020 * R)
 
-        self.IDRTD1 = PnID_Alone(self.TubeTab)
-        self.IDRTD1.Label.setText("RTD 1")
-        self.IDRTD1.move(1150 * R, 940 * R)
+        self.IDTT1001 = PnID_Alone(self.TubeTab)
+        self.IDTT1001.Label.setText("TT1001")
+        self.IDTT1001.move(1150 * R, 940 * R)
 
-        self.IDRTD2 = PnID_Alone(self.TubeTab)
-        self.IDRTD2.Label.setText("RTD 2")
-        self.IDRTD2.move(1515 * R, 940 * R)
+        self.IDTT1002 = PnID_Alone(self.TubeTab)
+        self.IDTT1002.Label.setText("TT1002")
+        self.IDTT1002.move(1515 * R, 940 * R)
 
-        self.IDRTD3 = PnID_Alone(self.TubeTab)
-        self.IDRTD3.Label.setText("RTD 3")
-        self.IDRTD3.move(1342 * R, 725 * R)
+        self.IDTT1003 = PnID_Alone(self.TubeTab)
+        self.IDTT1003.Label.setText("TT1003")
+        self.IDTT1003.move(1342 * R, 725 * R)
 
-        self.IDRTD4 = PnID_Alone(self.TubeTab)
-        self.IDRTD4.Label.setText("RTD 4")
-        self.IDRTD4.move(1342 * R, 685 * R)
+        self.IDTT1004 = PnID_Alone(self.TubeTab)
+        self.IDTT1004.Label.setText("TT1004")
+        self.IDTT1004.move(1342 * R, 685 * R)
 
-        self.IDRTD5 = PnID_Alone(self.TubeTab)
-        self.IDRTD5.Label.setText("RTD 5")
-        self.IDRTD5.move(800 * R, 130 * R)
+        self.IDTT1005 = PnID_Alone(self.TubeTab)
+        self.IDTT1005.Label.setText("TT1005")
+        self.IDTT1005.move(800 * R, 130 * R)
 
         # self.IDRTD6 = PnID_Alone(self.TubeTab)
         # self.IDRTD6.Label.setText("RTD 6")
@@ -1612,6 +1612,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MW.PT1013.SetValue(received_dic_c["data"]["PT"]["PT1013"])
         self.MW.PT1014.SetValue(received_dic_c["data"]["PT"]["PT1014"])
 
+        self.MW.TT1001.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1001"])
+        self.MW.TT1002.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1002"])
+        self.MW.TT1003.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1003"])
+        self.MW.TT1004.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1004"])
+        self.MW.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1005"])
+        self.MW.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1006"])
+
         self.MW.PT001.SetValue(received_dic_c["data"]["PT"]["PT001"])
         self.MW.PT002.SetValue(received_dic_c["data"]["PT"]["PT002"])
         self.MW.PT003.SetValue(received_dic_c["data"]["PT"]["PT003"])
@@ -1619,6 +1626,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.MW.BGA1.SetValue(received_dic_c["data"]["PT"]["BGA1"])
         self.MW.BGA2.SetValue(received_dic_c["data"]["PT"]["BGA2"])
+
+
 
         # self.MW.TT2118.SetValue(self.MW.PLC.RTD[0])
 
@@ -2764,6 +2773,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR01.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"])
         self.HTR01.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"])
+        self.HTR01.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR01"])
 
         if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR02"]:
             if received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"]:
@@ -2796,6 +2806,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR02.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"])
         self.HTR02.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"])
+        self.HTR02.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR02"])
 
 
         if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR03"]:
@@ -2829,6 +2840,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR03.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"])
         self.HTR03.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"])
+        self.HTR03.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR03"])
+
 
 
         if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR04"]:
@@ -2862,6 +2875,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR04.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"])
         self.HTR04.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"])
+        self.HTR04.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR04"])
+
+
+
+
+
 
 
         # set indicators value
@@ -2882,7 +2901,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT1007.SetValue(received_dic_c["data"]["TT_AD1"]["value"]["TT1007"])
         self.TT1008.SetValue(received_dic_c["data"]["TT_AD1"]["value"]["TT1008"])
         self.TT1009.SetValue(received_dic_c["data"]["TT_AD2"]["value"]["TT1009"])
-        self.LiqLev.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LL"])
+        self.LiqLev.SetValue(received_dic_c["data"]["LL"]["value"]["LL"])
+
 
 
 
@@ -3041,6 +3061,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR4.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR4"])
 
+        self.MFC1.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
+        self.MFC1.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
+
+        self.MFC2.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1002"])
+        self.MFC2.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1002"])
+
+        # self.MFC1008.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
+        # self.MFC1008.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
 
     @QtCore.Slot(object)
     def update_alarmwindow(self, list):
@@ -3943,6 +3971,7 @@ class UpdateClient(QtCore.QObject):
         self.LOOPPID_MODE2_ini = sec.LOOPPID_MODE2
         self.LOOPPID_MODE3_ini = sec.LOOPPID_MODE3
         self.LOOPPID_INTLKD_ini = sec.LOOPPID_INTLKD
+        self.LOOPPID_TT_ini = sec.LOOPPID_TT
         self.LOOPPID_MAN_ini = sec.LOOPPID_MAN
         self.LOOPPID_ERR_ini = sec.LOOPPID_ERR
         self.LOOPPID_SATHI_ini = sec.LOOPPID_SATHI
@@ -4029,6 +4058,7 @@ class UpdateClient(QtCore.QObject):
                                               "MODE2": self.LOOPPID_MODE2_ini,
                                               "MODE3": self.LOOPPID_MODE3_ini,
                                               "INTLKD": self.LOOPPID_INTLKD_ini,
+                                              "TT":self.LOOPPID_TT_ini,
                                               "MAN": self.LOOPPID_MAN_ini,
                                               "ERR": self.LOOPPID_ERR_ini,
                                               "SATHI": self.LOOPPID_SATHI_ini,
