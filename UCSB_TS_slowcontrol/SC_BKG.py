@@ -552,7 +552,7 @@ class PLC(QtCore.QObject):
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_OUT[key] = Raw_LS_power[key]
             for key in self.LOOPPID_ADR_BASE:
-                if self.LOOPPID_OUT[key]>0:
+                if float(self.LOOPPID_OUT[key])>0:
                     self.LOOPPID_EN[key] = True
                 else:
                     self.LOOPPID_EN[key] = False
