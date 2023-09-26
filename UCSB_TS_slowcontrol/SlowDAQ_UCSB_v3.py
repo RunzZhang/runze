@@ -16,7 +16,7 @@ from PySide2 import QtWidgets, QtCore, QtGui
 # from SlowDAQ_SBC_v2 import *
 # from PLC import *
 from PICOPW import VerifyPW
-from SlowDAQWidgets_UCSB_v2 import *
+from SlowDAQWidgets_UCSB_v3 import *
 import zmq
 import slowcontrol_env_cons as sec
 
@@ -519,7 +519,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # commands stack
         self.address = sec.merge_dic(sec.TT_AD1_ADDRESS, sec.TT_AD2_ADDRESS, sec.PT_ADDRESS, sec.LEFT_REAL_ADDRESS,
                                      sec.VALVE_ADDRESS, sec.LOOPPID_ADR_BASE, sec.PROCEDURE_ADDRESS,
-                                     sec.INTLK_A_ADDRESS)
+                                     sec.INTLK_A_ADDRESS,sec.LL_ADDRESS)
         self.commands = {}
 
         self.signal_connection()
@@ -3904,6 +3904,11 @@ class UpdateClient(QtCore.QObject):
         self.TT_AD1_HighLimit_ini = sec.TT_AD1_HIGHLIMIT
         self.TT_AD2_LowLimit_ini = sec.TT_AD2_LOWLIMIT
         self.TT_AD2_HighLimit_ini = sec.TT_AD2_HIGHLIMIT
+        self.LL_dic_ini = sec.LL_DIC
+        self.LL_lowLimit_ini = sec.LL_LOWLIMIT
+        self.LL_HighLimit_ini = sec.LL_HIGHLIMIT
+        self.LL_Alarm_ini = sec.LL_ALARM
+        self.LL_Activated_ini = sec.LL_ACTIVATED
         self.PT_LowLimit_ini = sec.PT_LOWLIMIT
         self.PT_HighLimit_ini = sec.PT_HIGHLIMIT
         self.LEFT_REAL_LowLimit_ini = sec.LEFT_REAL_LOWLIMIT
@@ -4007,6 +4012,7 @@ class UpdateClient(QtCore.QObject):
                                          "low": self.PT_LowLimit_ini},
                                   "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini,
                                                 "low": self.LEFT_REAL_LowLimit_ini},
+                                  "LL": {"value": self.LL_dic_ini, "high": self.LL_HighLimit_ini, "low": self.LL_lowLimit_ini},
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
@@ -4078,13 +4084,15 @@ class UpdateClient(QtCore.QObject):
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
                                    "Din": self.Din_Alarm_ini,
-                                   "LOOPPID": self.LOOPPID_Alarm_ini},
+                                   "LOOPPID": self.LOOPPID_Alarm_ini,
+                                   "LL":self.LL_Alarm_ini},
                          "Active": {"TT": {"AD1": self.TT_AD1_Activated_ini,
                                            "AD2": self.TT_AD2_Activated_ini},
                                     "PT": self.PT_Activated_ini,
                                     "LEFT_REAL": self.LEFT_REAL_Activated_ini,
                                     "Din": self.Din_Activated_ini,
                                     "LOOPPID": self.LOOPPID_Activated_ini,
+                                     "LL":self.LL_Activated_ini,
                                     "INI_CHECK": self.Ini_Check_ini},
                          "MainAlarm": self.MainAlarm_ini
                          }

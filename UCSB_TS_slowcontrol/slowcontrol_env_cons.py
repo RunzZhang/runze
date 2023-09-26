@@ -6,6 +6,8 @@ TT_AD1_ADDRESS = {"TT1001": 30, "TT1002": 32, "TT1003": 34, "TT1004": 36, "TT100
 
 TT_AD2_ADDRESS = { "TT1009": 30}
 
+LL_ADDRESS = {"LL":0}
+
 
 PT_ADDRESS = {"PT001": 12796, "PT002": 12798, "PT003": 12800, "PT004": 12802, "PT1000": 12804,
               "PT1001": 12806, "PT1002": 12808}
@@ -18,6 +20,8 @@ TT_AD1_DIC = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
 
 TT_AD2_DIC = { "TT1009": 0}
 
+LL_DIC = {"LL":0}
+
 PT_DIC = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
               "PT1001": 0, "PT1002": 0}
 
@@ -28,6 +32,10 @@ TT_AD1_LOWLIMIT = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005":
 
 TT_AD1_HIGHLIMIT = {"TT1001": 30, "TT1002": 30, "TT1003": 30, "TT1004": 30, "TT1005": 30,
                               "TT1006": 30, "TT1007": 30, "TT1008": 30}
+
+LL_LOWLIMIT = {"LL":0}
+
+LL_HIGHLIMIT = {"LL":100}
 
 TT_AD2_LOWLIMIT = { "TT1009": 0}
 
@@ -47,6 +55,8 @@ TT_AD1_ACTIVATED = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004":
 
 TT_AD2_ACTIVATED = {"TT1009": False}
 
+LL_ACTIVATED = {"LL":False}
+
 
 PT_ACTIVATED = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1000": False,
               "PT1001": False, "PT1002": False}
@@ -56,6 +66,8 @@ TT_AD1_ALARM = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004": Fal
 
 TT_AD2_ALARM = {"TT1009": False}
 
+LL_ALARM = {"LL":False}
+
 
 PT_ALARM = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1000": False,
               "PT1001": False, "PT1002": False}
@@ -64,6 +76,7 @@ MAINALARM = False
 MAN_SET = False
 NTT_AD1 = len(TT_AD1_ADDRESS)
 NTT_AD2 = len(TT_AD2_ADDRESS)
+NLL =len(LL_ADDRESS)
 NPT = len(PT_ADDRESS)
 NREAL = len(LEFT_REAL_ADDRESS)
 
@@ -314,10 +327,15 @@ TT_AD1_PARA = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
 TT_AD1_RATE = {"TT1001": 30, "TT1002": 30, "TT1003": 30, "TT1004": 30, "TT1005": 30,
                               "TT1006": 30, "TT1007": 30, "TT1008": 30}
 
+
 TT_AD2_PARA = { "TT1009": 0}
 
 
 TT_AD2_RATE = { "TT1009": 30}
+
+
+LL_PARA ={"LL":0}
+LL_RATE ={"LL":30}
 
 
 PT_PARA = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
@@ -341,6 +359,7 @@ DIC_PACK = {"data": {"TT": {"AD1": {"value": TT_AD1_DIC, "high": TT_AD1_HIGHLIMI
                              "AD2": {"value": TT_AD2_DIC, "high": TT_AD2_HIGHLIMIT, "low": TT_AD2_LOWLIMIT}},
                                   "PT": {"value": PT_DIC, "high": PT_HIGHLIMIT, "low": PT_LOWLIMIT},
                                   "LEFT_REAL": {"value": LEFT_REAL_DIC, "high": LEFT_REAL_HIGHLIMIT, "low": LEFT_REAL_LOWLIMIT},
+                                  "LL": {"value": LL_DIC, "high": LL_HIGHLIMIT, "low": LL_LOWLIMIT},
                                   "Valve": {"OUT": VALVE_OUT,
                                             "INTLKD": VALVE_INTLKD,
                                             "MAN": VALVE_MAN,
@@ -403,13 +422,15 @@ DIC_PACK = {"data": {"TT": {"AD1": {"value": TT_AD1_DIC, "high": TT_AD1_HIGHLIMI
                                    "PT": PT_ALARM,
                                    "LEFT_REAL": LEFT_REAL_ALARM,
                                    "Din": DIN_ALARM,
-                                   "LOOPPID": LOOPPID_ALARM},
+                                   "LOOPPID": LOOPPID_ALARM,
+                                   "LL":LL_ALARM},
                          "Active": {"TT": {"AD1": TT_AD1_ACTIVATED,"AD2": TT_AD2_ACTIVATED
                                           },
                                    "PT": PT_ACTIVATED,
                                    "LEFT_REAL": LEFT_REAL_ACTIVATED,
                                     "Din": DIN_ACTIVATED,
                                     "LOOPPID": LOOPPID_ACTIVATED,
+                                    "LL":LL_ACTIVATED,
                                     "INI_CHECK": INI_CHECK
                                     },
                          "MainAlarm": MAINALARM

@@ -360,6 +360,13 @@ class PLC(QtCore.QObject):
         self.TIME_ADDRESS = copy.copy(sec.TIME_ADDRESS)
         self.TIME_DIC = copy.copy(sec.TIME_DIC)
 
+        self.LL_dic_ini = copy.copy(sec.LL_DIC)
+        self.LL_lowLimit_ini = copy.copy(sec.LL_LOWLIMIT)
+        self.LL_HighLimit_ini = copy.copy(sec.LL_HIGHLIMIT)
+        self.LL_Alarm_ini = copy.copy(sec.LL_ALARM)
+        self.LL_Activated_ini = copy.copy(sec.LL_ACTIVATED)
+        self.nLL_ini = copy.copy(sec.NLL)
+
         self.signal_data = {"TT_AD1_address": self.TT_AD1_address,
                             "TT_AD2_address": self.TT_AD2_address,
                             "PT_address": self.PT_address,
@@ -392,6 +399,12 @@ class PLC(QtCore.QObject):
                             "nREAL": self.nREAL,
                             "PT_setting": self.PT_setting,
                             "nPT_Attribute": self.nPT_Attribute,
+                            "LL_address":self.LL_dic_ini,
+                            "LL_LowLimit":self.LL_lowLimit_ini,
+                            "LL_HighLimit":self.LL_HighLimit_ini,
+                            "LL_Activated":self.LL_Activated_ini,
+                            "LL_Alarm":self.LL_Alarm_ini,
+                            "nLL":self.nLL_ini,
                             # "Switch_address": self.Switch_address,
                             # "nSwitch": self.nSwitch,
                             # "Switch": self.Switch,
@@ -3105,10 +3118,18 @@ class UpdateServer(QtCore.QObject):
 
         self.Ini_Check_ini = sec.INI_CHECK
 
+        self.LL_dic_ini = sec.LL_DIC
+        self.LL_lowLimit_ini = sec.LL_LOWLIMIT
+        self.LL_HighLimit_ini = sec.LL_HIGHLIMIT
+        self.LL_Alarm_ini = sec.LL_ALARM
+        self.LL_Activated_ini = sec.LL_ACTIVATED
+
         self.data_dic = {"data": {"TT": {"AD1": {"value": self.TT_AD1_dic_ini, "high": self.TT_AD1_HighLimit_ini, "low": self.TT_AD1_LowLimit_ini},
                                          "AD2": {"value": self.TT_AD2_dic_ini, "high": self.TT_AD2_HighLimit_ini, "low": self.TT_AD2_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
                                   "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini, "low": self.LEFT_REAL_LowLimit_ini},
+                                  "LL": {"value": self.LL_dic_ini, "high": self.LL_HighLimit_ini,
+                                         "low": self.LL_lowLimit_ini},
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
@@ -3178,14 +3199,16 @@ class UpdateServer(QtCore.QObject):
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
                                    "Din": self.Din_Alarm_ini,
-                                   "LOOPPID": self.LOOPPID_Alarm_ini},
+                                   "LOOPPID": self.LOOPPID_Alarm_ini,
+                                   "LL":self.LL_Alarm_ini},
                          "Active": {"TT": {"AD1": self.TT_AD1_Activated_ini,
                                            "AD2": self.TT_AD2_Activated_ini},
                                    "PT": self.PT_Activated_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Activated_ini,
                                     "Din": self.Din_Activated_ini,
                                     "LOOPPID": self.LOOPPID_Activated_ini,
-                                    "INI_CHECK": self.Ini_Check_ini},
+                                    "INI_CHECK": self.Ini_Check_ini,
+                                    "LL":self.LL_Activated_ini},
                          "MainAlarm": self.MainAlarm_ini
                          }
 
