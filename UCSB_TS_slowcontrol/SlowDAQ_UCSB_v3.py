@@ -1487,202 +1487,202 @@ class MainWindow(QtWidgets.QMainWindow):
             self.man_activated(received_dic_c)
             self.CHECKED = True
         # initialization for all check box
-        self.MW.AlarmButton.SubWindow.PT1000.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1000"])
-        self.MW.AlarmButton.SubWindow.PT1000.Indicator.SetValue(
+        self.AlarmButton.SubWindow.PT1000.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1000"])
+        self.AlarmButton.SubWindow.PT1000.Indicator.SetValue(
             received_dic_c["data"]["PT"]["PT1000"])
 
-        self.MW.AlarmButton.SubWindow.PT1001.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1001"])
-        self.MW.AlarmButton.SubWindow.PT1001.Indicator.SetValue(
+        self.AlarmButton.SubWindow.PT1001.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1001"])
+        self.AlarmButton.SubWindow.PT1001.Indicator.SetValue(
             received_dic_c["data"]["PT"]["PT1001"])
 
-        self.MW.AlarmButton.SubWindow.PT1002.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1002"])
-        self.MW.AlarmButton.SubWindow.PT1002.Indicator.SetValue(
+        self.AlarmButton.SubWindow.PT1002.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1002"])
+        self.AlarmButton.SubWindow.PT1002.Indicator.SetValue(
             received_dic_c["data"]["PT"]["PT1002"])
 
-        self.MW.AlarmButton.SubWindow.PT001.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT001"])
-        self.MW.AlarmButton.SubWindow.PT001.Indicator.SetValue(
+        self.AlarmButton.SubWindow.PT001.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT001"])
+        self.AlarmButton.SubWindow.PT001.Indicator.SetValue(
             received_dic_c["data"]["PT"]["PT001"])
 
-        self.MW.AlarmButton.SubWindow.PT002.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT002"])
-        self.MW.AlarmButton.SubWindow.PT002.Indicator.SetValue(
+        self.AlarmButton.SubWindow.PT002.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT002"])
+        self.AlarmButton.SubWindow.PT002.Indicator.SetValue(
             received_dic_c["data"]["PT"]["PT002"])
 
-        self.MW.AlarmButton.SubWindow.PT003.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT003"])
-        self.MW.AlarmButton.SubWindow.PT003.Indicator.SetValue(
+        self.AlarmButton.SubWindow.PT003.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT003"])
+        self.AlarmButton.SubWindow.PT003.Indicator.SetValue(
             received_dic_c["data"]["PT"]["PT003"])
 
-        self.MW.AlarmButton.SubWindow.PT004.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT004"])
-        self.MW.AlarmButton.SubWindow.PT004.Indicator.SetValue(
+        self.AlarmButton.SubWindow.PT004.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT004"])
+        self.AlarmButton.SubWindow.PT004.Indicator.SetValue(
             received_dic_c["data"]["PT"]["PT004"])
 
         # self.display_update.emit(dic)
 
-        self.MW.PV1001.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1001"])
-        self.MW.PV1002.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1002"])
-        self.MW.PV1003.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1003"])
-        self.MW.PV1004.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1004"])
-        self.MW.PV1005.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1005"])
-        self.MW.PV1006.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1006"])
-        self.MW.PV1007.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1007"])
+        self.PV1001.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1001"])
+        self.PV1002.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1002"])
+        self.PV1003.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1003"])
+        self.PV1004.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1004"])
+        self.PV1005.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1005"])
+        self.PV1006.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1006"])
+        self.PV1007.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1007"])
 
-        self.MW.PV1.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1"])
-        self.MW.PV2.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV2"])
-        self.MW.PV3.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV3"])
-        self.MW.PV4.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4"])
-        self.MW.PV5.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5"])
-        self.MW.PV6.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV6"])
-        self.MW.PV7.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV7"])
-        self.MW.PV8.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV8"])
-        self.MW.PV9.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV9"])
-        self.MW.PV10.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV10"])
-        self.MW.PV11.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV11"])
-        self.MW.PV12.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV12"])
-        self.MW.PV13.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV13"])
+        self.PV1.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1"])
+        self.PV2.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV2"])
+        self.PV3.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV3"])
+        self.PV4.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4"])
+        self.PV5.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5"])
+        self.PV6.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV6"])
+        self.PV7.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV7"])
+        self.PV8.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV8"])
+        self.PV9.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV9"])
+        self.PV10.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV10"])
+        self.PV11.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV11"])
+        self.PV12.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV12"])
+        self.PV13.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV13"])
 
         # refreshing the valve status from PLC every 30s
         if self.count > 0:
             if received_dic_c["data"]["Valve"]["OUT"]["PV1001"]:
-                self.MW.PV1001.Set.ButtonLClicked()
+                self.PV1001.Set.ButtonLClicked()
             else:
-                self.MW.PV1001.Set.ButtonRClicked()
+                self.PV1001.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1002"]:
-                self.MW.PV1002.Set.ButtonLClicked()
+                self.PV1002.Set.ButtonLClicked()
             else:
-                self.MW.PV1002.Set.ButtonRClicked()
+                self.PV1002.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1003"]:
-                self.MW.PV1003.Set.ButtonLClicked()
+                self.PV1003.Set.ButtonLClicked()
             else:
-                self.MW.PV1003.Set.ButtonRClicked()
+                self.PV1003.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1004"]:
-                self.MW.PV1004.Set.ButtonLClicked()
+                self.PV1004.Set.ButtonLClicked()
             else:
-                self.MW.PV1004.Set.ButtonRClicked()
+                self.PV1004.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1005"]:
-                self.MW.PV1005.Set.ButtonLClicked()
+                self.PV1005.Set.ButtonLClicked()
             else:
-                self.MW.PV1005.Set.ButtonRClicked()
+                self.PV1005.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1006"]:
-                self.MW.PV1006.Set.ButtonLClicked()
+                self.PV1006.Set.ButtonLClicked()
             else:
-                self.MW.PV1006.Set.ButtonRClicked()
+                self.PV1006.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV1007.Set.ButtonLClicked()
+                self.PV1007.Set.ButtonLClicked()
             else:
-                self.MW.PV1007.Set.ButtonRClicked()
+                self.PV1007.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV1.Set.ButtonLClicked()
+                self.PV1.Set.ButtonLClicked()
             else:
-                self.MW.PV1.Set.ButtonRClicked()
+                self.PV1.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV2.Set.ButtonLClicked()
+                self.PV2.Set.ButtonLClicked()
             else:
-                self.MW.PV2.Set.ButtonRClicked()
+                self.PV2.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV3.Set.ButtonLClicked()
+                self.PV3.Set.ButtonLClicked()
             else:
-                self.MW.PV1003.Set.ButtonRClicked()
+                self.PV1003.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV4.Set.ButtonLClicked()
+                self.PV4.Set.ButtonLClicked()
             else:
-                self.MW.PV4.Set.ButtonRClicked()
+                self.PV4.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV5.Set.ButtonLClicked()
+                self.PV5.Set.ButtonLClicked()
             else:
-                self.MW.PV5.Set.ButtonRClicked()
+                self.PV5.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV6.Set.ButtonLClicked()
+                self.PV6.Set.ButtonLClicked()
             else:
-                self.MW.PV6.Set.ButtonRClicked()
+                self.PV6.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV7.Set.ButtonLClicked()
+                self.PV7.Set.ButtonLClicked()
             else:
-                self.MW.PV7.Set.ButtonRClicked()
+                self.PV7.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV8.Set.ButtonLClicked()
+                self.PV8.Set.ButtonLClicked()
             else:
-                self.MW.PV8.Set.ButtonRClicked()
+                self.PV8.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV9.Set.ButtonLClicked()
+                self.PV9.Set.ButtonLClicked()
             else:
-                self.MW.PV9.Set.ButtonRClicked()
+                self.PV9.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV10.Set.ButtonLClicked()
+                self.PV10.Set.ButtonLClicked()
             else:
-                self.MW.PV10.Set.ButtonRClicked()
+                self.PV10.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV10.Set.ButtonLClicked()
+                self.PV10.Set.ButtonLClicked()
             else:
-                self.MW.PV10.Set.ButtonRClicked()
+                self.PV10.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV11.Set.ButtonLClicked()
+                self.PV11.Set.ButtonLClicked()
             else:
-                self.MW.PV11.Set.ButtonRClicked()
+                self.PV11.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV12.Set.ButtonLClicked()
+                self.PV12.Set.ButtonLClicked()
             else:
-                self.MW.PV12.Set.ButtonRClicked()
+                self.PV12.Set.ButtonRClicked()
 
             if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-                self.MW.PV13.Set.ButtonLClicked()
+                self.PV13.Set.ButtonLClicked()
             else:
-                self.MW.PV13.Set.ButtonRClicked()
+                self.PV13.Set.ButtonRClicked()
 
             self.count = 0
         self.count += 1
 
-        self.MW.PT1000.SetValue(received_dic_c["data"]["PT"]["PT1000"])
-        self.MW.PT1001.SetValue(received_dic_c["data"]["PT"]["PT1001"])
-        self.MW.PT1002.SetValue(received_dic_c["data"]["PT"]["PT1002"])
+        self.PT1000.SetValue(received_dic_c["data"]["PT"]["PT1000"])
+        self.PT1001.SetValue(received_dic_c["data"]["PT"]["PT1001"])
+        self.PT1002.SetValue(received_dic_c["data"]["PT"]["PT1002"])
 
-        self.MW.PT001.SetValue(received_dic_c["data"]["PT"]["PT001"])
+        self.PT001.SetValue(received_dic_c["data"]["PT"]["PT001"])
 
-        self.MW.PT002.SetValue(received_dic_c["data"]["PT"]["PT002"])
+        self.PT002.SetValue(received_dic_c["data"]["PT"]["PT002"])
 
-        self.MW.PT003.SetValue(received_dic_c["data"]["PT"]["PT003"])
-        self.MW.PT004.SetValue(received_dic_c["data"]["PT"]["PT004"])
+        self.PT003.SetValue(received_dic_c["data"]["PT"]["PT003"])
+        self.PT004.SetValue(received_dic_c["data"]["PT"]["PT004"])
 
-        self.MW.TT1001.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1001"])
-        self.MW.TT1002.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1002"])
-        self.MW.TT1003.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1003"])
-        self.MW.TT1004.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1004"])
-        self.MW.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1005"])
-        self.MW.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1006"])
+        self.TT1001.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1001"])
+        self.TT1002.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1002"])
+        self.TT1003.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1003"])
+        self.TT1004.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1004"])
+        self.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1005"])
+        self.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1006"])
 
-        self.MW.PT001.SetValue(received_dic_c["data"]["PT"]["PT001"])
-        self.MW.PT002.SetValue(received_dic_c["data"]["PT"]["PT002"])
-        self.MW.PT003.SetValue(received_dic_c["data"]["PT"]["PT003"])
-        self.MW.PT004.SetValue(received_dic_c["data"]["PT"]["PT004"])
+        self.PT001.SetValue(received_dic_c["data"]["PT"]["PT001"])
+        self.PT002.SetValue(received_dic_c["data"]["PT"]["PT002"])
+        self.PT003.SetValue(received_dic_c["data"]["PT"]["PT003"])
+        self.PT004.SetValue(received_dic_c["data"]["PT"]["PT004"])
 
-        self.MW.BGA1.SetValue(received_dic_c["data"]["PT"]["BGA1"])
-        self.MW.BGA2.SetValue(received_dic_c["data"]["PT"]["BGA2"])
+        self.BGA1.SetValue(received_dic_c["data"]["PT"]["BGA1"])
+        self.BGA2.SetValue(received_dic_c["data"]["PT"]["BGA2"])
 
 
 
-        # self.MW.TT2118.SetValue(self.MW.PLC.RTD[0])
+        # self.TT2118.SetValue(self.PLC.RTD[0])
 
         if received_dic_c["MainAlarm"]:
-            self.MW.AlarmButton.ButtonAlarmSetSignal()
+            self.AlarmButton.ButtonAlarmSetSignal()
         else:
-            self.MW.AlarmButton.ButtonAlarmResetSignal()
+            self.AlarmButton.ButtonAlarmResetSignal()
         # # # generally checkbutton.clicked -> move to updatedisplay
 
 
