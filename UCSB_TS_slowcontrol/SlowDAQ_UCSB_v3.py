@@ -1489,31 +1489,31 @@ class MainWindow(QtWidgets.QMainWindow):
         # initialization for all check box
         self.AlarmButton.SubWindow.PT1000.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1000"])
         self.AlarmButton.SubWindow.PT1000.Indicator.SetValue(
-            received_dic_c["data"]["PT"]["PT1000"])
+            received_dic_c["data"]["PT"]["value"]["PT1000"])
 
         self.AlarmButton.SubWindow.PT1001.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1001"])
         self.AlarmButton.SubWindow.PT1001.Indicator.SetValue(
-            received_dic_c["data"]["PT"]["PT1001"])
+            received_dic_c["data"]["PT"]["value"]["PT1001"])
 
         self.AlarmButton.SubWindow.PT1002.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT1002"])
         self.AlarmButton.SubWindow.PT1002.Indicator.SetValue(
-            received_dic_c["data"]["PT"]["PT1002"])
+            received_dic_c["data"]["PT"]["value"]["PT1002"])
 
         self.AlarmButton.SubWindow.PT001.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT001"])
         self.AlarmButton.SubWindow.PT001.Indicator.SetValue(
-            received_dic_c["data"]["PT"]["PT001"])
+            received_dic_c["data"]["PT"]["value"]["PT001"])
 
         self.AlarmButton.SubWindow.PT002.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT002"])
         self.AlarmButton.SubWindow.PT002.Indicator.SetValue(
-            received_dic_c["data"]["PT"]["PT002"])
+            received_dic_c["data"]["PT"]["value"]["PT002"])
 
         self.AlarmButton.SubWindow.PT003.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT003"])
         self.AlarmButton.SubWindow.PT003.Indicator.SetValue(
-            received_dic_c["data"]["PT"]["PT003"])
+            received_dic_c["data"]["PT"]["value"]["PT003"])
 
         self.AlarmButton.SubWindow.PT004.UpdateAlarm(received_dic_c["Alarm"]["PT"]["PT004"])
         self.AlarmButton.SubWindow.PT004.Indicator.SetValue(
-            received_dic_c["data"]["PT"]["PT004"])
+            received_dic_c["data"]["PT"]["value"]["PT004"])
 
         # self.display_update.emit(dic)
 
@@ -1649,16 +1649,16 @@ class MainWindow(QtWidgets.QMainWindow):
             self.count = 0
         self.count += 1
 
-        self.PT1000.SetValue(received_dic_c["data"]["PT"]["PT1000"])
-        self.PT1001.SetValue(received_dic_c["data"]["PT"]["PT1001"])
-        self.PT1002.SetValue(received_dic_c["data"]["PT"]["PT1002"])
+        self.PT1000.SetValue(received_dic_c["data"]["PT"]["value"]["PT1000"])
+        self.PT1001.SetValue(received_dic_c["data"]["PT"]["value"]["PT1001"])
+        self.PT1002.SetValue(received_dic_c["data"]["PT"]["value"]["PT1002"])
 
-        self.PT001.SetValue(received_dic_c["data"]["PT"]["PT001"])
+        self.PT001.SetValue(received_dic_c["data"]["PT"]["value"]["PT001"])
 
-        self.PT002.SetValue(received_dic_c["data"]["PT"]["PT002"])
+        self.PT002.SetValue(received_dic_c["data"]["PT"]["value"]["PT002"])
 
-        self.PT003.SetValue(received_dic_c["data"]["PT"]["PT003"])
-        self.PT004.SetValue(received_dic_c["data"]["PT"]["PT004"])
+        self.PT003.SetValue(received_dic_c["data"]["PT"]["value"]["PT003"])
+        self.PT004.SetValue(received_dic_c["data"]["PT"]["value"]["PT004"])
 
         self.TT1001.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1001"])
         self.TT1002.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1002"])
@@ -1667,13 +1667,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1005"])
         self.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1006"])
 
-        self.PT001.SetValue(received_dic_c["data"]["PT"]["PT001"])
-        self.PT002.SetValue(received_dic_c["data"]["PT"]["PT002"])
-        self.PT003.SetValue(received_dic_c["data"]["PT"]["PT003"])
-        self.PT004.SetValue(received_dic_c["data"]["PT"]["PT004"])
+        self.PT001.SetValue(received_dic_c["data"]["PT"]["value"]["PT001"])
+        self.PT002.SetValue(received_dic_c["data"]["PT"]["value"]["PT002"])
+        self.PT003.SetValue(received_dic_c["data"]["PT"]["value"]["PT003"])
+        self.PT004.SetValue(received_dic_c["data"]["PT"]["value"]["PT004"])
 
-        self.BGA1.SetValue(received_dic_c["data"]["PT"]["BGA1"])
-        self.BGA2.SetValue(received_dic_c["data"]["PT"]["BGA2"])
+        self.BGA1.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BGA1"])
+        self.BGA2.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BGA2"])
 
 
 
