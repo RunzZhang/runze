@@ -5208,7 +5208,10 @@ class Indicator(QtWidgets.QWidget):
 
     def SetValue(self, value):
         self.value = value
-        self.Field.setText(format(value, '#.2f') + self.Unit)
+        try:
+            self.Field.setText(format(value, '#.2f') + self.Unit)
+        except:
+            self.Field.setText(str(value))
 
     def SetIntValue(self, value):
         self.value = value
