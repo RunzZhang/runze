@@ -2753,140 +2753,140 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # set LOOPPID double button status ON/OFF also the status in the subwindow
 
-        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR01"]:
-            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"]:
-                self.HTR01.LOOPPIDWindow.Mode.ButtonLClicked()
-                self.HTR01.State.ButtonLClicked()
+        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1001"]:
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"]:
+                self.HTR1001.LOOPPIDWindow.Mode.ButtonLClicked()
+                self.HTR1001.State.ButtonLClicked()
             else:
-                self.HTR01.LOOPPIDWindow.Mode.ButtonRClicked()
-                self.HTR01.State.ButtonRClicked()
-            self.LOOPPID_EN_buffer["HTR01"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"]
-        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR01"]:
-            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR01"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"]:
-                    self.HTR01.LOOPPIDWindow.Mode.ButtonLClicked()
-                    self.HTR01.State.ButtonLClicked()
+                self.HTR1001.LOOPPIDWindow.Mode.ButtonRClicked()
+                self.HTR1001.State.ButtonRClicked()
+            self.LOOPPID_EN_buffer["HTR1001"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"]
+        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1001"]:
+            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1001"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"]:
+                    self.HTR1001.LOOPPIDWindow.Mode.ButtonLClicked()
+                    self.HTR1001.State.ButtonLClicked()
                 else:
-                    self.HTR01.LOOPPIDWindow.Mode.ButtonRClicked()
-                    self.HTR01.State.ButtonRClicked()
-                self.LOOPPID_EN_buffer["HTR01"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"]
-            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR01"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"] != self.LOOPPID_EN_buffer["HTR01"]:
-                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"]:
-                        self.HTR01.LOOPPIDWindow.Mode.ButtonLClicked()
-                        self.HTR01.State.ButtonLClicked()
+                    self.HTR1001.LOOPPIDWindow.Mode.ButtonRClicked()
+                    self.HTR1001.State.ButtonRClicked()
+                self.LOOPPID_EN_buffer["HTR1001"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"]
+            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1001"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"] != self.LOOPPID_EN_buffer["HTR1001"]:
+                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"]:
+                        self.HTR1001.LOOPPIDWindow.Mode.ButtonLClicked()
+                        self.HTR1001.State.ButtonLClicked()
                     else:
-                        self.HTR01.LOOPPIDWindow.Mode.ButtonRClicked()
-                        self.HTR01.State.ButtonRClicked()
-                    self.LOOPPID_EN_buffer["HTR01"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"]
+                        self.HTR1001.LOOPPIDWindow.Mode.ButtonRClicked()
+                        self.HTR1001.State.ButtonRClicked()
+                    self.LOOPPID_EN_buffer["HTR1001"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"]
                 else:
                     pass
 
-        self.HTR01.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"])
-        self.HTR01.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR01"])
-        self.HTR01.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR01"])
+        self.HTR1001.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
+        self.HTR1001.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
+        self.HTR1001.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"])
 
-        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR02"]:
-            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"]:
-                self.HTR02.LOOPPIDWindow.Mode.ButtonLClicked()
-                self.HTR02.State.ButtonLClicked()
+        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1002"]:
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"]:
+                self.HTR1002.LOOPPIDWindow.Mode.ButtonLClicked()
+                self.HTR1002.State.ButtonLClicked()
             else:
-                self.HTR02.LOOPPIDWindow.Mode.ButtonRClicked()
-                self.HTR02.State.ButtonRClicked()
-            self.LOOPPID_EN_buffer["HTR02"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"]
-        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR02"]:
-            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR02"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"]:
-                    self.HTR02.LOOPPIDWindow.Mode.ButtonLClicked()
-                    self.HTR02.State.ButtonLClicked()
+                self.HTR1002.LOOPPIDWindow.Mode.ButtonRClicked()
+                self.HTR1002.State.ButtonRClicked()
+            self.LOOPPID_EN_buffer["HTR1002"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"]
+        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1002"]:
+            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1002"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"]:
+                    self.HTR1002.LOOPPIDWindow.Mode.ButtonLClicked()
+                    self.HTR1002.State.ButtonLClicked()
                 else:
-                    self.HTR02.LOOPPIDWindow.Mode.ButtonRClicked()
-                    self.HTR02.State.ButtonRClicked()
-                self.LOOPPID_EN_buffer["HTR02"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"]
-            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR02"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"] != self.LOOPPID_EN_buffer["HTR02"]:
-                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"]:
-                        self.HTR02.LOOPPIDWindow.Mode.ButtonLClicked()
-                        self.HTR02.State.ButtonLClicked()
+                    self.HTR1002.LOOPPIDWindow.Mode.ButtonRClicked()
+                    self.HTR1002.State.ButtonRClicked()
+                self.LOOPPID_EN_buffer["HTR1002"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"]
+            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1002"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"] != self.LOOPPID_EN_buffer["HTR1002"]:
+                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"]:
+                        self.HTR1002.LOOPPIDWindow.Mode.ButtonLClicked()
+                        self.HTR1002.State.ButtonLClicked()
                     else:
-                        self.HTR02.LOOPPIDWindow.Mode.ButtonRClicked()
-                        self.HTR02.State.ButtonRClicked()
-                    self.LOOPPID_EN_buffer["HTR02"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"]
+                        self.HTR1002.LOOPPIDWindow.Mode.ButtonRClicked()
+                        self.HTR1002.State.ButtonRClicked()
+                    self.LOOPPID_EN_buffer["HTR1002"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"]
                 else:
                     pass
 
-        self.HTR02.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"])
-        self.HTR02.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR02"])
-        self.HTR02.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR02"])
+        self.HTR1002.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"])
+        self.HTR1002.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"])
+        self.HTR1002.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1002"])
 
 
-        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR03"]:
-            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"]:
-                self.HTR03.LOOPPIDWindow.Mode.ButtonLClicked()
-                self.HTR03.State.ButtonLClicked()
+        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1003"]:
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]:
+                self.HTR1003.LOOPPIDWindow.Mode.ButtonLClicked()
+                self.HTR1003.State.ButtonLClicked()
             else:
-                self.HTR03.LOOPPIDWindow.Mode.ButtonRClicked()
-                self.HTR03.State.ButtonRClicked()
-            self.LOOPPID_EN_buffer["HTR03"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"]
-        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR03"]:
-            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR03"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"]:
-                    self.HTR03.LOOPPIDWindow.Mode.ButtonLClicked()
-                    self.HTR03.State.ButtonLClicked()
+                self.HTR1003.LOOPPIDWindow.Mode.ButtonRClicked()
+                self.HTR1003.State.ButtonRClicked()
+            self.LOOPPID_EN_buffer["HTR1003"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]
+        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1003"]:
+            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1003"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]:
+                    self.HTR1003.LOOPPIDWindow.Mode.ButtonLClicked()
+                    self.HTR1003.State.ButtonLClicked()
                 else:
-                    self.HTR03.LOOPPIDWindow.Mode.ButtonRClicked()
-                    self.HTR03.State.ButtonRClicked()
-                self.LOOPPID_EN_buffer["HTR03"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"]
-            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR03"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"] != self.LOOPPID_EN_buffer["HTR03"]:
-                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"]:
-                        self.HTR03.LOOPPIDWindow.Mode.ButtonLClicked()
-                        self.HTR03.State.ButtonLClicked()
+                    self.HTR1003.LOOPPIDWindow.Mode.ButtonRClicked()
+                    self.HTR1003.State.ButtonRClicked()
+                self.LOOPPID_EN_buffer["HTR1003"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]
+            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1003"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"] != self.LOOPPID_EN_buffer["HTR1003"]:
+                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]:
+                        self.HTR1003.LOOPPIDWindow.Mode.ButtonLClicked()
+                        self.HTR1003.State.ButtonLClicked()
                     else:
-                        self.HTR03.LOOPPIDWindow.Mode.ButtonRClicked()
-                        self.HTR03.State.ButtonRClicked()
-                    self.LOOPPID_EN_buffer["HTR03"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"]
+                        self.HTR1003.LOOPPIDWindow.Mode.ButtonRClicked()
+                        self.HTR1003.State.ButtonRClicked()
+                    self.LOOPPID_EN_buffer["HTR1003"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]
                 else:
                     pass
 
-        self.HTR03.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"])
-        self.HTR03.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR03"])
-        self.HTR03.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR03"])
+        self.HTR1003.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"])
+        self.HTR1003.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"])
+        self.HTR1003.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1003"])
 
 
 
-        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR04"]:
-            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"]:
-                self.HTR04.LOOPPIDWindow.Mode.ButtonLClicked()
-                self.HTR04.State.ButtonLClicked()
+        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1004"]:
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"]:
+                self.HTR1004.LOOPPIDWindow.Mode.ButtonLClicked()
+                self.HTR1004.State.ButtonLClicked()
             else:
-                self.HTR04.LOOPPIDWindow.Mode.ButtonRClicked()
-                self.HTR04.State.ButtonRClicked()
-            self.LOOPPID_EN_buffer["HTR04"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"]
-        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR04"]:
-            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR04"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"]:
-                    self.HTR04.LOOPPIDWindow.Mode.ButtonLClicked()
-                    self.HTR04.State.ButtonLClicked()
+                self.HTR1004.LOOPPIDWindow.Mode.ButtonRClicked()
+                self.HTR1004.State.ButtonRClicked()
+            self.LOOPPID_EN_buffer["HTR1004"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"]
+        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1004"]:
+            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1004"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"]:
+                    self.HTR1004.LOOPPIDWindow.Mode.ButtonLClicked()
+                    self.HTR1004.State.ButtonLClicked()
                 else:
-                    self.HTR04.LOOPPIDWindow.Mode.ButtonRClicked()
-                    self.HTR04.State.ButtonRClicked()
-                self.LOOPPID_EN_buffer["HTR04"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"]
-            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR04"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"] != self.LOOPPID_EN_buffer["HTR04"]:
-                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"]:
-                        self.HTR04.LOOPPIDWindow.Mode.ButtonLClicked()
-                        self.HTR04.State.ButtonLClicked()
+                    self.HTR1004.LOOPPIDWindow.Mode.ButtonRClicked()
+                    self.HTR1004.State.ButtonRClicked()
+                self.LOOPPID_EN_buffer["HTR1004"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"]
+            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1004"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"] != self.LOOPPID_EN_buffer["HTR1004"]:
+                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"]:
+                        self.HTR1004.LOOPPIDWindow.Mode.ButtonLClicked()
+                        self.HTR1004.State.ButtonLClicked()
                     else:
-                        self.HTR04.LOOPPIDWindow.Mode.ButtonRClicked()
-                        self.HTR04.State.ButtonRClicked()
-                    self.LOOPPID_EN_buffer["HTR04"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"]
+                        self.HTR1004.LOOPPIDWindow.Mode.ButtonRClicked()
+                        self.HTR1004.State.ButtonRClicked()
+                    self.LOOPPID_EN_buffer["HTR1004"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"]
                 else:
                     pass
 
-        self.HTR04.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"])
-        self.HTR04.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR04"])
-        self.HTR04.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR04"])
+        self.HTR1004.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"])
+        self.HTR1004.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"])
+        self.HTR1004.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1004"])
 
 
 
