@@ -677,14 +677,26 @@ class AlarmWin(QtWidgets.QMainWindow):
 
 
         # PT part
-        self.PT1012 = AlarmStatusWidget(self.PressureTab)
-        self.PT1012.Label.setText("PT1012")
+        self.PT1000 = AlarmStatusWidget(self.PressureTab)
+        self.PT1000.Label.setText("PT1000")
 
-        self.PT1013 = AlarmStatusWidget(self.PressureTab)
-        self.PT1013.Label.setText("PT1013")
+        self.PT1001 = AlarmStatusWidget(self.PressureTab)
+        self.PT1001.Label.setText("PT1001")
 
-        self.PT1014 = AlarmStatusWidget(self.PressureTab)
-        self.PT1014.Label.setText("PT1014")
+        self.PT1002 = AlarmStatusWidget(self.PressureTab)
+        self.PT1002.Label.setText("PT1002")
+
+        self.PT001 = AlarmStatusWidget(self.PressureTab)
+        self.PT001.Label.setText("PT001")
+
+        self.PT002 = AlarmStatusWidget(self.PressureTab)
+        self.PT002.Label.setText("PT002")
+
+        self.PT003 = AlarmStatusWidget(self.PressureTab)
+        self.PT003.Label.setText("PT003")
+
+        self.PT004 = AlarmStatusWidget(self.PressureTab)
+        self.PT004.Label.setText("PT004")
 
 
 
@@ -712,7 +724,8 @@ class AlarmWin(QtWidgets.QMainWindow):
         # self.AlarmRTD4dir = {0: {0: self.TT2101, 1: self.TT2102, 2: self.TT2103, 3: self.TT2104, 4: self.TT2105},
         #                      1: {0: self.TT2106, 1: self.TT2107, 2: self.TT2108, 3: self.TT2109, 4: self.TT2110}}
         #
-        self.AlarmPTdir = {0: {0: self.PT1012, 1: self.PT1013, 2: self.PT1014}}
+        self.AlarmPTdir = {0: {0: self.PT1000, 1: self.PT1001, 2: self.PT1002, 3: self.PT001, 4: self.PT002},
+                           1: {0: self.PT003, 1: self.PT004}}
         #
         # self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6203},
         #                         1: {0: self.TT6404, 1: self.TT6207, 2: self.TT6405, 3: self.TT6211, 4: self.TT6406},
