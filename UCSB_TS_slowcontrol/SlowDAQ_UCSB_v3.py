@@ -1657,12 +1657,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT003.SetValue(received_dic_c["data"]["PT"]["value"]["PT003"])
         self.PT004.SetValue(received_dic_c["data"]["PT"]["value"]["PT004"])
 
-        self.TT1001.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1001"])
-        self.TT1002.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1002"])
-        self.TT1003.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1003"])
-        self.TT1004.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1004"])
-        self.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1005"])
-        self.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["TT1006"])
+        self.TT1001.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1001"])
+        self.TT1002.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1002"])
+        self.TT1003.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1003"])
+        self.TT1004.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1004"])
+        self.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1005"])
+        self.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1006"])
 
         self.PT001.SetValue(received_dic_c["data"]["PT"]["value"]["PT001"])
         self.PT002.SetValue(received_dic_c["data"]["PT"]["value"]["PT002"])
