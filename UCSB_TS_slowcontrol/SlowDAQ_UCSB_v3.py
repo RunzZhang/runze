@@ -278,13 +278,13 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.PNV001.Label.setText("PNV001")
         # self.PNV001.move(470 * R, 750 * R)
 
-        self.BGA1 = PressureIndicator(self.GasTab)
-        self.BGA1.Label.setText("BGA1")
-        self.BGA1.move(1350 * R, 350 * R)
+        self.BGA01 = PressureIndicator(self.GasTab)
+        self.BGA01.Label.setText("BGA01")
+        self.BGA01.move(1350 * R, 350 * R)
 
-        self.BGA2 = PressureIndicator(self.GasTab)
-        self.BGA2.Label.setText("BGA2")
-        self.BGA2.move(1700 * R, 350 * R)
+        self.BGA02 = PressureIndicator(self.GasTab)
+        self.BGA02.Label.setText("BGA02")
+        self.BGA02.move(1700 * R, 350 * R)
 
         self.PT001 = PressureIndicator(self.GasTab)
         self.PT001.Label.setText("PT001")
@@ -1669,8 +1669,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT003.SetValue(received_dic_c["data"]["PT"]["value"]["PT003"])
         self.PT004.SetValue(received_dic_c["data"]["PT"]["value"]["PT004"])
 
-        self.BGA1.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BGA1"])
-        self.BGA2.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BGA2"])
+        self.BGA01.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BGA01"])
+        self.BGA02.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BGA02"])
 
 
 
