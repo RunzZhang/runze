@@ -2796,8 +2796,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR1001.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
         self.HTR1001.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
-        # self.HTR1001.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"][0])
-        # self.HTR1001.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"][1])
+        self.HTR1001.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"][0])
+        self.HTR1001.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"][1])
 
         if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1002"]:
             if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"]:
@@ -2830,8 +2830,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR1002.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"])
         self.HTR1002.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1002"])
-        # self.HTR1002.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1002"][0])
-        # self.HTR1002.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1002"][1])
+        self.HTR1002.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1002"][0])
+        self.HTR1002.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1002"][1])
 
 
         if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1003"]:
@@ -2865,8 +2865,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR1003.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"])
         self.HTR1003.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"])
-        # self.HTR1003.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1003"][0])
-        # self.HTR1003.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1003"][1])
+        self.HTR1003.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1003"][0])
+        self.HTR1003.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1003"][1])
 
 
 
@@ -2901,8 +2901,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR1004.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"])
         self.HTR1004.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1004"])
-        # self.HTR1004.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1004"][0])
-        # self.HTR1004.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1004"][1])
+        self.HTR1004.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1004"][0])
+        self.HTR1004.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1004"][1])
 
 
 
