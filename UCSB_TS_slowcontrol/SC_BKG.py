@@ -61,7 +61,7 @@ def LS_TT_translate(receive):
     # receive would be "float1,float2,float3,float4\r\n"
     # we need to return (float1, float2, float3, float4)
     stripped =  receive.strip("\n")
-    stripped =  stripped.strp("\r")
+    stripped =  stripped.strip("\r")
     print(stripped)
     res =  tuple(map(float, stripped.split(', ')))
     print("res",res)
@@ -4085,7 +4085,7 @@ if __name__ == "__main__":
     # msg_mana.tencent_alarm("this is a test message")
 
     print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
-    
+
     # App = QtWidgets.QApplication(sys.argv)
     # Update=Update()
     # sys.exit(App.exec_())
