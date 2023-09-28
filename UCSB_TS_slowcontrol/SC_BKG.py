@@ -57,6 +57,19 @@ def FPADS_OUT_AT(outaddress):
     print(new_address)
     return new_address
 
+def LS_TT_translate(receive):
+    # receive would be "float1,float2,float3,float4\r\n"
+    # we need to return (float1, float2, float3, float4)
+    stripped =  receive.strip("\n")
+    stripped =  stripped.strp("\r")
+    print(stripped)
+    res =  tuple(map(float, stripped.split(', ')))
+    print("res",res)
+    return(res)
+
+
+
+
 class PLC(QtCore.QObject):
     DATA_UPDATE_SIGNAL=QtCore.Signal(object)
     DATA_TRI_SIGNAL = QtCore.Signal(bool)
@@ -3278,6 +3291,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_dic_ini[key] = self.PLC.TT_AD1_dic[key]
         for key in self.PLC.TT_AD2_dic:
             self.TT_AD2_dic_ini[key] = self.PLC.TT_AD2_dic[key]
+        for key in self.PLC.LL_dic:
+            self.LL_dic_ini[key] = self.PLC.LL_dic[key]
 
         for key in self.PLC.PT_dic:
             self.PT_dic_ini[key] = self.PLC.PT_dic[key]
@@ -3285,6 +3300,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_HighLimit_ini[key] = self.PLC.TT_AD1_HighLimit[key]
         for key in self.PLC.TT_AD2_HighLimit:
             self.TT_AD2_HighLimit_ini[key] = self.PLC.TT_AD2_HighLimit[key]
+        for key in self.PLC.LL_HighLimit:
+            self.LL_HighLimit_ini[key] = self.PLC.LL_HighLimit[key]
 
         for key in self.PLC.PT_HighLimit:
             self.PT_HighLimit_ini[key] = self.PLC.PT_HighLimit[key]
@@ -3295,6 +3312,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_LowLimit_ini[key] = self.PLC.TT_AD1_LowLimit[key]
         for key in self.PLC.TT_AD2_LowLimit:
             self.TT_AD2_LowLimit_ini[key] = self.PLC.TT_AD2_LowLimit[key]
+        for key in self.PLC.LL_LowLimit:
+            self.LL_LowLimit_ini[key] = self.PLC.LL_LowLimit[key]
         for key in self.PLC.PT_LowLimit:
             self.PT_LowLimit_ini[key] = self.PLC.PT_LowLimit[key]
         for key in self.PLC.LEFT_REAL_LowLimit:
@@ -3306,6 +3325,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Activated_ini[key]= self.PLC.TT_AD1_Activated[key]
         for key in self.PLC.TT_AD2_Activated:
             self.TT_AD2_Activated_ini[key]= self.PLC.TT_AD2_Activated[key]
+        for key in self.PLC.LL_Activated:
+            self.LL_Activated_ini[key] = self.PLC.LL_Activated[key]
         for key in self.PLC.PT_Activated:
             self.PT_Activated_ini[key]= self.PLC.PT_Activated[key]
         for key in self.PLC.LEFT_REAL_Activated:
@@ -3343,6 +3364,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Alarm_ini[key] = self.PLC.TT_AD1_Alarm[key]
         for key in self.PLC.TT_AD2_Alarm:
             self.TT_AD2_Alarm_ini[key] = self.PLC.TT_AD2_Alarm[key]
+        for key in self.PLC.LL_Alarm:
+            self.LL_Alarm_ini[key] = self.PLC.LL_Alarm[key]
         for key in self.PLC.PT_dic:
             self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
         for key in self.PLC.LEFT_REAL_dic:
@@ -4061,10 +4084,11 @@ if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
 
-
-    App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
-    sys.exit(App.exec_())
+    print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
+    
+    # App = QtWidgets.QApplication(sys.argv)
+    # Update=Update()
+    # sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
