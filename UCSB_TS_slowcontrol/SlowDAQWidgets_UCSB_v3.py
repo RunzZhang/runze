@@ -14,8 +14,8 @@ import pandas as pd
 import slowcontrol_env_cons as sec
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
-FONT = "font-family: \"Calibri\"; font-size: 8px;"
-LAG_FONT = "font-family: \"Calibri\"; font-size: 10px;"
+FONT = "font-family: \"Calibri\"; font-size: 10px;"
+LAG_FONT = "font-family: \"Calibri\"; font-size: 12px;"
 
 # FONT = " "
 
@@ -7053,29 +7053,29 @@ class PressureIndicator(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("PressureIndicator")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 40*R))
-        self.setMinimumSize(80*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 120*R, 60*R))
+        self.setMinimumSize(120*R, 60*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 40*R))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 120*R, 60*R))
         self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("PressureIndicator")
-        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 80*R, 20*R))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 120*R, 30*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
-        self.Label.setStyleSheet("QLabel {" +FONT+"}")
+        self.Label.setStyleSheet("QLabel {" +LAG_FONT+"}")
 
         self.Field = QtWidgets.QLineEdit(self)
         self.Field.setObjectName("indicator value")
-        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 80*R, 20*R))
+        self.Field.setGeometry(QtCore.QRect(0*R, 30*R, 120*R, 30*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
-            "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
+            "QLineEdit{" + BORDER_STYLE + C_WHITE + LAG_FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
             "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
         self.Field.Property = False
         self.Field.setProperty("Alarm", False)

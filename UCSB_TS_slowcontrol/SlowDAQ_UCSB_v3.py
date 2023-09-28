@@ -228,31 +228,31 @@ class MainWindow(QtWidgets.QMainWindow):
         # Thermosyphon Widgets
         self.PV1001 = Valve_v2(self.ThermosyphonTab)
         self.PV1001.Label.setText("PV1001")
-        self.PV1001.move(1015 * R, 155 * R)
+        self.PV1001.move(1035 * R, 165 * R)
 
         self.PV1002 = Valve_v2(self.ThermosyphonTab)
         self.PV1002.Label.setText("PV1002")
-        self.PV1002.move(2115 * R, 920 * R)
+        self.PV1002.move(1950 * R, 940 * R)
 
         self.PV1003 = Valve_v2(self.ThermosyphonTab)
         self.PV1003.Label.setText("PV1003")
-        self.PV1003.move(2115 * R, 1257 * R)
+        self.PV1003.move(1950 * R, 1150 * R)
 
         self.PV1004 = Valve_v2(self.ThermosyphonTab)
         self.PV1004.Label.setText("PV1004")
-        self.PV1004.move(1500 * R, 1100 * R)
+        self.PV1004.move(1700 * R, 1100 * R)
 
         self.PV1005 = Valve_v2(self.ThermosyphonTab)
         self.PV1005.Label.setText("PV1005")
-        self.PV1005.move(1440 * R, 585 * R)
+        self.PV1005.move(1450 * R, 585 * R)
 
         self.PV1006 = Valve_v2(self.ThermosyphonTab)
         self.PV1006.Label.setText("PV1006")
-        self.PV1006.move(865 * R, 925 * R)
+        self.PV1006.move(1065 * R, 940 * R)
 
         self.PV1007 = Valve_v2(self.ThermosyphonTab)
         self.PV1007.Label.setText("PV1007")
-        self.PV1007.move(865 * R, 1257 * R)
+        self.PV1007.move(1065 * R, 1150 * R)
 
         self.MFC1008 = LOOPPID_v2(self.ThermosyphonTab)
         self.MFC1008.move(1795 * R, 700 * R)
@@ -263,14 +263,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1000 = PressureIndicator(self.ThermosyphonTab)
         self.PT1000.Label.setText("PT1000")
         self.PT1000.move(145 * R, 30 * R)
+        self.PT1000.SetUnit(" bar")
 
         self.PT1001 = PressureIndicator(self.ThermosyphonTab)
         self.PT1001.Label.setText("PT1001")
         self.PT1001.move(155 * R, 975 * R)
+        self.PT1001.SetUnit(" bar")
 
         self.PT1002 = PressureIndicator(self.ThermosyphonTab)
         self.PT1002.Label.setText("PT1002")
         self.PT1002.move(160 * R, 1160 * R)
+        self.PT1002.SetUnit(" bar")
 
         # Gas Panel Widgets
 
@@ -281,26 +284,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.BGA01 = PressureIndicator(self.GasTab)
         self.BGA01.Label.setText("BGA01")
         self.BGA01.move(1350 * R, 350 * R)
+        self.BGA01.SetUnit(" %")
 
         self.BGA02 = PressureIndicator(self.GasTab)
         self.BGA02.Label.setText("BGA02")
         self.BGA02.move(1700 * R, 350 * R)
+        self.BGA02.SetUnit(" %")
 
         self.PT001 = PressureIndicator(self.GasTab)
         self.PT001.Label.setText("PT001")
         self.PT001.move(190 * R, 560 * R)
+        self.PT001.SetUnit(" bar")
 
         self.PT002 = PressureIndicator(self.GasTab)
         self.PT002.Label.setText("PT002")
         self.PT002.move(1073 * R, 445 * R)
+        self.PT002.SetUnit(" bar")
 
         self.PT003 = PressureIndicator(self.GasTab)
         self.PT003.Label.setText("PT003")
         self.PT003.move(1091 * R, 740 * R)
+        self.PT003.SetUnit(" bar")
 
         self.PT004 = PressureIndicator(self.GasTab)
         self.PT004.Label.setText("PT004")
         self.PT004.move(1455 * R, 440 * R)
+        self.PT004.SetUnit(" bar")
 
         """
         self.IDPV1 = PnID_Alone(self.GasTab)
@@ -350,7 +359,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV1 = Valve_v2(self.GasTab)
         self.PV1.Label.setText("PV1")
-        self.PV1.move(890 * R, 960 * R)
+        self.PV1.move(895 * R, 960 * R)
 
         self.PV2 = Valve_v2(self.GasTab)
         self.PV2.Label.setText("PV2")
@@ -358,7 +367,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV3 = Valve_v2(self.GasTab)
         self.PV3.Label.setText("PV3")
-        self.PV3.move(1840 * R, 492 * R)
+        self.PV3.move(2200 * R, 492 * R)
 
         self.PV4 = Valve_v2(self.GasTab)
         self.PV4.Label.setText("PV4")
@@ -366,7 +375,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV5 = Valve_v2(self.GasTab)
         self.PV5.Label.setText("PV5")
-        self.PV5.move(1840 * R, 646 * R)
+        self.PV5.move(2200 * R, 646 * R)
 
         self.PV6 = Valve_v2(self.GasTab)
         self.PV6.Label.setText("PV6")
@@ -374,7 +383,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV7 = Valve_v2(self.GasTab)
         self.PV7.Label.setText("PV7")
-        self.PV7.move(1840 * R, 800 * R)
+        self.PV7.move(2200 * R, 800 * R)
 
         self.PV8 = Valve_v2(self.GasTab)
         self.PV8.Label.setText("PV8")
@@ -382,7 +391,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV9 = Valve_v2(self.GasTab)
         self.PV9.Label.setText("PV9")
-        self.PV9.move(1840 * R, 954 * R)
+        self.PV9.move(2200 * R, 954 * R)
 
         self.PV10 = Valve_v2(self.GasTab)
         self.PV10.Label.setText("PV10")
@@ -390,7 +399,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV11 = Valve_v2(self.GasTab)
         self.PV11.Label.setText("PV11")
-        self.PV11.move(1840 * R, 1108 * R)
+        self.PV11.move(2200 * R, 1108 * R)
 
         self.PV12 = Valve_v2(self.GasTab)
         self.PV12.Label.setText("PV12")
@@ -416,27 +425,28 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TT1002 = Indicator(self.TubeTab)
         self.TT1002.Label.setText("TT1002")
-        self.TT1002.move(145 * R, 80 * R)
+        self.TT1002.move(145 * R, 100 * R)
 
         self.TT1003 = Indicator(self.TubeTab)
         self.TT1003.Label.setText("TT1003")
-        self.TT1003.move(145 * R, 130 * R)
+        self.TT1003.move(145 * R, 170 * R)
 
         self.TT1004 = Indicator(self.TubeTab)
         self.TT1004.Label.setText("TT1004")
-        self.TT1004.move(145 * R, 180 * R)
+        self.TT1004.move(145 * R, 240 * R)
 
         self.TT1005 = Indicator(self.TubeTab)
         self.TT1005.Label.setText("TT1005")
-        self.TT1005.move(145 * R, 230 * R)
+        self.TT1005.move(145 * R, 310 * R)
 
         self.TT1006 = Indicator(self.TubeTab)
         self.TT1006.Label.setText("TT1006")
-        self.TT1006.move(145 * R, 280 * R)
+        self.TT1006.move(145 * R, 380 * R)
 
-        self.LiqLev = LiquidLevel(self.TubeTab)
+        self.LiqLev = Indicator(self.TubeTab)
         self.LiqLev.Label.setText("Liq Lev")
-        self.LiqLev.move(145 * R, 330 * R)
+        self.LiqLev.move(145 * R, 450 * R)
+        self.LiqLev.SetUnit(" cm")
 
         self.HTR1001 = LOOPPID_v2(self.TubeTab)
         self.HTR1001.move(295 * R, 30 * R)
