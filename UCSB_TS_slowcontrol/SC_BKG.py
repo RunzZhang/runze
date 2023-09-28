@@ -600,6 +600,7 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_TT[key] = Raw_LS_TT[key]
+            print("HTR RTDs",self.LOOPPID_TT)
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
 
