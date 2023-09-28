@@ -65,10 +65,10 @@ def LS_TT_translate(receive):
     print(stripped)
     str_list = eval(stripped)
     print("split",str_list)
-    float_list =  [float(i) for i in str_list]
-    res = tuple(float_list)
-    print("res",res)
-    return(res)
+    # float_list =  [float(i) for i in str_list]
+    # res = tuple(float_list)
+    # print("res",res)
+    # return(res)
 
 
 
