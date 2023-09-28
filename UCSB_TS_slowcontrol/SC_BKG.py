@@ -64,10 +64,10 @@ def LS_TT_translate(receive):
     stripped =  stripped.strip("\r")
     print(stripped)
     str_list = eval(stripped)
-    print("split",str_list)
+    # print("split",str_list)
     float_list =  [float(i) for i in str_list]
     res = tuple(float_list)
-    print("res",res)
+    # print("res",res)
     return(res)
 
 
@@ -585,14 +585,18 @@ class PLC(QtCore.QObject):
                     self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
                     cm_code = command.encode()
                     self.socket_LS1.send(cm_code)
-                    Raw_LS_TT[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
+                    output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
+                    i = self.LOOPPID_ADR_BASE[key][1]
+                    Raw_LS_TT[key] = (output_tuple[2*i],output_tuple[2*i+1])
                     self.socket_LS1.close()
                 if self.LOOPPID_ADR_BASE[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
                     cm_code = command.encode()
                     self.socket_LS2.send(cm_code)
-                    Raw_LS_TT[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
+                    output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
+                    i = self.LOOPPID_ADR_BASE[key][1]
+                    Raw_LS_TT[key] = (output_tuple[2 * i], output_tuple[2 * i + 1])
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_TT[key] = Raw_LS_TT[key]
@@ -4087,11 +4091,11 @@ if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
 
-    print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
+    # print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
 
-    # App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
-    # sys.exit(App.exec_())
+    App = QtWidgets.QApplication(sys.argv)
+    Update=Update()
+    sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
