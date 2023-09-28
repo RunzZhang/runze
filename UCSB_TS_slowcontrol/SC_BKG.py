@@ -64,7 +64,7 @@ def LS_TT_translate(receive):
     stripped =  stripped.strip("\r")
     print(stripped)
     str_list = stripped.split(',')
-    print(str_list)
+    print("split",str_list)
     float_list =  [float(i) for i in str_list]
     res = tuple(float_list)
     print("res",res)
