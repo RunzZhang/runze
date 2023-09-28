@@ -63,12 +63,12 @@ def LS_TT_translate(receive):
     stripped =  receive.strip("\n")
     stripped =  stripped.strip("\r")
     print(stripped)
-    # str_list = eval(stripped)
-    # print("split",str_list)
-    # float_list =  [float(i) for i in str_list]
-    # res = tuple(float_list)
-    # print("res",res)
-    # return(res)
+    str_list = eval(stripped)
+    print("split",str_list)
+    float_list =  [float(i) for i in str_list]
+    res = tuple(float_list)
+    print("res",res)
+    return(res)
 
 
 
