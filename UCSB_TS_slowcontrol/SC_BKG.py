@@ -3299,8 +3299,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_dic_ini[key] = self.PLC.TT_AD1_dic[key]
         for key in self.PLC.TT_AD2_dic:
             self.TT_AD2_dic_ini[key] = self.PLC.TT_AD2_dic[key]
-        for key in self.PLC.LL_dic:
-            self.LL_dic_ini[key] = self.PLC.LL_dic[key]
+        # for key in self.PLC.LL_dic:
+        #     self.LL_dic_ini[key] = self.PLC.LL_dic[key]
 
         for key in self.PLC.PT_dic:
             self.PT_dic_ini[key] = self.PLC.PT_dic[key]
