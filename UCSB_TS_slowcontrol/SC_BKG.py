@@ -378,6 +378,7 @@ class PLC(QtCore.QObject):
         self.TIME_DIC = copy.copy(sec.TIME_DIC)
 
         self.LL_dic = copy.copy(sec.LL_DIC)
+        self.LL_address =  copy.copy(sec.LL_ADDRESS)
         self.LL_lowLimit = copy.copy(sec.LL_LOWLIMIT)
         self.LL_HighLimit = copy.copy(sec.LL_HIGHLIMIT)
         self.LL_Alarm= copy.copy(sec.LL_ALARM)
@@ -416,7 +417,8 @@ class PLC(QtCore.QObject):
                             "nREAL": self.nREAL,
                             "PT_setting": self.PT_setting,
                             "nPT_Attribute": self.nPT_Attribute,
-                            "LL_address":self.LL_dic,
+                            "LL_address":self.LL_address,
+                            "LL_dic": self.LL_dic,
                             "LL_LowLimit":self.LL_lowLimit,
                             "LL_HighLimit":self.LL_HighLimit,
                             "LL_Activated":self.LL_Activated,
@@ -636,32 +638,35 @@ class PLC(QtCore.QObject):
         try:
             # if self.Connected_LL:
             if True:
-                self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.socket_LL.connect((self.IP_LL, self.PORT_LL))
-                # self.socket_LL.settimeout(1)
-                commandN2 = "MEASure:N2:LEVel?\n"
-                # commandN2 = "*IDN?\n"
-                print("command", commandN2)
-                cm_codeN2 = commandN2.encode()
-                # print(cm_codeN2)
-                self.socket_LL.send(cm_codeN2)
+                for key in self.LL_address:
+                    self.socket_LL = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LL.connect((self.LL_address[key], self.PORT_LL))
+                    # self.socket_LL.settimeout(1)
+                    commandN2 = "MEASure:N2:LEVel?\n"
+                    # commandN2 = "*IDN?\n"
+                    print("command", commandN2)
+                    cm_codeN2 = commandN2.encode()
+                    # print(cm_codeN2)
+                    self.socket_LL.send(cm_codeN2)
 
-                dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
+                    dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
 
-                self.socket_LL.close()
+                    self.socket_LL.close()
 
-                print("fetched data N2", dataN2.decode())
-                self.LL_dic["LL"] = dataN2.decode()
+                    print("fetched data N2", dataN2.decode())
+                    self.LL_dic[key]= dataN2.decode()
 
-                # commandHE = "MEASure:HE:LEVel?\n"
-                # print("command", commandHE)
-                # cm_codeHE = commandHE.encode()
-                # self.socket_LL.send(cm_codeHE)
-                # dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
-                #
-                # print("fetched data HE", dataHE.decode())
-                # self.LL_updatesignal = True
-                # self.socket_LL.close()
+                    # commandHE = "MEASure:HE:LEVel?\n"
+                    # print("command", commandHE)
+                    # cm_codeHE = commandHE.encode()
+                    # self.socket_LL.send(cm_codeHE)
+                    # dataHE = self.socket_LL.recv(self.BUFFER_SIZE)
+                    #
+                    # print("fetched data HE", dataHE.decode())
+                    # self.LL_updatesignal = True
+                    # self.socket_LL.close()
+
+                print(self.LL_dic)
         except:
             self.LL_updatesignal = False
             return 0
@@ -3299,8 +3304,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_dic_ini[key] = self.PLC.TT_AD1_dic[key]
         for key in self.PLC.TT_AD2_dic:
             self.TT_AD2_dic_ini[key] = self.PLC.TT_AD2_dic[key]
-        # for key in self.PLC.LL_dic:
-        #     self.LL_dic_ini[key] = self.PLC.LL_dic[key]
+        for key in self.PLC.LL_dic:
+            self.LL_dic_ini[key] = self.PLC.LL_dic[key]
 
         for key in self.PLC.PT_dic:
             self.PT_dic_ini[key] = self.PLC.PT_dic[key]
