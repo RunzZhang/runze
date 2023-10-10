@@ -1684,9 +1684,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # # # generally checkbutton.clicked -> move to updatedisplay
 
 
-
-
-
         for element in self.PTAlarmMatrix:
             # print(element.Label.text())
 
