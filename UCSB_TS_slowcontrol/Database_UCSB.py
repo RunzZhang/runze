@@ -43,7 +43,9 @@ def UNIX_time(self):
 class mydatabase():
     def __init__(self):
         # db=mysql.connector.connect()
-        self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="slowcontrol")
+        # self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="slowcontrol")
+        self.db = mysql.connector.connect(host="localhost", user="slowcontrol",
+                                          passwd="Th3Slow1!", database="slowcontrol")
         self.mycursor = self.db.cursor()
         self.stack= pd.DataFrame(columns=['Instrument', 'Time', 'Value'])
 
