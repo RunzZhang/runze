@@ -44,10 +44,9 @@ class mydatabase():
     def __init__(self):
         # db=mysql.connector.connect()
         # self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="slowcontrol")
-        # self.db = mysql.connector.connect(host="128.111.19.61", user="slowcontrol",
-        #                                   passwd="Th3Slow1!", database="slowcontrol")
-        self.db = mysql.connector.connect(host="128.111.19.61", user="root",
-                                          passwd="Iamh3puser!", database="slowcontrol")
+        self.db = mysql.connector.connect(host="128.111.19.61", user="slowcontrol",
+                                          passwd="Th3Slow1!", database="slowcontrol")
+
         self.mycursor = self.db.cursor()
         self.stack= pd.DataFrame(columns=['Instrument', 'Time', 'Value'])
 
