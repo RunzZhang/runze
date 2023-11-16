@@ -4005,8 +4005,8 @@ class Update(QtCore.QObject):
         self.UpPLC.AI_slack_alarm.connect(self.printstr)
 
 
-        self.UpPLC.AI_slack_alarm.connect(self.message_manager.sender_email)
-        self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.sender_email)
+        self.UpPLC.AI_slack_alarm.connect(self.message_manager.send_email)
+        self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.send_email)
 
     def connect_signals(self):
         self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
