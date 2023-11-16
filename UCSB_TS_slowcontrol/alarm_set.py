@@ -17,43 +17,40 @@ class Alarm_Setting():
         self.dtype = []
 
     def initialize(self):
-        self.TT_FP_LowLimit = copy.copy(sec.TT_FP_LOWLIMIT)
-        self.TT_FP_HighLimit = copy.copy(sec.TT_FP_HIGHLIMIT)
-        self.TT_BO_LowLimit = copy.copy(sec.TT_BO_LOWLIMIT)
+        self.TT_AD1_LowLimit = copy.copy(sec.TT_AD1_LOWLIMIT)
+        self.TT_AD1_HighLimit = copy.copy(sec.TT_AD1_HIGHLIMIT)
+        self.TT_AD2_LowLimit = copy.copy(sec.TT_AD2_LOWLIMIT)
 
-        self.TT_BO_HighLimit = copy.copy(sec.TT_BO_HIGHLIMIT)
+        self.TT_AD2_HighLimit = copy.copy(sec.TT_AD2_HIGHLIMIT)
         self.PT_LowLimit = copy.copy(sec.PT_LOWLIMIT)
         self.PT_HighLimit = copy.copy(sec.PT_HIGHLIMIT)
 
-        self.LEFT_REAL_HighLimit = copy.copy(sec.LEFT_REAL_HIGHLIMIT)
-        self.LEFT_REAL_LowLimit = copy.copy(sec.LEFT_REAL_LOWLIMIT)
+        self.LL_HighLimit = copy.copy(sec.LL_HIGHLIMIT)
+        self.LL_LowLimit = copy.copy(sec.LL_LOWLIMIT)
 
-        self.TT_FP_Activated = copy.copy(sec.TT_FP_ACTIVATED)
-        self.TT_BO_Activated = copy.copy(sec.TT_BO_ACTIVATED)
+        self.TT_AD1_Activated = copy.copy(sec.TT_AD1_ACTIVATED)
+        self.TT_AD2_Activated = copy.copy(sec.TT_AD2_ACTIVATED)
         self.PT_Activated = copy.copy(sec.PT_ACTIVATED)
-        self.LEFT_REAL_Activated = copy.copy(sec.LEFT_REAL_ACTIVATED)
+        self.LL_Activated = copy.copy(sec.LL_ACTIVATED)
 
         self.LOOPPID_HI_LIM = copy.copy(sec.LOOPPID_ALARM_HI_LIM)
         self.LOOPPID_LO_LIM = copy.copy(sec.LOOPPID_ALARM_LO_LIM)
         self.LOOPPID_Activated = copy.copy(sec.LOOPPID_ACTIVATED)
 
-        self.Din_LowLimit = copy.copy(sec.DIN_LOWLIMIT)
-        self.Din_HighLimit = copy.copy(sec.DIN_HIGHLIMIT)
-        self.Din_Activated = copy.copy(sec.DIN_ACTIVATED)
 
         # lowlimit, high limit and activae share the same keys
-        for key in self.TT_FP_LowLimit:
+        for key in self.TT_AD1_LowLimit:
             self.instrument.append(key)
-            self.lowlimit.append(self.TT_FP_LowLimit[key])
-            self.highlimit.append(self.TT_FP_HighLimit[key])
-            self.active.append(self.TT_FP_Activated[key])
+            self.lowlimit.append(self.TT_AD1_LowLimit[key])
+            self.highlimit.append(self.TT_AD1_HighLimit[key])
+            self.active.append(self.TT_AD1_Activated[key])
 
 
-        for key in self.TT_BO_LowLimit:
+        for key in self.TT_AD2_LowLimit:
             self.instrument.append(key)
-            self.lowlimit.append(self.TT_BO_LowLimit[key])
-            self.highlimit.append(self.TT_BO_HighLimit[key])
-            self.active.append(self.TT_BO_Activated[key])
+            self.lowlimit.append(self.TT_AD2_LowLimit[key])
+            self.highlimit.append(self.TT_AD2_HighLimit[key])
+            self.active.append(self.TT_AD2_Activated[key])
 
         for key in self.PT_LowLimit:
             self.instrument.append(key)
@@ -61,11 +58,11 @@ class Alarm_Setting():
             self.highlimit.append(self.PT_HighLimit[key])
             self.active.append(self.PT_Activated[key])
 
-        for key in self.LEFT_REAL_LowLimit:
+        for key in self.LL_LowLimit:
             self.instrument.append(key)
-            self.lowlimit.append(self.LEFT_REAL_LowLimit[key])
-            self.highlimit.append(self.LEFT_REAL_HighLimit[key])
-            self.active.append(self.LEFT_REAL_Activated[key])
+            self.lowlimit.append(self.LL_LowLimit[key])
+            self.highlimit.append(self.LL_HighLimit[key])
+            self.active.append(self.LL_Activated[key])
 
         for key in self.LOOPPID_LO_LIM:
             self.instrument.append(key)
@@ -73,11 +70,6 @@ class Alarm_Setting():
             self.highlimit.append(self.LOOPPID_HI_LIM[key])
             self.active.append(self.LOOPPID_Activated[key])
 
-        for key in self.Din_LowLimit:
-            self.instrument.append(key)
-            self.lowlimit.append(self.Din_LowLimit[key])
-            self.highlimit.append(self.Din_HighLimit[key])
-            self.active.append(self.Din_Activated[key])
 
         self.init_dic = {"Instrument":self.instrument, "Low_Limit":self.lowlimit, "High_Limit":self.highlimit, "Active":self.active}
 
