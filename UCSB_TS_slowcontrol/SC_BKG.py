@@ -14,9 +14,10 @@ import struct, time, zmq, sys, pickle, copy, logging
 import numpy as np
 from PySide2 import QtWidgets, QtCore, QtGui
 from Database_UCSB import *
+import smtplib
+import ssl
 from email.mime.text import MIMEText
-from email.header import Header
-from smtplib import SMTP_SSL
+from email.mime.multipart import MIMEMultipart
 import socket
 import requests
 import logging,os
@@ -4004,8 +4005,8 @@ class Update(QtCore.QObject):
         self.UpPLC.AI_slack_alarm.connect(self.printstr)
 
 
-        self.UpPLC.AI_slack_alarm.connect(self.message_manager.slack_alarm)
-        self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
+        self.UpPLC.AI_slack_alarm.connect(self.message_manager.sender_email)
+        self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.sender_email)
 
     def connect_signals(self):
         self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
@@ -4028,14 +4029,16 @@ class message_manager():
     # add here the other alarm and data base
     def __init__(self):
         # info about tencent mail settings
-        self.host_server = "smtp.qq.com"
-        self.sender_qq = "390282332"
-        self.pwd = "bngozrzmzsbocafa"
-        self.sender_mail = "390282332@qq.com"
-        # self.receiver1_mail = "cdahl@northwestern.edu"
-        self.receiver1_mail = "runzezhang@foxmail.com"
-        self.mail_title = "Alarm from SBC"
+        self.sender_email = "runzezhang@ucsb.edu"
+        self.receiver_email_list = ["runzezhang26@outlook.com", "2249992847@txt.att.net"]
+        # change receiver email to phonenumber@domain to send text message
+        self.subject = "Henry's Panel Alarm"
+        self.body = "This is a test email sent using Python and Gmail's SMTP server."
+        self.smtp_server = "smtp.gmail.com"
+        self.smtp_port = 465
+        self.smtp_username = "runzezhang@ucsb.edu"
 
+        self.smtp_password = os.environ.get("GMAIL_TOKEN")
 
         # server to pico watchdog
 
@@ -4043,32 +4046,28 @@ class message_manager():
         # SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol mathine
         # it can be fetched on slack app page in SBCAlarm app: https://api.slack.com/apps/A035X77RW64/general
         # if not_in_channel error type /invite @SBC_Alarm in channel
-        self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
-        self.logger = logging.getLogger(__name__)
-        self.channel_id = "C01A549VDHS"
 
-    def tencent_alarm(self, message):
-        try:
-            # The body content of the mail
-            mail_content = " Alarm from SBC slowcontrol: " + message
-            # sslLogin
-            smtp = SMTP_SSL(self.host_server)
-            # set_debuglevel() is used for debugging. The parameter value is 1 to enable debug mode and 0 to disable debug mode.
-            smtp.set_debuglevel(1)
-            smtp.ehlo(self.host_server)
-            smtp.login(self.sender_qq, self.pwd)
-            # Define mail content
-            msg = MIMEText(mail_content, "plain", "utf-8")
-            msg["Subject"] = Header(self.mail_title, "utf-8")
-            msg["From"] = self.sender_mail
-            msg["To"] = self.receiver1_mail
-            # send email
-            smtp.sendmail(self.sender_mail, self.receiver1_mail, msg.as_string())
-            smtp.quit()
-            print("mail sent successfully")
-        except Exception as e:
-            print("mail failed to send")
-            print(e)
+        # self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
+        # self.logger = logging.getLogger(__name__)
+        # self.channel_id = "C01A549VDHS"
+
+    def send_email(self, message):
+        # Create a MIMEText object to represent the email body
+        self.message = MIMEMultipart()
+        self.message["From"] = self.sender_email
+        self.message["To"] = ", ".join(self.receiver_email_list)
+        self.message["Subject"] = self.subject
+        self.message.attach(MIMEText(message, "plain"))
+
+        # Establish a connection to the SMTP server
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(self.smtp_server, self.smtp_port, context=context) as server:
+            # Login to your Gmail account
+            server.login(self.smtp_username, self.smtp_password)
+
+            # Send the email
+            for recipient_email in self.receiver_email_list:
+                server.sendmail(self.sender_email, recipient_email, self.message.as_string())
 
     @QtCore.Slot(str)
     def slack_alarm(self, message):
@@ -4095,7 +4094,7 @@ class message_manager():
 
 if __name__ == "__main__":
     # msg_mana=message_manager()
-    # msg_mana.tencent_alarm("this is a test message")
+    # msg_mana.send_email("this is a test message")
 
     # print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
 
