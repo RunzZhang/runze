@@ -2122,7 +2122,7 @@ class UpdateDataBase(QtCore.QObject):
         for key in self.PT_dic:
             self.PT_dic[key] = dic["PT_dic"][key]
         for key in self.LL_dic:
-            self.TT_dic[key] = dic["LL_dic"][key]
+            self.LL_dic[key] = dic["LL_dic"][key]
         for key in self.TT_AD1_HighLimit:
             self.TT_AD1_HighLimit[key] = dic["TT_AD1_HighLimit"][key]
         for key in self.TT_AD2_HighLimit:
