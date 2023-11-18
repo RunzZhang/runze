@@ -706,7 +706,7 @@ class PLC(QtCore.QObject):
             print("AD1 lost connection to PLC")
             self.PLC_DISCON_SIGNAL.emit()
             self.AD1_updatesignal = False
-        print("AD1", Raw_RTDs_AD1)
+        print("AD1", self.TT_AD1_dic)
 
         if self.Connected_AD2:
             # Reading all the RTDs
@@ -725,7 +725,7 @@ class PLC(QtCore.QObject):
             print("AD2 lost connection to PLC")
             self.AD2_updatesignal = False
             self.PLC_DISCON_SIGNAL.emit()
-        print("AD2", Raw_RTDs_AD2)
+        print("AD2", self.TT_AD2_dic)
 
 
                 # Raw_AD1_TT = self.Client_AD1.read_holding_registers(30, count=2, unit=0x01)
