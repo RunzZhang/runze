@@ -715,6 +715,7 @@ class PLC(QtCore.QObject):
                 Raw_RTDs_AD2[key] = self.Client_AD2.read_holding_registers(self.TT_AD2_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD2[key].getRegister(1), Raw_RTDs_AD2[key].getRegister(0)))[0], 3)
+                print(key, read_value)
                 if read_value < 849:
 
                     self.TT_AD2_dic[key] = 273.15 + read_value
