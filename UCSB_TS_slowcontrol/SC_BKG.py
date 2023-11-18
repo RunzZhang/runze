@@ -698,9 +698,9 @@ class PLC(QtCore.QObject):
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1), Raw_RTDs_AD1[key].getRegister(0)))[0], 3)
                 if read_value < 849:
 
-                    self.TT_AD_dic[key] = 273.15 + read_value
+                    self.TT_AD1_dic[key] = 273.15 + read_value
                 else:
-                    self.TT_AD_dic[key] = read_value
+                    self.TT_AD1_dic[key] = read_value
             self.AD1_updatesignal = True
         else:
             print("AD1 lost connection to PLC")
@@ -717,9 +717,9 @@ class PLC(QtCore.QObject):
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD2[key].getRegister(1), Raw_RTDs_AD2[key].getRegister(0)))[0], 3)
                 if read_value < 849:
 
-                    self.TT_AD_dic[key] = 273.15 + read_value
+                    self.TT_AD2_dic[key] = 273.15 + read_value
                 else:
-                    self.TT_AD_dic[key] = read_value
+                    self.TT_AD2_dic[key] = read_value
             self.AD2_updatesignal = True
         else:
             print("AD2 lost connection to PLC")
