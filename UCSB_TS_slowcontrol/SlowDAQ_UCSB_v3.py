@@ -2261,7 +2261,7 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
-
+        print("PV1out", received_dic_c["data"]["Valve"]["OUT"]["PV1"] )
         if not received_dic_c["data"]["Valve"]["MAN"]["PV1"]:
             if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
                 self.PV1.Set.ButtonLClicked()
