@@ -3173,8 +3173,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Activated_ini[key]= self.PLC.TT_AD1_Activated[key]
         for key in self.PLC.TT_AD2_Activated:
             self.TT_AD2_Activated_ini[key]= self.PLC.TT_AD2_Activated[key]
-        # for key in self.PLC.LL_Activated:
-        #     self.LL_Activated_ini[key] = self.PLC.LL_Activated[key]
+        for key in self.PLC.LL_Activated:
+            self.LL_Activated_ini[key] = self.PLC.LL_Activated[key]
         for key in self.PLC.PT_Activated:
             self.PT_Activated_ini[key]= self.PLC.PT_Activated[key]
         for key in self.PLC.LEFT_REAL_Activated:
