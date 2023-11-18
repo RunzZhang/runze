@@ -649,9 +649,10 @@ class PLC(QtCore.QObject):
                     dataN2 = self.socket_LL.recv(self.BUFFER_SIZE)
 
                     self.socket_LL.close()
-
-                    print("fetched data N2", dataN2.decode())
-                    self.LL_dic[key]= dataN2.decode()
+                    value = dataN2.decode()
+                    trimed_value = value.replace("\r\n", "")
+                    print("fetched data N2", trimed_value)
+                    self.LL_dic[key]= trimed_value
 
                     # commandHE = "MEASure:HE:LEVel?\n"
                     # print("command", commandHE)
