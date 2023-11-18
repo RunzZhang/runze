@@ -699,9 +699,9 @@ class PLC(QtCore.QObject):
                 # print(key, read_value)
                 if read_value < 200:
 
-                    self.TT_AD1_dic[key] = 273.15 + read_value
+                    self.TT_AD1_dic[key] = round(273.15 + read_value,1)
                 else:
-                    self.TT_AD1_dic[key] = read_value
+                    self.TT_AD1_dic[key] = round(read_value,1)
             self.AD1_updatesignal = True
         else:
             print("AD1 lost connection to PLC")
@@ -719,9 +719,9 @@ class PLC(QtCore.QObject):
 
                 if read_value < 849:
 
-                    self.TT_AD2_dic[key] = 273.15 + read_value
+                    self.TT_AD2_dic[key] = round(273.15 + read_value,1)
                 else:
-                    self.TT_AD2_dic[key] = read_value
+                    self.TT_AD2_dic[key] = round(read_value,1)
             self.AD2_updatesignal = True
         else:
             print("AD2 lost connection to PLC")
