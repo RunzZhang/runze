@@ -3161,8 +3161,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_LowLimit_ini[key] = self.PLC.TT_AD1_LowLimit[key]
         for key in self.PLC.TT_AD2_LowLimit:
             self.TT_AD2_LowLimit_ini[key] = self.PLC.TT_AD2_LowLimit[key]
-        # for key in self.PLC.LL_LowLimit:
-        #     self.LL_LowLimit_ini[key] = self.PLC.LL_LowLimit[key]
+        for key in self.PLC.LL_LowLimit:
+            self.LL_LowLimit_ini[key] = self.PLC.LL_LowLimit[key]
         for key in self.PLC.PT_LowLimit:
             self.PT_LowLimit_ini[key] = self.PLC.PT_LowLimit[key]
         for key in self.PLC.LEFT_REAL_LowLimit:
