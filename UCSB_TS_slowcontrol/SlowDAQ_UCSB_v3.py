@@ -1830,7 +1830,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.AlarmButton.ButtonAlarmResetSignal()
         # # # generally checkbutton.clicked -> move to updatedisplay
 
-        for element in self.RTDAlarmMatrix:
+        for element in self.PTAlarmMatrix:
             # print(element.Label.text())
             element.UpdateAlarm(
                 received_dic_c["Alarm"]["PT"][element.Label.text()])
@@ -1842,7 +1842,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["data"]["PT"]["high"][element.Label.text()])
 
 
-        for element in self.PTAlarmMatrix:
+        for element in self.RTDAlarmMatrix:
             if element.Label.text() in received_dic_c["Active"]["TT"]["AD1"]:
                 element.UpdateAlarm(
                     received_dic_c["Alarm"]["TT"]["AD1"][element.Label.text()])
