@@ -2026,7 +2026,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.PV12.ActiveState.UpdateColor(False)
 
 
-
+        print("PV1001 busy",received_dic_c["data"]["Valve"]["Busy"]["PV1001"] )
         if received_dic_c["data"]["Valve"]["Busy"]["PV1001"] == True:
             self.PV1001.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
