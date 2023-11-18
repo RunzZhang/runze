@@ -652,7 +652,7 @@ class PLC(QtCore.QObject):
                     value = dataN2.decode()
                     trimed_value = value.replace("\r\n", "")
                     print("fetched data N2", trimed_value)
-                    self.LL_dic[key]= trimed_value
+                    self.LL_dic[key]= float(trimed_value)
 
                     # commandHE = "MEASure:HE:LEVel?\n"
                     # print("command", commandHE)
@@ -686,28 +686,14 @@ class PLC(QtCore.QObject):
         # print(value)
 
     def Read_AD(self):
-        # test the port nubmber
-        # result=[]
-        # for i in range(99999):
-        #     try:
-        #         Raw_BO_TT_BO = self.Client_BO.read_holding_registers(i, count=2, unit=0x01)
-        #         # print(Raw_BO_TT_BO)
-        #         TT_BO_dic = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO.getRegister(1), Raw_BO_TT_BO.getRegister(0)))[
-        #                 0], 3)
-        #         if TT_BO_dic < 30 and TT_BO_dic >1:
-        #             result.append([i,TT_BO_dic])
-        #         print(i, TT_BO_dic)
-        #     except:
-        #         pass
-        # print(result)
+
         Raw_RTDs_AD1 = {}
         Raw_RTDs_AD2 = {}
         if self.Connected_AD1:
             # Reading all the RTDs
 
-            for key in self.TT_AD_address:
-                Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD_address[key], count=2, unit=0x01)
+            for key in self.TT_AD1_address:
+                Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD1_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1), Raw_RTDs_AD1[key].getRegister(0)))[0], 3)
                 if read_value < 849:
@@ -725,8 +711,8 @@ class PLC(QtCore.QObject):
         if self.Connected_AD2:
             # Reading all the RTDs
 
-            for key in self.TT_AD_address:
-                Raw_RTDs_AD2[key] = self.Client_AD2.read_holding_registers(self.TT_AD_address[key], count=2, unit=0x01)
+            for key in self.TT_AD2_address:
+                Raw_RTDs_AD2[key] = self.Client_AD2.read_holding_registers(self.TT_AD2_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD2[key].getRegister(1), Raw_RTDs_AD2[key].getRegister(0)))[0], 3)
                 if read_value < 849:
