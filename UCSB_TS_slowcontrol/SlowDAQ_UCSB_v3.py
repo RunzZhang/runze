@@ -2972,6 +2972,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR1001.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
         self.HTR1001.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
+        print(received_dic_c["data"]["LOOPPID"])
         self.HTR1001.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"][0])
         self.HTR1001.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"][1])
 
