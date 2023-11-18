@@ -717,14 +717,14 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.TT1006 = AlarmStatusWidget(self.GroupRTD1)
         self.TT1006.Label.setText("TT1006")
 
-        self.TT1007 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1007.Label.setText("TT1007")
-
-        self.TT1008 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1008.Label.setText("TT1008")
-
-        self.TT1009 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1009.Label.setText("TT1009")
+        # self.TT1007 = AlarmStatusWidget(self.GroupRTD1)
+        # self.TT1007.Label.setText("TT1007")
+        #
+        # self.TT1008 = AlarmStatusWidget(self.GroupRTD1)
+        # self.TT1008.Label.setText("TT1008")
+        #
+        # self.TT1009 = AlarmStatusWidget(self.GroupRTD1)
+        # self.TT1009.Label.setText("TT1009")
 
 
         self.HTR1001 = AlarmStatusWidget(self.GroupRTD2)
@@ -745,7 +745,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         # make a directory for the alarm instrument and assign instrument to certain position
         self.AlarmRTD1dir = {0: {0: self.TT1001, 1: self.TT1002, 2: self.TT1003, 3: self.TT1004, 4: self.TT1005},
-                             1: {0: self.TT1006, 1: self.TT1007, 2: self.TT1008, 3: self.TT1009}}
+                             1: {0: self.TT1006}}
 
 
         self.AlarmRTD2dir = {0: {0: self.HTR1001, 1: self.HTR1002, 2: self.HTR1003, 3: self.HTR1004}}
@@ -870,8 +870,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
         TempRefRTD1dir = self.AlarmRTD1dir
-        TempRTD1dir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
-                             1: {0: None, 1: None, 2: None, 3: None}}
+        TempRTD1dir = self.AlarmRTD1dir
 
         # l_RTD1_max is max number of column
         l_RTD1 = 0

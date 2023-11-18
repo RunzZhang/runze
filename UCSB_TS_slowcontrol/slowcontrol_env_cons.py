@@ -1,10 +1,9 @@
 BASE_ADDRESS= 12288
 # real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
-# TT_AD1_ADDRESS = {"TT1001": 30, "TT1002":1, "TT1003": 2, "TT1004": 3, "TT1005": 4,
-#                             "TT1006": 5, "TT1007": 6}
+
 TT_AD1_ADDRESS = {"TT1001": 31, "TT1002":33, "TT1003": 35, "TT1004": 37, "TT1005": 39,
-                              "TT1006": 41, "TT1007": 43}
+                              "TT1006": 41}
 
 TT_AD2_ADDRESS = { "TT1008": 31}
 
@@ -17,7 +16,7 @@ PT_ADDRESS = {"PT001": 12796, "PT002": 12798, "PT003": 12800, "PT004": 12802, "P
 LEFT_REAL_ADDRESS = {'FCV1001': 12782, 'FCV1002': 12784, "BGA01": 12804, "BGA02": 12806}
 
 TT_AD1_DIC = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
-                              "TT1006": 0, "TT1007": 0}
+                              "TT1006": 0}
 
 
 TT_AD2_DIC = { "TT1008": 0}
@@ -30,10 +29,10 @@ PT_DIC = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
 LEFT_REAL_DIC = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0}
 
 TT_AD1_LOWLIMIT = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
-                              "TT1006": 0, "TT1007": 0}
+                              "TT1006": 0}
 
 TT_AD1_HIGHLIMIT = {"TT1001": 30, "TT1002": 30, "TT1003": 30, "TT1004": 30, "TT1005": 30,
-                              "TT1006": 30, "TT1007": 30}
+                              "TT1006": 30}
 
 LL_LOWLIMIT = {"LL":0}
 
@@ -53,7 +52,7 @@ LEFT_REAL_HIGHLIMIT = {'FCV1001': 100, 'FCV1002': 100, "BGA01": 100, "BGA02": 10
 LEFT_REAL_LOWLIMIT = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0}
 
 TT_AD1_ACTIVATED = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004": False, "TT1005": False,
-                              "TT1006": False, "TT1007": False}
+                              "TT1006": False}
 
 TT_AD2_ACTIVATED = {"TT1008": False}
 
@@ -64,7 +63,7 @@ PT_ACTIVATED = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, 
               "PT1001": False, "PT1002": False}
 LEFT_REAL_ACTIVATED = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": 100}
 TT_AD1_ALARM = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004": False, "TT1005": False,
-                              "TT1006": False, "TT1007": False}
+                              "TT1006": False}
 
 TT_AD2_ALARM = {"TT1008": False}
 
@@ -325,11 +324,11 @@ TIME_DIC = {'PCYCLE_EXPTIME': 0}
 INI_CHECK= True
 
 TT_AD1_PARA = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
-                              "TT1006": 0, "TT1007": 0}
+                              "TT1006": 0}
 
 
 TT_AD1_RATE = {"TT1001": 30, "TT1002": 30, "TT1003": 30, "TT1004": 30, "TT1005": 30,
-                              "TT1006": 30, "TT1007": 30}
+                              "TT1006": 30}
 
 
 TT_AD2_PARA = { "TT1008": 0}
