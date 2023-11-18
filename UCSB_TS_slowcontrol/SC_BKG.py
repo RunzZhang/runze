@@ -697,7 +697,7 @@ class PLC(QtCore.QObject):
                 # also transform C into K if value is not NULL
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1), Raw_RTDs_AD1[key].getRegister(0)))[0], 3)
                 # print(key, read_value)
-                if read_value < 200:
+                if read_value < 201:
 
                     self.TT_AD1_dic[key] = round(273.15 + read_value,1)
                 else:
@@ -717,7 +717,7 @@ class PLC(QtCore.QObject):
                 # also transform C into K if value is not NULL
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD2[key].getRegister(1), Raw_RTDs_AD2[key].getRegister(0)))[0], 3)
 
-                if read_value < 849:
+                if read_value < 201:
 
                     self.TT_AD2_dic[key] = round(273.15 + read_value,1)
                 else:
