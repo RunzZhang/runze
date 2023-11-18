@@ -988,6 +988,7 @@ class PLC(QtCore.QObject):
                 self.LEFT_REAL_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
                                                     Raw_BO_REAL[key].getRegister(0)))[0], 3)
+            print(self.LEFT_REAL_dic)
 
                 # print(key, "'s' value is", self.PT_dic[key])
 
@@ -2268,41 +2269,7 @@ class UpdateDataBase(QtCore.QObject):
             # print("write pressure transducer")
             self.commit_bool = True
             self.para_LL = 0
-        # print(3)
-        # for key in self.Switch_OUT:
-        #     # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
-        #     if self.Switch_OUT[key] != self.Switch_buffer[key]:
-        #         self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.Switch_buffer[key])
-        #         self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
-        #         self.Switch_buffer[key] = self.Switch_OUT[key]
-        #         self.commit_bool = True
-        #         # print(self.Switch_OUT[key])
-        #     else:
-        #         pass
-        #
-        # if self.para_Switch >= self.rate_Switch:
-        #     for key in self.Switch_OUT:
-        #         self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
-        #         self.Switch_buffer[key] = self.Switch_OUT[key]
-        #         self.commit_bool = True
-        #     self.para_Switch = 0
-        # print(4)
-        # for key in self.Din_dic:
-        #     # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
-        #     if self.Din_dic[key] != self.Din_buffer[key]:
-        #         self.db.insert_data_into_stack(key, self.early_dt, self.Din_buffer[key])
-        #         self.db.insert_data_into_stack(key, self.dt, self.Din_dic[key])
-        #         self.Din_buffer[key] = self.Din_dic[key]
-        #         self.commit_bool = True
-        #     else:
-        #         pass
-        #
-        # if self.para_Din >= self.rate_Din:
-        #     for key in self.Din_dic:
-        #         self.db.insert_data_into_stack(key, self.dt, self.Din_dic[key])
-        #         self.Din_buffer[key] = self.Din_dic[key]
-        #     self.commit_bool = True
-        #     self.para_Din = 0
+
 
         # if state of bool variable changes, write the data into database
         # print(5)
@@ -2390,81 +2357,6 @@ class UpdateDataBase(QtCore.QObject):
             self.para_LOOPPID = 0
         # print(7)
 
-        # for key in self.LOOP2PT_OUT:
-        #     # print(7)
-        #     # print(8)
-        #     # print(key, self.LOOP2PT_OUT[key])
-        #     if self.LOOP2PT_OUT[key] != self.LOOP2PT_OUT_buffer[key]:
-        #         self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.LOOP2PT_OUT_buffer[key])
-        #         self.db.insert_data_into_stack(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-        #         self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
-        #         self.commit_bool = True
-        #         # print(self.Valve_OUT[key])
-        #     else:
-        #         pass
-        #
-        # for key in self.LOOP2PT_MODE0:
-        #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-        #     if self.LOOP2PT_MODE0[key] != self.LOOP2PT_MODE0_buffer[key]:
-        #         self.db.insert_data_into_stack(key + '_MODE0', self.early_dt, self.LOOP2PT_MODE0_buffer[key])
-        #         self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
-        #         self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
-        #         self.commit_bool = True
-        #         # print(self.Valve_OUT[key])
-        #     else:
-        #         pass
-        #
-        # for key in self.LOOP2PT_MODE1:
-        #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-        #     if self.LOOP2PT_MODE1[key] != self.LOOP2PT_MODE1_buffer[key]:
-        #         self.db.insert_data_into_stack(key + '_MODE1', self.early_dt, self.LOOP2PT_MODE1_buffer[key])
-        #         self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
-        #         self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
-        #         self.commit_bool = True
-        #         # print(self.Valve_OUT[key])
-        #     else:
-        #         pass
-        # for key in self.LOOP2PT_MODE2:
-        #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-        #     if self.LOOP2PT_MODE2[key] != self.LOOP2PT_MODE2_buffer[key]:
-        #         self.db.insert_data_into_stack(key + '_MODE2', self.early_dt, self.LOOP2PT_MODE2_buffer[key])
-        #         self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
-        #         self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
-        #         self.commit_bool = True
-        #         # print(self.Valve_OUT[key])
-        #     else:
-        #         pass
-        # for key in self.LOOP2PT_MODE3:
-        #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-        #     if self.LOOP2PT_MODE3[key] != self.LOOP2PT_MODE3_buffer[key]:
-        #         self.db.insert_data_into_stack(key + '_MODE3', self.early_dt, self.LOOP2PT_MODE3_buffer[key])
-        #         self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
-        #         self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
-        #         self.commit_bool = True
-        #         # print(self.Valve_OUT[key])
-        #     else:
-        #         pass
-        # if self.para_LOOP2PT >= self.rate_LOOP2PT:
-        #
-        #     for key in self.LOOP2PT_MODE0:
-        #         self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
-        #         self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
-        #     for key in self.LOOP2PT_MODE1:
-        #         self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
-        #         self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
-        #     for key in self.LOOP2PT_MODE2:
-        #         self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
-        #         self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
-        #     for key in self.LOOP2PT_MODE3:
-        #         self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
-        #         self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
-        #     # write float data.
-        #     for key in self.LOOP2PT_OUT:
-        #         self.db.insert_data_into_stack(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-        #         self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
-        #
-        #     self.commit_bool = True
-        #     self.para_LOOP2PT = 0
 
         if self.para_REAL >= self.rate_REAL:
             for key in self.LEFT_REAL_address:
@@ -2474,95 +2366,7 @@ class UpdateDataBase(QtCore.QObject):
                 self.commit_bool = True
             self.para_REAL = 0
 
-        # #FLAGS
-        # for key in self.FLAG_INTLKD:
-        #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-        #     if self.FLAG_INTLKD[key] != self.FLAG_INTLKD_buffer[key]:
-        #         self.db.insert_data_into_stack(key + '_INTLKD', self.early_dt, self.FLAG_INTLKD_buffer[key])
-        #         self.db.insert_data_into_stack(key + '_INTLKD', self.dt, self.FLAG_INTLKD[key])
-        #         self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
-        #         self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
-        #         self.commit_bool = True
-        #     else:
-        #         pass
-        #
-        # if self.para_FLAG >= self.rate_FLAG:
-        #     for key in self.FLAG_INTLKD:
-        #         self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
-        #         self.db.insert_data_into_stack(key + '_INTLKD', self.dt, self.FLAG_INTLKD[key])
-        #         self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
-        #         self.commit_bool = True
-        #     self.para_FLAG = 0
-        #
-        # # FF
-        # for key in self.FF_DIC:
-        #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-        #     if self.FF_DIC[key] != self.FF_buffer[key]:
-        #         self.db.insert_data_into_stack(key, self.early_dt, self.FF_buffer[key])
-        #         self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
-        #         self.FF_buffer[key] = self.FF_DIC[key]
-        #         self.commit_bool = True
-        #         # print(self.Valve_OUT[key])
-        #     else:
-        #         pass
-        #
-        # if self.para_FF >= self.rate_FF:
-        #     for key in self.FF_DIC:
-        #         self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
-        #         self.FF_buffer[key] = self.FF_DIC[key]
-        #         self.commit_bool = True
-        #     self.para_FF = 0
-        #
-        # # PARAM_B
-        # for key in self.PARAM_B_DIC:
-        #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-        #     if self.PARAM_B_DIC[key] != self.PARAM_B_buffer[key]:
-        #         self.db.insert_data_into_stack(key, self.early_dt, self.PARAM_B_buffer[key])
-        #         self.db.insert_data_into_stack(key, self.dt, self.PARAM_B_DIC[key])
-        #         self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
-        #         self.commit_bool = True
-        #         # print(self.Valve_OUT[key])
-        #     else:
-        #         pass
-        #
-        # if self.para_PARAM_B >= self.rate_PARAM_B:
-        #     for key in self.PARAM_B_DIC:
-        #         self.db.insert_data_into_stack(key, self.dt, self.PARAM_B_DIC[key])
-        #         self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
-        #         self.commit_bool = True
-        #     self.para_PARAM_B = 0
-        #
-        # # other parameters I/F/T
-        # if self.para_PARAM_F >= self.rate_PARAM_F:
-        #     for key in self.PARAM_F_DIC:
-        #         self.db.insert_data_into_stack(key, self.dt, self.PARAM_F_DIC[key])
-        #
-        #         self.commit_bool = True
-        #     self.para_PARAM_F = 0
-        #
-        # if self.para_PARAM_I >= self.rate_PARAM_I:
-        #     for key in self.PARAM_I_DIC:
-        #         self.db.insert_data_into_stack(key, self.dt, self.PARAM_I_DIC[key])
-        #
-        #         self.commit_bool = True
-        #     self.para_PARAM_I = 0
-        #
-        # if self.para_PARAM_T >= self.rate_PARAM_T:
-        #     for key in self.PARAM_T_DIC:
-        #         self.db.insert_data_into_stack(key, self.dt, self.PARAM_T_DIC[key])
-        #
-        #         self.commit_bool = True
-        #     self.para_PARAM_T = 0
-        #
-        # if self.para_TIME >= self.rate_TIME:
-        #     for key in self.TIME_DIC:
-        #         self.db.insert_data_into_stack(key, self.dt, self.TIME_DIC[key])
-        #
-        #         self.commit_bool = True
-        #     self.para_TIME = 0
 
-        # print("a",self.para_TT,"b",self.para_PT )
-        # print(8)
 
         # commit the changes at last step only if it is time to write
         if self.commit_bool:
@@ -3333,11 +3137,10 @@ class UpdateServer(QtCore.QObject):
         for key in self.PLC.TT_AD2_dic:
             self.TT_AD2_dic_ini[key] = self.PLC.TT_AD2_dic[key]
 
-        try:
-            for key in self.PLC.LL_dic:
-                self.LL_dic_ini[key] = self.PLC.LL_dic[key]
-        except:
-            print("error in LL cpy")
+        for key in self.PLC.LL_dic:
+            self.LL_dic_ini[key] = self.PLC.LL_dic[key]
+        for key in self.PLC.LEFT_REAL_dic:
+            self.LEFT_REAL_ini[key] = self.PLC.LEFT_REAL_dic[key]
 
         for key in self.PLC.PT_dic:
             self.PT_dic_ini[key] = self.PLC.PT_dic[key]
@@ -3345,8 +3148,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_HighLimit_ini[key] = self.PLC.TT_AD1_HighLimit[key]
         for key in self.PLC.TT_AD2_HighLimit:
             self.TT_AD2_HighLimit_ini[key] = self.PLC.TT_AD2_HighLimit[key]
-        # for key in self.PLC.LL_HighLimit:
-        #     self.LL_HighLimit_ini[key] = self.PLC.LL_HighLimit[key]
+        for key in self.PLC.LL_HighLimit:
+            self.LL_HighLimit_ini[key] = self.PLC.LL_HighLimit[key]
 
         for key in self.PLC.PT_HighLimit:
             self.PT_HighLimit_ini[key] = self.PLC.PT_HighLimit[key]
@@ -3357,21 +3160,20 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_LowLimit_ini[key] = self.PLC.TT_AD1_LowLimit[key]
         for key in self.PLC.TT_AD2_LowLimit:
             self.TT_AD2_LowLimit_ini[key] = self.PLC.TT_AD2_LowLimit[key]
-        # for key in self.PLC.LL_LowLimit:
-        #     self.LL_LowLimit_ini[key] = self.PLC.LL_LowLimit[key]
+        for key in self.PLC.LL_LowLimit:
+            self.LL_LowLimit_ini[key] = self.PLC.LL_LowLimit[key]
         for key in self.PLC.PT_LowLimit:
             self.PT_LowLimit_ini[key] = self.PLC.PT_LowLimit[key]
         for key in self.PLC.LEFT_REAL_LowLimit:
             self.LEFT_REAL_LowLimit_ini[key] = self.PLC.LEFT_REAL_LowLimit[key]
-        for key in self.PLC.LEFT_REAL_dic:
-            self.LEFT_REAL_ini[key] = self.PLC.LEFT_REAL_dic[key]
+
 
         for key in self.PLC.TT_AD1_Activated:
             self.TT_AD1_Activated_ini[key]= self.PLC.TT_AD1_Activated[key]
         for key in self.PLC.TT_AD2_Activated:
             self.TT_AD2_Activated_ini[key]= self.PLC.TT_AD2_Activated[key]
-        # for key in self.PLC.LL_Activated:
-        #     self.LL_Activated_ini[key] = self.PLC.LL_Activated[key]
+        for key in self.PLC.LL_Activated:
+            self.LL_Activated_ini[key] = self.PLC.LL_Activated[key]
         for key in self.PLC.PT_Activated:
             self.PT_Activated_ini[key]= self.PLC.PT_Activated[key]
         for key in self.PLC.LEFT_REAL_Activated:
@@ -3402,12 +3204,11 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Alarm_ini[key] = self.PLC.TT_AD1_Alarm[key]
         for key in self.PLC.TT_AD2_Alarm:
             self.TT_AD2_Alarm_ini[key] = self.PLC.TT_AD2_Alarm[key]
-        # for key in self.PLC.LL_Alarm:
-        #     self.LL_Alarm_ini[key] = self.PLC.LL_Alarm[key]
+        for key in self.PLC.LL_Alarm:
+            self.LL_Alarm_ini[key] = self.PLC.LL_Alarm[key]
         for key in self.PLC.PT_dic:
             self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
-        for key in self.PLC.LEFT_REAL_dic:
-            self.LEFT_REAL_Alarm_ini[key] = self.PLC.LEFT_REAL_Alarm[key]
+
         for key in self.PLC.LOOPPID_MODE0:
             self.LOOPPID_MODE0_ini[key] = self.PLC.LOOPPID_MODE0[key]
         for key in self.PLC.LOOPPID_MODE1:
