@@ -1649,19 +1649,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.AlarmButton.SubWindow.HTR1001.UpdateAlarm(received_dic_c["Alarm"]["LOOPPID"]["HTR1001"])
         self.AlarmButton.SubWindow.HTR1001.Indicator.SetValue(
-            received_dic_c["data"]["LOOPPID"]["value"]["HTR1001"])
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1001"])
 
         self.AlarmButton.SubWindow.HTR1002.UpdateAlarm(received_dic_c["Alarm"]["LOOPPID"]["HTR1002"])
         self.AlarmButton.SubWindow.HTR1002.Indicator.SetValue(
-            received_dic_c["data"]["LOOPPID"]["value"]["HTR1002"])
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1002"])
 
         self.AlarmButton.SubWindow.HTR1003.UpdateAlarm(received_dic_c["Alarm"]["LOOPPID"]["HTR1003"])
         self.AlarmButton.SubWindow.HTR1003.Indicator.SetValue(
-            received_dic_c["data"]["LOOPPID"]["value"]["HTR1003"])
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1003"])
 
         self.AlarmButton.SubWindow.HTR1004.UpdateAlarm(received_dic_c["Alarm"]["LOOPPID"]["HTR1004"])
         self.AlarmButton.SubWindow.HTR1004.Indicator.SetValue(
-            received_dic_c["data"]["LOOPPID"]["value"]["HTR1004"])
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1004"])
 
         self.AlarmButton.SubWindow.LL.UpdateAlarm(received_dic_c["Alarm"]["LL"]["LL"])
         self.AlarmButton.SubWindow.LL.Indicator.SetValue(
