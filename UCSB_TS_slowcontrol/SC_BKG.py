@@ -380,7 +380,7 @@ class PLC(QtCore.QObject):
 
         self.LL_dic = copy.copy(sec.LL_DIC)
         self.LL_address =  copy.copy(sec.LL_ADDRESS)
-        self.LL_lowLimit = copy.copy(sec.LL_LOWLIMIT)
+        self.LL_LowLimit = copy.copy(sec.LL_LOWLIMIT)
         self.LL_HighLimit = copy.copy(sec.LL_HIGHLIMIT)
         self.LL_Alarm= copy.copy(sec.LL_ALARM)
         self.LL_Activated = copy.copy(sec.LL_ACTIVATED)
@@ -420,7 +420,7 @@ class PLC(QtCore.QObject):
                             "nPT_Attribute": self.nPT_Attribute,
                             "LL_address":self.LL_address,
                             "LL_dic": self.LL_dic,
-                            "LL_LowLimit":self.LL_lowLimit,
+                            "LL_LowLimit":self.LL_LowLimit,
                             "LL_HighLimit":self.LL_HighLimit,
                             "LL_Activated":self.LL_Activated,
                             "LL_Alarm":self.LL_Alarm,
@@ -2995,7 +2995,7 @@ class UpdateServer(QtCore.QObject):
         self.Ini_Check_ini = sec.INI_CHECK
 
         self.LL_dic_ini = sec.LL_DIC
-        self.LL_lowLimit_ini = sec.LL_LOWLIMIT
+        self.LL_LowLimit_ini = sec.LL_LOWLIMIT
         self.LL_HighLimit_ini = sec.LL_HIGHLIMIT
         self.LL_Alarm_ini = sec.LL_ALARM
         self.LL_Activated_ini = sec.LL_ACTIVATED
@@ -3005,7 +3005,7 @@ class UpdateServer(QtCore.QObject):
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
                                   "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini, "low": self.LEFT_REAL_LowLimit_ini},
                                   "LL": {"value": self.LL_dic_ini, "high": self.LL_HighLimit_ini,
-                                         "low": self.LL_lowLimit_ini},
+                                         "low": self.LL_LowLimit_ini},
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
