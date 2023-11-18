@@ -3,7 +3,7 @@ BASE_ADDRESS= 12288
 # Initialization of Address, Value Matrix
 # TT_AD1_ADDRESS = {"TT1001": 30, "TT1002":1, "TT1003": 2, "TT1004": 3, "TT1005": 4,
 #                             "TT1006": 5, "TT1007": 6}
-TT_AD1_ADDRESS = {"TT1001": 30, "TT1002":32, "TT1003": 34, "TT1004": 36, "TT1005": 38,
+TT_AD1_ADDRESS = {"TT1001": 31, "TT1002":33, "TT1003": 34, "TT1004": 36, "TT1005": 38,
                               "TT1006": 40, "TT1007": 42}
 
 TT_AD2_ADDRESS = { "TT1008": 30}
