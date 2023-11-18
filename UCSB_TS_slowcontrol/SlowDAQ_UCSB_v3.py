@@ -2028,156 +2028,156 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1001"] == True:
-            self.PV1001.ButtonTransitionState(False)
+            self.PV1001.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV1001.ButtonTransitionState(True)
+            self.PV1001.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1002"] == True:
-            self.PV1002.ButtonTransitionState(False)
+            self.PV1002.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV1002.ButtonTransitionState(True)
+            self.PV1002.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1003"] == True:
-            self.PV1003.ButtonTransitionState(False)
+            self.PV1003.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV1003.ButtonTransitionState(True)
+            self.PV1003.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1004"] == True:
-            self.PV1004.ButtonTransitionState(False)
+            self.PV1004.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV1004.ButtonTransitionState(True)
+            self.PV1004.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1005"] == True:
-            self.PV1005.ButtonTransitionState(False)
+            self.PV1005.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV1005.ButtonTransitionState(True)
+            self.PV1005.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1006"] == True:
-            self.PV1006.ButtonTransitionState(False)
+            self.PV1006.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV1006.ButtonTransitionState(True)
+            self.PV1006.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1007"] == True:
-            self.PV1007.ButtonTransitionState(False)
+            self.PV1007.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV1007.ButtonTransitionState(True)
+            self.PV1007.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV1"] == True:
-            self.PV1.ButtonTransitionState(False)
+            self.PV1.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV1.ButtonTransitionState(True)
+            self.PV1.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV2"] == True:
-            self.PV2.ButtonTransitionState(False)
+            self.PV2.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV2.ButtonTransitionState(True)
+            self.PV2.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV3"] == True:
-            self.PV3.ButtonTransitionState(False)
+            self.PV3.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV3.ButtonTransitionState(True)
+            self.PV3.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV4"] == True:
-            self.PV4.ButtonTransitionState(False)
+            self.PV4.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV4.ButtonTransitionState(True)
+            self.PV4.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV5"] == True:
-            self.PV5.ButtonTransitionState(False)
+            self.PV5.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV5.ButtonTransitionState(True)
+            self.PV5.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV6"] == True:
-            self.PV6.ButtonTransitionState(False)
+            self.PV6.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV6.ButtonTransitionState(True)
+            self.PV6.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV7"] == True:
-            self.PV7.ButtonTransitionState(False)
+            self.PV7.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV7.ButtonTransitionState(True)
+            self.PV7.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV8"] == True:
-            self.PV8.ButtonTransitionState(False)
+            self.PV8.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV8.ButtonTransitionState(True)
+            self.PV8.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV9"] == True:
-            self.PV9.ButtonTransitionState(False)
+            self.PV9.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV9.ButtonTransitionState(True)
+            self.PV9.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV10"] == True:
-            self.PV10.ButtonTransitionState(False)
+            self.PV10.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV10.ButtonTransitionState(True)
+            self.PV10.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV11"] == True:
-            self.PV11.ButtonTransitionState(False)
+            self.PV11.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV11.ButtonTransitionState(True)
+            self.PV11.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV12"] == True:
-            self.PV12.ButtonTransitionState(False)
+            self.PV12.ButtonTransitionState(True)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
 
         else:
             # if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            self.PV12.ButtonTransitionState(True)
+            self.PV12.ButtonTransitionState(False)
 
 
 
@@ -2972,7 +2972,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR1001.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
         self.HTR1001.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1001"])
-        print(received_dic_c["data"]["LOOPPID"])
         self.HTR1001.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"][0])
         self.HTR1001.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1001"][1])
 
