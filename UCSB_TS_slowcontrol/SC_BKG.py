@@ -3149,8 +3149,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_HighLimit_ini[key] = self.PLC.TT_AD1_HighLimit[key]
         for key in self.PLC.TT_AD2_HighLimit:
             self.TT_AD2_HighLimit_ini[key] = self.PLC.TT_AD2_HighLimit[key]
-        for key in self.PLC.LL_HighLimit:
-            self.LL_HighLimit_ini[key] = self.PLC.LL_HighLimit[key]
+        # for key in self.PLC.LL_HighLimit:
+        #     self.LL_HighLimit_ini[key] = self.PLC.LL_HighLimit[key]
 
         for key in self.PLC.PT_HighLimit:
             self.PT_HighLimit_ini[key] = self.PLC.PT_HighLimit[key]
@@ -3161,8 +3161,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_LowLimit_ini[key] = self.PLC.TT_AD1_LowLimit[key]
         for key in self.PLC.TT_AD2_LowLimit:
             self.TT_AD2_LowLimit_ini[key] = self.PLC.TT_AD2_LowLimit[key]
-        for key in self.PLC.LL_LowLimit:
-            self.LL_LowLimit_ini[key] = self.PLC.LL_LowLimit[key]
+        # for key in self.PLC.LL_LowLimit:
+        #     self.LL_LowLimit_ini[key] = self.PLC.LL_LowLimit[key]
         for key in self.PLC.PT_LowLimit:
             self.PT_LowLimit_ini[key] = self.PLC.PT_LowLimit[key]
         for key in self.PLC.LEFT_REAL_LowLimit:
@@ -3173,8 +3173,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Activated_ini[key]= self.PLC.TT_AD1_Activated[key]
         for key in self.PLC.TT_AD2_Activated:
             self.TT_AD2_Activated_ini[key]= self.PLC.TT_AD2_Activated[key]
-        for key in self.PLC.LL_Activated:
-            self.LL_Activated_ini[key] = self.PLC.LL_Activated[key]
+        # for key in self.PLC.LL_Activated:
+        #     self.LL_Activated_ini[key] = self.PLC.LL_Activated[key]
         for key in self.PLC.PT_Activated:
             self.PT_Activated_ini[key]= self.PLC.PT_Activated[key]
         for key in self.PLC.LEFT_REAL_Activated:
@@ -3205,8 +3205,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Alarm_ini[key] = self.PLC.TT_AD1_Alarm[key]
         for key in self.PLC.TT_AD2_Alarm:
             self.TT_AD2_Alarm_ini[key] = self.PLC.TT_AD2_Alarm[key]
-        for key in self.PLC.LL_Alarm:
-            self.LL_Alarm_ini[key] = self.PLC.LL_Alarm[key]
+        # for key in self.PLC.LL_Alarm:
+        #     self.LL_Alarm_ini[key] = self.PLC.LL_Alarm[key]
         for key in self.PLC.PT_dic:
             self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
 
