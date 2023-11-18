@@ -726,7 +726,7 @@ class PLC(QtCore.QObject):
         else:
             print("AD2 lost connection to PLC")
             self.AD2_updatesignal = False
-            self.PLC_DISCON_SIGNAL.emit()
+            # self.PLC_DISCON_SIGNAL.emit()
         print("AD2", self.TT_AD2_dic)
 
 
@@ -4122,19 +4122,19 @@ if __name__ == "__main__":
 
     # print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
 
-    # App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
-    # sys.exit(App.exec_())
+    App = QtWidgets.QApplication(sys.argv)
+    Update=Update()
+    sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
     # Update.run()
 
 
-    PLC=PLC()
+    # PLC=PLC()
     # PLC.Read_LL()
     # PLC.Read_LS()
-    PLC.Read_AD()
+    # PLC.Read_AD()
     # PLC.ReadAll()
 
 
