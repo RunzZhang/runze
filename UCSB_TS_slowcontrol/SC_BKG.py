@@ -3205,8 +3205,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Alarm_ini[key] = self.PLC.TT_AD1_Alarm[key]
         for key in self.PLC.TT_AD2_Alarm:
             self.TT_AD2_Alarm_ini[key] = self.PLC.TT_AD2_Alarm[key]
-        # for key in self.PLC.LL_Alarm:
-        #     self.LL_Alarm_ini[key] = self.PLC.LL_Alarm[key]
+        for key in self.PLC.LL_Alarm:
+            self.LL_Alarm_ini[key] = self.PLC.LL_Alarm[key]
         for key in self.PLC.PT_dic:
             self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
 
