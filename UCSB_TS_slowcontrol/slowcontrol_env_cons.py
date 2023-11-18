@@ -1,8 +1,10 @@
 BASE_ADDRESS= 12288
 # real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
-TT_AD1_ADDRESS = {"TT1001": 40001, "TT1002":4002, "TT1003": 40003, "TT1004": 40004, "TT1005": 40005,
+TT_AD1_ADDRESS = {"TT1001": 40001, "TT1002":40002, "TT1003": 40003, "TT1004": 40004, "TT1005": 40005,
                               "TT1006": 40006, "TT1007": 40007}
+# TT_AD1_ADDRESS = {"TT1001": 30, "TT1002":32, "TT1003": 34, "TT1004": 36, "TT1005": 38,
+#                               "TT1006": 40, "TT1007": 42}
 
 TT_AD2_ADDRESS = { "TT1008": 30}
 
