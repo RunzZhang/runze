@@ -1741,7 +1741,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
             self.PV3.Set.ButtonLClicked()
         else:
-            self.PV1003.Set.ButtonRClicked()
+            self.PV3.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
             self.PV4.Set.ButtonLClicked()
