@@ -696,8 +696,8 @@ class PLC(QtCore.QObject):
                 Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD1_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1), Raw_RTDs_AD1[key].getRegister(0)))[0], 3)
-                print(key, read_value)
-                if read_value < 849:
+                # print(key, read_value)
+                if read_value < 200:
 
                     self.TT_AD1_dic[key] = 273.15 + read_value
                 else:
@@ -4122,19 +4122,19 @@ if __name__ == "__main__":
 
     # print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
 
-    # App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
-    # sys.exit(App.exec_())
+    App = QtWidgets.QApplication(sys.argv)
+    Update=Update()
+    sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
     # Update.run()
 
 
-    PLC=PLC()
+    # PLC=PLC()
     # PLC.Read_LL()
     # PLC.Read_LS()
-    PLC.Read_AD()
+    # PLC.Read_AD()
     # PLC.ReadAll()
 
 
