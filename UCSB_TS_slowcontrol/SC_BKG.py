@@ -2669,7 +2669,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.LL_Alarm[pid] = True
         # and send email or slack messages
         # every time interval send a alarm message
-        print("LL alarm",self.LL_para[pid])
+        print("LL alarm",self.PLC.LL_Alarm)
         if self.LL_para[pid] >= self.LL_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.LL_dic[pid],
                                                                                                                      high=self.PLC.LL_HighLimit[pid], low=self.PLC.LL_LowLimit[pid])
