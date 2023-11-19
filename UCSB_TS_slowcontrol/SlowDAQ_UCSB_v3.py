@@ -1697,106 +1697,106 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # refreshing the valve status from PLC every 30s
 
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1001"]:
-            self.PV1001.Set.ButtonLClicked()
-        else:
-            self.PV1001.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1002"]:
-            self.PV1002.Set.ButtonLClicked()
-        else:
-            self.PV1002.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1003"]:
-            self.PV1003.Set.ButtonLClicked()
-        else:
-            self.PV1003.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1004"]:
-            self.PV1004.Set.ButtonLClicked()
-        else:
-            self.PV1004.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1005"]:
-            self.PV1005.Set.ButtonLClicked()
-        else:
-            self.PV1005.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1006"]:
-            self.PV1006.Set.ButtonLClicked()
-        else:
-            self.PV1006.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV1007.Set.ButtonLClicked()
-        else:
-            self.PV1007.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV1.Set.ButtonLClicked()
-        else:
-            self.PV1.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV2.Set.ButtonLClicked()
-        else:
-            self.PV2.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV3.Set.ButtonLClicked()
-        else:
-            self.PV3.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV4.Set.ButtonLClicked()
-        else:
-            self.PV4.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV5.Set.ButtonLClicked()
-        else:
-            self.PV5.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV6.Set.ButtonLClicked()
-        else:
-            self.PV6.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV7.Set.ButtonLClicked()
-        else:
-            self.PV7.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV8.Set.ButtonLClicked()
-        else:
-            self.PV8.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV9.Set.ButtonLClicked()
-        else:
-            self.PV9.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV10.Set.ButtonLClicked()
-        else:
-            self.PV10.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV10.Set.ButtonLClicked()
-        else:
-            self.PV10.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV11.Set.ButtonLClicked()
-        else:
-            self.PV11.Set.ButtonRClicked()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-            self.PV12.Set.ButtonLClicked()
-        else:
-            self.PV12.Set.ButtonRClicked()
-
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1001"]:
+        #     self.PV1001.Set.ButtonLClicked()
+        # else:
+        #     self.PV1001.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1002"]:
+        #     self.PV1002.Set.ButtonLClicked()
+        # else:
+        #     self.PV1002.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1003"]:
+        #     self.PV1003.Set.ButtonLClicked()
+        # else:
+        #     self.PV1003.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1004"]:
+        #     self.PV1004.Set.ButtonLClicked()
+        # else:
+        #     self.PV1004.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1005"]:
+        #     self.PV1005.Set.ButtonLClicked()
+        # else:
+        #     self.PV1005.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1006"]:
+        #     self.PV1006.Set.ButtonLClicked()
+        # else:
+        #     self.PV1006.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV1007.Set.ButtonLClicked()
+        # else:
+        #     self.PV1007.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV1.Set.ButtonLClicked()
+        # else:
+        #     self.PV1.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV2.Set.ButtonLClicked()
+        # else:
+        #     self.PV2.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV3.Set.ButtonLClicked()
+        # else:
+        #     self.PV3.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV4.Set.ButtonLClicked()
+        # else:
+        #     self.PV4.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV5.Set.ButtonLClicked()
+        # else:
+        #     self.PV5.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV6.Set.ButtonLClicked()
+        # else:
+        #     self.PV6.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV7.Set.ButtonLClicked()
+        # else:
+        #     self.PV7.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV8.Set.ButtonLClicked()
+        # else:
+        #     self.PV8.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV9.Set.ButtonLClicked()
+        # else:
+        #     self.PV9.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV10.Set.ButtonLClicked()
+        # else:
+        #     self.PV10.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV10.Set.ButtonLClicked()
+        # else:
+        #     self.PV10.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV11.Set.ButtonLClicked()
+        # else:
+        #     self.PV11.Set.ButtonRClicked()
+        #
+        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
+        #     self.PV12.Set.ButtonLClicked()
+        # else:
+        #     self.PV12.Set.ButtonRClicked()
+        #
 
         self.PT1000.SetValue(received_dic_c["data"]["PT"]["value"]["PT1000"])
         self.PT1001.SetValue(received_dic_c["data"]["PT"]["value"]["PT1001"])
