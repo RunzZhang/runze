@@ -534,11 +534,11 @@ class PLC(QtCore.QObject):
         self.Client_BO.close()
 
     def UpdateSignal(self):
-        print("udpate signal")
+        # print("udpate signal")
         if self.AD1_updatesignal or self.AD2_updatesignal or self.LS1_updatesignal or self.LS2_updatesignal or self.BO_updatesignal or self.LL_updatesignal:
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
             self.DATA_TRI_SIGNAL.emit(True)
-            print("signal sent")
+            # print("signal sent")
             # print(True,'\n',True,"\n",True,"\n")
             self.NewData_Display = True
             self.NewData_Database = True
@@ -570,7 +570,7 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_OUT[key] = Raw_LS_power[key]
-            print(self.LOOPPID_OUT)
+            # print(self.LOOPPID_OUT)
             for key in self.LOOPPID_ADR_BASE:
                 if float(self.LOOPPID_OUT[key])>0:
                     self.LOOPPID_EN[key] = True
@@ -603,7 +603,7 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_TT[key] = Raw_LS_TT[key]
-            print("HTR RTDs",self.LOOPPID_TT)
+            # print("HTR RTDs",self.LOOPPID_TT)
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
 
@@ -612,8 +612,8 @@ class PLC(QtCore.QObject):
             self.LS1_updatesignal = False
             self.LS2_updatesignal = False
             # self.PLC_DISCON_SIGNAL.emit()
-        print("LS_power", Raw_LS_power)
-        print("LS_TT", Raw_LS_TT)
+        # print("LS_power", Raw_LS_power)
+        # print("LS_TT", Raw_LS_TT)
 
 
 
@@ -641,7 +641,7 @@ class PLC(QtCore.QObject):
                     # self.socket_LL.settimeout(1)
                     commandN2 = "MEASure:N2:LEVel?\n"
                     # commandN2 = "*IDN?\n"
-                    print("command", commandN2)
+                    # print("command", commandN2)
                     cm_codeN2 = commandN2.encode()
                     # print(cm_codeN2)
                     self.socket_LL.send(cm_codeN2)
@@ -651,7 +651,7 @@ class PLC(QtCore.QObject):
                     self.socket_LL.close()
                     value = dataN2.decode()
                     trimed_value = value.replace("\r\n", "")
-                    print("fetched data N2", trimed_value)
+                    # print("fetched data N2", trimed_value)
                     self.LL_dic[key]= float(trimed_value)
 
                     # commandHE = "MEASure:HE:LEVel?\n"
@@ -664,7 +664,7 @@ class PLC(QtCore.QObject):
                     # self.LL_updatesignal = True
                     # self.socket_LL.close()
 
-                print(self.LL_dic)
+                # print(self.LL_dic)
         except:
             self.LL_updatesignal = False
             return 0
@@ -988,7 +988,7 @@ class PLC(QtCore.QObject):
                 self.LEFT_REAL_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
                                                     Raw_BO_REAL[key].getRegister(0)))[0], 3)
-            print(self.LEFT_REAL_dic)
+            # print(self.LEFT_REAL_dic)
 
                 # print(key, "'s' value is", self.PT_dic[key])
 
@@ -2476,6 +2476,7 @@ class UpdatePLC(QtCore.QObject):
 
                         # self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                         self.AI_slack_alarm.emit(self.alarm_stack)
+                        self.alarm_stack = ""
                     else:
                         pass
                         # self.alarm_db.ssh_write()
