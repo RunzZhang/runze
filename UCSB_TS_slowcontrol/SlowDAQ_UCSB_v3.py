@@ -3453,13 +3453,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.AlarmButton.ButtonAlarmSetSignal()
             self.AlarmButton.SubWindow.ReassignRTD1Order()
             self.AlarmButton.SubWindow.ReassignRTD2Order()
-            self.AlarmButton.SubWindow.ReassignRTD3Order()
-            self.AlarmButton.SubWindow.ReassignRTD4Order()
+            # self.AlarmButton.SubWindow.ReassignRTD3Order()
+            # self.AlarmButton.SubWindow.ReassignRTD4Order()
             self.AlarmButton.SubWindow.ReassignRTDLEFTOrder()
             self.AlarmButton.SubWindow.ReassignPTOrder()
             self.AlarmButton.SubWindow.ReassignLEFTOrder()
-            self.AlarmButton.SubWindow.ReassignDinOrder()
-            self.AlarmButton.SubWindow.ReassignHTROrder()
+            # self.AlarmButton.SubWindow.ReassignDinOrder()
+            # self.AlarmButton.SubWindow.ReassignHTROrder()
 
 
 

@@ -2419,6 +2419,8 @@ class UpdatePLC(QtCore.QObject):
         self.TT_AD2_rate = sec.TT_AD2_RATE
         self.PT_para = sec.PT_PARA
         self.PT_rate = sec.PT_RATE
+        self.LL_para = sec.TT_AD2_PARA
+        self.LL_rate = sec.TT_AD2_RATE
         self.PR_CYCLE_para = 0
         self.PR_CYCLE_rate = 30
         self.LEFT_REAL_para = sec.LEFT_REAL_PARA
