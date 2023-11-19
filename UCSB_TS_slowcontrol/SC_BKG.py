@@ -163,8 +163,7 @@ class PLC(QtCore.QObject):
 
         self.TT_AD1_address = copy.copy(sec.TT_AD1_ADDRESS)
         self.TT_AD2_address = copy.copy(sec.TT_AD2_ADDRESS)
-
-
+        self.HTRTD_address = copy.copy(sec.HTRTD_ADDRESS)
         self.PT_address = copy.copy(sec.PT_ADDRESS)
 
         self.LEFT_REAL_address = copy.copy(sec.LEFT_REAL_ADDRESS)
@@ -172,7 +171,7 @@ class PLC(QtCore.QObject):
         self.TT_AD1_dic = copy.copy(sec.TT_AD1_DIC)
         self.TT_AD2_dic = copy.copy(sec.TT_AD2_DIC)
 
-
+        self.HTRTD_dic = copy.copy(sec.HTRTD_DIC)
 
         self.PT_dic = copy.copy(sec.PT_DIC)
 
@@ -186,7 +185,8 @@ class PLC(QtCore.QObject):
 
         self.TT_AD2_HighLimit = copy.copy(sec.TT_AD2_HIGHLIMIT)
 
-
+        self.HTRTD_LowLimit = copy.copy(sec.HTRTD_LOWLIMIT)
+        self.HTRTD_HighLimit = copy.copy(sec.HTRTD_HIGHLIMIT)
         self.PT_LowLimit = copy.copy(sec.PT_LOWLIMIT)
         self.PT_HighLimit = copy.copy(sec.PT_HIGHLIMIT)
 
@@ -195,12 +195,13 @@ class PLC(QtCore.QObject):
 
         self.TT_AD1_Activated = copy.copy(sec.TT_AD1_ACTIVATED)
         self.TT_AD2_Activated = copy.copy(sec.TT_AD2_ACTIVATED)
-
+        self.HTRTD_Activated = copy.copy(sec.HTRTD_ACTIVATED)
         self.PT_Activated = copy.copy(sec.PT_ACTIVATED)
         self.LEFT_REAL_Activated = copy.copy(sec.LEFT_REAL_ACTIVATED)
 
         self.TT_AD1_Alarm = copy.copy(sec.TT_AD1_ALARM)
         self.TT_AD2_Alarm = copy.copy(sec.TT_AD2_ALARM)
+        self.HTRTD_Alarm = copy.copy(sec.HTRTD_ALARM)
 
         self.PT_Alarm = copy.copy(sec.PT_ALARM)
         self.LEFT_REAL_Alarm = copy.copy(sec.LEFT_REAL_ALARM)
@@ -209,6 +210,7 @@ class PLC(QtCore.QObject):
 
         self.nTT_AD1 = copy.copy(sec.NTT_AD1)
         self.nTT_AD2 = copy.copy(sec.NTT_AD2)
+        self.nHTRTD = copy.copy(sec.NHTRTD)
         self.nPT = copy.copy(sec.NPT)
         self.nREAL = copy.copy(sec.NREAL)
 
@@ -388,32 +390,39 @@ class PLC(QtCore.QObject):
 
         self.signal_data = {"TT_AD1_address": self.TT_AD1_address,
                             "TT_AD2_address": self.TT_AD2_address,
+                            "HTRTD_address":self.HTRTD_address,
                             "PT_address": self.PT_address,
                             "LEFT_REAL_address": self.LEFT_REAL_address,
                             "TT_AD1_dic": self.TT_AD1_dic,
                             "TT_AD2_dic": self.TT_AD2_dic,
+                            "HTRTD_dic":self.HTRTD_dic,
                             "PT_dic": self.PT_dic,
                             "LEFT_REAL_dic": self.LEFT_REAL_dic,
                             "TT_AD1_LowLimit": self.TT_AD1_LowLimit,
                             "TT_AD1_HighLimit": self.TT_AD1_HighLimit,
                             "TT_AD2_LowLimit": self.TT_AD2_LowLimit,
                             "TT_AD2_HighLimit": self.TT_AD2_HighLimit,
+                            "HTRTD_LowLimit": self.HTRTD_LowLimit,
+                            "HTRTD_HighLimit": self.HTRTD_HighLimit,
                             "PT_LowLimit": self.PT_LowLimit,
                             "PT_HighLimit": self.PT_HighLimit,
                             "LEFT_REAL_HighLimit": self.LEFT_REAL_HighLimit,
                             "LEFT_REAL_LowLimit": self.LEFT_REAL_LowLimit,
                             "TT_AD1_Activated": self.TT_AD1_Activated,
                             "TT_AD2_Activated": self.TT_AD2_Activated,
+                            "HTRTD_Activated": self.HTRTD_Activated,
                             "PT_Activated": self.PT_Activated,
                             "LEFT_REAL_Activated": self.LEFT_REAL_Activated,
                             "TT_AD1_Alarm": self.TT_AD1_Alarm,
                             "TT_AD2_Alarm": self.TT_AD2_Alarm,
+                            "HTRTD_Alarm": self.HTRTD_Alarm,
                             "PT_Alarm": self.PT_Alarm,
                             "LEFT_REAL_Alarm": self.LEFT_REAL_Alarm,
                             "MainAlarm": self.MainAlarm,
                             "MAN_SET": self.MAN_SET,
                             "nTT_AD1": self.nTT_AD1,
                             "nTT_AD2": self.nTT_AD2,
+                            "nHTRTD":self.nHTRTD,
                             "nPT": self.nPT,
                             "nREAL": self.nREAL,
                             "PT_setting": self.PT_setting,
@@ -577,32 +586,58 @@ class PLC(QtCore.QObject):
                 else:
                     self.LOOPPID_EN[key] = False
 
-            for key in self.LOOPPID_ADR_BASE:
+            # for key in self.LOOPPID_ADR_BASE:
+            #     command_base = "KRDG?"
+            #     # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
+            #     command_middle = "0"
+            #     command = command_base+command_middle+"\n"
+            #     # command = command_base + "\n"
+            #     if self.LOOPPID_ADR_BASE[key][0]==0:
+            #         self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            #         self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
+            #         cm_code = command.encode()
+            #         self.socket_LS1.send(cm_code)
+            #         output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
+            #         i = self.LOOPPID_ADR_BASE[key][1]
+            #         Raw_LS_TT[key] = (output_tuple[2*i],output_tuple[2*i+1])
+            #         self.socket_LS1.close()
+            #     if self.LOOPPID_ADR_BASE[key][0]==1:
+            #         self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            #         self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
+            #         cm_code = command.encode()
+            #         self.socket_LS2.send(cm_code)
+            #         output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
+            #         i = self.LOOPPID_ADR_BASE[key][1]
+            #         Raw_LS_TT[key] = (output_tuple[2 * i], output_tuple[2 * i + 1])
+            #         self.socket_LS2.close()
+            # for key in self.LOOPPID_ADR_BASE:
+            #     self.LOOPPID_TT[key] = Raw_LS_TT[key]
+            for key in self.HTRTD_address:
                 command_base = "KRDG?"
                 # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
                 command_middle = "0"
                 command = command_base+command_middle+"\n"
                 # command = command_base + "\n"
-                if self.LOOPPID_ADR_BASE[key][0]==0:
+                if self.HTRTD_address[key][0]==0:
                     self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
                     cm_code = command.encode()
                     self.socket_LS1.send(cm_code)
                     output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
-                    i = self.LOOPPID_ADR_BASE[key][1]
-                    Raw_LS_TT[key] = (output_tuple[2*i],output_tuple[2*i+1])
+
+                    Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
                     self.socket_LS1.close()
-                if self.LOOPPID_ADR_BASE[key][0]==1:
+                if self.HTRTD_address[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
                     cm_code = command.encode()
                     self.socket_LS2.send(cm_code)
                     output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
-                    i = self.LOOPPID_ADR_BASE[key][1]
-                    Raw_LS_TT[key] = (output_tuple[2 * i], output_tuple[2 * i + 1])
+                    # combining 2nd digit and 3rd digit to get final address
+                    Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
                     self.socket_LS2.close()
-            for key in self.LOOPPID_ADR_BASE:
-                self.LOOPPID_TT[key] = Raw_LS_TT[key]
+            for key in self.HTRTD_address:
+                self.HTRTD_dic[key] = Raw_LS_TT[key]
             # print("HTR RTDs",self.LOOPPID_TT)
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
@@ -1830,19 +1865,24 @@ class UpdateDataBase(QtCore.QObject):
         # INITIALIZATION
         self.TT_AD1_address = copy.copy(sec.TT_AD1_ADDRESS)
         self.TT_AD2_address = copy.copy(sec.TT_AD2_ADDRESS)
+        self.HTRTD_address = copy.copy(sec.HTRTD_ADDRESS)
         self.PT_address = copy.copy(sec.PT_ADDRESS)
         self.LL_address = copy.copy(sec.LL_ADDRESS)
         self.LEFT_REAL_address = copy.copy(sec.LEFT_REAL_ADDRESS)
         self.TT_AD1_dic = copy.copy(sec.TT_AD1_DIC)
         self.TT_AD2_dic = copy.copy(sec.TT_AD2_DIC)
+        self.HTRTD_dic = copy.copy(sec.HTRTD_DIC)
         self.PT_dic = copy.copy(sec.PT_DIC)
         self.LL_dic = copy.copy(sec.LL_DIC)
         self.LEFT_REAL_dic = copy.copy(sec.LEFT_REAL_DIC)
         self.TT_AD1_LowLimit = copy.copy(sec.TT_AD1_LOWLIMIT)
         self.TT_AD1_HighLimit = copy.copy(sec.TT_AD1_HIGHLIMIT)
 
+
         self.TT_AD2_LowLimit = copy.copy(sec.TT_AD2_LOWLIMIT)
         self.TT_AD2_HighLimit = copy.copy(sec.TT_AD2_HIGHLIMIT)
+        self.HTRTD_LowLimit = copy.copy(sec.HTRTD_LOWLIMIT)
+        self.HTRTD_HighLimit = copy.copy(sec.HTRTD_HIGHLIMIT)
 
         self.PT_LowLimit = copy.copy(sec.PT_LOWLIMIT)
         self.PT_HighLimit = copy.copy(sec.PT_HIGHLIMIT)
@@ -1851,17 +1891,20 @@ class UpdateDataBase(QtCore.QObject):
         self.LEFT_REAL_LowLimit = copy.copy(sec.LEFT_REAL_LOWLIMIT)
         self.TT_AD1_Activated = copy.copy(sec.TT_AD1_ACTIVATED)
         self.TT_AD2_Activated = copy.copy(sec.TT_AD2_ACTIVATED)
+        self.HTRTD_Activated = copy.copy(sec.HTRTD_ACTIVATED)
         self.PT_Activated = copy.copy(sec.PT_ACTIVATED)
         self.LEFT_REAL_Activated = copy.copy(sec.LEFT_REAL_ACTIVATED)
 
         self.TT_AD1_Alarm = copy.copy(sec.TT_AD1_ALARM)
         self.TT_AD2_Alarm = copy.copy(sec.TT_AD2_ALARM)
+        self.HTRTD_Alarm = copy.copy(sec.HTRTD_ALARM)
         self.PT_Alarm = copy.copy(sec.PT_ALARM)
         self.LEFT_REAL_Alarm = copy.copy(sec.LEFT_REAL_ALARM)
         self.MainAlarm = copy.copy(sec.MAINALARM)
         self.MAN_SET = copy.copy(sec.MAN_SET)
         self.nTT_AD1 = copy.copy(sec.NTT_AD1)
         self.nTT_AD2 = copy.copy(sec.NTT_AD2)
+        self.nHTRTD = copy.copy(sec.NHTRTD)
         self.nPT = copy.copy(sec.NPT)
         self.nREAL = copy.copy(sec.NREAL)
 
@@ -2093,6 +2136,8 @@ class UpdateDataBase(QtCore.QObject):
             self.TT_AD1_dic[key] = dic["TT_AD1_dic"][key]
         for key in self.TT_AD2_dic:
             self.TT_AD2_dic[key] = dic["TT_AD2_dic"][key]
+        for key in self.HTRTD_dic:
+            self.HTRTD_dic[key] = dic["HTRTD_dic"][key]
 
         for key in self.PT_dic:
             self.PT_dic[key] = dic["PT_dic"][key]
@@ -2102,6 +2147,8 @@ class UpdateDataBase(QtCore.QObject):
             self.TT_AD1_HighLimit[key] = dic["TT_AD1_HighLimit"][key]
         for key in self.TT_AD2_HighLimit:
             self.TT_AD2_HighLimit[key] = dic["TT_AD2_HighLimit"][key]
+        for key in self.HTRTD_HighLimit:
+            self.HTRTD_HighLimit[key] = dic["HTRTD_HighLimit"][key]
 
         for key in self.PT_HighLimit:
             self.PT_HighLimit[key] = dic["PT_HighLimit"][key]
@@ -2112,6 +2159,8 @@ class UpdateDataBase(QtCore.QObject):
             self.TT_AD1_LowLimit[key] = dic["TT_AD1_LowLimit"][key]
         for key in self.TT_AD2_LowLimit:
             self.TT_AD2_LowLimit[key] = dic["TT_AD2_LowLimit"][key]
+        for key in self.HTRTD_LowLimit:
+            self.HTRTD_LowLimit[key] = dic["HTRTD_LowLimit"][key]
 
         for key in self.PT_LowLimit:
             self.PT_LowLimit[key] = dic["PT_LowLimit"][key]
@@ -2142,6 +2191,8 @@ class UpdateDataBase(QtCore.QObject):
             self.TT_AD1_Alarm[key] = dic["TT_AD1_Alarm"][key]
         for key in self.TT_AD2_Alarm:
             self.TT_AD2_Alarm[key] = dic["TT_AD2_Alarm"][key]
+        for key in self.HTRTD_Alarm:
+            self.HTRTD_Alarm[key] = dic["HTRTD_Alarm"][key]
         for key in self.PT_dic:
             self.PT_Alarm[key] = dic["PT_Alarm"][key]
         for key in self.LEFT_REAL_dic:
@@ -2233,6 +2284,12 @@ class UpdateDataBase(QtCore.QObject):
         if self.para_TT >= self.rate_TT:
             for key in self.TT_AD2_dic:
                 self.db.insert_data_into_stack(key, self.dt, self.TT_AD2_dic[key])
+            # print("write RTDS")
+            self.commit_bool = True
+            self.para_TT = 0
+        if self.para_TT >= self.rate_TT:
+            for key in self.HTRTD_dic:
+                self.db.insert_data_into_stack(key, self.dt, self.HTRTD_dic[key])
             # print("write RTDS")
             self.commit_bool = True
             self.para_TT = 0
@@ -2417,6 +2474,9 @@ class UpdatePLC(QtCore.QObject):
         self.TT_AD1_rate = sec.TT_AD1_RATE
         self.TT_AD2_para = sec.TT_AD2_PARA
         self.TT_AD2_rate = sec.TT_AD2_RATE
+        self.HTRTD_para = sec.HTRTD_PARA
+        self.HTRTD_rate = sec.HTRTD_RATE
+
         self.PT_para = sec.PT_PARA
         self.PT_rate = sec.PT_RATE
         self.LL_para = sec.LL_PARA
@@ -2454,6 +2514,8 @@ class UpdatePLC(QtCore.QObject):
                         self.check_TT_AD1_alarm(keyTT_AD1)
                     for keyTT_AD2 in self.PLC.TT_AD2_dic:
                         self.check_TT_AD2_alarm(keyTT_AD2)
+                    for keyHTRTD in self.PLC.HTRTD_dic:
+                        self.check_HTRTD_alarm(keyHTRTD)
                     for keyPT in self.PLC.PT_dic:
                         self.check_PT_alarm(keyPT)
                     for keyLL in self.PLC.LL_dic:
@@ -2475,6 +2537,7 @@ class UpdatePLC(QtCore.QObject):
                     print("stack1"+"\n", "111", str(self.alarm_stack))
                     print(self.alarm_stack == "", self.PLC.MainAlarm)
                     if self.PLC.MainAlarm:
+                        # if there is an alarm, every para time, it trigger a message
                         if self.mainalarm_para>= self.mainalarm_rate:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
 
@@ -2486,7 +2549,7 @@ class UpdatePLC(QtCore.QObject):
                             self.mainalarm_para = 0
                         self.mainalarm_para+=1
                     else:
-                        pass
+                        self.mainalarm_para = 0
                         # self.alarm_db.ssh_write()
                 except:
                     self.AI_slack_alarm.emit("failed to ssh to PICO watchdog in PLC update module")
@@ -2507,21 +2570,21 @@ class UpdatePLC(QtCore.QObject):
     @QtCore.Slot()
     def stack_alarm_msg(self, string):
         self.alarm_stack= self.alarm_stack+"\n" +str(string)
-        print("stack2", self.alarm_stack)
+        # print("stack2", self.alarm_stack)
 
     def check_LL_alarm(self, pid):
-        print("check alarm status")
+        # print("check alarm status")
         if self.PLC.LL_Activated[pid]:
             if float(self.PLC.LL_LowLimit[pid]) >= float(self.PLC.LL_HighLimit[pid]):
-                print("Low limit should be less than high limit!")
+                # print("Low limit should be less than high limit!")
             else:
                 if float(self.PLC.LL_dic[pid]) <= float(self.PLC.LL_LowLimit[pid]):
-                    print(pid , " reading is lower than the low limit")
+                    # print(pid , " reading is lower than the low limit")
                     self.LLalarmmsg(pid)
 
 
                 elif float(self.PLC.LL_dic[pid]) >= float(self.PLC.LL_HighLimit[pid]):
-                    print(pid,  " reading is higher than the high limit")
+                    # print(pid,  " reading is higher than the high limit")
                     self.LLalarmmsg(pid)
 
 
@@ -2575,6 +2638,28 @@ class UpdatePLC(QtCore.QObject):
         else:
             self.resetTTAD2alarmmsg(pid)
             pass
+    def check_HTRTD_alarm(self, pid):
+
+        if self.PLC.HTRTD_Activated[pid]:
+            if float(self.PLC.HTRTD_LowLimit[pid]) >= float(self.PLC.HTRTD_HighLimit[pid]):
+                print("Low limit should be less than high limit!")
+            else:
+                if float(self.PLC.HTRTD_dic[pid]) <= float(self.PLC.HTRTD_LowLimit[pid]):
+                    self.HTRTDalarmmsg(pid)
+
+                    # print(pid , " reading is lower than the low limit")
+                elif float(self.PLC.HTRTD_dic[pid]) >= float(self.PLC.HTRTD_HighLimit[pid]):
+                    self.HTRTDalarmmsg(pid)
+
+                    # print(pid,  " reading is higher than the high limit")
+                else:
+                    self.resetHTRTDalarmmsg(pid)
+                    # print(pid, " is in normal range")
+
+        else:
+            self.resetHTRTDalarmmsg(pid)
+            pass
+
 
     def check_PT_alarm(self, pid):
 
@@ -2675,7 +2760,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.LL_Alarm[pid] = True
         # and send email or slack messages
         # every time interval send a alarm message
-        print("LL alarm",self.LL_para,self.PLC.LL_Alarm)
+        # print("LL alarm",self.LL_para,self.PLC.LL_Alarm)
         if self.LL_para[pid] >= self.LL_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.LL_dic[pid],
                                                                                                                      high=self.PLC.LL_HighLimit[pid], low=self.PLC.LL_LowLimit[pid])
@@ -2724,6 +2809,26 @@ class UpdatePLC(QtCore.QObject):
     def resetTTAD2alarmmsg(self, pid):
         self.PLC.TT_AD2_Alarm[pid] = False
         # self.TT_AD2_para = 0
+        # and send email or slack messages
+
+    def HTRTDalarmmsg(self, pid):
+        self.PLC.HTRTD_Alarm[pid] = True
+        # and send email or slack messages
+        # every time interval send a alarm message
+        print(self.HTRTD_para[pid])
+        if self.HTRTD_para[pid] >= self.HTRTD_rate[pid]:
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.HTRTD_dic[pid],
+                                                                                                                     high=self.PLC.HTRTD_HighLimit[pid], low=self.PLC.HTRTD_LowLimit[pid])
+            # self.message_manager.tencent_alarm(msg)
+            # self.AI_slack_alarm.emit(msg)
+            self.stack_alarm_msg(msg)
+
+            self.HTRTD_para[pid] = 0
+        self.HTRTD_para[pid] += 1
+
+    def resetHTRTDalarmmsg(self, pid):
+        self.PLC.HTRTD_Alarm[pid] = False
+        # self.HTRTD_para = 0
         # and send email or slack messages
 
     def PTalarmmsg(self, pid):
@@ -2800,7 +2905,7 @@ class UpdatePLC(QtCore.QObject):
 
     def or_alarm_signal(self):
         # print("or alarm",self.true_in_dic(self.PLC.LL_Alarm))
-        if (self.true_in_dic(self.PLC.PT_Alarm)) or (self.true_in_dic(self.PLC.TT_AD1_Alarm)) or(self.true_in_dic(self.PLC.TT_AD2_Alarm)) or (self.true_in_dic(self.PLC.LEFT_REAL_Alarm)) or (self.true_in_dic(self.PLC.Din_Alarm)) or (self.true_in_dic(self.PLC.LOOPPID_Alarm)) or (self.true_in_dic(self.PLC.LL_Alarm)):
+        if (self.true_in_dic(self.PLC.PT_Alarm)) or (self.true_in_dic(self.PLC.TT_AD1_Alarm)) or(self.true_in_dic(self.PLC.TT_AD2_Alarm)) or (self.true_in_dic(self.PLC.LEFT_REAL_Alarm)) or (self.true_in_dic(self.PLC.Din_Alarm)) or (self.true_in_dic(self.PLC.LOOPPID_Alarm)) or (self.true_in_dic(self.PLC.LL_Alarm) or (self.true_in_dic(self.PLC.HTRTD_Alarm))):
             self.PLC.MainAlarm = True
         else:
             self.PLC.MainAlarm = False
@@ -2914,20 +3019,25 @@ class UpdateServer(QtCore.QObject):
 
         self.TT_AD1_dic_ini = sec.TT_AD1_DIC
         self.TT_AD2_dic_ini = sec.TT_AD2_DIC
+        self.HTRTD_dic_ini = sec.HTRTD_DIC
         self.PT_dic_ini = sec.PT_DIC
         self.LEFT_REAL_ini = sec.LEFT_REAL_DIC
         self.TT_AD1_LowLimit_ini = sec.TT_AD1_LOWLIMIT
         self.TT_AD1_HighLimit_ini = sec.TT_AD1_HIGHLIMIT
         self.TT_AD2_LowLimit_ini = sec.TT_AD2_LOWLIMIT
         self.TT_AD2_HighLimit_ini = sec.TT_AD2_HIGHLIMIT
+        self.HTRTD_LowLimit_ini = sec.HTRTD_LOWLIMIT
+        self.HTRTD_HighLimit_ini = sec.HTRTD_HIGHLIMIT
         self.PT_LowLimit_ini = sec.PT_LOWLIMIT
         self.PT_HighLimit_ini = sec.PT_HIGHLIMIT
         self.LEFT_REAL_LowLimit_ini = sec.LEFT_REAL_LOWLIMIT
         self.LEFT_REAL_HighLimit_ini = sec.LEFT_REAL_HIGHLIMIT
         self.TT_AD1_Alarm_ini = sec.TT_AD1_ALARM
         self.TT_AD2_Alarm_ini = sec.TT_AD2_ALARM
+        self.HTRTD_Alarm_ini = sec.HTRTD_ALARM
         self.TT_AD1_Activated_ini = sec.TT_AD1_ACTIVATED
         self.TT_AD2_Activated_ini = sec.TT_AD2_ACTIVATED
+        self.HTRTD_Activated_ini = sec.HTRTD_ACTIVATED
         self.PT_Activated_ini = sec.PT_ACTIVATED
         self.PT_Alarm_ini = sec.PT_ALARM
         self.LEFT_REAL_Activated_ini = sec.LEFT_REAL_ACTIVATED
@@ -3025,7 +3135,8 @@ class UpdateServer(QtCore.QObject):
         self.LL_Activated_ini = sec.LL_ACTIVATED
 
         self.data_dic = {"data": {"TT": {"AD1": {"value": self.TT_AD1_dic_ini, "high": self.TT_AD1_HighLimit_ini, "low": self.TT_AD1_LowLimit_ini},
-                                         "AD2": {"value": self.TT_AD2_dic_ini, "high": self.TT_AD2_HighLimit_ini, "low": self.TT_AD2_LowLimit_ini}},
+                                         "AD2": {"value": self.TT_AD2_dic_ini, "high": self.TT_AD2_HighLimit_ini, "low": self.TT_AD2_LowLimit_ini},
+                                         "LS":{"value": self.HTRTD_dic_ini, "high": self.HTRTD_HighLimit_ini, "low": self.HTRTD_HighLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
                                   "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini, "low": self.LEFT_REAL_LowLimit_ini},
                                   "LL": {"value": self.LL_dic_ini, "high": self.LL_HighLimit_ini,
@@ -3095,7 +3206,8 @@ class UpdateServer(QtCore.QObject):
                                   "PARA_T":self.PARAM_T_DIC_ini,
                                   "TIME":self.TIME_DIC_ini},
                          "Alarm": {"TT": {"AD1": self.TT_AD1_Alarm_ini,
-                                          "AD2": self.TT_AD2_Alarm_ini
+                                          "AD2": self.TT_AD2_Alarm_ini,
+                                          "LS":self.HTRTD_Alarm_ini
                                           },
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
@@ -3103,7 +3215,8 @@ class UpdateServer(QtCore.QObject):
                                    "LOOPPID": self.LOOPPID_Alarm_ini,
                                    "LL":self.LL_Alarm_ini},
                          "Active": {"TT": {"AD1": self.TT_AD1_Activated_ini,
-                                           "AD2": self.TT_AD2_Activated_ini},
+                                           "AD2": self.TT_AD2_Activated_ini,
+                                           "LS":self.HTRTD_Activated_ini},
                                    "PT": self.PT_Activated_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Activated_ini,
                                     "Din": self.Din_Activated_ini,
@@ -3160,6 +3273,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_dic_ini[key] = self.PLC.TT_AD1_dic[key]
         for key in self.PLC.TT_AD2_dic:
             self.TT_AD2_dic_ini[key] = self.PLC.TT_AD2_dic[key]
+        for key in self.PLC.HTRTD_dic:
+            self.HTRTD_dic_ini[key] = self.PLC.HTRTD_dic[key]
 
         for key in self.PLC.LL_dic:
             self.LL_dic_ini[key] = self.PLC.LL_dic[key]
@@ -3173,6 +3288,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_HighLimit_ini[key] = self.PLC.TT_AD1_HighLimit[key]
         for key in self.PLC.TT_AD2_HighLimit:
             self.TT_AD2_HighLimit_ini[key] = self.PLC.TT_AD2_HighLimit[key]
+        for key in self.PLC.HTRTD_HighLimit:
+            self.HTRTD_HighLimit_ini[key] = self.PLC.HTRTD_HighLimit[key]
         for key in self.PLC.LL_HighLimit:
             self.LL_HighLimit_ini[key] = self.PLC.LL_HighLimit[key]
 
@@ -3185,6 +3302,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_LowLimit_ini[key] = self.PLC.TT_AD1_LowLimit[key]
         for key in self.PLC.TT_AD2_LowLimit:
             self.TT_AD2_LowLimit_ini[key] = self.PLC.TT_AD2_LowLimit[key]
+        for key in self.PLC.HTRTD_LowLimit:
+            self.HTRTD_LowLimit_ini[key] = self.PLC.HTRTD_LowLimit[key]
         # for key in self.PLC.LL_LowLimit:
         #     self.LL_LowLimit_ini[key] = self.PLC.LL_LowLimit[key]
         for key in self.PLC.PT_LowLimit:
@@ -3197,6 +3316,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Activated_ini[key]= self.PLC.TT_AD1_Activated[key]
         for key in self.PLC.TT_AD2_Activated:
             self.TT_AD2_Activated_ini[key]= self.PLC.TT_AD2_Activated[key]
+        for key in self.PLC.HTRTD_Activated:
+            self.HTRTD_Activated_ini[key]= self.PLC.HTRTD_Activated[key]
         for key in self.PLC.LL_Activated:
             self.LL_Activated_ini[key] = self.PLC.LL_Activated[key]
         for key in self.PLC.PT_Activated:
@@ -3229,6 +3350,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_AD1_Alarm_ini[key] = self.PLC.TT_AD1_Alarm[key]
         for key in self.PLC.TT_AD2_Alarm:
             self.TT_AD2_Alarm_ini[key] = self.PLC.TT_AD2_Alarm[key]
+        for key in self.PLC.HTRTD_Alarm:
+            self.HTRTD_Alarm_ini[key] = self.PLC.HTRTD_Alarm[key]
         for key in self.PLC.LL_Alarm:
             self.LL_Alarm_ini[key] = self.PLC.LL_Alarm[key]
         for key in self.PLC.PT_dic:
@@ -3416,6 +3539,16 @@ class UpdateServer(QtCore.QObject):
                                 self.PLC.TT_AD2_Activated[key] = message[key]["operation"]["Act"]
                         else:
                             pass
+                        elif message[key]["server"] == "LS":
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.HTRTD_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.HTRTD_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.HTRTD_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            else:
+                                self.PLC.HTRTD_Activated[key] = message[key]["operation"]["Act"]
+                        else:
+                            pass
+
                     elif message[key]["type"] == "PT":
                         if message[key]["server"] == "BO":
                             if message[key]["operation"]["Update"]:
@@ -3716,6 +3849,8 @@ class UpdateServer(QtCore.QObject):
                 self.PLC.TT_AD1_HighLimit[key] = message["MAN_SET"]["data"]["TT"]["AD1"]["high"][key]
             for key in message["MAN_SET"]["data"]["TT"]["AD2"]["high"]:
                 self.PLC.TT_AD2_HighLimit[key] = message["MAN_SET"]["data"]["TT"]["AD2"]["high"][key]
+            for key in message["MAN_SET"]["data"]["TT"]["LS"]["high"]:
+                self.PLC.HTRTD_HighLimit[key] = message["MAN_SET"]["data"]["TT"]["LS"]["high"][key]
 
 
 
@@ -3737,7 +3872,8 @@ class UpdateServer(QtCore.QObject):
                 self.PLC.TT_AD1_LowLimit[key] = message["MAN_SET"]["data"]["TT"]["AD1"]["low"][key]
             for key in message["MAN_SET"]["data"]["TT"]["AD2"]["low"]:
                 self.PLC.TT_AD2_LowLimit[key] = message["MAN_SET"]["data"]["TT"]["AD2"]["low"][key]
-
+            for key in message["MAN_SET"]["data"]["TT"]["LS"]["low"]:
+                self.PLC.HTRTD_LowLimit[key] = message["MAN_SET"]["data"]["TT"]["LS"]["low"][key]
 
             for key in message["MAN_SET"]["data"]["PT"]["low"]:
                 self.PLC.PT_LowLimit[key] = message["MAN_SET"]["data"]["PT"]["low"][key]
@@ -3755,6 +3891,8 @@ class UpdateServer(QtCore.QObject):
                 self.PLC.TT_AD1_Activated[key] =message["MAN_SET"]["Active"]["TT"]["AD1"][key]
             for key in message["MAN_SET"]["Active"]["TT"]["AD2"]:
                 self.PLC.TT_AD2_Activated[key] =message["MAN_SET"]["Active"]["TT"]["AD2"][key]
+            for key in message["MAN_SET"]["Active"]["TT"]["LS"]:
+                self.PLC.HTRTD_Activated[key] =message["MAN_SET"]["Active"]["TT"]["LS"][key]
 
 
             for key in message["MAN_SET"]["Active"]["PT"]:

@@ -543,35 +543,15 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT1003, self.AlarmButton.SubWindow.TT1004,
                                  self.AlarmButton.SubWindow.TT1005, self.AlarmButton.SubWindow.TT1006]
         #
-        # self.FPRTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2420, self.AlarmButton.SubWindow.TT2422,
-        #                          self.AlarmButton.SubWindow.TT2424, self.AlarmButton.SubWindow.TT2425,
-        #                          self.AlarmButton.SubWindow.TT2442, self.AlarmButton.SubWindow.TT2403,
-        #                          self.AlarmButton.SubWindow.TT2418, self.AlarmButton.SubWindow.TT2427,
-        #                          self.AlarmButton.SubWindow.TT2429, self.AlarmButton.SubWindow.TT2431,
-        #                          self.AlarmButton.SubWindow.TT2441, self.AlarmButton.SubWindow.TT2414,
-        #                          self.AlarmButton.SubWindow.TT2413, self.AlarmButton.SubWindow.TT2412,
-        #                          self.AlarmButton.SubWindow.TT2415, self.AlarmButton.SubWindow.TT2409,
-        #                          self.AlarmButton.SubWindow.TT2436, self.AlarmButton.SubWindow.TT2438,
-        #                          self.AlarmButton.SubWindow.TT2440, self.AlarmButton.SubWindow.TT2402,
-        #                          self.AlarmButton.SubWindow.TT2411, self.AlarmButton.SubWindow.TT2443,
-        #                          self.AlarmButton.SubWindow.TT2417, self.AlarmButton.SubWindow.TT2404,
-        #                          self.AlarmButton.SubWindow.TT2408, self.AlarmButton.SubWindow.TT2407,
-        #                          self.AlarmButton.SubWindow.TT2406, self.AlarmButton.SubWindow.TT2428,
-        #                          self.AlarmButton.SubWindow.TT2432, self.AlarmButton.SubWindow.TT2421,
-        #                          self.AlarmButton.SubWindow.TT2416, self.AlarmButton.SubWindow.TT2439,
-        #                          self.AlarmButton.SubWindow.TT2419, self.AlarmButton.SubWindow.TT2423,
-        #                          self.AlarmButton.SubWindow.TT2426, self.AlarmButton.SubWindow.TT2430,
-        #                          self.AlarmButton.SubWindow.TT2450, self.AlarmButton.SubWindow.TT2401,
-        #                          self.AlarmButton.SubWindow.TT2449, self.AlarmButton.SubWindow.TT2445,
-        #                          self.AlarmButton.SubWindow.TT2444, self.AlarmButton.SubWindow.TT2435,
-        #                          self.AlarmButton.SubWindow.TT2437, self.AlarmButton.SubWindow.TT2446,
-        #                          self.AlarmButton.SubWindow.TT2447, self.AlarmButton.SubWindow.TT2448,
-        #                          self.AlarmButton.SubWindow.TT2410, self.AlarmButton.SubWindow.TT2405,
-        #                          self.AlarmButton.SubWindow.TT6220, self.AlarmButton.SubWindow.TT6401,
-        #                          self.AlarmButton.SubWindow.TT6404, self.AlarmButton.SubWindow.TT6405,
-        #                          self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
-        #                          self.AlarmButton.SubWindow.TT6411, self.AlarmButton.SubWindow.TT6412,
-        #                          self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414]
+        self.HTROUTAlarmMatrix = [self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
+                                 self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004]
+
+        self.HTRRTDAlarmMatrix = [self.AlarmButton.SubWindow.HT1T1, self.AlarmButton.SubWindow.HT1T2,
+                                  self.AlarmButton.SubWindow.HT2T1, self.AlarmButton.SubWindow.HT2T2,
+                                  self.AlarmButton.SubWindow.HT3T1, self.AlarmButton.SubWindow.HT3T2,
+                                  self.AlarmButton.SubWindow.HT4T1, self.AlarmButton.SubWindow.HT4T2
+                                  ]
+
 
         self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT1000, self.AlarmButton.SubWindow.PT1001,
                               self.AlarmButton.SubWindow.PT1002, self.AlarmButton.SubWindow.PT001, self.AlarmButton.SubWindow.PT002,
@@ -594,7 +574,11 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT1003, self.AlarmButton.SubWindow.TT1004,
                                  self.AlarmButton.SubWindow.TT1005, self.AlarmButton.SubWindow.TT1006,self.AlarmButton.SubWindow.PT1000, self.AlarmButton.SubWindow.PT1001,
                               self.AlarmButton.SubWindow.PT1002, self.AlarmButton.SubWindow.PT001, self.AlarmButton.SubWindow.PT002,
-                              self.AlarmButton.SubWindow.PT003, self.AlarmButton.SubWindow.PT004,self.AlarmButton.SubWindow.LL]
+                              self.AlarmButton.SubWindow.PT003, self.AlarmButton.SubWindow.PT004,self.AlarmButton.SubWindow.LL,self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
+                                 self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004,self.AlarmButton.SubWindow.HT1T1, self.AlarmButton.SubWindow.HT1T2,
+                                  self.AlarmButton.SubWindow.HT2T1, self.AlarmButton.SubWindow.HT2T2,
+                                  self.AlarmButton.SubWindow.HT3T1, self.AlarmButton.SubWindow.HT3T2,
+                                  self.AlarmButton.SubWindow.HT4T1, self.AlarmButton.SubWindow.HT4T2]
 
         # Set user to guest by default
         self.User = "Guest"
@@ -1709,6 +1693,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["AD1"][element.Label.text()]))
             elif element.Label.text() in dic_c["Active"]["TT"]["AD2"]:
                 element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["AD2"][element.Label.text()]))
+        for element in self.HTROUTAlarmMatrix:
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["LOOPPID"][element.Label.text()]))
 
         for element in self.PTAlarmMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][element.Label.text()]))
@@ -1852,106 +1838,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # refreshing the valve status from PLC every 30s
 
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1001"]:
-        #     self.PV1001.Set.ButtonLClicked()
-        # else:
-        #     self.PV1001.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1002"]:
-        #     self.PV1002.Set.ButtonLClicked()
-        # else:
-        #     self.PV1002.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1003"]:
-        #     self.PV1003.Set.ButtonLClicked()
-        # else:
-        #     self.PV1003.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1004"]:
-        #     self.PV1004.Set.ButtonLClicked()
-        # else:
-        #     self.PV1004.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1005"]:
-        #     self.PV1005.Set.ButtonLClicked()
-        # else:
-        #     self.PV1005.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1006"]:
-        #     self.PV1006.Set.ButtonLClicked()
-        # else:
-        #     self.PV1006.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV1007.Set.ButtonLClicked()
-        # else:
-        #     self.PV1007.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV1.Set.ButtonLClicked()
-        # else:
-        #     self.PV1.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV2.Set.ButtonLClicked()
-        # else:
-        #     self.PV2.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV3.Set.ButtonLClicked()
-        # else:
-        #     self.PV3.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV4.Set.ButtonLClicked()
-        # else:
-        #     self.PV4.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV5.Set.ButtonLClicked()
-        # else:
-        #     self.PV5.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV6.Set.ButtonLClicked()
-        # else:
-        #     self.PV6.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV7.Set.ButtonLClicked()
-        # else:
-        #     self.PV7.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV8.Set.ButtonLClicked()
-        # else:
-        #     self.PV8.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV9.Set.ButtonLClicked()
-        # else:
-        #     self.PV9.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV10.Set.ButtonLClicked()
-        # else:
-        #     self.PV10.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV10.Set.ButtonLClicked()
-        # else:
-        #     self.PV10.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV11.Set.ButtonLClicked()
-        # else:
-        #     self.PV11.Set.ButtonRClicked()
-        #
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1007"]:
-        #     self.PV12.Set.ButtonLClicked()
-        # else:
-        #     self.PV12.Set.ButtonRClicked()
-        #
+
 
         self.PT1000.SetValue(received_dic_c["data"]["PT"]["value"]["PT1000"])
         self.PT1001.SetValue(received_dic_c["data"]["PT"]["value"]["PT1001"])
@@ -3453,7 +3340,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.AlarmButton.ButtonAlarmSetSignal()
             self.AlarmButton.SubWindow.ReassignRTD1Order()
             self.AlarmButton.SubWindow.ReassignRTD2Order()
-            # self.AlarmButton.SubWindow.ReassignRTD3Order()
+            self.AlarmButton.SubWindow.ReassignRTD3Order()
             # self.AlarmButton.SubWindow.ReassignRTD4Order()
             self.AlarmButton.SubWindow.ReassignRTDLEFTOrder()
             self.AlarmButton.SubWindow.ReassignPTOrder()

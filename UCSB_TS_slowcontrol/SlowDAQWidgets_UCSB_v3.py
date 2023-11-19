@@ -605,7 +605,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.Tab.addTab(self.RTDSET34Tab, "RTD SET 3&4")
 
         self.RTDLEFTTab = QtWidgets.QTabWidget(self.Tab)
-        self.Tab.addTab(self.RTDLEFTTab, "HEATER RTDs and ETC")
+        self.Tab.addTab(self.RTDLEFTTab, "Left Variables and ETC")
 
         # Groupboxs for alarm/PT/TT
 
@@ -739,6 +739,30 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.HTR1004 = AlarmStatusWidget(self.GroupRTD2)
         self.HTR1004.Label.setText("HTR1004")
 
+        self.HTR1001T1 = AlarmStatusWidget(self.GroupRTD3)
+        self.HTR1001T1.Label.setText("HT1T1")
+
+        self.HTR1001T2 = AlarmStatusWidget(self.GroupRTD3)
+        self.HTR1001T2.Label.setText("HT1T2")
+
+        self.HTR1002T1 = AlarmStatusWidget(self.GroupRTD3)
+        self.HTR1002T1.Label.setText("HT2T1")
+
+        self.HTR1002T2 = AlarmStatusWidget(self.GroupRTD3)
+        self.HTR1002T2.Label.setText("HT2T2")
+
+        self.HTR1003T1 = AlarmStatusWidget(self.GroupRTD3)
+        self.HTR1003T1.Label.setText("HTT1")
+
+        self.HTR1003T2 = AlarmStatusWidget(self.GroupRTD3)
+        self.HTR1003T2.Label.setText("HTT2")
+
+        self.HTR1004T1 = AlarmStatusWidget(self.GroupRTD3)
+        self.HTR1004T1.Label.setText("HT4T1")
+
+        self.HTR1004T2 = AlarmStatusWidget(self.GroupRTD3)
+        self.HTR1004T2.Label.setText("HT4T2")
+
         self.LL = AlarmStatusWidget(self.GroupRTDLEFT)
         self.LL.Label.setText("LL")
 
@@ -751,10 +775,8 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.AlarmRTD2dir = {0: {0: self.HTR1001, 1: self.HTR1002, 2: self.HTR1003, 3: self.HTR1004}}
         #
         #
-        # self.AlarmRTD3dir = {0: {0: self.TT2435, 1: self.TT2436, 2: self.TT2437, 3: self.TT2438, 4: self.TT2439},
-        #                      1: {0: self.TT2440, 1: self.TT2441, 2: self.TT2442, 3: self.TT2443, 4: self.TT2444},
-        #                      2: {0: self.TT2445, 1: self.TT2446, 2: self.TT2447, 3: self.TT2448, 4: self.TT2449},
-        #                      3: {0: self.TT2450}}
+        self.AlarmRTD3dir = {0: {0: self.HTR1001T1, 1: self.HTR1001T2, 2: self.HTR1002T1, 3: self.HTR1002T2, 4: self.HTR1003T1},
+                             1: {0: self.HTR1003T2, 1: self.HTR1004T1, 2: self.HTR1004T2}}
         #
         # self.AlarmRTD4dir = {0: {0: self.TT2101, 1: self.TT2102, 2: self.TT2103, 3: self.TT2104, 4: self.TT2105},
         #                      1: {0: self.TT2106, 1: self.TT2107, 2: self.TT2108, 3: self.TT2109, 4: self.TT2110}}
@@ -820,16 +842,16 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (self.i_RTD2_last, self.j_RTD2_last):
                 break
-        #
-        # for i in range(0, self.i_RTD3_max):
-        #     for j in range(0, self.j_RTD3_max):
-        #         # self.GLRTD3.addWidget(eval(self.AlarmRTD3dir[i][j]), i, j)
-        #         self.GLRTD3.addWidget(self.AlarmRTD3dir[i][j], i, j)
-        #         # end the position generator when i= last element's row number, j= last element's column number
-        #         if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
-        #             break
-        #     if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
-        #         break
+
+        for i in range(0, self.i_RTD3_max):
+            for j in range(0, self.j_RTD3_max):
+                # self.GLRTD3.addWidget(eval(self.AlarmRTD3dir[i][j]), i, j)
+                self.GLRTD3.addWidget(self.AlarmRTD3dir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
+                    break
+            if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
+                break
         #
         # for i in range(0, self.i_RTD4_max):
         #     for j in range(0, self.j_RTD4_max):

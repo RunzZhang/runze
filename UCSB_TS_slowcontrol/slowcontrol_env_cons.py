@@ -7,6 +7,8 @@ TT_AD1_ADDRESS = {"TT1001": 31, "TT1002":33, "TT1003": 35, "TT1004": 37, "TT1005
 
 TT_AD2_ADDRESS = { "TT1008": 31}
 
+HTRTD_ADDRESS = {"HT1TT1":(0,0,0),"HT1TT2":(0,0,1),"HT2TT1":(0,1,0),"HT1TT1":(0,1,1),
+                 "HT1TT1":(1,0,0),"HT1TT1":(1,0,1),"HT1TT1":(1,1,0),"HT1TT1":(1,1,1)}
 LL_ADDRESS = {"LL":"10.111.19.108"}
 
 
@@ -18,9 +20,10 @@ LEFT_REAL_ADDRESS = {'FCV1001': 12792, 'FCV1002': 12794, "BGA01": 12804, "BGA02"
 TT_AD1_DIC = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
                               "TT1006": 0}
 
-
 TT_AD2_DIC = { "TT1008": 0}
 
+HTRTD_DIC = {"HT1TT1":0,"HT1TT2":0,"HT2TT1":0,"HT1TT1":0,
+                 "HT1TT1":0,"HT1TT1":0,"HT1TT1":0,"HT1TT1":0}
 LL_DIC = {"LL":0}
 
 PT_DIC = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
@@ -33,6 +36,10 @@ TT_AD1_LOWLIMIT = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005":
 
 TT_AD1_HIGHLIMIT = {"TT1001": 30, "TT1002": 30, "TT1003": 30, "TT1004": 30, "TT1005": 30,
                               "TT1006": 30}
+HTRTD_HIGHLIMIT = {"HT1TT1":30,"HT1TT2":30,"HT2TT1":30,"HT1TT1":30,
+                 "HT1TT1":30,"HT1TT1":30,"HT1TT1":30,"HT1TT1":30}
+HTRTD_LOWLIMIT = {"HT1TT1":0,"HT1TT2":0,"HT2TT1":0,"HT1TT1":0,
+                 "HT1TT1":0,"HT1TT1":0,"HT1TT1":0,"HT1TT1":0}
 
 LL_LOWLIMIT = {"LL":0}
 
@@ -56,6 +63,9 @@ TT_AD1_ACTIVATED = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004":
 
 TT_AD2_ACTIVATED = {"TT1008": False}
 
+HTRTD_ACTIVATED = {"HT1TT1":False,"HT1TT2":False,"HT2TT1":False,"HT1TT1":False,
+                 "HT1TT1":False,"HT1TT1":False,"HT1TT1":False,"HT1TT1":False}
+
 LL_ACTIVATED = {"LL":False}
 
 
@@ -66,6 +76,9 @@ TT_AD1_ALARM = {"TT1001": False, "TT1002": False, "TT1003": False, "TT1004": Fal
                               "TT1006": False}
 
 TT_AD2_ALARM = {"TT1008": False}
+
+HTRTD_ALARM = {"HT1TT1":False,"HT1TT2":False,"HT2TT1":False,"HT1TT1":False,
+                 "HT1TT1":False,"HT1TT1":False,"HT1TT1":False,"HT1TT1":False}
 
 LL_ALARM = {"LL":False}
 
@@ -83,6 +96,7 @@ NTT_AD2 = len(TT_AD2_ADDRESS)
 NLL =len(LL_ADDRESS)
 NPT = len(PT_ADDRESS)
 NREAL = len(LEFT_REAL_ADDRESS)
+NHTRTD = len(HTRTD_ADDRESS)
 
 
 PT_SETTING = [0.] * NPT
@@ -333,11 +347,16 @@ TT_AD1_PARA = {"TT1001": 0, "TT1002": 0, "TT1003": 0, "TT1004": 0, "TT1005": 0,
 TT_AD1_RATE = {"TT1001": 30, "TT1002": 30, "TT1003": 30, "TT1004": 30, "TT1005": 30,
                               "TT1006": 30}
 
+HTRTD_PARA = {"HT1TT1":0,"HT1TT2":0,"HT2TT1":0,"HT1TT1":0,
+                 "HT1TT1":0,"HT1TT1":0,"HT1TT1":0,"HT1TT1":0}
 
+HTRTD_RATE = {"HT1TT1":30,"HT1TT2":30,"HT2TT1":30,"HT1TT1":30,
+                 "HT1TT1":30,"HT1TT1":30,"HT1TT1":30,"HT1TT1":30}
 TT_AD2_PARA = { "TT1008": 0}
 
 
 TT_AD2_RATE = { "TT1008": 30}
+
 
 
 LL_PARA ={"LL":0}
@@ -362,7 +381,8 @@ LOOPPID_PARA = {'HTR1001': 0, 'HTR1002': 0, 'HTR1003': 0, 'HTR1004': 0}
 LOOPPID_RATE = {'HTR1001': 30, 'HTR1002': 30, 'HTR1003': 30, 'HTR1004': 30}
 
 DIC_PACK = {"data": {"TT": {"AD1": {"value": TT_AD1_DIC, "high": TT_AD1_HIGHLIMIT, "low": TT_AD1_LOWLIMIT},
-                             "AD2": {"value": TT_AD2_DIC, "high": TT_AD2_HIGHLIMIT, "low": TT_AD2_LOWLIMIT}},
+                             "AD2": {"value": TT_AD2_DIC, "high": TT_AD2_HIGHLIMIT, "low": TT_AD2_LOWLIMIT},
+                            "LS":{"value": HTRTD_DIC, "high": HTRTD_HIGHLIMIT, "low": HTRTD_LOWLIMIT}},
                                   "PT": {"value": PT_DIC, "high": PT_HIGHLIMIT, "low": PT_LOWLIMIT},
                                   "LEFT_REAL": {"value": LEFT_REAL_DIC, "high": LEFT_REAL_HIGHLIMIT, "low": LEFT_REAL_LOWLIMIT},
                                   "LL": {"value": LL_DIC, "high": LL_HIGHLIMIT, "low": LL_LOWLIMIT},
@@ -424,14 +444,14 @@ DIC_PACK = {"data": {"TT": {"AD1": {"value": TT_AD1_DIC, "high": TT_AD1_HIGHLIMI
                                            "INTLKD":FLAG_INTLKD,
                                            "Busy":FLAG_BUSY},
                                   "Procedure": {"Running": PROCEDURE_RUNNING, "INTLKD": PROCEDURE_INTLKD, "EXIT": PROCEDURE_EXIT}},
-                         "Alarm": {"TT": {"AD1": TT_AD1_ALARM,"AD2": TT_AD2_ALARM
+                         "Alarm": {"TT": {"AD1": TT_AD1_ALARM,"AD2": TT_AD2_ALARM, "LS":HTRTD_ALARM
                                           },
                                    "PT": PT_ALARM,
                                    "LEFT_REAL": LEFT_REAL_ALARM,
                                    "Din": DIN_ALARM,
                                    "LOOPPID": LOOPPID_ALARM,
                                    "LL":LL_ALARM},
-                         "Active": {"TT": {"AD1": TT_AD1_ACTIVATED,"AD2": TT_AD2_ACTIVATED
+                         "Active": {"TT": {"AD1": TT_AD1_ACTIVATED,"AD2": TT_AD2_ACTIVATED, "LS":HTRTD_ACTIVATED
                                           },
                                    "PT": PT_ACTIVATED,
                                    "LEFT_REAL": LEFT_REAL_ACTIVATED,
