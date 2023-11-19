@@ -2262,45 +2262,11 @@ class MainWindow(QtWidgets.QMainWindow):
             pass
 
         print("PV1out", received_dic_c["data"]["Valve"]["OUT"]["PV1"] )
-        # if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
-        #     self.PV1.Set.ButtonLClicked()
-        # else:
-        #     self.PV1.Set.ButtonRClicked()
-        # timeline
-        # 1.click button and button locked -> 2.same status signal sent(try to set button status back)-> 3.PLC received the command and change the status
-        #-> 4.changed status signal sent, the status is unlocked
-        # how to distinguish 2 and 4 in different senarios: state change
-        # busy -> whether it is locked
+        if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
+            self.PV1.Set.ButtonLClicked()
+        else:
+            self.PV1.Set.ButtonRClicked()
 
-        if not received_dic_c["data"]["Valve"]["MAN"]["PV1"]:
-            #if not manually control, then change the value to what it is
-            if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
-                self.PV1.Set.ButtonLClicked()
-            else:
-                self.PV1.Set.ButtonRClicked()
-            self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
-        elif received_dic_c["data"]["Valve"]["MAN"]["PV1"]:
-            # if manually, we need to know whether the button is locked
-            # if locked (grey), then only update value after the buffer != current value
-            if not self.PV1.Set.Locked:
-                if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
-                    self.PV1.Set.ButtonLClicked()
-                else:
-                    self.PV1.Set.ButtonRClicked()
-                self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
-            elif self.PV1.Set.Locked:
-                # if locked
-                #     print("PV1", received_dic_c["data"]["Valve"]["OUT"]["PV1"] != self.Valve_buffer["PV1"])
-                #     print("OUT", received_dic_c["data"]["Valve"]["OUT"]["PV1"])
-                #     print("Buffer", self.Valve_buffer["PV1"])
-                if received_dic_c["data"]["Valve"]["OUT"]["PV1"] != self.Valve_buffer["PV1"]:
-                    if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
-                        self.PV1.Set.ButtonLClicked()
-                    else:
-                        self.PV1.Set.ButtonRClicked()
-                    self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
-                else:
-                    pass
         # if not received_dic_c["data"]["Valve"]["MAN"]["PV1"]:
         #     if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
         #         self.PV1.Set.ButtonLClicked()
