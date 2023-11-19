@@ -5958,6 +5958,8 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.RState = "Inactive"
         self.SetButtonStateNames("Active", "Inactive")
         self.ButtonRState()
+        # show if the button is waiting for new commands, otherwise it will be locked (grey)
+        self.Locked= False
 
         self.LButton.clicked.connect(self.ButtonLStateLocked)
         self.RButton.clicked.connect(self.ButtonRStateLocked)
@@ -6000,12 +6002,14 @@ class DoubleButton_s(QtWidgets.QWidget):
         if self.LState == self.InactiveName and self.RState == self.ActiveName:
             self.RButton.setProperty("State", True)
             self.RButton.setStyle(self.RButton.style())
+            self.Locked =True
 
     @QtCore.Slot()
     def ButtonRStateLocked(self):
         if self.LState == self.ActiveName and self.RState == self.InactiveName:
             self.LButton.setProperty("State", False)
             self.LButton.setStyle(self.LButton.style())
+            self.Locked = True
 
     # L->L/R->L state.
     # initial state is R active, then change into L
@@ -6056,12 +6060,14 @@ class DoubleButton_s(QtWidgets.QWidget):
         # time.sleep(1)
         self.ButtonLState()
         self.Signals.sSignal.emit(self.LButton.text())
+        self.Locked = False
 
     @QtCore.Slot()
     def ButtonRClicked(self):
         # time.sleep(1)
         self.ButtonRState()
         self.Signals.sSignal.emit(self.RButton.text())
+        self.Locked =False
 
 
 
