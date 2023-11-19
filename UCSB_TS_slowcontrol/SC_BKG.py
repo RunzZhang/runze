@@ -2793,7 +2793,7 @@ class UpdatePLC(QtCore.QObject):
         # and send email or slack messages
 
     def or_alarm_signal(self):
-        print("or alarm",True in self.PLC.LL_Alarm)
+        print("or alarm",self.true_in_dic(self.PLC.LL_Alarm))
         if (True in self.PLC.PT_Alarm) or (True in self.PLC.TT_AD1_Alarm) or(True in self.PLC.TT_AD2_Alarm) or (True in self.PLC.LEFT_REAL_Alarm) or (True in self.PLC.Din_Alarm) or (True in self.PLC.LOOPPID_Alarm) or (True in self.PLC.LL_Alarm):
             self.PLC.MainAlarm = True
         else:
@@ -2803,6 +2803,14 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.LL_Alarm[pid] = False
         # self.LEFT_REAL_para = 0
         # and send email or slack messages
+
+    def true_in_dic(self,dic):
+        value = False
+        for key in dic:
+            if dic[key]==True:
+                value = True
+
+        return value
 
 
 class UpdateServer(QtCore.QObject):
