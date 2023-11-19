@@ -3412,6 +3412,16 @@ class UpdateServer(QtCore.QObject):
                                 self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
                         else:
                             pass
+                    elif message[key]["type"] == "LL":
+                        if message[key]["server"] == "LL":
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.LL_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.LL_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.LL_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            else:
+                                self.PLC.LL_Activated[key] = message[key]["operation"]["Act"]
+                        else:
+                            pass
 
                     elif message[key]["type"] == "Din":
                         if message[key]["server"] == "BO":
