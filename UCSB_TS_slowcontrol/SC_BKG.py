@@ -3537,8 +3537,7 @@ class UpdateServer(QtCore.QObject):
                                 self.PLC.TT_AD2_HighLimit[key] = message[key]["operation"]["HighLimit"]
                             else:
                                 self.PLC.TT_AD2_Activated[key] = message[key]["operation"]["Act"]
-                        else:
-                            pass
+
                         elif message[key]["server"] == "LS":
                             if message[key]["operation"]["Update"]:
                                 self.PLC.HTRTD_Activated[key] = message[key]["operation"]["Act"]
