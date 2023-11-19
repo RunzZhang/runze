@@ -338,7 +338,7 @@ TT_AD2_RATE = { "TT1008": 30}
 
 
 LL_PARA ={"LL":0}
-LL_RATE ={"LL":30}
+LL_RATE ={"LL":10}
 
 
 PT_PARA = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
