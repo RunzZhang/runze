@@ -3893,6 +3893,7 @@ class message_manager():
         self.smtp_username = "runzezhang@ucsb.edu"
 
         self.smtp_password = os.environ.get("GMAIL_TOKEN")
+        print(self.smtp_password)
 
         # server to pico watchdog
 
