@@ -2576,7 +2576,7 @@ class UpdatePLC(QtCore.QObject):
         # print("check alarm status")
         if self.PLC.LL_Activated[pid]:
             if float(self.PLC.LL_LowLimit[pid]) >= float(self.PLC.LL_HighLimit[pid]):
-                # print("Low limit should be less than high limit!")
+                print("Low limit should be less than high limit!")
             else:
                 if float(self.PLC.LL_dic[pid]) <= float(self.PLC.LL_LowLimit[pid]):
                     # print(pid , " reading is lower than the low limit")
