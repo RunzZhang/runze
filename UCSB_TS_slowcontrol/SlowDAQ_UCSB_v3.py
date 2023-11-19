@@ -2262,31 +2262,36 @@ class MainWindow(QtWidgets.QMainWindow):
             pass
 
         print("PV1out", received_dic_c["data"]["Valve"]["OUT"]["PV1"] )
-        if not received_dic_c["data"]["Valve"]["MAN"]["PV1"]:
-            if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
-                self.PV1.Set.ButtonLClicked()
-            else:
-                self.PV1.Set.ButtonRClicked()
-            self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
-        elif received_dic_c["data"]["Valve"]["MAN"]["PV1"]:
-            if received_dic_c["data"]["Valve"]["Busy"]["PV1"]:
-                if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
-                    self.PV1.Set.ButtonLClicked()
-                else:
-                    self.PV1.Set.ButtonRClicked()
-                self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
-            elif not received_dic_c["data"]["Valve"]["Busy"]["PV1"]:
-                #     print("PV1", received_dic_c["data"]["Valve"]["OUT"]["PV1"] != self.Valve_buffer["PV1"])
-                #     print("OUT", received_dic_c["data"]["Valve"]["OUT"]["PV1"])
-                #     print("Buffer", self.Valve_buffer["PV1"])
-                if received_dic_c["data"]["Valve"]["OUT"]["PV1"] != self.Valve_buffer["PV1"]:
-                    if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
-                        self.PV1.Set.ButtonLClicked()
-                    else:
-                        self.PV1.Set.ButtonRClicked()
-                    self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
-                else:
-                    pass
+        if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
+            self.PV1.Set.ButtonLClicked()
+        else:
+            self.PV1.Set.ButtonRClicked()
+
+        # if not received_dic_c["data"]["Valve"]["MAN"]["PV1"]:
+        #     if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
+        #         self.PV1.Set.ButtonLClicked()
+        #     else:
+        #         self.PV1.Set.ButtonRClicked()
+        #     self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
+        # elif received_dic_c["data"]["Valve"]["MAN"]["PV1"]:
+        #     if received_dic_c["data"]["Valve"]["Busy"]["PV1"]:
+        #         if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
+        #             self.PV1.Set.ButtonLClicked()
+        #         else:
+        #             self.PV1.Set.ButtonRClicked()
+        #         self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
+        #     elif not received_dic_c["data"]["Valve"]["Busy"]["PV1"]:
+        #         #     print("PV1", received_dic_c["data"]["Valve"]["OUT"]["PV1"] != self.Valve_buffer["PV1"])
+        #         #     print("OUT", received_dic_c["data"]["Valve"]["OUT"]["PV1"])
+        #         #     print("Buffer", self.Valve_buffer["PV1"])
+        #         if received_dic_c["data"]["Valve"]["OUT"]["PV1"] != self.Valve_buffer["PV1"]:
+        #             if received_dic_c["data"]["Valve"]["OUT"]["PV1"]:
+        #                 self.PV1.Set.ButtonLClicked()
+        #             else:
+        #                 self.PV1.Set.ButtonRClicked()
+        #             self.Valve_buffer["PV1"] = received_dic_c["data"]["Valve"]["OUT"]["PV1"]
+        #         else:
+        #             pass
 
         if not received_dic_c["data"]["Valve"]["MAN"]["PV2"]:
             if received_dic_c["data"]["Valve"]["OUT"]["PV2"]:
