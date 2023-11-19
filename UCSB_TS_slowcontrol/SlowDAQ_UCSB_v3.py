@@ -546,10 +546,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTROUTAlarmMatrix = [self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
                                  self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004]
 
-        self.HTRRTDAlarmMatrix = [self.AlarmButton.SubWindow.HT1001T1, self.AlarmButton.SubWindow.HT1001T2,
-                                  self.AlarmButton.SubWindow.HT1002T1, self.AlarmButton.SubWindow.HT1002T2,
-                                  self.AlarmButton.SubWindow.HT1003T1, self.AlarmButton.SubWindow.HT1003T2,
-                                  self.AlarmButton.SubWindow.HT1004T1, self.AlarmButton.SubWindow.HT1004T2
+        self.HTRRTDAlarmMatrix = [self.AlarmButton.SubWindow.HTR1001T1, self.AlarmButton.SubWindow.HTR1001T2,
+                                  self.AlarmButton.SubWindow.HTR1002T1, self.AlarmButton.SubWindow.HTR1002T2,
+                                  self.AlarmButton.SubWindow.HTR1003T1, self.AlarmButton.SubWindow.HTR1003T2,
+                                  self.AlarmButton.SubWindow.HTR1004T1, self.AlarmButton.SubWindow.HTR1004T2
                                   ]
 
 
@@ -575,10 +575,10 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT1005, self.AlarmButton.SubWindow.TT1006,self.AlarmButton.SubWindow.PT1000, self.AlarmButton.SubWindow.PT1001,
                               self.AlarmButton.SubWindow.PT1002, self.AlarmButton.SubWindow.PT001, self.AlarmButton.SubWindow.PT002,
                               self.AlarmButton.SubWindow.PT003, self.AlarmButton.SubWindow.PT004,self.AlarmButton.SubWindow.LL,self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
-                                 self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004,self.AlarmButton.SubWindow.HT1001T1, self.AlarmButton.SubWindow.HT1001T2,
-                                  self.AlarmButton.SubWindow.HT1002T1, self.AlarmButton.SubWindow.HT1002T2,
-                                  self.AlarmButton.SubWindow.HT1003T1, self.AlarmButton.SubWindow.HT1003T2,
-                                  self.AlarmButton.SubWindow.HT1004T1, self.AlarmButton.SubWindow.HT1004T2]
+                                 self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004,self.AlarmButton.SubWindow.HTR1001T1, self.AlarmButton.SubWindow.HTR1001T2,
+                                  self.AlarmButton.SubWindow.HTR1002T1, self.AlarmButton.SubWindow.HTR1002T2,
+                                  self.AlarmButton.SubWindow.HTR1003T1, self.AlarmButton.SubWindow.HTR1003T2,
+                                  self.AlarmButton.SubWindow.HTR1004T1, self.AlarmButton.SubWindow.HTR1004T2]
 
         # Set user to guest by default
         self.User = "Guest"
