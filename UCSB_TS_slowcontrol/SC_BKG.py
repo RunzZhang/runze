@@ -2502,21 +2502,25 @@ class UpdatePLC(QtCore.QObject):
         print("stack2", self.alarm_stack)
 
     def check_LL_alarm(self, pid):
+        print("check alarm status")
         if self.PLC.LL_Activated[pid]:
             if float(self.PLC.LL_LowLimit[pid]) >= float(self.PLC.LL_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
                 if float(self.PLC.LL_dic[pid]) <= float(self.PLC.LL_LowLimit[pid]):
+                    print(pid , " reading is lower than the low limit")
                     self.LLalarmmsg(pid)
 
-                    # print(pid , " reading is lower than the low limit")
+
                 elif float(self.PLC.LL_dic[pid]) >= float(self.PLC.LL_HighLimit[pid]):
+                    print(pid,  " reading is higher than the high limit")
                     self.LLalarmmsg(pid)
 
-                    # print(pid,  " reading is higher than the high limit")
+
                 else:
+                    print(pid, " is in normal range")
                     self.resetLLalarmmsg(pid)
-                    # print(pid, " is in normal range")
+
 
         else:
             self.resetTTAD1alarmmsg(pid)
@@ -2663,7 +2667,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.LL_Alarm[pid] = True
         # and send email or slack messages
         # every time interval send a alarm message
-        print(self.LL_para[pid])
+        print("LL alarm",self.LL_para[pid])
         if self.LL_para[pid] >= self.LL_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.LL_dic[pid],
                                                                                                                      high=self.PLC.LL_HighLimit[pid], low=self.PLC.LL_LowLimit[pid])
