@@ -1693,8 +1693,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["AD1"][element.Label.text()]))
             elif element.Label.text() in dic_c["Active"]["TT"]["AD2"]:
                 element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["AD2"][element.Label.text()]))
-        for element in self.HTROUTAlarmMatrix:
-            element.AlarmMode.setChecked(bool(dic_c["Active"]["LOOPPID"][element.Label.text()]))
+        # for element in self.HTROUTAlarmMatrix:
+        #     element.AlarmMode.setChecked(bool(dic_c["Active"]["LOOPPID"][element.Label.text()]))
 
         for element in self.PTAlarmMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][element.Label.text()]))

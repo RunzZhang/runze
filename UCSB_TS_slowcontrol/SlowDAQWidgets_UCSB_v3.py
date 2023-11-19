@@ -796,8 +796,8 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.i_RTD2_max = len(self.AlarmRTD2dir)
         self.j_RTD2_max = len(self.AlarmRTD2dir[0])
-        # self.i_RTD3_max = len(self.AlarmRTD3dir)
-        # self.j_RTD3_max = len(self.AlarmRTD3dir[0])
+        self.i_RTD3_max = len(self.AlarmRTD3dir)
+        self.j_RTD3_max = len(self.AlarmRTD3dir[0])
         # self.i_RTD4_max = len(self.AlarmRTD4dir)
         # self.j_RTD4_max = len(self.AlarmRTD4dir[0])
         self.i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
@@ -809,8 +809,8 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.j_RTD1_last = len(self.AlarmRTD1dir[self.i_RTD1_last]) - 1
         self.i_RTD2_last = len(self.AlarmRTD2dir) - 1
         self.j_RTD2_last = len(self.AlarmRTD2dir[self.i_RTD2_last]) - 1
-        # self.i_RTD3_last = len(self.AlarmRTD3dir) - 1
-        # self.j_RTD3_last = len(self.AlarmRTD3dir[self.i_RTD3_last]) - 1
+        self.i_RTD3_last = len(self.AlarmRTD3dir) - 1
+        self.j_RTD3_last = len(self.AlarmRTD3dir[self.i_RTD3_last]) - 1
         # self.i_RTD4_last = len(self.AlarmRTD4dir) - 1
         # self.j_RTD4_last = len(self.AlarmRTD4dir[self.i_RTD4_last]) - 1
         self.i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
