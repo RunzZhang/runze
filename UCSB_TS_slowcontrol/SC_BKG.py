@@ -2430,6 +2430,9 @@ class UpdatePLC(QtCore.QObject):
         self.LOOPPID_para = sec.LOOPPID_PARA
         self.LOOPPID_rate = sec.LOOPPID_RATE
         self.alarm_stack=""
+        self.mainalarm_para = sec.MAINALARM_PARA
+        self.mainalarm_rate = sec.MAINALARM_RATE
+
 
     @QtCore.Slot()
     def run(self):
@@ -2472,13 +2475,16 @@ class UpdatePLC(QtCore.QObject):
                     print("stack1"+"\n", "111", str(self.alarm_stack))
                     print(self.alarm_stack == "", self.PLC.MainAlarm)
                     if self.PLC.MainAlarm:
+                        if self.mainalarm_para>= self.mainalarm_rate:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
 
                         # self.COUPP_TEXT_alarm.emit(self.alarm_stack)
 
-                        self.AI_slack_alarm.emit(self.alarm_stack)
-                        print("alarm stack sent")
-                        self.alarm_stack = ""
+                            self.AI_slack_alarm.emit(self.alarm_stack)
+                            print("alarm stack sent")
+                            self.alarm_stack = ""
+                            self.mainalarm_para = 0
+                        self.mainalarm_para+=1
                     else:
                         pass
                         # self.alarm_db.ssh_write()

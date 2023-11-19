@@ -74,6 +74,9 @@ PT_ALARM = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1
               "PT1001": False, "PT1002": False}
 LEFT_REAL_ALARM = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": False}
 MAINALARM = False
+MAINALARM_PARA = 0
+MAINALARM_RATE = 30
+
 MAN_SET = False
 NTT_AD1 = len(TT_AD1_ADDRESS)
 NTT_AD2 = len(TT_AD2_ADDRESS)
