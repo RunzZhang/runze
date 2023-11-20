@@ -63,6 +63,25 @@ TITLE_STYLE_1 = "background-color: white; border-radius: 3px; font-family: " \
 R=0.6 #Resolution rate
 
 
+def make_zero_dic(i_last, j_last, i_max, j_max):
+    # make a 2d dic imax*jmax and end at ilast and jlast, counting from 1 instead of 0
+    id_matrix = {}
+    for i in range(0, i_max):
+        # every new row, add a row dictionary
+        id_matrix[i] = {0: None}
+        for j in range(0, j_max):
+            id_matrix[i][j] = None
+            # end the position generator when i= last element's row number, j= last element's column number
+            print(i,j)
+            if (i, j) == (i_last-1, j_last-1):
+                break
+        if i == i_last-1:
+            break
+    print(id_matrix)
+    return id_matrix
+
+
+
 # Defines a reusable layout containing widgets
 class RegionPID(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -892,7 +911,6 @@ class AlarmWin(QtWidgets.QMainWindow):
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
         TempRefRTD1dir = self.AlarmRTD1dir
-        TempRTD1dir = copy.deepcopy(self.AlarmRTD1dir)
 
         # l_RTD1_max is max number of column
         l_RTD1 = 0
@@ -918,7 +936,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         j_RTD1_last = len(self.AlarmRTD1dir[i_RTD1_last]) - 1
         # which is 4
         # print(i_RTD1_max,j_RTD1_max,i_RTD1_last, j_RTD1_last)
-
+        TempRTD1dir = make_zero_dic(i_RTD1_last+1,j_RTD1_last+1,i_RTD1_max,j_RTD1_max)
         l_RTD1_max = j_RTD1_max - 1
 
         # RTD1 put alarm true widget to the begining of the diretory
@@ -973,7 +991,6 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD2dir = self.AlarmRTD2dir
 
-        TempRTD2dir = copy.deepcopy(self.AlarmRTD2dir)
 
         # l_RTD1_max is max number of column
 
@@ -997,7 +1014,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         i_RTD2_last = len(self.AlarmRTD2dir) - 1
         j_RTD2_last = len(self.AlarmRTD2dir[i_RTD2_last]) - 1
 
-
+        TempRTD2dir = make_zero_dic(i_RTD2_last + 1, j_RTD2_last + 1, i_RTD2_max, j_RTD2_max)
         l_RTD2_max = j_RTD2_max - 1
 
         # RTD1 put alarm true widget to the begining of the diretory
@@ -1053,7 +1070,6 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD3dir = self.AlarmRTD3dir
 
-        TempRTD3dir = copy.deepcopy(self.AlarmRTD3dir)
 
         # l_RTD1_max is max number of column
 
@@ -1075,6 +1091,8 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         i_RTD3_last = len(self.AlarmRTD3dir) - 1
         j_RTD3_last = len(self.AlarmRTD3dir[i_RTD3_last]) - 1
+
+        TempRTD3dir = make_zero_dic(i_RTD3_last + 1, j_RTD3_last + 1, i_RTD3_max, j_RTD3_max)
 
         l_RTD3_max = j_RTD3_max - 1
 
@@ -1129,7 +1147,6 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD4dir = self.AlarmRTD4dir
 
-        TempRTD4dir = copy.deepcopy(self.AlarmRTD4dir)
 
         # l_RTD1_max is max number of column
 
@@ -1152,6 +1169,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         i_RTD4_last = len(self.AlarmRTD4dir) - 1
         j_RTD4_last = len(self.AlarmRTD4dir[i_RTD4_last]) - 1
+        TempRTD4dir = make_zero_dic(i_RTD4_last + 1, j_RTD4_last + 1, i_RTD4_max, j_RTD4_max)
 
         l_RTD4_max = j_RTD4_max - 1
 
@@ -1209,7 +1227,6 @@ class AlarmWin(QtWidgets.QMainWindow):
         TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
 
 
-        TempRTDLEFTdir = copy.deepcopy(self.AlarmRTDLEFTdir)
 
         # l_RTD1_max is max number of column
 
@@ -1233,6 +1250,8 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
         j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[i_RTDLEFT_last]) - 1
+        TempRTDLEFTdir = make_zero_dic(i_RTDLEFT_last + 1, j_RTDLEFT_last + 1, i_RTDLEFT_max, j_RTDLEFT_max)
+
 
         l_RTDLEFT_max = j_RTDLEFT_max - 1
 
@@ -1287,7 +1306,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefPTdir = self.AlarmPTdir
 
-        TempPTdir = copy.deepcopy(self.AlarmPTdir)
+
         # l_RTD1_max is max number of column
 
         l_PT = 0
@@ -1312,7 +1331,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         # which is 3
         j_PT_last = len(self.AlarmPTdir[i_PT_last]) - 1
         # which is 1
-
+        TempPTdir = make_zero_dic(i_PT_last + 1, j_PT_last + 1, i_PT_max, j_PT_max)
         l_PT_max = j_PT_max - 1
 
         # PT
@@ -1353,6 +1372,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_PT_last, j_PT_last):
                 break
+
 
 
 class INTLCK_Win_v2(QtWidgets.QMainWindow):
