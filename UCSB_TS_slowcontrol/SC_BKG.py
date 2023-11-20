@@ -3058,7 +3058,7 @@ class UpdateServer(QtCore.QObject):
 
         self.data_dic = {"data": {"TT": {"AD1": {"value": self.TT_AD1_dic_ini, "high": self.TT_AD1_HighLimit_ini, "low": self.TT_AD1_LowLimit_ini},
                                          "AD2": {"value": self.TT_AD2_dic_ini, "high": self.TT_AD2_HighLimit_ini, "low": self.TT_AD2_LowLimit_ini},
-                                         "LS":{"value": self.HTRTD_dic_ini, "high": self.HTRTD_HighLimit_ini, "low": self.HTRTD_HighLimit_ini}},
+                                         "LS":{"value": self.HTRTD_dic_ini, "high": self.HTRTD_HighLimit_ini, "low": self.HTRTD_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
                                   "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini, "low": self.LEFT_REAL_LowLimit_ini},
                                   "LL": {"value": self.LL_dic_ini, "high": self.LL_HighLimit_ini,
