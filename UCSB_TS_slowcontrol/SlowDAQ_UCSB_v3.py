@@ -2064,11 +2064,11 @@ class MainWindow(QtWidgets.QMainWindow):
             element.UpdateAlarm(
                 received_dic_c["Alarm"]["LOOPPID"][element.Label.text()])
             element.Indicator.SetValue(
-                received_dic_c["data"]["LOOPPID"]["value"][element.Label.text()])
+                received_dic_c["data"]["LOOPPID"]["OUT"][element.Label.text()])
             element.Low_Read.SetValue(
-                received_dic_c["data"]["LOOPPID"]["low"][element.Label.text()])
+                received_dic_c["data"]["LOOPPID"]["LO_LIM"][element.Label.text()])
             element.High_Read.SetValue(
-                received_dic_c["data"]["LOOPPID"]["high"][element.Label.text()])
+                received_dic_c["data"]["LOOPPID"]["HI_LIM"][element.Label.text()])
 
         for element in self.LEFTVariableMatrix:
             # print(element.Label.text())
