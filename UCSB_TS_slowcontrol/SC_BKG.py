@@ -3591,7 +3591,7 @@ class UpdateServer(QtCore.QObject):
                             pass
 
                     elif message[key]["type"] == "LOOPPID_alarm":
-                        if message[key]["server"] == "BO":
+                        if message[key]["server"] == "LS":
                             if message[key]["operation"]["Update"]:
                                 self.PLC.LOOPPID_Activated[key] = message[key]["operation"]["Act"]
                                 # self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],

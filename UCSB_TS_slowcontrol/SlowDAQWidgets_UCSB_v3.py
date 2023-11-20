@@ -740,28 +740,28 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.HTR1004.Label.setText("HTR1004")
 
         self.HTR1001T1 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1001T1.Label.setText("HT1T1")
+        self.HTR1001T1.Label.setText("HT1TT1")
 
         self.HTR1001T2 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1001T2.Label.setText("HT1T2")
+        self.HTR1001T2.Label.setText("HT1TT2")
 
         self.HTR1002T1 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1002T1.Label.setText("HT2T1")
+        self.HTR1002T1.Label.setText("HT2TT1")
 
         self.HTR1002T2 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1002T2.Label.setText("HT2T2")
+        self.HTR1002T2.Label.setText("HT2TT2")
 
         self.HTR1003T1 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1003T1.Label.setText("HTT1")
+        self.HTR1003T1.Label.setText("HT3TT1")
 
         self.HTR1003T2 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1003T2.Label.setText("HTT2")
+        self.HTR1003T2.Label.setText("HT3TT2")
 
         self.HTR1004T1 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1004T1.Label.setText("HT4T1")
+        self.HTR1004T1.Label.setText("HT4TT1")
 
         self.HTR1004T2 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1004T2.Label.setText("HT4T2")
+        self.HTR1004T2.Label.setText("HT4TT2")
 
         self.LL = AlarmStatusWidget(self.GroupRTDLEFT)
         self.LL.Label.setText("LL")
