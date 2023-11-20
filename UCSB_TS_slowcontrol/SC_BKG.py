@@ -837,6 +837,7 @@ class PLC(QtCore.QObject):
         if self.Connected_BO:
             self.alarm_config = AS.Alarm_Setting()
             self.alarm_config.read_Information()
+            # high group
             for key in self.TT_AD1_HighLimit:
                 try:
                     self.TT_AD1_HighLimit[key] = self.alarm_config.high_dic[key]
@@ -858,6 +859,35 @@ class PLC(QtCore.QObject):
                     self.LEFT_REAL_HighLimit[key] = self.alarm_config.high_dic[key]
                 except:
                     pass
+
+            for key in self.LOOPPID_Alarm_HighLimit:
+                try:
+                # self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+                #                         value=self.alarm_config.high_dic[key])
+                    self.LOOPPID_Alarm_HighLimit[key] = self.alarm_config.high_dic[key]
+                except:
+                    pass
+
+            for key in self.LL_HighLimit:
+                try:
+                # self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+                #                         value=self.alarm_config.high_dic[key])
+                    self.LL_HighLimit[key] = self.alarm_config.high_dic[key]
+                except:
+                    pass
+
+            for key in self.HTRTD_HighLimit:
+                try:
+                # self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+                #                         value=self.alarm_config.high_dic[key])
+                    self.HTRTD_HighLimit[key] = self.alarm_config.high_dic[key]
+                except:
+                    pass
+
+
+            # low group
+
+
 
             for key in self.TT_AD1_LowLimit:
                 try:
@@ -881,6 +911,31 @@ class PLC(QtCore.QObject):
                 except:
                     pass
 
+            for key in self.LOOPPID_Alarm_LowLimit:
+                # self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
+                #                         value=self.alarm_config.low_dic[key])
+                try:
+                    self.LOOPPID_Alarm_LowLimit[key] = self.alarm_config.low_dic[key]
+                except:
+                    pass
+
+            for key in self.LL_LowLimit:
+                try:
+                    # self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+                    #                         value=self.alarm_config.high_dic[key])
+                    self.LL_LowLimit[key] = self.alarm_config.high_dic[key]
+                except:
+                    pass
+
+            for key in self.HTRTD_LowLimit:
+                try:
+                    # self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+                    #                         value=self.alarm_config.high_dic[key])
+                    self.HTRTD_LowLimit[key] = self.alarm_config.high_dic[key]
+                except:
+                    pass
+
+            # activated group
             for key in self.TT_AD1_Activated:
                 try:
                     self.TT_AD1_Activated[key] = self.alarm_config.active_dic[key]
@@ -905,27 +960,22 @@ class PLC(QtCore.QObject):
                     pass
 
 
-            for key in self.LOOPPID_Alarm_LowLimit:
-                # self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
-                #                         value=self.alarm_config.low_dic[key])
-                try:
-                    self.LOOPPID_Alarm_LowLimit[key] = self.alarm_config.low_dic[key]
-                except:
-                    pass
 
-            for key in self.LOOPPID_Alarm_HighLimit:
-                try:
-                # self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
-                #                         value=self.alarm_config.high_dic[key])
-                    self.LOOPPID_Alarm_HighLimit[key] = self.alarm_config.high_dic[key]
-                except:
-                    pass
+
+
 
             for key in self.LOOPPID_Activated:
                 try:
                     self.LOOPPID_Activated[key] = self.alarm_config.active_dic[key]
                 except:
                     pass
+
+            for key in self.HTRTD_Activated:
+                try:
+                    self.HTRTD_Activated[key] = self.alarm_config.active_dic[key]
+                except:
+                    pass
+
         else:
             self.PLC_DISCON_SIGNAL.emit()
             # raise Exception('Not connected to PLC')  # will it restart the PLC ?
