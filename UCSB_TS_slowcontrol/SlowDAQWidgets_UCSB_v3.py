@@ -4210,7 +4210,7 @@ class CustomSave(QtWidgets.QWidget):
         self.init_dic = {"Instrument": self.instrument, "Low_Limit": self.lowlimit, "High_Limit": self.highlimit,
                          "Active": self.active}
 
-        print(type(self.init_dic["Low_Limit"][0]))
+        print(type(self.init_dic))
         df = pd.DataFrame(self.init_dic)
         # df = pd.DataFrame(columns=["Instrument","LowLimit","HighLimit","Active"])
 
