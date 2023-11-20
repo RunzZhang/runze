@@ -4170,43 +4170,44 @@ class CustomSave(QtWidgets.QWidget):
         self.dtype = []
 
         # lowlimit, high limit and activae share the same keys
+        print(0)
         for key in dic_c['data']['TT']['AD1']['low']:
             self.instrument.append(key)
             self.lowlimit.append(dic_c['data']['TT']['AD1']['low'][key])
             self.highlimit.append(dic_c['data']['TT']['AD1']['high'][key])
             self.active.append(dic_c['Active']['TT']['AD1'][key])
-
+        print(1)
         for key in dic_c['data']['TT']['AD2']['low']:
             self.instrument.append(key)
             self.lowlimit.append(dic_c['data']['TT']['AD2']['low'][key])
             self.highlimit.append(dic_c['data']['TT']['AD2']['high'][key])
             self.active.append(dic_c['Active']['TT']['AD2'][key])
-
+        print(2)
         for key in dic_c['data']['TT']['LS']['low']:
             self.instrument.append(key)
             self.lowlimit.append(dic_c['data']['TT']['LS']['low'][key])
             self.highlimit.append(dic_c['data']['TT']['LS']['high'][key])
             self.active.append(dic_c['Active']['TT']['LS'][key])
-
+        print(3)
         for key in dic_c['data']['PT']['low']:
             self.instrument.append(key)
             self.lowlimit.append(dic_c['data']['PT']['low'][key])
             self.highlimit.append(dic_c['data']['PT']['high'][key])
             self.active.append(dic_c['Active']['PT'][key])
-
+        print(4)
         for key in dic_c['data']['LL']['low']:
             self.instrument.append(key)
             self.lowlimit.append(dic_c['data']['LL']['low'][key])
             self.highlimit.append(dic_c['data']['LL']['high'][key])
             self.active.append(dic_c['Active']['LL'][key])
-
+        print(5)
         for key in dic_c['data']['LOOPPID']['Alarm_LowLimit']:
             self.instrument.append(key)
             self.lowlimit.append(dic_c['data']['LOOPPID']['Alarm_LowLimit'][key])
             self.highlimit.append(dic_c['data']['LOOPPID']['Alarm_HighLimit'][key])
             self.active.append(dic_c['Active']['TT']["LS"][key])
 
-
+        print(6)
         self.init_dic = {"Instrument": self.instrument, "Low_Limit": self.lowlimit, "High_Limit": self.highlimit,
                          "Active": self.active}
 
