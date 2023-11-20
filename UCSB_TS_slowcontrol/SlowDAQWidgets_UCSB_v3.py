@@ -892,7 +892,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
         TempRefRTD1dir = self.AlarmRTD1dir
-        TempRTD1dir = self.AlarmRTD1dir
+        TempRTD1dir = copy.deepcopy(self.AlarmRTD1dir)
 
         # l_RTD1_max is max number of column
         l_RTD1 = 0
@@ -973,7 +973,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD2dir = self.AlarmRTD2dir
 
-        TempRTD2dir = self.AlarmRTD2dir
+        TempRTD2dir = copy.deepcopy(self.AlarmRTD2dir)
 
         # l_RTD1_max is max number of column
 
@@ -1053,7 +1053,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD3dir = self.AlarmRTD3dir
 
-        TempRTD3dir = self.AlarmRTD3dir
+        TempRTD3dir = copy.deepcopy(self.AlarmRTD3dir)
 
         # l_RTD1_max is max number of column
 
@@ -1129,7 +1129,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD4dir = self.AlarmRTD4dir
 
-        TempRTD4dir = self.AlarmRTD4dir
+        TempRTD4dir = copy.deepcopy(self.AlarmRTD4dir)
 
         # l_RTD1_max is max number of column
 
@@ -1209,7 +1209,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
 
 
-        TempRTDLEFTdir = self.AlarmRTDLEFTdir
+        TempRTDLEFTdir = copy.deepcopy(self.AlarmRTDLEFTdir)
 
         # l_RTD1_max is max number of column
 
@@ -1287,7 +1287,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefPTdir = self.AlarmPTdir
 
-        TempPTdir = self.AlarmPTdir
+        TempPTdir = copy.deepcopy(self.AlarmPTdir)
         # l_RTD1_max is max number of column
 
         l_PT = 0
