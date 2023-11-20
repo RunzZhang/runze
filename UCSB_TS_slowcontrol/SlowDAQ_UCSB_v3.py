@@ -2067,9 +2067,9 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Indicator.SetValue(
                 received_dic_c["data"]["LOOPPID"]["OUT"][element.Label.text()])
             element.Low_Read.SetValue(
-                received_dic_c["data"]["LOOPPID"]["LO_LIM"][element.Label.text()])
+                received_dic_c["data"]["LOOPPID"]["Alarm_LowLimit"][element.Label.text()])
             element.High_Read.SetValue(
-                received_dic_c["data"]["LOOPPID"]["HI_LIM"][element.Label.text()])
+                received_dic_c["data"]["LOOPPID"]["Alarm_HighLimit"][element.Label.text()])
 
         for element in self.LEFTVariableMatrix:
             # print(element.Label.text())
