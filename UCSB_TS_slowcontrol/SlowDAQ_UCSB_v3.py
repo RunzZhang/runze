@@ -208,13 +208,12 @@ class MainWindow(QtWidgets.QMainWindow):
         # Data and Signal Tab
         self.ReadSettings = Loadfile(self.DatanSignalTab)
         self.ReadSettings.move(50 * R, 50 * R)
-        self.ReadSettings.LoadFileButton.clicked.connect(
-            lambda x: self.Recover(address=self.ReadSettings.FilePath.text()))
+
 
         self.SaveSettings = CustomSave(self.DatanSignalTab)
         self.SaveSettings.move(700 * R, 50 * R)
-        self.SaveSettings.SaveFileButton.clicked.connect(
-            lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
+        # self.SaveSettings.SaveFileButton.clicked.connect(
+        #     lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
 
         # Alarm button
         self.AlarmWindow = AlarmWin()
