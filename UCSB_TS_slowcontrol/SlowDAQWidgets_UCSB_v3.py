@@ -4038,16 +4038,21 @@ class Loadfile(QtWidgets.QWidget):
         self.active_dic = self.translate_csv("Active")
 
         # value low high they share the same key list
-        for key in self.default_dict['data']['TT']['FP']['low']:
-            self.default_dict['data']['TT']['FP']['low'][key] = self.low_dic[key]
-            self.default_dict['data']['TT']['FP']['high'][key] = self.high_dic[key]
-            self.default_dict['Active']['TT']['FP'][key] = self.active_dic[key]
+        for key in self.default_dict['data']['TT']['AD1']['low']:
+            self.default_dict['data']['TT']['AD1']['low'][key] = self.low_dic[key]
+            self.default_dict['data']['TT']['AD1']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['TT']['AD1'][key] = self.active_dic[key]
 
 
-        for key in self.default_dict['data']['TT']['BO']['low']:
-            self.default_dict['data']['TT']['BO']['low'][key]= self.low_dic[key]
-            self.default_dict['data']['TT']['BO']['high'][key] = self.high_dic[key]
-            self.default_dict['Active']['TT']['BO'][key] = self.active_dic[key]
+        for key in self.default_dict['data']['TT']['AD2']['low']:
+            self.default_dict['data']['TT']['AD2']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['TT']['AD2']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['TT']['AD2'][key] = self.active_dic[key]
+
+        for key in self.default_dict['data']['TT']['LS']['low']:
+            self.default_dict['data']['TT']['LS']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['TT']['LS']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['TT']['LS'][key] = self.active_dic[key]
 
         for key in self.default_dict['data']['PT']['low']:
             self.default_dict['data']['PT']['low'][key]= self.low_dic[key]
@@ -4055,16 +4060,10 @@ class Loadfile(QtWidgets.QWidget):
             self.default_dict['Active']['PT'][key] = self.active_dic[key]
 
 
-        for key in self.default_dict['data']['LEFT_REAL']['low']:
-            self.default_dict['data']['LEFT_REAL']['low'][key]= self.low_dic[key]
-            self.default_dict['data']['LEFT_REAL']['high'][key] = self.high_dic[key]
-            self.default_dict['Active']['LEFT_REAL'][key] = self.active_dic[key]
-
-
-        for key in self.default_dict['data']['Din']['low']:
-            self.default_dict['data']['Din']['low'][key]= self.low_dic[key]
-            self.default_dict['data']['Din']['high'][key] = self.high_dic[key]
-            self.default_dict['Active']['Din'][key] = self.active_dic[key]
+        for key in self.default_dict['data']['LL']['low']:
+            self.default_dict['data']['LL']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['LL']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['LL'][key] = self.active_dic[key]
 
         for key in self.default_dict['data']['LOOPPID']['Alarm_LowLimit']:
             self.default_dict['data']['LOOPPID']['Alarm_LowLimit'][key]= self.low_dic[key]
