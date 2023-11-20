@@ -3327,6 +3327,7 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_Alarm_LowLimit_ini[key] = self.PLC.LOOPPID_Alarm_LowLimit[key]
         for key in self.PLC.LOOPPID_Alarm_HighLimit:
             self.LOOPPID_Alarm_HighLimit_ini[key] = self.PLC.LOOPPID_Alarm_HighLimit[key]
+        print(self.LOOPPID_Alarm_HighLimit_ini)
 
 
 
@@ -3522,8 +3523,8 @@ class UpdateServer(QtCore.QObject):
                                 #                             value=message[key]["operation"]["HighLimit"])
                                 self.PLC.LOOPPID_Alarm_HighLimit[key] = message[key]["operation"]["HighLimit"]
                                 self.PLC.LOOPPID_Alarm_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                                time.sleep(1)
-                                print(self.PLC.LOOPPID_Activated[key],self.PLC.LOOPPID_Alarm_HighLimit[key],self.PLC.LOOPPID_Alarm_LowLimit[key])
+                                # time.sleep(1)
+                                # print(self.PLC.LOOPPID_Activated[key],self.PLC.LOOPPID_Alarm_HighLimit[key],self.PLC.LOOPPID_Alarm_LowLimit[key])
 
 
                             else:
