@@ -4205,7 +4205,7 @@ class CustomSave(QtWidgets.QWidget):
             self.instrument.append(key)
             self.lowlimit.append(dic_c['data']['LOOPPID']['Alarm_LowLimit'][key])
             self.highlimit.append(dic_c['data']['LOOPPID']['Alarm_HighLimit'][key])
-            self.active.append(dic_c['Active']['TT']["LS"][key])
+            self.active.append(dic_c['Active']['LOOPPID'][key])
 
         print(6)
         self.init_dic = {"Instrument": self.instrument, "Low_Limit": self.lowlimit, "High_Limit": self.highlimit,
