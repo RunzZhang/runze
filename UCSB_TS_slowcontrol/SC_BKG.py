@@ -2941,7 +2941,7 @@ class UpdatePLC(QtCore.QObject):
         if self.LOOPPID_para[pid] >= self.LOOPPID_rate[pid]:
             msg = "Henry's Panel alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.LOOPPID_OUT[pid],
                                                                                                                      high=self.PLC.LOOPPID_Alarm_HighLimit[pid], low=self.PLC.LOOPPID_Alarm_LowLimit[pid])
-            print("initial message",msg)
+            # print("initial message",msg)
             # self.message_manager.tencent_alarm(msg)
             # self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
