@@ -698,45 +698,45 @@ class AlarmWin(QtWidgets.QMainWindow):
         # PT part
         self.PT1000 = AlarmStatusWidget(self.PressureTab)
         self.PT1000.Label.setText("PT1000")
-        self.PT1000.Indicator.Unit = " bara"
-        self.PT1000.Low_Read.Unit = " bara"
-        self.PT1000.High_Read.Unit = " bara"
+        self.PT1000.Indicator.Unit = " b"
+        self.PT1000.Low_Read.Unit = " b"
+        self.PT1000.High_Read.Unit = " b"
 
         self.PT1001 = AlarmStatusWidget(self.PressureTab)
         self.PT1001.Label.setText("PT1001")
-        self.PT1001.Indicator.Unit = " bara"
-        self.PT1001.Low_Read.Unit = " bara"
-        self.PT1001.High_Read.Unit = " bara"
+        self.PT1001.Indicator.Unit = " b"
+        self.PT1001.Low_Read.Unit = " b"
+        self.PT1001.High_Read.Unit = " b"
 
         self.PT1002 = AlarmStatusWidget(self.PressureTab)
         self.PT1002.Label.setText("PT1002")
-        self.PT1002.Indicator.Unit = " bara"
-        self.PT1002.Low_Read.Unit = " bara"
-        self.PT1002.High_Read.Unit = " bara"
+        self.PT1002.Indicator.Unit = " b"
+        self.PT1002.Low_Read.Unit = " b"
+        self.PT1002.High_Read.Unit = " b"
 
         self.PT001 = AlarmStatusWidget(self.PressureTab)
         self.PT001.Label.setText("PT001")
-        self.PT001.Indicator.Unit = " bara"
-        self.PT001.Low_Read.Unit = " bara"
-        self.PT001.High_Read.Unit = " bara"
+        self.PT001.Indicator.Unit = " b"
+        self.PT001.Low_Read.Unit = " b"
+        self.PT001.High_Read.Unit = " b"
 
         self.PT002 = AlarmStatusWidget(self.PressureTab)
         self.PT002.Label.setText("PT002")
-        self.PT002.Indicator.Unit = " bara"
-        self.PT002.Low_Read.Unit = " bara"
-        self.PT002.High_Read.Unit = " bara"
+        self.PT002.Indicator.Unit = " b"
+        self.PT002.Low_Read.Unit = " b"
+        self.PT002.High_Read.Unit = " b"
 
         self.PT003 = AlarmStatusWidget(self.PressureTab)
         self.PT003.Label.setText("PT003")
-        self.PT003.Indicator.Unit = " bara"
-        self.PT003.Low_Read.Unit = " bara"
-        self.PT003.High_Read.Unit = " bara"
+        self.PT003.Indicator.Unit = " b"
+        self.PT003.Low_Read.Unit = " b"
+        self.PT003.High_Read.Unit = " b"
 
         self.PT004 = AlarmStatusWidget(self.PressureTab)
         self.PT004.Label.setText("PT004")
-        self.PT004.Indicator.Unit = " bara"
-        self.PT004.Low_Read.Unit = " bara"
-        self.PT004.High_Read.Unit = " bara"
+        self.PT004.Indicator.Unit = " b"
+        self.PT004.Low_Read.Unit = " b"
+        self.PT004.High_Read.Unit = " b"
 
         # RTD
         self.TT1001 = AlarmStatusWidget(self.GroupRTD1)
@@ -818,9 +818,9 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.LL = AlarmStatusWidget(self.GroupRTDLEFT)
         self.LL.Label.setText("LL")
-        self.LL.Indicator.Unit = " cm"
-        self.LL.Low_Read.Unit = " cm"
-        self.LL.High_Read.Unit = " cm"
+        self.LL.Indicator.Unit = " c"
+        self.LL.Low_Read.Unit = " c"
+        self.LL.High_Read.Unit = " c"
 
 
         # make a directory for the alarm instrument and assign instrument to certain position
