@@ -742,7 +742,7 @@ class PLC(QtCore.QObject):
             print("AD1 lost connection to PLC")
             self.PLC_DISCON_SIGNAL.emit()
             self.AD1_updatesignal = False
-        print("AD1", self.TT_AD1_dic)
+        # print("AD1", self.TT_AD1_dic)
 
         if self.Connected_AD2:
             # Reading all the RTDs
@@ -762,7 +762,7 @@ class PLC(QtCore.QObject):
             print("AD2 lost connection to PLC")
             self.AD2_updatesignal = False
             # self.PLC_DISCON_SIGNAL.emit()
-        print("AD2", self.TT_AD2_dic)
+        # print("AD2", self.TT_AD2_dic)
 
 
                 # Raw_AD1_TT = self.Client_AD1.read_holding_registers(30, count=2, unit=0x01)
@@ -3246,7 +3246,7 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
-        print("Updateserver", self.data_dic["data"]['FLAG']["value"],datetime.datetime.now())
+        print("Updateserver", datetime.datetime.now())
 
         for key in self.PLC.TT_AD1_dic:
             self.TT_AD1_dic_ini[key] = self.PLC.TT_AD1_dic[key]
@@ -3475,16 +3475,16 @@ class UpdateServer(QtCore.QObject):
 
     def write_data(self):
         message = pickle.loads(self.socket.recv())
-        print(message)
+        # print(message)
         if not "MAN_SET" in message:
             if message == {}:
                 pass
             else:
                 for key in message:
-                    print(message[key]["type"])
-                    print(message[key]["type"] == "valve")
+                    # print(message[key]["type"])
+                    # print(message[key]["type"] == "valve")
                     if message[key]["type"] == "valve":
-                        print("Valve", datetime_in_1e5micro())
+                        # print("Valve", datetime_in_1e5micro())
                         if message[key]["operation"] == "OPEN":
                             self.PLC.WriteBase2(address=message[key]["address"])
                         elif message[key]["operation"] == "CLOSE":
@@ -3733,7 +3733,7 @@ class UpdateServer(QtCore.QObject):
                         #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
 
                     elif message[key]["type"] == "LOOP2PT_power":
-                        print("PUMP", datetime_in_1e5micro())
+                        # print("PUMP", datetime_in_1e5micro())
                         if message[key]["operation"] == "OPEN":
                             self.PLC.LOOP2PT_OPEN(address=message[key]["address"])
                         elif message[key]["operation"] == "CLOSE":
