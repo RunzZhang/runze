@@ -525,7 +525,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # commands stack
         self.address = sec.merge_dic(sec.TT_AD1_ADDRESS, sec.TT_AD2_ADDRESS, sec.PT_ADDRESS, sec.LEFT_REAL_ADDRESS,
                                      sec.VALVE_ADDRESS, sec.LOOPPID_ADR_BASE, sec.PROCEDURE_ADDRESS,
-                                     sec.INTLK_A_ADDRESS,sec.LL_ADDRESS)
+                                     sec.INTLK_A_ADDRESS,sec.LL_ADDRESS, sec.HTRTD_ADDRESS)
         self.commands = {}
 
         self.signal_connection()
@@ -844,6 +844,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                         Act=self.AlarmButton.SubWindow.HTR1004T1.AlarmMode.isChecked(),
                                         LowLimit=self.AlarmButton.SubWindow.HTR1004T1.Low_Set.Field.text(),
                                         HighLimit=self.AlarmButton.SubWindow.HTR1004T1.High_Set.Field.text()))
+
         self.AlarmButton.SubWindow.HTR1004T2.updatebutton.clicked.connect(
             lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1004T2.Label.text(),
                                         Act=self.AlarmButton.SubWindow.HTR1004T2.AlarmMode.isChecked(),
@@ -4341,25 +4342,25 @@ class UpdateClient(QtCore.QObject):
 
         self.TT_AD1_dic_ini = sec.TT_AD1_DIC
         self.TT_AD2_dic_ini = sec.TT_AD2_DIC
+        self.HTRTD_dic_ini = sec.HTRTD_DIC
         self.PT_dic_ini = sec.PT_DIC
         self.LEFT_REAL_ini = sec.LEFT_REAL_DIC
         self.TT_AD1_LowLimit_ini = sec.TT_AD1_LOWLIMIT
         self.TT_AD1_HighLimit_ini = sec.TT_AD1_HIGHLIMIT
         self.TT_AD2_LowLimit_ini = sec.TT_AD2_LOWLIMIT
         self.TT_AD2_HighLimit_ini = sec.TT_AD2_HIGHLIMIT
-        self.LL_dic_ini = sec.LL_DIC
-        self.LL_lowLimit_ini = sec.LL_LOWLIMIT
-        self.LL_HighLimit_ini = sec.LL_HIGHLIMIT
-        self.LL_Alarm_ini = sec.LL_ALARM
-        self.LL_Activated_ini = sec.LL_ACTIVATED
+        self.HTRTD_LowLimit_ini = sec.HTRTD_LOWLIMIT
+        self.HTRTD_HighLimit_ini = sec.HTRTD_HIGHLIMIT
         self.PT_LowLimit_ini = sec.PT_LOWLIMIT
         self.PT_HighLimit_ini = sec.PT_HIGHLIMIT
         self.LEFT_REAL_LowLimit_ini = sec.LEFT_REAL_LOWLIMIT
         self.LEFT_REAL_HighLimit_ini = sec.LEFT_REAL_HIGHLIMIT
         self.TT_AD1_Alarm_ini = sec.TT_AD1_ALARM
         self.TT_AD2_Alarm_ini = sec.TT_AD2_ALARM
+        self.HTRTD_Alarm_ini = sec.HTRTD_ALARM
         self.TT_AD1_Activated_ini = sec.TT_AD1_ACTIVATED
         self.TT_AD2_Activated_ini = sec.TT_AD2_ACTIVATED
+        self.HTRTD_Activated_ini = sec.HTRTD_ACTIVATED
         self.PT_Activated_ini = sec.PT_ACTIVATED
         self.PT_Alarm_ini = sec.PT_ALARM
         self.LEFT_REAL_Activated_ini = sec.LEFT_REAL_ACTIVATED
@@ -4386,8 +4387,8 @@ class UpdateClient(QtCore.QObject):
         self.LOOPPID_MODE2_ini = sec.LOOPPID_MODE2
         self.LOOPPID_MODE3_ini = sec.LOOPPID_MODE3
         self.LOOPPID_INTLKD_ini = sec.LOOPPID_INTLKD
-        self.LOOPPID_TT_ini = sec.LOOPPID_TT
         self.LOOPPID_MAN_ini = sec.LOOPPID_MAN
+        self.LOOPPID_TT_ini = sec.LOOPPID_TT
         self.LOOPPID_ERR_ini = sec.LOOPPID_ERR
         self.LOOPPID_SATHI_ini = sec.LOOPPID_SATHI
         self.LOOPPID_SATLO_ini = sec.LOOPPID_SATLO
@@ -4449,25 +4450,31 @@ class UpdateClient(QtCore.QObject):
 
         self.Ini_Check_ini = sec.INI_CHECK
 
-        self.receive_dic = {"data": {"TT": {
-            "AD1": {"value": self.TT_AD1_dic_ini, "high": self.TT_AD1_HighLimit_ini, "low": self.TT_AD1_LowLimit_ini},
-            "AD2": {"value": self.TT_AD2_dic_ini, "high": self.TT_AD2_HighLimit_ini, "low": self.TT_AD2_LowLimit_ini}},
-                                  "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini,
-                                         "low": self.PT_LowLimit_ini},
-                                  "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini,
-                                                "low": self.LEFT_REAL_LowLimit_ini},
-                                  "LL": {"value": self.LL_dic_ini, "high": self.LL_HighLimit_ini, "low": self.LL_lowLimit_ini},
+        self.LL_dic_ini = sec.LL_DIC
+        self.LL_LowLimit_ini = sec.LL_LOWLIMIT
+        self.LL_HighLimit_ini = sec.LL_HIGHLIMIT
+        self.LL_Alarm_ini = sec.LL_ALARM
+        self.LL_Activated_ini = sec.LL_ACTIVATED
+
+        self.Ini_Check_ini = sec.INI_CHECK
+
+        self.receive_dic =  {"data": {"TT": {"AD1": {"value": self.TT_AD1_dic_ini, "high": self.TT_AD1_HighLimit_ini, "low": self.TT_AD1_LowLimit_ini},
+                                         "AD2": {"value": self.TT_AD2_dic_ini, "high": self.TT_AD2_HighLimit_ini, "low": self.TT_AD2_LowLimit_ini},
+                                         "LS":{"value": self.HTRTD_dic_ini, "high": self.HTRTD_HighLimit_ini, "low": self.HTRTD_HighLimit_ini}},
+                                  "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
+                                  "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini, "low": self.LEFT_REAL_LowLimit_ini},
+                                  "LL": {"value": self.LL_dic_ini, "high": self.LL_HighLimit_ini,
+                                         "low": self.LL_LowLimit_ini},
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
                                             "ERR": self.Valve_ERR_ini,
-                                            "Busy": self.Valve_Busy_ini},
+                                            "Busy":self.Valve_Busy_ini},
                                   # "Switch": {"OUT": self.Switch_OUT_ini,
                                   #            "INTLKD": self.Switch_INTLKD_ini,
                                   #            "MAN": self.Switch_MAN_ini,
                                   #            "ERR": self.Switch_ERR_ini},
-                                  "Din": {'value': self.Din_dic_ini, "high": self.Din_HighLimit_ini,
-                                          "low": self.Din_LowLimit_ini},
+                                  "Din": {'value': self.Din_dic_ini,"high": self.Din_HighLimit_ini, "low": self.Din_LowLimit_ini},
                                   "LOOPPID": {"MODE0": self.LOOPPID_MODE0_ini,
                                               "MODE1": self.LOOPPID_MODE1_ini,
                                               "MODE2": self.LOOPPID_MODE2_ini,
@@ -4487,10 +4494,10 @@ class UpdateClient(QtCore.QObject):
                                               "SET1": self.LOOPPID_SET1_ini,
                                               "SET2": self.LOOPPID_SET2_ini,
                                               "SET3": self.LOOPPID_SET3_ini,
-                                              "Busy": self.LOOPPID_Busy_ini,
-                                              "Alarm": self.LOOPPID_Alarm_ini,
-                                              "Alarm_HighLimit": self.LOOPPID_Alarm_HighLimit_ini,
-                                              "Alarm_LowLimit": self.LOOPPID_Alarm_LowLimit_ini},
+                                              "Busy":self.LOOPPID_Busy_ini,
+                                              "Alarm":self.LOOPPID_Alarm_ini,
+                                              "Alarm_HighLimit":self.LOOPPID_Alarm_HighLimit_ini,
+                                              "Alarm_LowLimit":self.LOOPPID_Alarm_LowLimit_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
                                               "MODE2": self.LOOP2PT_MODE2_ini,
@@ -4502,29 +4509,29 @@ class UpdateClient(QtCore.QObject):
                                               "SET1": self.LOOP2PT_SET1_ini,
                                               "SET2": self.LOOP2PT_SET2_ini,
                                               "SET3": self.LOOP2PT_SET3_ini,
-                                              "Busy": self.LOOP2PT_Busy_ini},
+                                              "Busy":self.LOOP2PT_Busy_ini},
                                   "INTLK_D": {"value": self.INTLK_D_DIC_ini,
                                               "EN": self.INTLK_D_EN_ini,
                                               "COND": self.INTLK_D_COND_ini,
-                                              "Busy": self.INTLK_D_Busy_ini},
-                                  "INTLK_A": {"value": self.INTLK_A_DIC_ini,
-                                              "EN": self.INTLK_A_EN_ini,
-                                              "COND": self.INTLK_A_COND_ini,
-                                              "SET": self.INTLK_A_SET_ini,
-                                              "Busy": self.INTLK_A_Busy_ini},
-                                  "FLAG": {"value": self.FLAG_DIC_ini,
-                                           "INTLKD": self.FLAG_INTLKD_ini,
-                                           "Busy": self.FLAG_Busy_ini},
-                                  "Procedure": {"Running": self.Procedure_running_ini,
-                                                "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini},
-                                  "FF": self.FF_DIC_ini,
-                                  "PARA_I": self.PARAM_I_DIC_ini,
-                                  "PARA_F": self.PARAM_F_DIC_ini,
-                                  "PARA_B": self.PARAM_B_DIC_ini,
-                                  "PARA_T": self.PARAM_T_DIC_ini,
-                                  "TIME": self.TIME_DIC_ini},
+                                              "Busy":self.INTLK_D_Busy_ini},
+                                  "INTLK_A": {"value":self.INTLK_A_DIC_ini,
+                                              "EN":self.INTLK_A_EN_ini,
+                                              "COND":self.INTLK_A_COND_ini,
+                                              "SET":self.INTLK_A_SET_ini,
+                                              "Busy":self.INTLK_A_Busy_ini},
+                                  "FLAG": {"value":self.FLAG_DIC_ini,
+                                           "INTLKD":self.FLAG_INTLKD_ini,
+                                           "Busy":self.FLAG_Busy_ini},
+                                  "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini},
+                                  "FF":self.FF_DIC_ini,
+                                  "PARA_I":self.PARAM_I_DIC_ini,
+                                  "PARA_F":self.PARAM_F_DIC_ini,
+                                  "PARA_B":self.PARAM_B_DIC_ini,
+                                  "PARA_T":self.PARAM_T_DIC_ini,
+                                  "TIME":self.TIME_DIC_ini},
                          "Alarm": {"TT": {"AD1": self.TT_AD1_Alarm_ini,
-                                          "AD2": self.TT_AD2_Alarm_ini
+                                          "AD2": self.TT_AD2_Alarm_ini,
+                                          "LS":self.HTRTD_Alarm_ini
                                           },
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
@@ -4532,13 +4539,14 @@ class UpdateClient(QtCore.QObject):
                                    "LOOPPID": self.LOOPPID_Alarm_ini,
                                    "LL":self.LL_Alarm_ini},
                          "Active": {"TT": {"AD1": self.TT_AD1_Activated_ini,
-                                           "AD2": self.TT_AD2_Activated_ini},
-                                    "PT": self.PT_Activated_ini,
-                                    "LEFT_REAL": self.LEFT_REAL_Activated_ini,
+                                           "AD2": self.TT_AD2_Activated_ini,
+                                           "LS":self.HTRTD_Activated_ini},
+                                   "PT": self.PT_Activated_ini,
+                                   "LEFT_REAL": self.LEFT_REAL_Activated_ini,
                                     "Din": self.Din_Activated_ini,
                                     "LOOPPID": self.LOOPPID_Activated_ini,
-                                     "LL":self.LL_Activated_ini,
-                                    "INI_CHECK": self.Ini_Check_ini},
+                                    "INI_CHECK": self.Ini_Check_ini,
+                                    "LL":self.LL_Activated_ini},
                          "MainAlarm": self.MainAlarm_ini
                          }
 
