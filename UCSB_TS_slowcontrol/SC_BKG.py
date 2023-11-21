@@ -4009,7 +4009,7 @@ class message_manager():
     def __init__(self):
         # info about tencent mail settings
         self.sender_email = "runzezhang@ucsb.edu"
-        self.receiver_email_list = ["runzezhang26@outlook.com", "2249992847@txt.att.net","chami@ucsb.edu"]
+        self.receiver_email_list = ["runzezhang26@outlook.com", "2249992847@txt.att.net"]
         # change receiver email to phonenumber@domain to send text message
         self.subject = "Henry's Panel Alarm"
         self.body = "This is a test email sent using Python and Gmail's SMTP server."
