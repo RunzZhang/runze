@@ -4071,14 +4071,14 @@ class message_manager():
 
 
 if __name__ == "__main__":
-    # msg_mana=message_manager()
-    # msg_mana.send_email("this is a test message")
+    msg_mana=message_manager()
+    msg_mana.send_email("Henry's Panel alarm: HTR1002 is out of range: CURRENT VALUE: 0, LO_LIM: 20.0, HI_LIM: 80.0 \n Henry's Panel alarm: HTR1003 is out of range: CURRENT VALUE: 0, LO_LIM: 30.0, HI_LIM: 90.0 \n Henry's Panel alarm: HTR1001 is out of range: CURRENT VALUE: 0, LO_LIM: 20.0, HI_LIM: 90.0")
 
     # print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
 
-    App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
-    sys.exit(App.exec_())
+    # App = QtWidgets.QApplication(sys.argv)
+    # Update=Update()
+    # sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
