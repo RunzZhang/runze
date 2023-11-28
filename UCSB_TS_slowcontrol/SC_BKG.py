@@ -2558,7 +2558,7 @@ class UpdatePLC(QtCore.QObject):
                     print("finished")
                     # test signal
                     # self.AI_slack_alarm.emit("signal")
-                    self.alarm_stack = ""
+                    # self.alarm_stack = ""
                     # check alarms
                     for keyTT_AD1 in self.PLC.TT_AD1_dic:
                         self.check_TT_AD1_alarm(keyTT_AD1)
