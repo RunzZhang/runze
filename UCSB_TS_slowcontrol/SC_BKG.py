@@ -2593,7 +2593,7 @@ class UpdatePLC(QtCore.QObject):
                         # self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                             temp_msg = self.join_stack_into_message()
                             self.AI_slack_alarm.emit(temp_msg)
-                            print("alarm stack sent")
+                            print("alarm stack sent," , temp_msg)
                             self.alarm_stack = {}
                             self.mainalarm_para = 0
                         self.mainalarm_para+=1
