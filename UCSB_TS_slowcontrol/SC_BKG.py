@@ -579,7 +579,7 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_OUT[key] = Raw_LS_power[key]
-            # print(self.LOOPPID_OUT)
+            print("HTR OUT",self.LOOPPID_OUT)
             for key in self.LOOPPID_ADR_BASE:
                 if float(self.LOOPPID_OUT[key])>0:
                     self.LOOPPID_EN[key] = True
@@ -638,7 +638,7 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.close()
             for key in self.HTRTD_address:
                 self.HTRTD_dic[key] = Raw_LS_TT[key]
-            # print("HTR RTDs",self.LOOPPID_TT)
+            print("HTR RTDs",self.LOOPPID_TT)
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
 
