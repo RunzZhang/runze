@@ -562,7 +562,7 @@ class PLC(QtCore.QObject):
         command = "HTR?0\n"
         cm_code = command.encode()
         self.socket_LS.send(cm_code)
-        receive = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
+        receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
         print("decode", receive)
 
     def Read_LS(self):
