@@ -2547,7 +2547,7 @@ class UpdatePLC(QtCore.QObject):
                     self.PLC.ReadAll()
                     self.PLC.Read_AD()
                     # self.PLC.Read_LS()
-                    # self.PLC.Read_LL()
+                    self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
                     print("finished")
                     # test signal
