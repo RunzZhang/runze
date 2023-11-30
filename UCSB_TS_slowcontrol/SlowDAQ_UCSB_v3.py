@@ -431,7 +431,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.RTD4 = Indicator(self.TubeTab)
         self.RTD4.Label.setText("RTD4")
-        self.RTD4.move(1342 * R, 725 * R)
+        self.RTD4.move(1342 * R, 735 * R)
 
         self.RTD5 = Indicator(self.TubeTab)
         self.RTD5.Label.setText("RTD5")
