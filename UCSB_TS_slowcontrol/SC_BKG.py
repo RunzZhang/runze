@@ -2682,6 +2682,8 @@ class UpdatePLC(QtCore.QObject):
         self.alarm_stack={}
         self.mainalarm_para = sec.MAINALARM_PARA
         self.mainalarm_rate = sec.MAINALARM_RATE
+        self.broadcast_para = sec.BROAD_CAST_PARA
+        self.broadcast_rate = sec.BROAD_CAST_RATE
 
 
     @QtCore.Slot()
@@ -2758,10 +2760,21 @@ class UpdatePLC(QtCore.QObject):
     # def pressure_cycle(self):
     #     if self.PR_CYCLE_para >= self.PR_CYCLE_rate:
     #         self.PLC.
+
+    @QtCore.Slot()
+    def broadcast(self):
+        if self.broadcast_para>= self.broadcast_rate:
+            self.AI_slack_alarm.emit("Henry's Panel Broadcast: RTD value ")
+            self.broadcast_para = 0
+        self.broadcast_para += 1
+        return 0
+
     @QtCore.Slot()
     def stack_alarm_msg(self, pid,string):
         self.alarm_stack[pid]= string
         # print("stack2", self.alarm_stack)
+
+
 
     @QtCore.Slot()
     def stack_LS_alarm_msg(self, string):
