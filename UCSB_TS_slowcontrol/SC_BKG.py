@@ -557,7 +557,7 @@ class PLC(QtCore.QObject):
     def LS_test(self):
         # test part
         self.socket_LS = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_LS.connect((self.IP_LS1, self.PORT_LS2))
+        self.socket_LS.connect((self.IP_LS2, self.PORT_LS2))
         print("connection success!")
         command = "HTR?1\n"
         cm_code = command.encode()
