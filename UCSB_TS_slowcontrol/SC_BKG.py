@@ -567,7 +567,7 @@ class PLC(QtCore.QObject):
                 if self.LOOPPID_ADR_BASE[key][0]==0:
                     self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
-                    print("connection success!")
+                    print("connection success!",key)
                     cm_code = command.encode()
                     self.socket_LS1.send(cm_code)
                     Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
@@ -575,6 +575,7 @@ class PLC(QtCore.QObject):
                 if self.LOOPPID_ADR_BASE[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
+                    print("connection success!", key)
                     cm_code = command.encode()
                     self.socket_LS2.send(cm_code)
                     Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
