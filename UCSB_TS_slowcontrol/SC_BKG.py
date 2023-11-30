@@ -567,6 +567,131 @@ class PLC(QtCore.QObject):
         self.socket_LS.send(cm_code)
         receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
         print("decode", receive)
+    def Read_LS_slow(self):
+        # print("socket connection",self.socket.stillconnected())
+        # command = "HTR?1\n"
+        Raw_LS_power = {}
+        Raw_LS_TT = {}
+        self.LS_timeout  = 1
+
+        try:
+            for key in self.LOOPPID_ADR_BASE:
+                # time.sleep(0.1)
+                command_base = "HTR?"
+                command_middle=str(self.LOOPPID_ADR_BASE[key][1])
+                command =  command_base+command_middle+"\n"
+                if self.LOOPPID_ADR_BASE[key][0]==0:
+                    self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
+                    self.socket_LS1.settimeout(self.LS_timeout)
+                    # print("connection success!", key)
+                    try:
+                        cm_code = command.encode()
+                        self.socket_LS1.send(cm_code)
+                        Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
+                    except socket.timeout:
+                        print(f"Socket operation timed out after {self.LS_timeout} seconds")
+                    finally:
+
+                        self.socket_LS1.close()
+                if self.LOOPPID_ADR_BASE[key][0]==1:
+                    self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
+                    self.socket_LS2.settimeout(self.LS_timeout)
+                    # print("connection success!", key)
+                    try:
+                        cm_code = command.encode()
+                        self.socket_LS2.send(cm_code)
+                        Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
+                    except socket.timeout:
+                        print(f"Socket operation timed out after {self.LS_timeout} seconds")
+                    finally:
+                        self.socket_LS2.close()
+            for key in self.LOOPPID_ADR_BASE:
+                stripped = Raw_LS_power[key].strip("+")
+                self.LOOPPID_OUT[key] = float(stripped)
+            # print("HTR OUT",self.LOOPPID_OUT)
+            for key in self.LOOPPID_ADR_BASE:
+                if float(self.LOOPPID_OUT[key])>0:
+                    self.LOOPPID_EN[key] = True
+                else:
+                    self.LOOPPID_EN[key] = False
+
+
+
+            #first read LS and then put value into dic
+            command_base = "KRDG?"
+            # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
+            command_middle = "0"
+            command = command_base + command_middle + "\n"
+            # command = command_base + "\n"
+
+            self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
+            self.socket_LS1.settimeout(self.LS_timeout)
+            try:
+                cm_code = command.encode()
+                self.socket_LS1.send(cm_code)
+
+                output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
+
+                for key in self.HTRTD_address:
+                    if self.HTRTD_address[key][0] == 0:
+                        Raw_LS_TT[key] = output_tuple[
+                            2 * self.HTRTD_address[key][1] + self.HTRTD_address[key][2]]
+            except socket.timeout:
+                print(f"Socket operation timed out after {self.LS_timeout} seconds")
+            finally:
+
+                self.socket_LS1.close()
+
+
+            self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
+            self.socket_LS2.settimeout(self.LS_timeout)
+            try:
+                cm_code = command.encode()
+                self.socket_LS2.send(cm_code)
+                output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
+                # combining 2nd digit and 3rd digit to get final address
+                for key in self.HTRTD_address:
+                    if self.HTRTD_address[key][0] == 1:
+
+                        Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
+            except socket.timeout:
+                print(f"Socket operation timed out after {self.LS_timeout} seconds")
+            finally:
+
+                self.socket_LS2.close()
+            for key in self.HTRTD_address:
+                self.HTRTD_dic[key] = Raw_LS_TT[key]
+            # print("HTR RTDs",self.HTRTD_dic)
+            self.LS1_updatesignal = True
+            self.LS2_updatesignal = True
+
+        except:
+            print("LS1 or LS2 lost connection to PLC")
+            self.LS1_updatesignal = False
+            self.LS2_updatesignal = False
+            self.LS_DISCON_SIGNAL.emit("LS1 or LS2 lost connection to PLC")
+            # self.PLC_DISCON_SIGNAL.emit()
+        # print("LS_power", Raw_LS_power)
+        # print("LS_TT", Raw_LS_TT)
+
+
+
+        # request = pymodbus.Custom
+        # command =1
+        # if self.Connected:
+        # self.Client.send(command)
+        # value = self.Client.execute(request=command)
+        # value = self.Client.execute()
+        # raw_data = self.Client.send(command)
+        # value = self.Client.recv(1024)
+        # value = round(
+        #         struct.unpack("<f", struct.pack("<HH", raw_data.getRegister(1), raw_data.getRegister(0)))[0], 3)
+        # print(value)
+
 
     def Read_LS(self):
         # print("socket connection",self.socket.stillconnected())
@@ -2565,7 +2690,8 @@ class UpdatePLC(QtCore.QObject):
                     print("PLC updating", datetime.datetime.now())
                     self.PLC.ReadAll()
                     self.PLC.Read_AD()
-                    self.PLC.Read_LS()
+                    # self.PLC.Read_LS()
+                    self.PLC.Read_LS_slow()
                     self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
                     print("finished")
