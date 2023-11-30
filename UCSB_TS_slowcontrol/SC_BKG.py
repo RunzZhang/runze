@@ -584,19 +584,28 @@ class PLC(QtCore.QObject):
                     self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
                     self.socket_LS1.settimeout(self.LS_timeout)
                     # print("connection success!", key)
-                    cm_code = command.encode()
-                    self.socket_LS1.send(cm_code)
-                    Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
-                    self.socket_LS1.close()
+                    try:
+                        cm_code = command.encode()
+                        self.socket_LS1.send(cm_code)
+                        Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
+                    except socket.timeout:
+                        print(f"Socket operation timed out after {self.LS_timeout} seconds")
+                    finally:
+
+                        self.socket_LS1.close()
                 if self.LOOPPID_ADR_BASE[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
                     self.socket_LS2.settimeout(self.LS_timeout)
                     # print("connection success!", key)
-                    cm_code = command.encode()
-                    self.socket_LS2.send(cm_code)
-                    Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
-                    self.socket_LS2.close()
+                    try:
+                        cm_code = command.encode()
+                        self.socket_LS2.send(cm_code)
+                        Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
+                    except socket.timeout:
+                        print(f"Socket operation timed out after {self.LS_timeout} seconds")
+                    finally:
+                        self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
                 stripped = Raw_LS_power[key].strip("+")
                 self.LOOPPID_OUT[key] = float(stripped)
@@ -617,22 +626,33 @@ class PLC(QtCore.QObject):
                     self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
                     self.socket_LS1.settimeout(self.LS_timeout)
-                    cm_code = command.encode()
-                    self.socket_LS1.send(cm_code)
-                    output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
+                    try:
+                        cm_code = command.encode()
+                        self.socket_LS1.send(cm_code)
 
-                    Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
-                    self.socket_LS1.close()
+                        output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
+
+                        Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
+                    except socket.timeout:
+                        print(f"Socket operation timed out after {self.LS_timeout} seconds")
+                    finally:
+
+                        self.socket_LS1.close()
                 if self.HTRTD_address[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
                     self.socket_LS2.settimeout(self.LS_timeout)
-                    cm_code = command.encode()
-                    self.socket_LS2.send(cm_code)
-                    output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
-                    # combining 2nd digit and 3rd digit to get final address
-                    Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
-                    self.socket_LS2.close()
+                    try:
+                        cm_code = command.encode()
+                        self.socket_LS2.send(cm_code)
+                        output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
+                        # combining 2nd digit and 3rd digit to get final address
+                        Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
+                    except socket.timeout:
+                        print(f"Socket operation timed out after {self.LS_timeout} seconds")
+                    finally:
+
+                        self.socket_LS2.close()
             for key in self.HTRTD_address:
                 self.HTRTD_dic[key] = Raw_LS_TT[key]
             # print("HTR RTDs",self.HTRTD_dic)
