@@ -495,11 +495,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1004.LOOPPIDWindow.setWindowTitle("Heater4")
         self.HTR1004.LOOPPIDWindow.Label.setText("Heater4")
 
-        self.H5 = LOOPPID_v2(self.TubeTab)
-        self.H5.move(295 * R, 430 * R)
-        self.H5.Label.setText("Heater5")
-        self.H5.LOOPPIDWindow.setWindowTitle("Heater5")
-        self.H5.LOOPPIDWindow.Label.setText("Heater5")
+        self.HTR1005 = LOOPPID_v2(self.TubeTab)
+        self.HTR1005.move(295 * R, 430 * R)
+        self.HTR1005.Label.setText("Heater5")
+        self.HTR1005.LOOPPIDWindow.setWindowTitle("Heater5")
+        self.HTR1005.LOOPPIDWindow.Label.setText("Heater5")
 
         self.IDHTR1001 = PnID_Alone(self.TubeTab)
         self.IDHTR1001.Label.setText("Heater 1")
