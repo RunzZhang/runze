@@ -559,7 +559,7 @@ class PLC(QtCore.QObject):
         # command = "HTR?1\n"
         Raw_LS_power = {}
         Raw_LS_TT = {}
-        if self.Connected_LS1 and self.Connected_LS2:
+        try:
             for key in self.LOOPPID_ADR_BASE:
                 command_base = "HTR?"
                 command_middle=str(self.LOOPPID_ADR_BASE[key][1])
@@ -618,7 +618,7 @@ class PLC(QtCore.QObject):
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
 
-        else:
+        except:
             print("LS1 or LS2 lost connection to PLC")
             self.LS1_updatesignal = False
             self.LS2_updatesignal = False
@@ -2520,7 +2520,7 @@ class UpdatePLC(QtCore.QObject):
                     print("PLC updating", datetime.datetime.now())
                     self.PLC.ReadAll()
                     self.PLC.Read_AD()
-                    # self.PLC.Read_LS()
+                    self.PLC.Read_LS()
                     self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
                     print("finished")
