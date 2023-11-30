@@ -4073,8 +4073,8 @@ if __name__ == "__main__":
 
     PLC=PLC()
     # PLC.Read_LL()
-    PLC.LS_test()
-    # PLC.Read_LS()
+    # PLC.LS_test()
+    PLC.Read_LS()
     # PLC.Read_AD()
     # PLC.ReadAll()
 
