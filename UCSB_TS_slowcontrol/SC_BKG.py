@@ -559,7 +559,7 @@ class PLC(QtCore.QObject):
         self.socket_LS = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_LS.connect((self.IP_LS2, self.PORT_LS2))
         print("connection success!")
-        command = "HTR?0\n"
+        command = "KRDG?0\n"
         cm_code = command.encode()
         self.socket_LS.send(cm_code)
         receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
