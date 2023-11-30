@@ -79,6 +79,7 @@ class PLC(QtCore.QObject):
     DATA_UPDATE_SIGNAL=QtCore.Signal(object)
     DATA_TRI_SIGNAL = QtCore.Signal(bool)
     PLC_DISCON_SIGNAL = QtCore.Signal()
+    LS_DISCON_SIGNAL = QtCore.Signal(str)
     def __init__(self):
         super().__init__()
         self.IP_LS1 = "10.111.19.109"
@@ -663,6 +664,7 @@ class PLC(QtCore.QObject):
             print("LS1 or LS2 lost connection to PLC")
             self.LS1_updatesignal = False
             self.LS2_updatesignal = False
+            self.LS_DISCON_SIGNAL.emit("LS1 or LS2 lost connection to PLC")
             self.PLC_DISCON_SIGNAL.emit()
         # print("LS_power", Raw_LS_power)
         # print("LS_TT", Raw_LS_TT)
@@ -2630,6 +2632,11 @@ class UpdatePLC(QtCore.QObject):
     def stack_alarm_msg(self, pid,string):
         self.alarm_stack[pid]= string
         # print("stack2", self.alarm_stack)
+
+    @QtCore.Slot()
+    def stack_LS_alarm_msg(self, string):
+        self.alarm_stack["LS_CON"] = string
+        # print("stack2", self.alarm_stack)
     def join_stack_into_message(self):
         message = ""
         if len(self.alarm_stack)>=1:
@@ -3995,6 +4002,8 @@ class Update(QtCore.QObject):
 
         self.UpPLC.AI_slack_alarm.connect(self.message_manager.send_email)
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.send_email)
+        self.UpPLC.PLC.LS_DISCON_SIGNAL.connect(self.UpPLC.stack_LS_alarm_msg)
+        # if LS disconnected, then throw an alarm message into upplc stack, all stack message will be sent out later
 
     def connect_signals(self):
         # self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
@@ -4007,6 +4016,7 @@ class Update(QtCore.QObject):
         self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
 
         self.UpPLC.PLC.PLC_DISCON_SIGNAL.connect(self.StopUpdater)
+
         print("signal established")
 
 
