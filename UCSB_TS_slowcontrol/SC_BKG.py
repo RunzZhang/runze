@@ -554,11 +554,24 @@ class PLC(QtCore.QObject):
             self.NewData_Database = True
             self.NewData_ZMQ = True
 
+    def LS_test(self):
+        # test part
+        self.socket_LS = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket_LS.connect((self.IP_LS1, self.PORT_LS1))
+        print("connection success!")
+        command = "HTR?0\n"
+        cm_code = command.encode()
+        self.socket_LS.send(cm_code)
+        receive = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
+        print("decode", receive)
+
     def Read_LS(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
         Raw_LS_power = {}
         Raw_LS_TT = {}
+
+
         try:
             for key in self.LOOPPID_ADR_BASE:
                 command_base = "HTR?"
@@ -4058,7 +4071,8 @@ if __name__ == "__main__":
 
     PLC=PLC()
     # PLC.Read_LL()
-    PLC.Read_LS()
+    PLC.LS_test()
+    # PLC.Read_LS()
     # PLC.Read_AD()
     # PLC.ReadAll()
 
