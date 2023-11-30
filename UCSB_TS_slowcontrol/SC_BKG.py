@@ -92,7 +92,9 @@ class PLC(QtCore.QObject):
 
         self.LS1_updatesignal = False
 
-        self.IP_LS2 = "10.111.19.100"
+        # self.IP_LS2 = "10.111.19.100"
+        self.IP_LS2 = "169.254.2.173"
+
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         self.PORT_LS2 = 7777
         self.BUFFER_SIZE = 1024
