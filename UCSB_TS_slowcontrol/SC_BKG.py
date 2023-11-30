@@ -2493,7 +2493,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_PARAM_B += 1
         self.para_PARAM_F += 1
         self.para_TIME += 1
-        self.para_LL +=1
+        # self.para_LL +=1
         # self.PLC.NewData_Database = False
 
 
