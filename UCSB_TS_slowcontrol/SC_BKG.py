@@ -577,6 +577,7 @@ class PLC(QtCore.QObject):
 
         try:
             for key in self.LOOPPID_ADR_BASE:
+                time.sleep(0.1)
                 command_base = "HTR?"
                 command_middle=str(self.LOOPPID_ADR_BASE[key][1])
                 command =  command_base+command_middle+"\n"
@@ -618,6 +619,7 @@ class PLC(QtCore.QObject):
                     self.LOOPPID_EN[key] = False
 
             for key in self.HTRTD_address:
+                time.sleep(0.1)
                 command_base = "KRDG?"
                 # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
                 command_middle = "0"
