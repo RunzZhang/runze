@@ -557,7 +557,7 @@ class PLC(QtCore.QObject):
     def LS_test(self):
         # test part
         self.socket_LS = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_LS.connect((self.IP_LS2, self.PORT_LS2))
+        self.socket_LS.connect((self.IP_LS1, self.PORT_LS1))
         print("connection success!")
         command = "KRDG?0\n"
         cm_code = command.encode()
@@ -593,42 +593,42 @@ class PLC(QtCore.QObject):
                     self.socket_LS2.send(cm_code)
                     Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS2.close()
-            # for key in self.LOOPPID_ADR_BASE:
-            #     stripped = Raw_LS_power[key].strip("+")
-            #     self.LOOPPID_OUT[key] = float(stripped)
-            print("HTR OUT",self.LOOPPID_OUT)
-            # for key in self.LOOPPID_ADR_BASE:
-            #     if float(self.LOOPPID_OUT[key])>0:
-            #         self.LOOPPID_EN[key] = True
-            #     else:
-            #         self.LOOPPID_EN[key] = False
-            #
-            # for key in self.HTRTD_address:
-            #     command_base = "KRDG?"
-            #     # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
-            #     command_middle = "0"
-            #     command = command_base+command_middle+"\n"
-            #     # command = command_base + "\n"
-            #     if self.HTRTD_address[key][0]==0:
-            #         self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            #         self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
-            #         cm_code = command.encode()
-            #         self.socket_LS1.send(cm_code)
-            #         output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
-            #
-            #         Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
-            #         self.socket_LS1.close()
-            #     if self.HTRTD_address[key][0]==1:
-            #         self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            #         self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
-            #         cm_code = command.encode()
-            #         self.socket_LS2.send(cm_code)
-            #         output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
-            #         # combining 2nd digit and 3rd digit to get final address
-            #         Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
-            #         self.socket_LS2.close()
-            # for key in self.HTRTD_address:
-            #     self.HTRTD_dic[key] = Raw_LS_TT[key]
+            for key in self.LOOPPID_ADR_BASE:
+                stripped = Raw_LS_power[key].strip("+")
+                self.LOOPPID_OUT[key] = float(stripped)
+            # print("HTR OUT",self.LOOPPID_OUT)
+            for key in self.LOOPPID_ADR_BASE:
+                if float(self.LOOPPID_OUT[key])>0:
+                    self.LOOPPID_EN[key] = True
+                else:
+                    self.LOOPPID_EN[key] = False
+
+            for key in self.HTRTD_address:
+                command_base = "KRDG?"
+                # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
+                command_middle = "0"
+                command = command_base+command_middle+"\n"
+                # command = command_base + "\n"
+                if self.HTRTD_address[key][0]==0:
+                    self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
+                    cm_code = command.encode()
+                    self.socket_LS1.send(cm_code)
+                    output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
+
+                    Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
+                    self.socket_LS1.close()
+                if self.HTRTD_address[key][0]==1:
+                    self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
+                    cm_code = command.encode()
+                    self.socket_LS2.send(cm_code)
+                    output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
+                    # combining 2nd digit and 3rd digit to get final address
+                    Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
+                    self.socket_LS2.close()
+            for key in self.HTRTD_address:
+                self.HTRTD_dic[key] = Raw_LS_TT[key]
             # print("HTR RTDs",self.HTRTD_dic)
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
@@ -4071,8 +4071,8 @@ if __name__ == "__main__":
 
     PLC=PLC()
     # PLC.Read_LL()
-    # PLC.LS_test()
-    PLC.Read_LS()
+    PLC.LS_test()
+    # PLC.Read_LS()
     # PLC.Read_AD()
     # PLC.ReadAll()
 
