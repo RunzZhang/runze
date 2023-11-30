@@ -419,27 +419,27 @@ class MainWindow(QtWidgets.QMainWindow):
         # inner tube widgets
         self.RTD1 = Indicator(self.TubeTab)
         self.RTD1.Label.setText("RTD1")
-        self.RTD1.move(145 * R, 30 * R)
+        self.RTD1.move(495 * R, 30 * R)
 
         self.RTD2 = Indicator(self.TubeTab)
         self.RTD2.Label.setText("RTD2")
-        self.RTD2.move(145 * R, 30 * R)
+        self.RTD2.move(495 * R, 130 * R)
 
         self.RTD3 = Indicator(self.TubeTab)
         self.RTD3.Label.setText("RTD3")
-        self.RTD3.move(145 * R, 30 * R)
+        self.RTD3.move(295 * R, 290 * R)
 
         self.RTD4 = Indicator(self.TubeTab)
         self.RTD4.Label.setText("RTD4")
-        self.RTD4.move(145 * R, 30 * R)
+        self.RTD4.move(295 * R, 390 * R)
 
         self.RTD5 = Indicator(self.TubeTab)
         self.RTD5.Label.setText("RTD5")
-        self.RTD5.move(145 * R, 30 * R)
+        self.RTD5.move(1200 * R, 1020 * R)
 
         self.RTD6 = Indicator(self.TubeTab)
         self.RTD6.Label.setText("RTD6")
-        self.RTD6.move(145 * R, 30 * R)
+        self.RTD6.move(1400 * R, 30 * R)
 
 
         self.RTD7 = Indicator(self.TubeTab)
