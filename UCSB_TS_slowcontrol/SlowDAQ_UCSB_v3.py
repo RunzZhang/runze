@@ -511,7 +511,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.IDHTR1003 = PnID_Alone(self.TubeTab)
         self.IDHTR1003.Label.setText("Heater 3")
-        self.IDHTR1003.move(1200 * R, 600 * R)
+        self.IDHTR1003.move(900 * R, 600 * R)
 
         self.IDHTR1004 = PnID_Alone(self.TubeTab)
         self.IDHTR1004.Label.setText("Heater 4")
@@ -521,7 +521,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IDH5.Label.setText("Heater 5")
         self.IDH5.move(1317 * R, 1020 * R)
 
-        
+
 
         # self.IDRTD6 = PnID_Alone(self.TubeTab)
         # self.IDRTD6.Label.setText("RTD 6")
