@@ -427,11 +427,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.RTD3 = Indicator(self.TubeTab)
         self.RTD3.Label.setText("RTD3")
-        self.RTD3.move(1342 * R, 650 * R)
+        self.RTD3.move(1342 * R, 635 * R)
 
         self.RTD4 = Indicator(self.TubeTab)
         self.RTD4.Label.setText("RTD4")
-        self.RTD4.move(1342 * R, 710 * R)
+        self.RTD4.move(1342 * R, 725 * R)
 
         self.RTD5 = Indicator(self.TubeTab)
         self.RTD5.Label.setText("RTD5")
@@ -444,19 +444,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.RTD7 = Indicator(self.TubeTab)
         self.RTD7.Label.setText("RTD7")
-        self.RTD7.move(1222 * R, 730 * R)
+        self.RTD7.move(1222 * R, 750 * R)
 
         self.RTD8 = Indicator(self.TubeTab)
         self.RTD8.Label.setText("RTD8")
-        self.RTD8.move(1222 * R, 630 * R)
+        self.RTD8.move(1222 * R, 650 * R)
 
         self.RTD9 = Indicator(self.TubeTab)
         self.RTD9.Label.setText("RTD9")
-        self.RTD9.move(1222 * R, 530 * R)
+        self.RTD9.move(1222 * R, 550 * R)
 
         self.RTD10 = Indicator(self.TubeTab)
         self.RTD10.Label.setText("RTD10")
-        self.RTD10.move(1222 * R, 430 * R)
+        self.RTD10.move(1222 * R, 450 * R)
 
         self.RTD11 = Indicator(self.TubeTab)
         self.RTD11.Label.setText("RTD11")
@@ -496,7 +496,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1004.LOOPPIDWindow.Label.setText("Heater4")
 
         self.HTR1005 = LOOPPID_v2(self.TubeTab)
-        self.HTR1005.move(295 * R, 430 * R)
+        self.HTR1005.move(295 * R, 410 * R)
         self.HTR1005.Label.setText("Heater5")
         self.HTR1005.LOOPPIDWindow.setWindowTitle("Heater5")
         self.HTR1005.LOOPPIDWindow.Label.setText("Heater5")
