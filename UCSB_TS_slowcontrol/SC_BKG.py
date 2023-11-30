@@ -567,6 +567,7 @@ class PLC(QtCore.QObject):
                 if self.LOOPPID_ADR_BASE[key][0]==0:
                     self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
+                    print("connection success!")
                     cm_code = command.encode()
                     self.socket_LS1.send(cm_code)
                     Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
@@ -4045,18 +4046,18 @@ if __name__ == "__main__":
 
     # print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
 
-    App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
-    sys.exit(App.exec_())
+    # App = QtWidgets.QApplication(sys.argv)
+    # Update=Update()
+    # sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
     # Update.run()
 
 
-    # PLC=PLC()
+    PLC=PLC()
     # PLC.Read_LL()
-    # PLC.Read_LS()
+    PLC.Read_LS()
     # PLC.Read_AD()
     # PLC.ReadAll()
 
