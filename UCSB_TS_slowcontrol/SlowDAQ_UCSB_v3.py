@@ -521,25 +521,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IDH5.Label.setText("Heater 5")
         self.IDH5.move(1317 * R, 1020 * R)
 
-        self.IDRTD7 = PnID_Alone(self.TubeTab)
-        self.IDRTD7.Label.setText("RTD7")
-        self.IDRTD7.move(1150 * R, 940 * R)
-
-        self.IDRTD8 = PnID_Alone(self.TubeTab)
-        self.IDRTD8.Label.setText("RTD8")
-        self.IDRTD8.move(1515 * R, 940 * R)
-
-        self.IDRTD9 = PnID_Alone(self.TubeTab)
-        self.IDRTD9.Label.setText("RTD9")
-        self.IDRTD9.move(1342 * R, 725 * R)
-
-        self.IDRTD10 = PnID_Alone(self.TubeTab)
-        self.IDRTD10.Label.setText("RTD10")
-        self.IDRTD10.move(1342 * R, 685 * R)
-
-        self.IDRTD11 = PnID_Alone(self.TubeTab)
-        self.IDRTD11.Label.setText("RTD11")
-        self.IDRTD11.move(800 * R, 130 * R)
+        
 
         # self.IDRTD6 = PnID_Alone(self.TubeTab)
         # self.IDRTD6.Label.setText("RTD 6")
