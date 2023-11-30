@@ -619,7 +619,9 @@ class PLC(QtCore.QObject):
 
 
 
-            #first read LS and then put value into dic
+            #RTD read is all pulled out once (1,2,3,4), so we can read the tuple first and give it to Raw_dic
+            # this reduces the times we communicates with the LS server by a factor of 4
+            # too many communications in a short of time can cause LS server to crash
             command_base = "KRDG?"
             # command_middle=str(self.LOOPPID_ADR_BASE[key][1])
             command_middle = "0"
