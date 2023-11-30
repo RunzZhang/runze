@@ -419,27 +419,27 @@ class MainWindow(QtWidgets.QMainWindow):
         # inner tube widgets
         self.RTD1 = Indicator(self.TubeTab)
         self.RTD1.Label.setText("RTD1")
-        self.RTD1.move(900 * R, 50 * R)
+        self.RTD1.move(900 * R, 60 * R)
 
         self.RTD2 = Indicator(self.TubeTab)
         self.RTD2.Label.setText("RTD2")
-        self.RTD2.move(900 * R, 110 * R)
+        self.RTD2.move(900 * R, 130 * R)
 
         self.RTD3 = Indicator(self.TubeTab)
         self.RTD3.Label.setText("RTD3")
-        self.RTD3.move(1342 * R, 700 * R)
+        self.RTD3.move(1342 * R, 600 * R)
 
         self.RTD4 = Indicator(self.TubeTab)
         self.RTD4.Label.setText("RTD4")
-        self.RTD4.move(1342 * R, 800 * R)
+        self.RTD4.move(1342 * R, 760 * R)
 
         self.RTD5 = Indicator(self.TubeTab)
         self.RTD5.Label.setText("RTD5")
-        self.RTD5.move(1200 * R, 970 * R)
+        self.RTD5.move(1250 * R, 970 * R)
 
         self.RTD6 = Indicator(self.TubeTab)
         self.RTD6.Label.setText("RTD6")
-        self.RTD6.move(1400 * R, 970 * R)
+        self.RTD6.move(1450 * R, 970 * R)
 
 
         self.RTD7 = Indicator(self.TubeTab)
@@ -517,9 +517,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IDHTR1004.Label.setText("Heater 4")
         self.IDHTR1004.move(1342 * R, 705 * R)
 
-        self.IDHTR1004 = PnID_Alone(self.TubeTab)
-        self.IDHTR1004.Label.setText("Heater 5")
-        self.IDHTR1004.move(1317 * R, 1020 * R)
+        self.IDHTR1005 = PnID_Alone(self.TubeTab)
+        self.IDHTR1005.Label.setText("Heater 5")
+        self.IDHTR1005.move(1370 * R, 1020 * R)
 
 
 
