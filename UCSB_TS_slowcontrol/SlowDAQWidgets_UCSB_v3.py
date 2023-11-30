@@ -739,24 +739,24 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PT004.High_Read.Unit = " b"
 
         # RTD
-        self.TT1001 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1001.Label.setText("TT1001")
+        self.RTD7 = AlarmStatusWidget(self.GroupRTD1)
+        self.RTD7.Label.setText("RTD7")
 
 
-        self.TT1002 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1002.Label.setText("TT1002")
+        self.RTD8 = AlarmStatusWidget(self.GroupRTD1)
+        self.RTD8.Label.setText("RTD8")
 
-        self.TT1003 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1003.Label.setText("TT1003")
+        self.RTD9 = AlarmStatusWidget(self.GroupRTD1)
+        self.RTD9.Label.setText("RTD9")
 
-        self.TT1004 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1004.Label.setText("TT1004")
+        self.RTD10 = AlarmStatusWidget(self.GroupRTD1)
+        self.RTD10.Label.setText("RTD10")
 
-        self.TT1005 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1005.Label.setText("TT1005")
+        self.RTD11 = AlarmStatusWidget(self.GroupRTD1)
+        self.RTD11.Label.setText("RTD11")
 
-        self.TT1006 = AlarmStatusWidget(self.GroupRTD1)
-        self.TT1006.Label.setText("TT1006")
+        self.RTD12 = AlarmStatusWidget(self.GroupRTD1)
+        self.RTD12.Label.setText("RTD12")
 
         # self.TT1007 = AlarmStatusWidget(self.GroupRTD1)
         # self.TT1007.Label.setText("TT1007")
@@ -792,29 +792,24 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.HTR1004.Low_Read.Unit = " %"
         self.HTR1004.High_Read.Unit = " %"
 
-        self.HTR1001T1 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1001T1.Label.setText("HT1TT1")
+        self.RTD1 = AlarmStatusWidget(self.GroupRTD3)
+        self.RTD1.Label.setText("RTD1")
 
-        self.HTR1001T2 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1001T2.Label.setText("HT1TT2")
+        self.RTD2 = AlarmStatusWidget(self.GroupRTD3)
+        self.RTD2.Label.setText("RTD2")
 
-        self.HTR1002T1 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1002T1.Label.setText("HT2TT1")
+        self.RTD3 = AlarmStatusWidget(self.GroupRTD3)
+        self.RTD3.Label.setText("RTD3")
 
-        self.HTR1002T2 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1002T2.Label.setText("HT2TT2")
+        self.RTD4 = AlarmStatusWidget(self.GroupRTD3)
+        self.RTD4.Label.setText("RTD4")
 
-        self.HTR1003T1 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1003T1.Label.setText("HT3TT1")
+        self.RTD5 = AlarmStatusWidget(self.GroupRTD3)
+        self.RTD5.Label.setText("RTD5")
 
-        self.HTR1003T2 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1003T2.Label.setText("HT3TT2")
+        self.RTD6 = AlarmStatusWidget(self.GroupRTD3)
+        self.RTD6.Label.setText("RTD6")
 
-        self.HTR1004T1 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1004T1.Label.setText("HT4TT1")
-
-        self.HTR1004T2 = AlarmStatusWidget(self.GroupRTD3)
-        self.HTR1004T2.Label.setText("HT4TT2")
 
         self.LL = AlarmStatusWidget(self.GroupRTDLEFT)
         self.LL.Label.setText("LL")
@@ -824,15 +819,15 @@ class AlarmWin(QtWidgets.QMainWindow):
 
 
         # make a directory for the alarm instrument and assign instrument to certain position
-        self.AlarmRTD1dir = {0: {0: self.TT1001, 1: self.TT1002, 2: self.TT1003, 3: self.TT1004, 4: self.TT1005},
-                             1: {0: self.TT1006}}
+        self.AlarmRTD1dir = {0: {0: self.RTD7, 1: self.RTD8, 2: self.RTD9, 3: self.RTD10, 4: self.RTD11},
+                             1: {0: self.RTD12}}
 
 
         self.AlarmRTD2dir = {0: {0: self.HTR1001, 1: self.HTR1002, 2: self.HTR1003, 3: self.HTR1004}}
         #
         #
-        self.AlarmRTD3dir = {0: {0: self.HTR1001T1, 1: self.HTR1001T2, 2: self.HTR1002T1, 3: self.HTR1002T2, 4: self.HTR1003T1},
-                             1: {0: self.HTR1003T2, 1: self.HTR1004T1, 2: self.HTR1004T2}}
+        self.AlarmRTD3dir = {0: {0: self.RTD1, 1: self.RTD2, 2: self.RTD3, 3: self.RTD4, 4:self.RTD5},
+                             1: {0: self.RTD6}}
         #
         # self.AlarmRTD4dir = {0: {0: self.TT2101, 1: self.TT2102, 2: self.TT2103, 3: self.TT2104, 4: self.TT2105},
         #                      1: {0: self.TT2106, 1: self.TT2107, 2: self.TT2108, 3: self.TT2109, 4: self.TT2110}}

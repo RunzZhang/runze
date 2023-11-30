@@ -418,29 +418,29 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # inner tube widgets
 
-        self.TT1001 = Indicator(self.TubeTab)
-        self.TT1001.Label.setText("TT1001")
-        self.TT1001.move(145 * R, 30 * R)
+        self.RTD7 = Indicator(self.TubeTab)
+        self.RTD7.Label.setText("RTD7")
+        self.RTD7.move(145 * R, 30 * R)
 
-        self.TT1002 = Indicator(self.TubeTab)
-        self.TT1002.Label.setText("TT1002")
-        self.TT1002.move(145 * R, 100 * R)
+        self.RTD8 = Indicator(self.TubeTab)
+        self.RTD8.Label.setText("RTD8")
+        self.RTD8.move(145 * R, 100 * R)
 
-        self.TT1003 = Indicator(self.TubeTab)
-        self.TT1003.Label.setText("TT1003")
-        self.TT1003.move(145 * R, 170 * R)
+        self.RTD9 = Indicator(self.TubeTab)
+        self.RTD9.Label.setText("RTD9")
+        self.RTD9.move(145 * R, 170 * R)
 
-        self.TT1004 = Indicator(self.TubeTab)
-        self.TT1004.Label.setText("TT1004")
-        self.TT1004.move(145 * R, 240 * R)
+        self.RTD10 = Indicator(self.TubeTab)
+        self.RTD10.Label.setText("RTD10")
+        self.RTD10.move(145 * R, 240 * R)
 
-        self.TT1005 = Indicator(self.TubeTab)
-        self.TT1005.Label.setText("TT1005")
-        self.TT1005.move(145 * R, 310 * R)
+        self.RTD11 = Indicator(self.TubeTab)
+        self.RTD11.Label.setText("RTD11")
+        self.RTD11.move(145 * R, 310 * R)
 
-        self.TT1006 = Indicator(self.TubeTab)
-        self.TT1006.Label.setText("TT1006")
-        self.TT1006.move(145 * R, 380 * R)
+        self.RTD12 = Indicator(self.TubeTab)
+        self.RTD12.Label.setText("RTD12")
+        self.RTD12.move(145 * R, 380 * R)
 
         self.LiqLev = Indicator(self.TubeTab)
         self.LiqLev.Label.setText("Liq Lev")
@@ -497,25 +497,25 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IDH5.Label.setText("Heater 5")
         self.IDH5.move(1417 * R, 1020 * R)
 
-        self.IDTT1001 = PnID_Alone(self.TubeTab)
-        self.IDTT1001.Label.setText("TT1001")
-        self.IDTT1001.move(1150 * R, 940 * R)
+        self.IDRTD7 = PnID_Alone(self.TubeTab)
+        self.IDRTD7.Label.setText("RTD7")
+        self.IDRTD7.move(1150 * R, 940 * R)
 
-        self.IDTT1002 = PnID_Alone(self.TubeTab)
-        self.IDTT1002.Label.setText("TT1002")
-        self.IDTT1002.move(1515 * R, 940 * R)
+        self.IDRTD8 = PnID_Alone(self.TubeTab)
+        self.IDRTD8.Label.setText("RTD8")
+        self.IDRTD8.move(1515 * R, 940 * R)
 
-        self.IDTT1003 = PnID_Alone(self.TubeTab)
-        self.IDTT1003.Label.setText("TT1003")
-        self.IDTT1003.move(1342 * R, 725 * R)
+        self.IDRTD9 = PnID_Alone(self.TubeTab)
+        self.IDRTD9.Label.setText("RTD9")
+        self.IDRTD9.move(1342 * R, 725 * R)
 
-        self.IDTT1004 = PnID_Alone(self.TubeTab)
-        self.IDTT1004.Label.setText("TT1004")
-        self.IDTT1004.move(1342 * R, 685 * R)
+        self.IDRTD10 = PnID_Alone(self.TubeTab)
+        self.IDRTD10.Label.setText("RTD10")
+        self.IDRTD10.move(1342 * R, 685 * R)
 
-        self.IDTT1005 = PnID_Alone(self.TubeTab)
-        self.IDTT1005.Label.setText("TT1005")
-        self.IDTT1005.move(800 * R, 130 * R)
+        self.IDRTD11 = PnID_Alone(self.TubeTab)
+        self.IDRTD11.Label.setText("RTD11")
+        self.IDRTD11.move(800 * R, 130 * R)
 
         # self.IDRTD6 = PnID_Alone(self.TubeTab)
         # self.IDRTD6.Label.setText("RTD 6")
@@ -538,17 +538,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LOOPPID_EN_buffer = copy.copy(sec.LOOPPID_EN)
 
 
-        self.RTDAlarmMatrix = [self.AlarmButton.SubWindow.TT1001, self.AlarmButton.SubWindow.TT1002,
-                                 self.AlarmButton.SubWindow.TT1003, self.AlarmButton.SubWindow.TT1004,
-                                 self.AlarmButton.SubWindow.TT1005, self.AlarmButton.SubWindow.TT1006]
+        self.RTDAlarmMatrix = [self.AlarmButton.SubWindow.RTD7, self.AlarmButton.SubWindow.RTD8,
+                                 self.AlarmButton.SubWindow.RTD9, self.AlarmButton.SubWindow.RTD10,
+                                 self.AlarmButton.SubWindow.RTD11, self.AlarmButton.SubWindow.RTD12]
         #
         self.HTROUTAlarmMatrix = [self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
                                  self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004]
 
-        self.HTRRTDAlarmMatrix = [self.AlarmButton.SubWindow.HTR1001T1, self.AlarmButton.SubWindow.HTR1001T2,
-                                  self.AlarmButton.SubWindow.HTR1002T1, self.AlarmButton.SubWindow.HTR1002T2,
-                                  self.AlarmButton.SubWindow.HTR1003T1, self.AlarmButton.SubWindow.HTR1003T2,
-                                  self.AlarmButton.SubWindow.HTR1004T1, self.AlarmButton.SubWindow.HTR1004T2
+        self.HTRRTDAlarmMatrix = [self.AlarmButton.SubWindow.RTD1, self.AlarmButton.SubWindow.RTD2,
+                                  self.AlarmButton.SubWindow.RTD3, self.AlarmButton.SubWindow.RTD4,
+                                  self.AlarmButton.SubWindow.RTD5,
+                                  self.AlarmButton.SubWindow.RTD6
                                   ]
 
 
@@ -569,15 +569,15 @@ class MainWindow(QtWidgets.QMainWindow):
         #                            self.AlarmButton.SubWindow.HTR6219, self.AlarmButton.SubWindow.HTR6221,
         #                            self.AlarmButton.SubWindow.HTR6214]
 
-        self.AlarmMatrix = [self.AlarmButton.SubWindow.TT1001, self.AlarmButton.SubWindow.TT1002,
-                                 self.AlarmButton.SubWindow.TT1003, self.AlarmButton.SubWindow.TT1004,
-                                 self.AlarmButton.SubWindow.TT1005, self.AlarmButton.SubWindow.TT1006,self.AlarmButton.SubWindow.PT1000, self.AlarmButton.SubWindow.PT1001,
+        self.AlarmMatrix = [self.AlarmButton.SubWindow.RTD7, self.AlarmButton.SubWindow.RTD8,
+                                 self.AlarmButton.SubWindow.RTD9, self.AlarmButton.SubWindow.RTD10,
+                                 self.AlarmButton.SubWindow.RTD11, self.AlarmButton.SubWindow.RTD12,self.AlarmButton.SubWindow.PT1000, self.AlarmButton.SubWindow.PT1001,
                               self.AlarmButton.SubWindow.PT1002, self.AlarmButton.SubWindow.PT001, self.AlarmButton.SubWindow.PT002,
                               self.AlarmButton.SubWindow.PT003, self.AlarmButton.SubWindow.PT004,self.AlarmButton.SubWindow.LL,self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
-                                 self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004,self.AlarmButton.SubWindow.HTR1001T1, self.AlarmButton.SubWindow.HTR1001T2,
-                                  self.AlarmButton.SubWindow.HTR1002T1, self.AlarmButton.SubWindow.HTR1002T2,
-                                  self.AlarmButton.SubWindow.HTR1003T1, self.AlarmButton.SubWindow.HTR1003T2,
-                                  self.AlarmButton.SubWindow.HTR1004T1, self.AlarmButton.SubWindow.HTR1004T2]
+                                 self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004,self.AlarmButton.SubWindow.RTD1, self.AlarmButton.SubWindow.RTD2,
+                                  self.AlarmButton.SubWindow.RTD3, 
+                                  self.AlarmButton.SubWindow.RTD4, self.AlarmButton.SubWindow.RTD5,
+                                  self.AlarmButton.SubWindow.RTD6]
 
         # Set user to guest by default
         self.User = "Guest"
@@ -748,41 +748,41 @@ class MainWindow(QtWidgets.QMainWindow):
                                      LowLimit=self.AlarmButton.SubWindow.PT004.Low_Set.Field.text(),
                                      HighLimit=self.AlarmButton.SubWindow.PT004.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.TT1001.updatebutton.clicked.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1001.Label.text(),
-                                     Act=self.AlarmButton.SubWindow.TT1001.AlarmMode.isChecked(),
-                                     LowLimit=self.AlarmButton.SubWindow.TT1001.Low_Set.Field.text(),
-                                     HighLimit=self.AlarmButton.SubWindow.TT1001.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD7.updatebutton.clicked.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD7.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.RTD7.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.RTD7.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.RTD7.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.TT1002.updatebutton.clicked.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1002.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1002.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1002.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1002.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD8.updatebutton.clicked.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD8.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD8.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD8.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD8.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.TT1003.updatebutton.clicked.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1003.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1003.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1003.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1003.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD9.updatebutton.clicked.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD9.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD9.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD9.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD9.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.TT1004.updatebutton.clicked.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1004.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1004.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1004.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1004.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD10.updatebutton.clicked.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD10.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD10.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD10.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD10.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.TT1005.updatebutton.clicked.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1005.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1005.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1005.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1005.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD11.updatebutton.clicked.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD11.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD11.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD11.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD11.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.TT1006.updatebutton.clicked.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1006.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1006.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1006.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1006.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD12.updatebutton.clicked.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD12.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD12.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD12.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD12.High_Set.Field.text()))
 
 
         self.AlarmButton.SubWindow.HTR1001.updatebutton.clicked.connect(
@@ -808,47 +808,38 @@ class MainWindow(QtWidgets.QMainWindow):
                                        LowLimit=self.AlarmButton.SubWindow.HTR1004.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.HTR1004.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.HTR1001T1.updatebutton.clicked.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1001T1.Label.text(),
-                                          Act=self.AlarmButton.SubWindow.HTR1001T1.AlarmMode.isChecked(),
-                                          LowLimit=self.AlarmButton.SubWindow.HTR1001T1.Low_Set.Field.text(),
-                                          HighLimit=self.AlarmButton.SubWindow.HTR1001T1.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.HTR1001T2.updatebutton.clicked.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1001T2.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1001T2.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1001T2.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1001T2.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.HTR1002T1.updatebutton.clicked.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1002T1.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1002T1.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1002T1.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1002T1.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.HTR1002T2.updatebutton.clicked.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1002T2.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1002T2.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1002T2.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1002T2.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.HTR1003T1.updatebutton.clicked.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1003T1.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1003T1.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1003T1.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1003T1.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.HTR1003T2.updatebutton.clicked.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1003T2.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1003T2.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1003T2.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1003T2.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.HTR1004T1.updatebutton.clicked.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1004T1.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1004T1.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1004T1.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1004T1.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD1.updatebutton.clicked.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD1.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.RTD1.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.RTD1.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.RTD1.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD2.updatebutton.clicked.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD2.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD2.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD2.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD2.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD3.updatebutton.clicked.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD3.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD3.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD3.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD3.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD4.updatebutton.clicked.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD4.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD4.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD4.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD4.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD5.updatebutton.clicked.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD5.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD5.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD5.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD5.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.RTD6.updatebutton.clicked.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD6.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD6.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD6.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD6.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.HTR1004T2.updatebutton.clicked.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1004T2.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1004T2.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1004T2.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1004T2.High_Set.Field.text()))
+
 
         self.AlarmButton.SubWindow.LL.updatebutton.clicked.connect(
             lambda: self.LLBoxUpdate(pid=self.AlarmButton.SubWindow.LL.Label.text(),
@@ -899,41 +890,41 @@ class MainWindow(QtWidgets.QMainWindow):
                                      LowLimit=self.AlarmButton.SubWindow.PT004.Low_Set.Field.text(),
                                      HighLimit=self.AlarmButton.SubWindow.PT004.High_Set.Field.text(),update = False))
 
-        self.AlarmButton.SubWindow.TT1001.AlarmMode.stateChanged.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1001.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1001.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1001.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1001.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD7.AlarmMode.stateChanged.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD7.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD7.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD7.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD7.High_Set.Field.text(),update = False))
 
-        self.AlarmButton.SubWindow.TT1002.AlarmMode.stateChanged.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1002.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1002.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1002.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1002.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD8.AlarmMode.stateChanged.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD8.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD8.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD8.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD8.High_Set.Field.text(),update = False))
 
-        self.AlarmButton.SubWindow.TT1003.AlarmMode.stateChanged.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1003.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1003.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1003.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1003.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD9.AlarmMode.stateChanged.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD9.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD9.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD9.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD9.High_Set.Field.text(),update = False))
 
-        self.AlarmButton.SubWindow.TT1004.AlarmMode.stateChanged.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1004.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1004.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1004.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1004.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD10.AlarmMode.stateChanged.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD10.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD10.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD10.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD10.High_Set.Field.text(),update = False))
 
-        self.AlarmButton.SubWindow.TT1005.AlarmMode.stateChanged.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1005.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1005.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1005.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1005.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD11.AlarmMode.stateChanged.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD11.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD11.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD11.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD11.High_Set.Field.text(),update = False))
 
-        self.AlarmButton.SubWindow.TT1006.AlarmMode.stateChanged.connect(
-            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.TT1006.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT1006.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT1006.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT1006.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD12.AlarmMode.stateChanged.connect(
+            lambda: self.AD1TTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD12.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.RTD12.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.RTD12.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.RTD12.High_Set.Field.text(),update = False))
 
         self.AlarmButton.SubWindow.HTR1001.AlarmMode.stateChanged.connect(
             lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1001.Label.text(),
@@ -958,46 +949,36 @@ class MainWindow(QtWidgets.QMainWindow):
                                        LowLimit=self.AlarmButton.SubWindow.HTR1004.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.HTR1004.High_Set.Field.text(),update = False))
 
-        self.AlarmButton.SubWindow.HTR1001T1.AlarmMode.stateChanged.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1001T1.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1001T1.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1001T1.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1001T1.High_Set.Field.text(),update = False))
-        self.AlarmButton.SubWindow.HTR1001T2.AlarmMode.stateChanged.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1001T2.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1001T2.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1001T2.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1001T2.High_Set.Field.text(),update = False))
-        self.AlarmButton.SubWindow.HTR1002T1.AlarmMode.stateChanged.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1002T1.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1002T1.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1002T1.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1002T1.High_Set.Field.text(),update = False))
-        self.AlarmButton.SubWindow.HTR1002T2.AlarmMode.stateChanged.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1002T2.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1002T2.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1002T2.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1002T2.High_Set.Field.text(),update = False))
-        self.AlarmButton.SubWindow.HTR1003T1.AlarmMode.stateChanged.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1003T1.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1003T1.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1003T1.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1003T1.High_Set.Field.text(),update = False))
-        self.AlarmButton.SubWindow.HTR1003T2.AlarmMode.stateChanged.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1003T2.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1003T2.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1003T2.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1003T2.High_Set.Field.text(),update = False))
-        self.AlarmButton.SubWindow.HTR1004T1.AlarmMode.stateChanged.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1004T1.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1004T1.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1004T1.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1004T1.High_Set.Field.text(),update = False))
-        self.AlarmButton.SubWindow.HTR1004T2.AlarmMode.stateChanged.connect(
-            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1004T2.Label.text(),
-                                        Act=self.AlarmButton.SubWindow.HTR1004T2.AlarmMode.isChecked(),
-                                        LowLimit=self.AlarmButton.SubWindow.HTR1004T2.Low_Set.Field.text(),
-                                        HighLimit=self.AlarmButton.SubWindow.HTR1004T2.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD1.AlarmMode.stateChanged.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD1.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD1.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD1.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD1.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD2.AlarmMode.stateChanged.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD2.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD2.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD2.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD2.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD3.AlarmMode.stateChanged.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD3.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD3.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD3.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD3.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD4.AlarmMode.stateChanged.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD4.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD4.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD4.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD4.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD5.AlarmMode.stateChanged.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD5.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD5.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD5.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD5.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.RTD6.AlarmMode.stateChanged.connect(
+            lambda: self.HTRTTBoxUpdate(pid=self.AlarmButton.SubWindow.RTD6.Label.text(),
+                                        Act=self.AlarmButton.SubWindow.RTD6.AlarmMode.isChecked(),
+                                        LowLimit=self.AlarmButton.SubWindow.RTD6.Low_Set.Field.text(),
+                                        HighLimit=self.AlarmButton.SubWindow.RTD6.High_Set.Field.text(),update = False))
 
         self.AlarmButton.SubWindow.LL.AlarmMode.stateChanged.connect(
             lambda: self.LLBoxUpdate(pid=self.AlarmButton.SubWindow.LL.Label.text(),
@@ -1863,29 +1844,29 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.SubWindow.PT004.Indicator.SetValue(
             received_dic_c["data"]["PT"]["value"]["PT004"])
 
-        self.AlarmButton.SubWindow.TT1001.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["TT1001"])
-        self.AlarmButton.SubWindow.TT1001.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["AD1"]["value"]["TT1001"])
+        self.AlarmButton.SubWindow.RTD7.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["RTD7"])
+        self.AlarmButton.SubWindow.RTD7.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["AD1"]["value"]["RTD7"])
 
-        self.AlarmButton.SubWindow.TT1002.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["TT1002"])
-        self.AlarmButton.SubWindow.TT1002.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["AD1"]["value"]["TT1002"])
+        self.AlarmButton.SubWindow.RTD8.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["RTD8"])
+        self.AlarmButton.SubWindow.RTD8.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["AD1"]["value"]["RTD8"])
 
-        self.AlarmButton.SubWindow.TT1003.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["TT1003"])
-        self.AlarmButton.SubWindow.TT1003.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["AD1"]["value"]["TT1003"])
+        self.AlarmButton.SubWindow.RTD9.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["RTD9"])
+        self.AlarmButton.SubWindow.RTD9.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["AD1"]["value"]["RTD9"])
 
-        self.AlarmButton.SubWindow.TT1004.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["TT1004"])
-        self.AlarmButton.SubWindow.TT1004.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["AD1"]["value"]["TT1004"])
+        self.AlarmButton.SubWindow.RTD10.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["RTD10"])
+        self.AlarmButton.SubWindow.RTD10.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["AD1"]["value"]["RTD10"])
 
-        self.AlarmButton.SubWindow.TT1005.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["TT1005"])
-        self.AlarmButton.SubWindow.TT1005.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["AD1"]["value"]["TT1005"])
+        self.AlarmButton.SubWindow.RTD11.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["RTD11"])
+        self.AlarmButton.SubWindow.RTD11.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["AD1"]["value"]["RTD11"])
 
-        self.AlarmButton.SubWindow.TT1006.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["TT1006"])
-        self.AlarmButton.SubWindow.TT1006.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["AD1"]["value"]["TT1006"])
+        self.AlarmButton.SubWindow.RTD12.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["RTD12"])
+        self.AlarmButton.SubWindow.RTD12.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["AD1"]["value"]["RTD12"])
 
         # self.AlarmButton.SubWindow.TT1007.UpdateAlarm(received_dic_c["Alarm"]["TT"]["AD1"]["TT1007"])
         # self.AlarmButton.SubWindow.TT1007.Indicator.SetValue(
@@ -1915,37 +1896,30 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.SubWindow.HTR1004.Indicator.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1004"])
 
-        self.AlarmButton.SubWindow.HTR1001T1.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["HT1TT1"])
-        self.AlarmButton.SubWindow.HTR1001T1.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["LS"]["value"]["HT1TT1"])
+        self.AlarmButton.SubWindow.RTD1.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["RTD1"])
+        self.AlarmButton.SubWindow.RTD1.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["LS"]["value"]["RTD1"])
 
-        self.AlarmButton.SubWindow.HTR1001T2.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["HT1TT2"])
-        self.AlarmButton.SubWindow.HTR1001T2.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["LS"]["value"]["HT1TT2"])
+        self.AlarmButton.SubWindow.RTD2.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["RTD2"])
+        self.AlarmButton.SubWindow.RTD2.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["LS"]["value"]["RTD2"])
 
-        self.AlarmButton.SubWindow.HTR1002T1.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["HT2TT1"])
-        self.AlarmButton.SubWindow.HTR1002T1.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["LS"]["value"]["HT2TT1"])
+        self.AlarmButton.SubWindow.RTD3.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["RTD3"])
+        self.AlarmButton.SubWindow.RTD3.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["LS"]["value"]["RTD3"])
 
-        self.AlarmButton.SubWindow.HTR1002T2.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["HT2TT2"])
-        self.AlarmButton.SubWindow.HTR1002T2.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["LS"]["value"]["HT2TT2"])
+        self.AlarmButton.SubWindow.RTD4.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["RTD4"])
+        self.AlarmButton.SubWindow.RTD4.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["LS"]["value"]["RTD4"])
 
-        self.AlarmButton.SubWindow.HTR1003T1.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["HT3TT1"])
-        self.AlarmButton.SubWindow.HTR1003T1.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["LS"]["value"]["HT3TT1"])
+        self.AlarmButton.SubWindow.RTD5.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["RTD5"])
+        self.AlarmButton.SubWindow.RTD5.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["LS"]["value"]["RTD5"])
 
-        self.AlarmButton.SubWindow.HTR1003T2.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["HT3TT2"])
-        self.AlarmButton.SubWindow.HTR1003T2.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["LS"]["value"]["HT3TT2"])
+        self.AlarmButton.SubWindow.RTD6.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["RTD6"])
+        self.AlarmButton.SubWindow.RTD6.Indicator.SetValue(
+            received_dic_c["data"]["TT"]["LS"]["value"]["RTD6"])
 
-        self.AlarmButton.SubWindow.HTR1004T1.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["HT4TT1"])
-        self.AlarmButton.SubWindow.HTR1004T1.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["LS"]["value"]["HT4TT1"])
-
-        self.AlarmButton.SubWindow.HTR1004T2.UpdateAlarm(received_dic_c["Alarm"]["TT"]["LS"]["HT4TT2"])
-        self.AlarmButton.SubWindow.HTR1004T2.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["LS"]["value"]["HT4TT2"])
 
         self.AlarmButton.SubWindow.LL.UpdateAlarm(received_dic_c["Alarm"]["LL"]["LL"])
         self.AlarmButton.SubWindow.LL.Indicator.SetValue(
@@ -1990,12 +1964,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT003.SetValue(received_dic_c["data"]["PT"]["value"]["PT003"])
         self.PT004.SetValue(received_dic_c["data"]["PT"]["value"]["PT004"])
 
-        self.TT1001.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1001"])
-        self.TT1002.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1002"])
-        self.TT1003.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1003"])
-        self.TT1004.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1004"])
-        self.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1005"])
-        self.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1006"])
+        self.RTD7.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD7"])
+        self.RTD8.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD8"])
+        self.RTD9.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD9"])
+        self.RTD10.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD10"])
+        self.RTD11.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD11"])
+        self.RTD12.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD12"])
 
         self.PT001.SetValue(received_dic_c["data"]["PT"]["value"]["PT001"])
         self.PT002.SetValue(received_dic_c["data"]["PT"]["value"]["PT002"])
@@ -3307,12 +3281,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1000.SetValue(received_dic_c["data"]["PT"]["value"]["PT1000"])
         self.PT1001.SetValue(received_dic_c["data"]["PT"]["value"]["PT1001"])
         self.PT1002.SetValue(received_dic_c["data"]["PT"]["value"]["PT1002"])
-        self.TT1001.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1001"])
-        self.TT1002.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1002"])
-        self.TT1003.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1003"])
-        self.TT1004.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1004"])
-        self.TT1005.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1005"])
-        self.TT1006.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1006"])
+        self.RTD7.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD7"])
+        self.RTD8.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD8"])
+        self.RTD9.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD9"])
+        self.RTD10.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD10"])
+        self.RTD11.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD11"])
+        self.RTD12.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD12"])
         # self.TT1007.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1007"])
         # self.TT1008.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["TT1008"])
         # self.TT1009.SetValue(received_dic_c["data"]["TT"]["AD2"]["value"]["TT1009"])
