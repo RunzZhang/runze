@@ -559,34 +559,34 @@ class PLC(QtCore.QObject):
         # command = "HTR?1\n"
         Raw_LS_power = {}
         Raw_LS_TT = {}
-        # if self.Connected_LS1 and self.Connected_LS2:
-        #     for key in self.LOOPPID_ADR_BASE:
-        #         command_base = "HTR?"
-        #         command_middle=str(self.LOOPPID_ADR_BASE[key][1])
-        #         command =  command_base+command_middle+"\n"
-        #         if self.LOOPPID_ADR_BASE[key][0]==0:
-        #             self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        #             self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
-        #             cm_code = command.encode()
-        #             self.socket_LS1.send(cm_code)
-        #             Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
-        #             self.socket_LS1.close()
-        #         if self.LOOPPID_ADR_BASE[key][0]==1:
-        #             self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        #             self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
-        #             cm_code = command.encode()
-        #             self.socket_LS2.send(cm_code)
-        #             Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
-        #             self.socket_LS2.close()
-        #     for key in self.LOOPPID_ADR_BASE:
-        #         stripped = Raw_LS_power[key].strip("+")
-        #         self.LOOPPID_OUT[key] = float(stripped)
-        #     print("HTR OUT",self.LOOPPID_OUT)
-        #     for key in self.LOOPPID_ADR_BASE:
-        #         if float(self.LOOPPID_OUT[key])>0:
-        #             self.LOOPPID_EN[key] = True
-        #         else:
-        #             self.LOOPPID_EN[key] = False
+        if self.Connected_LS1 and self.Connected_LS2:
+            # for key in self.LOOPPID_ADR_BASE:
+            #     command_base = "HTR?"
+            #     command_middle=str(self.LOOPPID_ADR_BASE[key][1])
+            #     command =  command_base+command_middle+"\n"
+            #     if self.LOOPPID_ADR_BASE[key][0]==0:
+            #         self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            #         self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
+            #         cm_code = command.encode()
+            #         self.socket_LS1.send(cm_code)
+            #         Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
+            #         self.socket_LS1.close()
+            #     if self.LOOPPID_ADR_BASE[key][0]==1:
+            #         self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            #         self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
+            #         cm_code = command.encode()
+            #         self.socket_LS2.send(cm_code)
+            #         Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
+            #         self.socket_LS2.close()
+            # for key in self.LOOPPID_ADR_BASE:
+            #     stripped = Raw_LS_power[key].strip("+")
+            #     self.LOOPPID_OUT[key] = float(stripped)
+            # print("HTR OUT",self.LOOPPID_OUT)
+            # for key in self.LOOPPID_ADR_BASE:
+            #     if float(self.LOOPPID_OUT[key])>0:
+            #         self.LOOPPID_EN[key] = True
+            #     else:
+            #         self.LOOPPID_EN[key] = False
 
             for key in self.HTRTD_address:
                 command_base = "KRDG?"
