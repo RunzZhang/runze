@@ -2329,23 +2329,14 @@ class UpdateDataBase(QtCore.QObject):
         if self.para_TT >= self.rate_TT:
             for key in self.TT_AD1_dic:
                 self.db.insert_data_into_stack(key, self.dt, self.TT_AD1_dic[key])
-            # print("write RTDS")
-            self.commit_bool = True
-            self.para_TT = 0
-        # print(1)
-        if self.para_TT >= self.rate_TT:
             for key in self.TT_AD2_dic:
                 self.db.insert_data_into_stack(key, self.dt, self.TT_AD2_dic[key])
-            # print("write RTDS")
-            self.commit_bool = True
-            self.para_TT = 0
-        if self.para_TT >= self.rate_TT:
             for key in self.HTRTD_dic:
                 self.db.insert_data_into_stack(key, self.dt, self.HTRTD_dic[key])
             # print("write RTDS")
             self.commit_bool = True
             self.para_TT = 0
-        # print(1)
+            
         if self.para_PT >= self.rate_PT:
             for key in self.PT_dic:
                 self.db.insert_data_into_stack(key, self.dt, self.PT_dic[key])
