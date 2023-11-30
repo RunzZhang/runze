@@ -780,11 +780,11 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.HTR1002.Low_Read.Unit = " %"
         self.HTR1002.High_Read.Unit = " %"
 
-        self.HTR1003 = AlarmStatusWidget(self.GroupRTD2)
-        self.HTR1003.Label.setText("HTR1003")
-        self.HTR1003.Indicator.Unit = " %"
-        self.HTR1003.Low_Read.Unit = " %"
-        self.HTR1003.High_Read.Unit = " %"
+        self.HTR1005 = AlarmStatusWidget(self.GroupRTD2)
+        self.HTR1005.Label.setText("HTR1005")
+        self.HTR1005.Indicator.Unit = " %"
+        self.HTR1005.Low_Read.Unit = " %"
+        self.HTR1005.High_Read.Unit = " %"
 
         self.HTR1004 = AlarmStatusWidget(self.GroupRTD2)
         self.HTR1004.Label.setText("HTR1004")
@@ -823,7 +823,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                              1: {0: self.RTD12}}
 
 
-        self.AlarmRTD2dir = {0: {0: self.HTR1001, 1: self.HTR1002, 2: self.HTR1003, 3: self.HTR1004}}
+        self.AlarmRTD2dir = {0: {0: self.HTR1001, 1: self.HTR1002, 2: self.HTR1004, 3: self.HTR1005}}
         #
         #
         self.AlarmRTD3dir = {0: {0: self.RTD1, 1: self.RTD2, 2: self.RTD3, 3: self.RTD4, 4:self.RTD5},

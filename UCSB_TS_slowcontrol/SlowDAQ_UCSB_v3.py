@@ -549,7 +549,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.RTD11, self.AlarmButton.SubWindow.RTD12]
         #
         self.HTROUTAlarmMatrix = [self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
-                                 self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004]
+                                 self.AlarmButton.SubWindow.HTR1004, self.AlarmButton.SubWindow.HTR1006]
 
         self.HTRRTDAlarmMatrix = [self.AlarmButton.SubWindow.RTD1, self.AlarmButton.SubWindow.RTD2,
                                   self.AlarmButton.SubWindow.RTD3, self.AlarmButton.SubWindow.RTD4,
@@ -580,7 +580,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.RTD11, self.AlarmButton.SubWindow.RTD12,self.AlarmButton.SubWindow.PT1000, self.AlarmButton.SubWindow.PT1001,
                               self.AlarmButton.SubWindow.PT1002, self.AlarmButton.SubWindow.PT001, self.AlarmButton.SubWindow.PT002,
                               self.AlarmButton.SubWindow.PT003, self.AlarmButton.SubWindow.PT004,self.AlarmButton.SubWindow.LL,self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
-                                 self.AlarmButton.SubWindow.HTR1003, self.AlarmButton.SubWindow.HTR1004,self.AlarmButton.SubWindow.RTD1, self.AlarmButton.SubWindow.RTD2,
+                                 self.AlarmButton.SubWindow.HTR1004, self.AlarmButton.SubWindow.HTR1005,self.AlarmButton.SubWindow.RTD1, self.AlarmButton.SubWindow.RTD2,
                                   self.AlarmButton.SubWindow.RTD3, 
                                   self.AlarmButton.SubWindow.RTD4, self.AlarmButton.SubWindow.RTD5,
                                   self.AlarmButton.SubWindow.RTD6]
@@ -802,11 +802,11 @@ class MainWindow(QtWidgets.QMainWindow):
                                        Act=self.AlarmButton.SubWindow.HTR1002.AlarmMode.isChecked(),
                                        LowLimit=self.AlarmButton.SubWindow.HTR1002.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.HTR1002.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.HTR1003.updatebutton.clicked.connect(
-            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1003.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.HTR1003.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.HTR1003.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.HTR1003.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.HTR1005.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1005.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.HTR1005.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.HTR1005.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.HTR1005.High_Set.Field.text()))
 
         self.AlarmButton.SubWindow.HTR1004.updatebutton.clicked.connect(
             lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1004.Label.text(),
@@ -943,11 +943,11 @@ class MainWindow(QtWidgets.QMainWindow):
                                        Act=self.AlarmButton.SubWindow.HTR1002.AlarmMode.isChecked(),
                                        LowLimit=self.AlarmButton.SubWindow.HTR1002.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.HTR1002.High_Set.Field.text(),update = False))
-        self.AlarmButton.SubWindow.HTR1003.AlarmMode.stateChanged.connect(
-            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1003.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.HTR1003.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.HTR1003.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.HTR1003.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.HTR1005.AlarmMode.stateChanged.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1005.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.HTR1005.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.HTR1005.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.HTR1005.High_Set.Field.text(),update = False))
 
         self.AlarmButton.SubWindow.HTR1004.AlarmMode.stateChanged.connect(
             lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1004.Label.text(),
@@ -1894,9 +1894,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.SubWindow.HTR1002.Indicator.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1002"])
 
-        self.AlarmButton.SubWindow.HTR1003.UpdateAlarm(received_dic_c["Alarm"]["LOOPPID"]["HTR1003"])
-        self.AlarmButton.SubWindow.HTR1003.Indicator.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1003"])
+        self.AlarmButton.SubWindow.HTR1005.UpdateAlarm(received_dic_c["Alarm"]["LOOPPID"]["HTR1005"])
+        self.AlarmButton.SubWindow.HTR1005.Indicator.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1005"])
 
         self.AlarmButton.SubWindow.HTR1004.UpdateAlarm(received_dic_c["Alarm"]["LOOPPID"]["HTR1004"])
         self.AlarmButton.SubWindow.HTR1004.Indicator.SetValue(
@@ -2426,12 +2426,12 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
-        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1003"]:
-            self.HTR1003.ButtonTransitionState(True)
-            self.HTR1003.LOOPPIDWindow.ButtonTransitionState(True)
-        elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1003"]:
-            self.HTR1003.ButtonTransitionState(False)
-            self.HTR1003.LOOPPIDWindow.ButtonTransitionState(False)
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1005"]:
+            self.HTR1005.ButtonTransitionState(True)
+            self.HTR1005.LOOPPIDWindow.ButtonTransitionState(True)
+        elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1005"]:
+            self.HTR1005.ButtonTransitionState(False)
+            self.HTR1005.LOOPPIDWindow.ButtonTransitionState(False)
         else:
             pass
 
@@ -3202,39 +3202,39 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1002.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1002"][1])
 
 
-        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1003"]:
-            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]:
-                self.HTR1003.LOOPPIDWindow.Mode.ButtonLClicked()
-                self.HTR1003.State.ButtonLClicked()
+        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1005"]:
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"]:
+                self.HTR1005.LOOPPIDWindow.Mode.ButtonLClicked()
+                self.HTR1005.State.ButtonLClicked()
             else:
-                self.HTR1003.LOOPPIDWindow.Mode.ButtonRClicked()
-                self.HTR1003.State.ButtonRClicked()
-            self.LOOPPID_EN_buffer["HTR1003"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]
-        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1003"]:
-            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1003"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]:
-                    self.HTR1003.LOOPPIDWindow.Mode.ButtonLClicked()
-                    self.HTR1003.State.ButtonLClicked()
+                self.HTR1005.LOOPPIDWindow.Mode.ButtonRClicked()
+                self.HTR1005.State.ButtonRClicked()
+            self.LOOPPID_EN_buffer["HTR1005"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"]
+        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1005"]:
+            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1005"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"]:
+                    self.HTR1005.LOOPPIDWindow.Mode.ButtonLClicked()
+                    self.HTR1005.State.ButtonLClicked()
                 else:
-                    self.HTR1003.LOOPPIDWindow.Mode.ButtonRClicked()
-                    self.HTR1003.State.ButtonRClicked()
-                self.LOOPPID_EN_buffer["HTR1003"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]
-            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1003"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"] != self.LOOPPID_EN_buffer["HTR1003"]:
-                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]:
-                        self.HTR1003.LOOPPIDWindow.Mode.ButtonLClicked()
-                        self.HTR1003.State.ButtonLClicked()
+                    self.HTR1005.LOOPPIDWindow.Mode.ButtonRClicked()
+                    self.HTR1005.State.ButtonRClicked()
+                self.LOOPPID_EN_buffer["HTR1005"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"]
+            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1005"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"] != self.LOOPPID_EN_buffer["HTR1005"]:
+                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"]:
+                        self.HTR1005.LOOPPIDWindow.Mode.ButtonLClicked()
+                        self.HTR1005.State.ButtonLClicked()
                     else:
-                        self.HTR1003.LOOPPIDWindow.Mode.ButtonRClicked()
-                        self.HTR1003.State.ButtonRClicked()
-                    self.LOOPPID_EN_buffer["HTR1003"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"]
+                        self.HTR1005.LOOPPIDWindow.Mode.ButtonRClicked()
+                        self.HTR1005.State.ButtonRClicked()
+                    self.LOOPPID_EN_buffer["HTR1005"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"]
                 else:
                     pass
 
-        self.HTR1003.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"])
-        self.HTR1003.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"])
-        self.HTR1003.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1003"][0])
-        self.HTR1003.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1003"][1])
+        self.HTR1005.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"])
+        self.HTR1005.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"])
+        self.HTR1005.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1005"][0])
+        self.HTR1005.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["LOOPPID"]["TT"]["HTR1005"][1])
 
 
 
@@ -3378,43 +3378,43 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1002.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1002"])
 
-        self.HTR1003.LOOPPIDWindow.Interlock.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR1003"])
-        self.HTR1003.LOOPPIDWindow.Error.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR1003"])
-        self.HTR1003.LOOPPIDWindow.MANSP.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1003"])
-        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR1003"],
-                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR1003"]]:
+        self.HTR1005.LOOPPIDWindow.Interlock.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR1005"])
+        self.HTR1005.LOOPPIDWindow.Error.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR1005"])
+        self.HTR1005.LOOPPIDWindow.MANSP.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1005"])
+        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR1005"],
+                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR1005"]]:
 
-            self.HTR1003.LOOPPIDWindow.SAT.UpdateColor(True)
+            self.HTR1005.LOOPPIDWindow.SAT.UpdateColor(True)
         else:
-            self.HTR1003.LOOPPIDWindow.SAT.UpdateColor(False)
-        self.HTR1003.LOOPPIDWindow.ModeREAD.Field.setText(
+            self.HTR1005.LOOPPIDWindow.SAT.UpdateColor(False)
+        self.HTR1005.LOOPPIDWindow.ModeREAD.Field.setText(
 
-            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1003"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1003"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1003"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1003"]))
-        self.HTR1003.LOOPPIDWindow.EN.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["EN"]["HTR1003"])
-        self.HTR1003.LOOPPIDWindow.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1003"])
-        self.HTR1003.LOOPPIDWindow.HIGH.SetValue(
-            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR1003"])
-        self.HTR1003.LOOPPIDWindow.LOW.SetValue(
-            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR1003"])
-        self.HTR1003.LOOPPIDWindow.SETSP.SetValue(
-            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1003"],
-                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1003"],
-                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1003"],
-                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1003"],
-                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR1003"],
-                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR1003"],
-                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR1003"],
-                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR1003"]))
-        self.HTR1003.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1003"])
+            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1005"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1005"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1005"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1005"]))
+        self.HTR1005.LOOPPIDWindow.EN.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["EN"]["HTR1005"])
+        self.HTR1005.LOOPPIDWindow.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1005"])
+        self.HTR1005.LOOPPIDWindow.HIGH.SetValue(
+            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR1005"])
+        self.HTR1005.LOOPPIDWindow.LOW.SetValue(
+            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR1005"])
+        self.HTR1005.LOOPPIDWindow.SETSP.SetValue(
+            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR1005"],
+                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR1005"],
+                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR1005"],
+                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR1005"],
+                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR1005"],
+                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR1005"],
+                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR1005"],
+                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR1005"]))
+        self.HTR1005.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR1005"])
 
 
 
