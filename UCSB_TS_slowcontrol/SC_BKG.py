@@ -63,7 +63,7 @@ def LS_TT_translate(receive):
     # we need to return (float1, float2, float3, float4)
     stripped =  receive.strip("\n")
     stripped =  stripped.strip("\r")
-    stripped = stripped.strip("+")
+    # stripped = stripped.strip("+")
     # print(stripped)
     str_list = eval(stripped)
     # print("split",str_list)
@@ -579,7 +579,8 @@ class PLC(QtCore.QObject):
                     Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
-                self.LOOPPID_OUT[key] = Raw_LS_power[key]
+                stripped = Raw_LS_power[key].strip("+")
+                self.LOOPPID_OUT[key] = float(stripped)
             print("HTR OUT",self.LOOPPID_OUT)
             for key in self.LOOPPID_ADR_BASE:
                 if float(self.LOOPPID_OUT[key])>0:
