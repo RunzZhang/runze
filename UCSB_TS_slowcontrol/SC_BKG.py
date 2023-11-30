@@ -63,7 +63,8 @@ def LS_TT_translate(receive):
     # we need to return (float1, float2, float3, float4)
     stripped =  receive.strip("\n")
     stripped =  stripped.strip("\r")
-    print(stripped)
+    stripped = stripped.strip("+")
+    # print(stripped)
     str_list = eval(stripped)
     # print("split",str_list)
     float_list =  [float(i) for i in str_list]
