@@ -549,7 +549,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.RTD11, self.AlarmButton.SubWindow.RTD12]
         #
         self.HTROUTAlarmMatrix = [self.AlarmButton.SubWindow.HTR1001, self.AlarmButton.SubWindow.HTR1002,
-                                 self.AlarmButton.SubWindow.HTR1004, self.AlarmButton.SubWindow.HTR1006]
+                                 self.AlarmButton.SubWindow.HTR1004, self.AlarmButton.SubWindow.HTR1005]
 
         self.HTRRTDAlarmMatrix = [self.AlarmButton.SubWindow.RTD1, self.AlarmButton.SubWindow.RTD2,
                                   self.AlarmButton.SubWindow.RTD3, self.AlarmButton.SubWindow.RTD4,
