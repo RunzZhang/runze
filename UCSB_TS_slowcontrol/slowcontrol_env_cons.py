@@ -9,6 +9,7 @@ TT_AD2_ADDRESS = { "TT1008": 31}
 
 HTRTD_ADDRESS = {"HT1TT1":(0,0,0),"HT1TT2":(0,0,1),"HT2TT1":(0,1,0),"HT2TT2":(0,1,1),
                  "HT3TT1":(1,0,0),"HT3TT2":(1,0,1),"HT4TT1":(1,1,0),"HT4TT2":(1,1,1)}
+# first digit the number of Lakeshore, second didgit the number of Heater, the 3rd digit the number of feedback RTD
 LL_ADDRESS = {"LL":"10.111.19.108"}
 
 
