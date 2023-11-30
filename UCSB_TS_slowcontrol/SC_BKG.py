@@ -2336,7 +2336,7 @@ class UpdateDataBase(QtCore.QObject):
             # print("write RTDS")
             self.commit_bool = True
             self.para_TT = 0
-            
+
         if self.para_PT >= self.rate_PT:
             for key in self.PT_dic:
                 self.db.insert_data_into_stack(key, self.dt, self.PT_dic[key])
@@ -2493,6 +2493,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_PARAM_B += 1
         self.para_PARAM_F += 1
         self.para_TIME += 1
+        self.para_LL +=1
         # self.PLC.NewData_Database = False
 
 
