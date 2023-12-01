@@ -586,7 +586,6 @@ class PLC(QtCore.QObject):
         self.LS_timeout  = 5
 
         try:
-            print("start")
             for key in self.LOOPPID_ADR_BASE:
                 # time.sleep(0.1)
                 command_base = "HTR?"
@@ -608,7 +607,6 @@ class PLC(QtCore.QObject):
                     finally:
 
                         self.socket_LS1.close()
-                print(1)
                 if self.LOOPPID_ADR_BASE[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
@@ -624,21 +622,19 @@ class PLC(QtCore.QObject):
                         Raw_LS_power[key] = -1
                     finally:
                         self.socket_LS2.close()
-                print(2)
             for key in self.LOOPPID_ADR_BASE:
                 try:
                     stripped = Raw_LS_power[key].strip("+")
                 except:
                     stripped = Raw_LS_power[key]
                 self.LOOPPID_OUT[key] = float(stripped)
-            print("HTR OUT",self.LOOPPID_OUT)
+            # print("HTR OUT",self.LOOPPID_OUT)
             for key in self.LOOPPID_ADR_BASE:
                 if float(self.LOOPPID_OUT[key])>0:
                     self.LOOPPID_EN[key] = True
                 else:
                     self.LOOPPID_EN[key] = False
 
-            print("mid")
 
             #RTD read is all pulled out once (1,2,3,4), so we can read the tuple first and give it to Raw_dic
             # this reduces the times we communicates with the LS server by a factor of 4
@@ -706,7 +702,7 @@ class PLC(QtCore.QObject):
             # print("HTR RTDs",self.HTRTD_dic)
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
-            print("end")
+
 
         except:
             print("LS1 or LS2 lost connection to PLC")
