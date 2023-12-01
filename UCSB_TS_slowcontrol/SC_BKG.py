@@ -4182,7 +4182,7 @@ class Update(QtCore.QObject):
 
         self.UpPLC.AI_slack_alarm.connect(self.message_manager.send_email)
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.send_email)
-        self.UpPLC.PLC.LS_DISCON_SIGNAL.connect(self.UpPLC.stack_LS_alarm_msg)
+        self.UpPLC.PLC.LS_DISCON_SIGNAL.connect(self.message_manager.send_email_t)
         # if LS disconnected, then throw an alarm message into upplc stack, all stack message will be sent out later
 
     def connect_signals(self):
@@ -4217,6 +4217,8 @@ class message_manager():
         self.smtp_username = "runzezhang@ucsb.edu"
 
         self.smtp_password = os.environ.get("GMAIL_TOKEN")
+        self.email_para = sec.BROAD_CAST_PARA
+        self.email_rate = sec.BROAD_CAST_RATE
 
         # server to pico watchdog
 
@@ -4265,6 +4267,13 @@ class message_manager():
         except SlackApiError as e:
             print(f"Error: {e}")
             # print(e)
+
+    def send_email_t(self, message):
+        if self.email_para> self.email_rate:
+            self.send_email(message)
+            self.email_para = 0
+        self.email_para += 1
+
 
 
 

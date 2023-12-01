@@ -383,7 +383,7 @@ LOOPPID_PARA = {'HTR1001': 0, 'HTR1002': 0, 'HTR1004': 0, 'HTR1005': 0}
 LOOPPID_RATE = {'HTR1001': 30, 'HTR1002': 30, 'HTR1004': 30, 'HTR1005': 30}
 
 BROAD_CAST_PARA =0
-BROAD_CAST_RATE = 200
+BROAD_CAST_RATE = 100
 
 DIC_PACK = {"data": {"TT": {"AD1": {"value": TT_AD1_DIC, "high": TT_AD1_HIGHLIMIT, "low": TT_AD1_LOWLIMIT},
                              "AD2": {"value": TT_AD2_DIC, "high": TT_AD2_HIGHLIMIT, "low": TT_AD2_LOWLIMIT},
