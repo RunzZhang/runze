@@ -84,7 +84,7 @@ class PLC(QtCore.QObject):
         super().__init__()
         self.IP_LS1 = "10.111.19.109"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
-        self.PORT_LS1 = 777
+        self.PORT_LS1 = 7777
         self.BUFFER_SIZE = 1024
 
         self.Client_LS1 = ModbusTcpClient(self.IP_LS1, port=self.PORT_LS1)
@@ -568,8 +568,8 @@ class PLC(QtCore.QObject):
         self.socket_LS.settimeout(5)
         print("connection success!2")
 
-        # command = "*CLS\r\n"
-        command = "KRDG?0\r\n"
+        command = "NET?\r\n"
+        # command = "KRDG?0\r\n"
         cm_code = command.encode('utf-8')
         self.socket_LS.send(cm_code)
         receive = self.socket_LS.recv(self.BUFFER_SIZE).decode('utf-8')
