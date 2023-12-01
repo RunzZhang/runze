@@ -626,8 +626,10 @@ class PLC(QtCore.QObject):
                         self.socket_LS2.close()
                 print(2)
             for key in self.LOOPPID_ADR_BASE:
-                # stripped = Raw_LS_power[key].strip("+")
-                stripped = Raw_LS_power[key]
+                try:
+                    stripped = Raw_LS_power[key].strip("+")
+                except:
+                    stripped = Raw_LS_power[key]
                 self.LOOPPID_OUT[key] = float(stripped)
             print("HTR OUT",self.LOOPPID_OUT)
             for key in self.LOOPPID_ADR_BASE:
@@ -704,6 +706,7 @@ class PLC(QtCore.QObject):
             # print("HTR RTDs",self.HTRTD_dic)
             self.LS1_updatesignal = True
             self.LS2_updatesignal = True
+            print("end")
 
         except:
             print("LS1 or LS2 lost connection to PLC")
