@@ -112,6 +112,7 @@ class UpdatePLC(QtCore.QObject):
 
         # command = "*RST\r\n"
         command = "KRDG?0\r\n"
+        print("size", sys.getsizeof(command))
         cm_code = command.encode('utf-8')
         self.socket_LS.send(cm_code)
         receive = self.socket_LS.recv(1024).decode('utf-8')
