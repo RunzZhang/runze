@@ -579,6 +579,8 @@ class PLC(QtCore.QObject):
     def Read_LS_slow(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
+
+        #LS1 should be unaffected if LS2 lost connection
         Raw_LS_power = {}
         Raw_LS_TT = {}
         self.LS_timeout  = 5
