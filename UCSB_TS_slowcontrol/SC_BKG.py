@@ -603,6 +603,7 @@ class PLC(QtCore.QObject):
                     finally:
 
                         self.socket_LS1.close()
+
                 if self.LOOPPID_ADR_BASE[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
@@ -670,7 +671,14 @@ class PLC(QtCore.QObject):
 
                         Raw_LS_TT[key] = output_tuple[2*self.HTRTD_address[key][1]+self.HTRTD_address[key][2]]
             except socket.timeout:
+
                 print(f"Socket operation timed out after {self.LS_timeout} seconds")
+            # except:
+            #     for key in self.HTRTD_address:
+            #         if self.HTRTD_address[key][0] == 1:
+            #
+            #             Raw_LS_TT[key] = 0
+
             finally:
 
                 self.socket_LS2.close()
