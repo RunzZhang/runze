@@ -586,6 +586,7 @@ class PLC(QtCore.QObject):
         self.LS_timeout  = 5
 
         try:
+            print("start")
             for key in self.LOOPPID_ADR_BASE:
                 # time.sleep(0.1)
                 command_base = "HTR?"
@@ -633,7 +634,7 @@ class PLC(QtCore.QObject):
                 else:
                     self.LOOPPID_EN[key] = False
 
-
+            print("mid")
 
             #RTD read is all pulled out once (1,2,3,4), so we can read the tuple first and give it to Raw_dic
             # this reduces the times we communicates with the LS server by a factor of 4
