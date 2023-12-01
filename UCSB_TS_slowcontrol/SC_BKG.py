@@ -626,7 +626,8 @@ class PLC(QtCore.QObject):
                         self.socket_LS2.close()
                 print(2)
             for key in self.LOOPPID_ADR_BASE:
-                stripped = Raw_LS_power[key].strip("+")
+                # stripped = Raw_LS_power[key].strip("+")
+                stripped = Raw_LS_power[key]
                 self.LOOPPID_OUT[key] = float(stripped)
             print("HTR OUT",self.LOOPPID_OUT)
             for key in self.LOOPPID_ADR_BASE:
