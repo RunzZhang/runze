@@ -115,7 +115,7 @@ class UpdatePLC(QtCore.QObject):
         print("command size", sys.getsizeof(command))
         cm_code = command.encode('utf-8')
         self.socket_LS.send(cm_code)
-        receive = self.socket_LS.recv(1024).decode('utf-8')
+        receive = self.socket_LS.recv(256).decode('utf-8')
         print("decode", command,receive)
         print("command size", sys.getsizeof(receive))
         self.socket_LS.close()
