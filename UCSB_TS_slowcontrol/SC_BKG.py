@@ -608,7 +608,7 @@ class PLC(QtCore.QObject):
                     finally:
 
                         self.socket_LS1.close()
-
+                print(1)
                 if self.LOOPPID_ADR_BASE[key][0]==1:
                     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     self.socket_LS2.connect((self.IP_LS2, self.PORT_LS2))
