@@ -574,6 +574,7 @@ class PLC(QtCore.QObject):
         # receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
         # print("decode", receive)
         self.socket_LS.close()
+        print("connection success!3")
     def Read_LS_slow(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
