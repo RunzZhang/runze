@@ -73,8 +73,8 @@ class UpdatePLC(QtCore.QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        # self.IP_LS = "10.111.19.109"
-        self.IP_LS = "10.111.19.102"
+        self.IP_LS = "10.111.19.109"
+        # self.IP_LS = "10.111.19.102"
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         self.PORT_LS = 7777
         self.BUFFER_SIZE = 1024
