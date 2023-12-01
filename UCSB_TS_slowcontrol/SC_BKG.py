@@ -624,6 +624,7 @@ class PLC(QtCore.QObject):
                         Raw_LS_power[key] = -1
                     finally:
                         self.socket_LS2.close()
+                print(2)
             for key in self.LOOPPID_ADR_BASE:
                 stripped = Raw_LS_power[key].strip("+")
                 self.LOOPPID_OUT[key] = float(stripped)
