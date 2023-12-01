@@ -567,12 +567,12 @@ class PLC(QtCore.QObject):
         self.socket_LS.connect((self.IP_LS2, self.PORT_LS1))
         print("connection success!2")
 
-        command = "*CLS\r\n"
-        # command = "KRDG?0\r\n"
+        # command = "*CLS\r\n"
+        command = "KRDG?0\r\n"
         cm_code = command.encode()
         self.socket_LS.send(cm_code)
-        # receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
-        # print("decode", receive)
+        receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
+        print("decode", receive)
         self.socket_LS.close()
         print("connection success!3")
     def Read_LS_slow(self):
