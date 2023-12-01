@@ -628,7 +628,7 @@ class PLC(QtCore.QObject):
             for key in self.LOOPPID_ADR_BASE:
                 stripped = Raw_LS_power[key].strip("+")
                 self.LOOPPID_OUT[key] = float(stripped)
-            # print("HTR OUT",self.LOOPPID_OUT)
+            print("HTR OUT",self.LOOPPID_OUT)
             for key in self.LOOPPID_ADR_BASE:
                 if float(self.LOOPPID_OUT[key])>0:
                     self.LOOPPID_EN[key] = True
