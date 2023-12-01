@@ -581,7 +581,7 @@ class PLC(QtCore.QObject):
         # command = "HTR?1\n"
         Raw_LS_power = {}
         Raw_LS_TT = {}
-        self.LS_timeout  = 1
+        self.LS_timeout  = 5
 
         try:
             for key in self.LOOPPID_ADR_BASE:
@@ -600,6 +600,8 @@ class PLC(QtCore.QObject):
                         Raw_LS_power[key] = self.socket_LS1.recv(self.BUFFER_SIZE).decode()
                     except socket.timeout:
                         print(f"Socket operation timed out after {self.LS_timeout} seconds")
+                    except:
+                        Raw_LS_power[key] = -1
                     finally:
 
                         self.socket_LS1.close()
@@ -615,6 +617,8 @@ class PLC(QtCore.QObject):
                         Raw_LS_power[key] = self.socket_LS2.recv(self.BUFFER_SIZE).decode()
                     except socket.timeout:
                         print(f"Socket operation timed out after {self.LS_timeout} seconds")
+                    except:
+                        Raw_LS_power[key] = -1
                     finally:
                         self.socket_LS2.close()
             for key in self.LOOPPID_ADR_BASE:
@@ -653,6 +657,10 @@ class PLC(QtCore.QObject):
                             2 * self.HTRTD_address[key][1] + self.HTRTD_address[key][2]]
             except socket.timeout:
                 print(f"Socket operation timed out after {self.LS_timeout} seconds")
+            except:
+                for key in self.HTRTD_address:
+                    if self.HTRTD_address[key][0] == 0:
+                        Raw_LS_TT[key] = -1
             finally:
 
                 self.socket_LS1.close()
@@ -673,6 +681,10 @@ class PLC(QtCore.QObject):
             except socket.timeout:
 
                 print(f"Socket operation timed out after {self.LS_timeout} seconds")
+            except:
+                for key in self.HTRTD_address:
+                    if self.HTRTD_address[key][0] == 1:
+                        Raw_LS_TT[key] = -1
             # except:
             #     for key in self.HTRTD_address:
             #         if self.HTRTD_address[key][0] == 1:
