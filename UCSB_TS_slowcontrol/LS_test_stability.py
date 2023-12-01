@@ -77,7 +77,7 @@ class UpdatePLC(QtCore.QObject):
         # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
         self.PORT_LS = 7777
         self.BUFFER_SIZE = 1024
-
+        self.period =1
         self.Client_LS = ModbusTcpClient(self.IP_LS, port=self.PORT_LS)
         self.Connected_LS = self.Client_LS.connect()
         print("LS connected: " + self.IP_LS + str(self.Connected_LS))
