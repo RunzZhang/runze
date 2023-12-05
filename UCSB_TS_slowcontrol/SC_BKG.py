@@ -79,7 +79,7 @@ def LS_OUT_translate(receive):
     stripped =  stripped.strip("\r")
 
     res = stripped.strip("+")
-    print("res",res)
+    # print("res",res)
     return(res)
 
 
