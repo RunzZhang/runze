@@ -622,6 +622,7 @@ class PLC(QtCore.QObject):
                         Raw_LS_power[key] = -1
                     finally:
                         self.socket_LS2.close()
+                print("OUTPUT POWER",Raw_LS_power)
             for key in self.LOOPPID_ADR_BASE:
                 try:
                     stripped = Raw_LS_power[key].strip("+")
