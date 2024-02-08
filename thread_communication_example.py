@@ -2,7 +2,21 @@ from PySide2.QtCore import QObject, QThread, Signal
 import time, sys, platform
 from PySide2 import QtWidgets, QtCore
 # Snip...
-#https://realpython.com/python-pyqt-qthread/
+# https://realpython.com/python-pyqt-qthread/
+
+# The Window class do two things:
+# 1. the upper button: "click me" contains the functions defined in Window class itself.
+# 2. the lower button "long running task" depends on another class Worker's functions. Also it is included in another
+# new thread
+#
+# The main thread can run with the Qthread at the same time, i.e. after click lower button you can still click upper
+# button and see
+# the number increase
+# It is better to use signal to communicate between the threads and that is how "finished" and "progress" come in.
+# And we use connected function to link
+# the signals to functions
+
+
 # Step 1: Create a worker class
 class Worker(QObject):
     finished = Signal()
@@ -10,11 +24,12 @@ class Worker(QObject):
 
     def run(self):
         """Long-running task."""
-        for i in range(5):
+        for i in range(20):
             time.sleep(1)
             self.progress.emit(i + 1)
             print(i)
         self.finished.emit()
+
 
 class Window(QtWidgets.QMainWindow):
     # Snip...
@@ -56,9 +71,6 @@ class Window(QtWidgets.QMainWindow):
 
     def runLongTask(self):
         """Long-running task in 5 steps."""
-        for i in range(5):
-            time.sleep(1)
-            self.reportProgress(i + 1)
         # Step 2: Create a QThread object
         self.thread = QThread()
         # Step 3: Create a worker object
@@ -82,26 +94,18 @@ class Window(QtWidgets.QMainWindow):
         self.thread.finished.connect(
             lambda: self.stepLabel.setText("Long-Running Step: 0")
         )
-#
-#
-#
+
+
 if __name__ == "__main__":
 
-
-
     App = QtWidgets.QApplication(sys.argv)
-
     MW = Window()
 
-    # MW = HeaterSubWindow()
-    # recover data
-    # MW.Recover()
     if platform.system() == "Linux":
         MW.show()
         MW.showMinimized()
     else:
         MW.show()
     MW.activateWindow()
-    # save data
 
     sys.exit(App.exec_())
