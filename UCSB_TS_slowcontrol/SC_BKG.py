@@ -719,7 +719,7 @@ class PLC(QtCore.QObject):
             print("LS1 or LS2 lost connection to PLC")
             self.LS1_updatesignal = False
             self.LS2_updatesignal = False
-            self.LS_DISCON_SIGNAL.emit("LS1 or LS2 lost connection to PLC")
+            # self.LS_DISCON_SIGNAL.emit("LS1 or LS2 lost connection to PLC")
             # self.PLC_DISCON_SIGNAL.emit()
         # print("LS_power", Raw_LS_power)
         # print("LS_TT", Raw_LS_TT)
