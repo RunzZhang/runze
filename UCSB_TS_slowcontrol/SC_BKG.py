@@ -1265,6 +1265,8 @@ class PLC(QtCore.QObject):
                 self.LEFT_REAL_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
                                                     Raw_BO_REAL[key].getRegister(0)))[0], 3)
+
+            print("MFC1008", self.LEFT_REAL_dic["MFC1008"])
             # print(self.LEFT_REAL_dic)
 
                 # print(key, "'s' value is", self.PT_dic[key])
