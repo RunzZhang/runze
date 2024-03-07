@@ -17,7 +17,7 @@ LL_ADDRESS = {"LL":"10.111.19.108"}
 PT_ADDRESS = {"PT001": 12796, "PT002": 12798, "PT003": 12800, "PT004": 12802, "PT1000": 12808,
               "PT1001": 12810, "PT1002": 12812}
 
-LEFT_REAL_ADDRESS = {'FCV1001': 12792, 'FCV1002': 12794, "BGA01": 12804, "BGA02": 12806}
+LEFT_REAL_ADDRESS = {'FCV1001': 12792, 'FCV1002': 12794, "BGA01": 12804, "BGA02": 12806 , "MFC1008": 12307}
 
 TT_AD1_DIC = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0, "RTD11": 0,
                               "RTD12": 0}
@@ -31,7 +31,7 @@ LL_DIC = {"LL":0}
 PT_DIC = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
               "PT1001": 0, "PT1002": 0}
 
-LEFT_REAL_DIC = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0}
+LEFT_REAL_DIC = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0, "MFC1008": 0}
 
 TT_AD1_LOWLIMIT = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0, "RTD11": 0,
                               "RTD12": 0}
@@ -57,8 +57,8 @@ PT_LOWLIMIT = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
 PT_HIGHLIMIT = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
               "PT1001": 0, "PT1002": 0}
 
-LEFT_REAL_HIGHLIMIT = {'FCV1001': 100, 'FCV1002': 100, "BGA01": 100, "BGA02": 100}
-LEFT_REAL_LOWLIMIT = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0}
+LEFT_REAL_HIGHLIMIT = {'FCV1001': 100, 'FCV1002': 100, "BGA01": 100, "BGA02": 100 , "MFC1008": 100}
+LEFT_REAL_LOWLIMIT = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0, "MFC1008": 0}
 
 TT_AD1_ACTIVATED = {"RTD7": False, "RTD8":False, "RTD9": False, "RTD10": False, "RTD11": False,
                               "RTD12": False}
@@ -73,7 +73,7 @@ LL_ACTIVATED = {"LL":False}
 
 PT_ACTIVATED = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1000": False,
               "PT1001": False, "PT1002": False}
-LEFT_REAL_ACTIVATED = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": 100}
+LEFT_REAL_ACTIVATED = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": False, "MFC1008": False}
 TT_AD1_ALARM = {"RTD7": False, "RTD8":False, "RTD9": False, "RTD10": False, "RTD11": False,
                               "RTD12": False}
 
@@ -87,7 +87,7 @@ LL_ALARM = {"LL":False}
 
 PT_ALARM = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1000": False,
               "PT1001": False, "PT1002": False}
-LEFT_REAL_ALARM = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": False}
+LEFT_REAL_ALARM = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": False, "MFC1008": False}
 MAINALARM = False
 MAINALARM_PARA = 0
 MAINALARM_RATE = 30
@@ -371,9 +371,9 @@ PT_PARA = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
 PT_RATE = {"PT001": 30, "PT002": 30, "PT003": 30, "PT004": 30, "PT1000": 30,
               "PT1001": 30, "PT1002": 30}
 
-LEFT_REAL_PARA = {'FCV1001': 0, 'FCV1002': 0, "BGA01":0, "BGA02": 0}
+LEFT_REAL_PARA = {'FCV1001': 0, 'FCV1002': 0, "BGA01":0, "BGA02": 0,  "MFC1008": 0}
 
-LEFT_REAL_RATE = {'FCV1001': 30, 'FCV1002': 30, "BGA01": 30, "BGA02": 30}
+LEFT_REAL_RATE = {'FCV1001': 30, 'FCV1002': 30, "BGA01": 30, "BGA02": 30, "MFC1008": 30}
 
 DIN_PARA = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
 

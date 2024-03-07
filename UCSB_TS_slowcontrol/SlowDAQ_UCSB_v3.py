@@ -3473,7 +3473,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC2.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["FCV1002"])
         self.MFC2.LOOPPIDWindow.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["FCV1002"])
 
-        # self.MFC1008.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
+        self.MFC1008.Power.SetValue(received_dic_c["data"]["LEFT_REAL"]["MFC1008"])
         # self.MFC1008.LOOPPIDWindow.OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["FCV1001"])
 
     @QtCore.Slot(object)
