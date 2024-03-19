@@ -257,6 +257,7 @@ class PLC(QtCore.QObject):
         self.Valve_INTLKD = copy.copy(sec.VALVE_INTLKD)
         self.Valve_ERR = copy.copy(sec.VALVE_ERR)
         self.Valve_Busy = copy.copy(sec.VALVE_BUSY)
+        self.valve_invert_list = sec.VALVE_INVERT_LIST
 
         self.LOOPPID_ADR_BASE = copy.copy(sec.LOOPPID_ADR_BASE)
 
@@ -1276,8 +1277,10 @@ class PLC(QtCore.QObject):
             for key in self.valve_address:
                 Raw_BO_Valve[key] = self.Client_BO.read_holding_registers(self.valve_address[key], count=1, unit=0x01)
                 self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
-
-                self.Valve_OUT[key] = self.ReadCoil(1, self.valve_address[key])
+                if key in self.valve_invert_list:
+                    self.Valve_OUT[key] = not self.ReadCoil(1, self.valve_address[key])
+                else:
+                    self.Valve_OUT[key] = self.ReadCoil(1, self.valve_address[key])
                 self.Valve_Busy[key] = self.ReadCoil(2, self.valve_address[key]) or self.ReadCoil(4, self.valve_address[key])
                 self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
                 self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
@@ -2537,8 +2540,6 @@ class UpdateDataBase(QtCore.QObject):
             self.para_PT = 0
         # print(2)
         for key in self.Valve_OUT:
-            if key == 'SV3307':
-                print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
             if self.Valve_OUT[key] != self.Valve_buffer[key]:
                 self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.Valve_buffer[key])
                 self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Valve_OUT[key])

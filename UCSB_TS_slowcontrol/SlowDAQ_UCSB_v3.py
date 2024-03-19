@@ -671,20 +671,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ReadSettings.LoadFileButton.clicked.connect(lambda: self.man_set(self.ReadSettings.default_dict))
         self.ReadSettings.LoadFileButton.clicked.connect(lambda: self.man_activated(self.ReadSettings.default_dict))
 
-        self.PV1001.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1001.Label.text()))
-        self.PV1001.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1001.Label.text()))
-        self.PV1002.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1002.Label.text()))
-        self.PV1002.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1002.Label.text()))
-        self.PV1003.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1003.Label.text()))
-        self.PV1003.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1003.Label.text()))
-        self.PV1004.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1004.Label.text()))
-        self.PV1004.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1004.Label.text()))
-        self.PV1005.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1005.Label.text()))
-        self.PV1005.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1005.Label.text()))
-        self.PV1006.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1006.Label.text()))
-        self.PV1006.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1006.Label.text()))
-        self.PV1007.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1007.Label.text()))
-        self.PV1007.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1007.Label.text()))
+        self.PV1001.Set.LButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1001.Label.text()))
+        self.PV1001.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1001.Label.text()))
+        self.PV1002.Set.LButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1002.Label.text()))
+        self.PV1002.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1002.Label.text()))
+        self.PV1003.Set.LButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1003.Label.text()))
+        self.PV1003.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1003.Label.text()))
+        self.PV1004.Set.LButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1004.Label.text()))
+        self.PV1004.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1004.Label.text()))
+        self.PV1005.Set.LButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1005.Label.text()))
+        self.PV1005.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1005.Label.text()))
+        self.PV1006.Set.LButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1006.Label.text()))
+        self.PV1006.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1006.Label.text()))
+        self.PV1007.Set.LButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1007.Label.text()))
+        self.PV1007.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1007.Label.text()))
 
         self.PV1.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1.Label.text()))
         self.PV1.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1.Label.text()))
@@ -2762,32 +2762,6 @@ class MainWindow(QtWidgets.QMainWindow):
                         else:
                             self.PV12.Set.ButtonRClicked()
                         self.Valve_buffer["PV12"] = received_dic_c["data"]["Valve"]["OUT"]["PV12"]
-                    else:
-                        pass
-
-            if not received_dic_c["data"]["Valve"]["MAN"]["PV1000"]:
-                if received_dic_c["data"]["Valve"]["OUT"]["PV1000"]:
-                    self.PV1000.Set.ButtonLClicked()
-                else:
-                    self.PV1000.Set.ButtonRClicked()
-                self.Valve_buffer["PV1000"] = received_dic_c["data"]["Valve"]["OUT"]["PV1000"]
-            elif received_dic_c["data"]["Valve"]["MAN"]["PV1000"]:
-                if received_dic_c["data"]["Valve"]["Busy"]["PV1000"]:
-                    if received_dic_c["data"]["Valve"]["OUT"]["PV1000"]:
-                        self.PV1000.Set.ButtonLClicked()
-                    else:
-                        self.PV1000.Set.ButtonRClicked()
-                    self.Valve_buffer["PV1000"] = received_dic_c["data"]["Valve"]["OUT"]["PV1000"]
-                elif not received_dic_c["data"]["Valve"]["Busy"]["PV1000"]:
-                    #     print("PV1000", received_dic_c["data"]["Valve"]["OUT"]["PV1000"] != self.Valve_buffer["PV1000"])
-                    #     print("OUT", received_dic_c["data"]["Valve"]["OUT"]["PV1000"])
-                    #     print("Buffer", self.Valve_buffer["PV1000"])
-                    if received_dic_c["data"]["Valve"]["OUT"]["PV1000"] != self.Valve_buffer["PV1000"]:
-                        if received_dic_c["data"]["Valve"]["OUT"]["PV1000"]:
-                            self.PV1000.Set.ButtonLClicked()
-                        else:
-                            self.PV1000.Set.ButtonRClicked()
-                        self.Valve_buffer["PV1000"] = received_dic_c["data"]["Valve"]["OUT"]["PV1000"]
                     else:
                         pass
 
