@@ -183,6 +183,7 @@ class PLC(QtCore.QObject):
         self.LEFT_REAL_address = copy.copy(sec.LEFT_REAL_ADDRESS)
 
         self.TT_AD1_dic = copy.copy(sec.TT_AD1_DIC)
+        self.TT_AD1_cali = copy.copy(sec.TT_AD1_CALI)
         self.TT_AD2_dic = copy.copy(sec.TT_AD2_DIC)
 
         self.HTRTD_dic = copy.copy(sec.HTRTD_DIC)
@@ -921,15 +922,16 @@ class PLC(QtCore.QObject):
             # Reading all the RTDs
 
             for key in self.TT_AD1_address:
+                bias = self.TT_AD1_cali[key]
                 Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD1_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1), Raw_RTDs_AD1[key].getRegister(0)))[0], 3)
                 # print(key, read_value)
                 if read_value < 201:
 
-                    self.TT_AD1_dic[key] = round(273.15 + read_value,1)
+                    self.TT_AD1_dic[key] = round(273.15 + read_value+bias,1)
                 else:
-                    self.TT_AD1_dic[key] = round(read_value,1)
+                    self.TT_AD1_dic[key] = round(read_value+bias,1)
             self.AD1_updatesignal = True
         else:
             print("AD1 lost connection to PLC")

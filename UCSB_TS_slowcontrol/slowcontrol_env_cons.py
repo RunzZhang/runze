@@ -21,7 +21,8 @@ LEFT_REAL_ADDRESS = {'FCV1001': 12792, 'FCV1002': 12794, "BGA01": 12804, "BGA02"
 
 TT_AD1_DIC = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0, "RTD11": 0,
                               "RTD12": 0}
-
+TT_AD1_CALI = {"RTD7": -1.94, "RTD8":-2.44, "RTD9": 1.26, "RTD10": -1.74, "RTD11": 0,
+                              "RTD12": 0}
 TT_AD2_DIC = { "RTD13": 0}
 
 HTRTD_DIC = {"RTD1":0,"RTD2":0,"RTD3":0,
