@@ -62,10 +62,13 @@ def LS_TT_translate(receive):
     # receive would be "float1,float2,float3,float4\r\n"
     # we need to return (float1, float2, float3, float4)
     print("TT INPUT", receive)
-    stripped =  receive.strip("\n")
-    stripped =  stripped.strip("\r")
+    try:
+        stripped =  receive.strip("\n")
+        stripped =  stripped.strip("\r")
+    except:
+        stripped = receive
     # stripped = stripped.strip("+")
-    # print(stripped)
+    print(stripped)
     str_list = eval(stripped)
     # print("split",str_list)
     float_list =  [float(i) for i in str_list]
@@ -688,11 +691,8 @@ class PLC(QtCore.QObject):
             self.socket_LS2.settimeout(self.LS_timeout)
             try:
                 cm_code = command.encode()
-                print(2)
                 self.socket_LS2.send(cm_code)
-                print(3)
                 data = self.socket_LS2.recv(self.BUFFER_SIZE)
-                print(4,data)
                 output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
                 # combining 2nd digit and 3rd digit to get final address
                 print(1)
