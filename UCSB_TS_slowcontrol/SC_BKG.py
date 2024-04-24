@@ -668,7 +668,6 @@ class PLC(QtCore.QObject):
             try:
                 cm_code = command.encode()
                 self.socket_LS1.send(cm_code)
-                print("LS1,",self.socket_LS1.recv(self.BUFFER_SIZE))
                 output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
 
                 for key in self.HTRTD_address:
@@ -692,12 +691,9 @@ class PLC(QtCore.QObject):
             try:
                 cm_code = command.encode()
                 self.socket_LS2.send(cm_code)
-                print(3)
                 data = self.socket_LS2.recv(self.BUFFER_SIZE)
-                print(4,data)
                 output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
                 # combining 2nd digit and 3rd digit to get final address
-                print(1)
                 for key in self.HTRTD_address:
                     if self.HTRTD_address[key][0] == 1:
 
@@ -2752,6 +2748,7 @@ class UpdatePLC(QtCore.QObject):
                     self.PLC.ReadAll()
                     self.PLC.Read_AD()
                     # self.PLC.Read_LS()
+                    self.PLC.LS_test()
                     self.PLC.Read_LS_slow()
                     self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
