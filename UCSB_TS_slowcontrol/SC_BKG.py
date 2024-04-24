@@ -689,6 +689,7 @@ class PLC(QtCore.QObject):
                 cm_code = command.encode()
                 print(2)
                 self.socket_LS2.send(cm_code)
+                print(3)
                 output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
                 # combining 2nd digit and 3rd digit to get final address
                 print(1)
