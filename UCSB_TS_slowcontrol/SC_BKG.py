@@ -68,7 +68,7 @@ def LS_TT_translate(receive):
     except:
         stripped = receive
     # stripped = stripped.strip("+")
-    print(stripped)
+    # print(stripped)
     str_list = eval(stripped)
     # print("split",str_list)
     float_list =  [float(i) for i in str_list]
@@ -692,8 +692,9 @@ class PLC(QtCore.QObject):
             try:
                 cm_code = command.encode()
                 self.socket_LS2.send(cm_code)
+                print(3)
                 data = self.socket_LS2.recv(self.BUFFER_SIZE)
-                print(4,data.decode())
+                print(4,data)
                 output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
                 # combining 2nd digit and 3rd digit to get final address
                 print(1)
