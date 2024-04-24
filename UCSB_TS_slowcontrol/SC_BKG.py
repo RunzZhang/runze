@@ -75,6 +75,7 @@ def LS_TT_translate(receive):
 def LS_OUT_translate(receive):
     # receive would be "float1,float2,float3,float4\r\n"
     # we need to return (float1, float2, float3, float4)
+    print("INPUT string",receive)
     stripped =  receive.strip("\n")
     stripped =  stripped.strip("\r")
 
@@ -626,9 +627,7 @@ class PLC(QtCore.QObject):
                     # print("connection success!", key)
                     try:
                         cm_code = command.encode()
-                        print(1)
                         self.socket_LS2.send(cm_code)
-                        print(2)
                         Raw_LS_power[key] = float(LS_OUT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode()))
                     except socket.timeout:
                         print(f"Socket operation timed out after {self.LS_timeout} seconds")
