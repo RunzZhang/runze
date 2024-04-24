@@ -668,7 +668,7 @@ class PLC(QtCore.QObject):
             try:
                 cm_code = command.encode()
                 self.socket_LS1.send(cm_code)
-
+                print("LS1,",self.socket_LS1.recv(self.BUFFER_SIZE))
                 output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
 
                 for key in self.HTRTD_address:
