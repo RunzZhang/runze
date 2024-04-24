@@ -75,7 +75,6 @@ def LS_TT_translate(receive):
 def LS_OUT_translate(receive):
     # receive would be "float1,float2,float3,float4\r\n"
     # we need to return (float1, float2, float3, float4)
-    print("INPUT string",receive)
     stripped =  receive.strip("\n")
     stripped =  stripped.strip("\r")
 
@@ -691,6 +690,7 @@ class PLC(QtCore.QObject):
                 self.socket_LS2.send(cm_code)
                 output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
                 # combining 2nd digit and 3rd digit to get final address
+                print(1)
                 for key in self.HTRTD_address:
                     if self.HTRTD_address[key][0] == 1:
 
