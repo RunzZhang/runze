@@ -61,6 +61,7 @@ def FPADS_OUT_AT(outaddress):
 def LS_TT_translate(receive):
     # receive would be "float1,float2,float3,float4\r\n"
     # we need to return (float1, float2, float3, float4)
+    print("TT INPUT", receive)
     stripped =  receive.strip("\n")
     stripped =  stripped.strip("\r")
     # stripped = stripped.strip("+")
