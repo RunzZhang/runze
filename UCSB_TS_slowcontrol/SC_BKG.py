@@ -705,6 +705,7 @@ class PLC(QtCore.QObject):
                 self.socket_LS2.send(cm_code)
                 data = self.socket_LS2.recv(self.BUFFER_SIZE)
                 output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
+                print("LS2 RTD",output_tuple)
                 # combining 2nd digit and 3rd digit to get final address
                 for key in self.HTRTD_address:
                     if self.HTRTD_address[key][0] == 1:
@@ -4313,19 +4314,19 @@ if __name__ == "__main__":
 
     # print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
 
-    # App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
-    # sys.exit(App.exec_())
+    App = QtWidgets.QApplication(sys.argv)
+    Update=Update()
+    sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
     # Update.run()
 
 
-    PLC=PLC()
+    # PLC=PLC()
     # PLC.Read_LL()
     # PLC.LS_test()
-    PLC.LS_test_v2()
+    # PLC.LS_test_v2()
     # PLC.Read_LS()
     # PLC.Read_AD()
     # PLC.ReadAll()
