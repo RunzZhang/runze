@@ -596,7 +596,7 @@ class PLC(QtCore.QObject):
 
     def LS_test_v2(self):
         self.socket_LS = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_LS.connect((self.IP_LS2, self.PORT_LS1))
+        self.socket_LS.connect((self.IP_LS2, self.PORT_LS2))
         # self.socket_LS1.settimeout(self.LS_timeout)
         # command = "*idn?\r\n"
         command = "KRDG?0\r\n"
@@ -4313,19 +4313,19 @@ if __name__ == "__main__":
 
     # print(LS_TT_translate('+293.954,+294.177,+294.287,+294.385\r\n'))
 
-    App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
-    sys.exit(App.exec_())
+    # App = QtWidgets.QApplication(sys.argv)
+    # Update=Update()
+    # sys.exit(App.exec_())
 
     # PLC=PLC()
     # Update = UpdatePLC(PLC)
     # Update.run()
 
 
-    # PLC=PLC()
+    PLC=PLC()
     # PLC.Read_LL()
     # PLC.LS_test()
-    # PLC.LS_test_v2()
+    PLC.LS_test_v2()
     # PLC.Read_LS()
     # PLC.Read_AD()
     # PLC.ReadAll()
