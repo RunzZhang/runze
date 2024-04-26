@@ -593,6 +593,16 @@ class PLC(QtCore.QObject):
         print("decode", receive)
         self.socket_LS.close()
         print("connection success!3")
+
+    def LS_test_v2(self):
+        self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
+        self.socket_LS1.settimeout(self.LS_timeout)
+        command = "KRDG?0\r\n"
+        cm_code = command.encode()
+        self.socket_LS1.send(cm_code)
+        output_tuple = LS_TT_translate(self.socket_LS1.recv(self.BUFFER_SIZE).decode())
+        print(output_tuple)
     def Read_LS_slow(self):
         # print("socket connection",self.socket.stillconnected())
         # command = "HTR?1\n"
@@ -4313,7 +4323,8 @@ if __name__ == "__main__":
 
     PLC=PLC()
     # PLC.Read_LL()
-    PLC.LS_test()
+    # PLC.LS_test()
+    PLC.LS_test_v2()
     # PLC.Read_LS()
     # PLC.Read_AD()
     # PLC.ReadAll()
