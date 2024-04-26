@@ -597,7 +597,7 @@ class PLC(QtCore.QObject):
     def LS_test_v2(self):
         self.socket_LS1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_LS1.connect((self.IP_LS1, self.PORT_LS1))
-        self.socket_LS1.settimeout(self.LS_timeout)
+        # self.socket_LS1.settimeout(self.LS_timeout)
         command = "KRDG?0\r\n"
         cm_code = command.encode()
         self.socket_LS1.send(cm_code)
