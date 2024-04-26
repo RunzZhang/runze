@@ -577,10 +577,10 @@ class PLC(QtCore.QObject):
         self.socket_LS = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_LS.connect((self.IP_LS2, self.PORT_LS1))
         print("connection success!1")
-        self.socket_LS.close()
-        self.socket_LS = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_LS.connect((self.IP_LS2, self.PORT_LS1))
-        self.socket_LS.settimeout(5)
+        # self.socket_LS.close()
+        # self.socket_LS = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # self.socket_LS.connect((self.IP_LS2, self.PORT_LS1))
+        # self.socket_LS.settimeout(5)
         print("connection success!2")
 
         # command = "*RST\r\n"
