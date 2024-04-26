@@ -703,7 +703,8 @@ class PLC(QtCore.QObject):
             try:
                 cm_code = command.encode()
                 self.socket_LS2.send(cm_code)
-                data = self.socket_LS2.recv(self.BUFFER_SIZE)
+                # data = self.socket_LS2.recv(self.BUFFER_SIZE)
+                print("LS2 send")
                 output_tuple = LS_TT_translate(self.socket_LS2.recv(self.BUFFER_SIZE).decode())
                 print("LS2 RTD",output_tuple)
                 # combining 2nd digit and 3rd digit to get final address
