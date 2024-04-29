@@ -3266,7 +3266,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.RTD4.SetValue(received_dic_c["data"]["TT"]["LS"]["value"]["RTD4"])
         self.RTD5.SetValue(received_dic_c["data"]["TT"]["LS"]["value"]["RTD5"])
         self.RTD6.SetValue(received_dic_c["data"]["TT"]["LS"]["value"]["RTD6"])
-        self.RTD11.SetValue(received_dic_c["data"]["TT"]["ALS"]["value"]["RTD11"])
+        self.RTD11.SetValue(received_dic_c["data"]["TT"]["LS"]["value"]["RTD11"])
         self.RTD7.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD7"])
         self.RTD8.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD8"])
         self.RTD9.SetValue(received_dic_c["data"]["TT"]["AD1"]["value"]["RTD9"])
