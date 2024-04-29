@@ -460,7 +460,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.RTD11 = Indicator(self.TubeTab)
         self.RTD11.Label.setText("RTD11")
-        self.RTD11.move(1420 * R, 700 * R)
+        self.RTD11.move(1440 * R, 700 * R)
 
 
         self.LiqLev = Indicator(self.TubeTab)
