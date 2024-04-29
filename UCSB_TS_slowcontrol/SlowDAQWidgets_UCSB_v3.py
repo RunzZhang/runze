@@ -755,8 +755,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.RTD11 = AlarmStatusWidget(self.GroupRTD1)
         self.RTD11.Label.setText("RTD11")
 
-        self.RTD12 = AlarmStatusWidget(self.GroupRTD1)
-        self.RTD12.Label.setText("RTD12")
+
 
         # self.TT1007 = AlarmStatusWidget(self.GroupRTD1)
         # self.TT1007.Label.setText("TT1007")
@@ -819,8 +818,7 @@ class AlarmWin(QtWidgets.QMainWindow):
 
 
         # make a directory for the alarm instrument and assign instrument to certain position
-        self.AlarmRTD1dir = {0: {0: self.RTD7, 1: self.RTD8, 2: self.RTD9, 3: self.RTD10, 4: self.RTD11},
-                             1: {0: self.RTD12}}
+        self.AlarmRTD1dir = {0: {0: self.RTD7, 1: self.RTD8, 2: self.RTD9, 3: self.RTD10, 4: self.RTD11}}
 
 
         self.AlarmRTD2dir = {0: {0: self.HTR1001, 1: self.HTR1002, 2: self.HTR1004, 3: self.HTR1005}}

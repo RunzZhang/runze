@@ -2,13 +2,12 @@ BASE_ADDRESS= 12288
 # real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
 
-TT_AD1_ADDRESS = {"RTD7": 31, "RTD8":33, "RTD9": 35, "RTD10": 37, "RTD11": 39,
-                              "RTD12": 41}
+TT_AD1_ADDRESS = {"RTD7": 31, "RTD8":33, "RTD9": 35, "RTD10": 37}
 
 TT_AD2_ADDRESS = { "RTD13": 31}
 
 HTRTD_ADDRESS = {"RTD1":(0,0,0),"RTD2":(0,0,1),"RTD3":(0,1,0),
-                 "RTD4":(1,0,0),"RTD5":(1,0,1),"RTD6":(1,1,0)}
+                 "RTD4":(1,0,0),"RTD5":(1,0,1),"RTD6":(1,1,0), "RTD11":(1,1,1)}
 # first digit the number of Lakeshore, second didgit the number of Heater, the 3rd digit the number of feedback RTD
 # only 6 RTD conneceted to LS now
 LL_ADDRESS = {"LL":"10.111.19.108"}
@@ -19,14 +18,12 @@ PT_ADDRESS = {"PT001": 12796, "PT002": 12798, "PT003": 12800, "PT004": 12802, "P
 
 LEFT_REAL_ADDRESS = {'FCV1001': 12792, 'FCV1002': 12794, "BGA01": 12804, "BGA02": 12806 , "MFC1008": 12816}
 
-TT_AD1_DIC = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0, "RTD11": 0,
-                              "RTD12": 0}
-TT_AD1_CALI = {"RTD7": -1.94, "RTD8":-2.44, "RTD9": 1.26, "RTD10": -1.74, "RTD11": 0,
-                              "RTD12": 0}
+TT_AD1_DIC = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0}
+TT_AD1_CALI = {"RTD7": -1.94, "RTD8":-2.44, "RTD9": 1.26, "RTD10": -1.74}
 TT_AD2_DIC = { "RTD13": 0}
 
 HTRTD_DIC = {"RTD1":0,"RTD2":0,"RTD3":0,
-                 "RTD4":0,"RTD5":0,"RTD6":0}
+                 "RTD4":0,"RTD5":0,"RTD6":0, "RTD11":0}
 LL_DIC = {"LL":0}
 
 PT_DIC = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
@@ -34,15 +31,13 @@ PT_DIC = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
 
 LEFT_REAL_DIC = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0, "MFC1008": 0}
 
-TT_AD1_LOWLIMIT = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0, "RTD11": 0,
-                              "RTD12": 0}
+TT_AD1_LOWLIMIT = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0}
 
-TT_AD1_HIGHLIMIT = {"RTD7": 30, "RTD8":30, "RTD9": 30, "RTD10": 30, "RTD11": 30,
-                              "RTD12": 30}
+TT_AD1_HIGHLIMIT = {"RTD7": 30, "RTD8":30, "RTD9": 30, "RTD10": 30}
 HTRTD_HIGHLIMIT = {"RTD1":30,"RTD2":30,"RTD3":30,
-                 "RTD4":30,"RTD5":30,"RTD6":30}
+                 "RTD4":30,"RTD5":30,"RTD6":30, "RTD11":30}
 HTRTD_LOWLIMIT = {"RTD1":0,"RTD2":0,"RTD3":0,
-                 "RTD4":0,"RTD5":0,"RTD6":0}
+                 "RTD4":0,"RTD5":0,"RTD6":0, "RTD11":30}
 
 LL_LOWLIMIT = {"LL":0}
 
@@ -61,13 +56,12 @@ PT_HIGHLIMIT = {"PT001": 0, "PT002": 0, "PT003": 0, "PT004": 0, "PT1000": 0,
 LEFT_REAL_HIGHLIMIT = {'FCV1001': 100, 'FCV1002': 100, "BGA01": 100, "BGA02": 100 , "MFC1008": 100}
 LEFT_REAL_LOWLIMIT = {'FCV1001': 0, 'FCV1002': 0, "BGA01": 0, "BGA02": 0, "MFC1008": 0}
 
-TT_AD1_ACTIVATED = {"RTD7": False, "RTD8":False, "RTD9": False, "RTD10": False, "RTD11": False,
-                              "RTD12": False}
+TT_AD1_ACTIVATED = {"RTD7": False, "RTD8":False, "RTD9": False, "RTD10": False}
 
 TT_AD2_ACTIVATED = {"RTD13": False}
 
 HTRTD_ACTIVATED = {"RTD1":False,"RTD2":False,"RTD3":False,
-                 "RTD4":False,"RTD5":False,"RTD6":False}
+                 "RTD4":False,"RTD5":False,"RTD6":False, "RTD11":False}
 
 LL_ACTIVATED = {"LL":False}
 
@@ -75,13 +69,12 @@ LL_ACTIVATED = {"LL":False}
 PT_ACTIVATED = {"PT001": False, "PT002": False, "PT003": False, "PT004": False, "PT1000": False,
               "PT1001": False, "PT1002": False}
 LEFT_REAL_ACTIVATED = {'FCV1001': False, 'FCV1002': False, "BGA01": False, "BGA02": False, "MFC1008": False}
-TT_AD1_ALARM = {"RTD7": False, "RTD8":False, "RTD9": False, "RTD10": False, "RTD11": False,
-                              "RTD12": False}
+TT_AD1_ALARM = {"RTD7": False, "RTD8":False, "RTD9": False, "RTD10": False}
 
 TT_AD2_ALARM = {"RTD13": False}
 
 HTRTD_ALARM = {"RTD1":False,"RTD2":False,"RTD3":False,
-                 "RTD4":False,"RTD5":False,"RTD6":False}
+                 "RTD4":False,"RTD5":False,"RTD6":False, "RTD11":False}
 
 LL_ALARM = {"LL":False}
 
@@ -344,18 +337,16 @@ TIME_DIC = {'PCYCLE_EXPTIME': 0}
 #[1,0]
 INI_CHECK= True
 
-TT_AD1_PARA = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0, "RTD11": 0,
-                              "RTD12": 0}
+TT_AD1_PARA = {"RTD7": 0, "RTD8":0, "RTD9": 0, "RTD10": 0 }
 
 
-TT_AD1_RATE = {"RTD7": 30, "RTD8":30, "RTD9": 30, "RTD10": 30, "RTD11": 30,
-                              "RTD12": 30}
+TT_AD1_RATE = {"RTD7": 30, "RTD8":30, "RTD9": 30, "RTD10": 30}
 
 HTRTD_PARA = {"RTD1":0,"RTD2":0,"RTD3":0,
-                 "RTD4":0,"RTD5":0,"RTD6":0}
+                 "RTD4":0,"RTD5":0,"RTD6":0, "RTD11":0}
 
 HTRTD_RATE = {"RTD1":30,"RTD2":30,"RTD3":30,
-                 "RTD4":30,"RTD5":30,"RTD6":3}
+                 "RTD4":30,"RTD5":30,"RTD6":3, "RTD11":3}
 TT_AD2_PARA = { "RTD13": 0}
 
 
