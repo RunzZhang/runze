@@ -6,6 +6,7 @@ import time as tm
 import paramiko, pymysql
 import random
 import pandas as pd
+import csv
 # import matplotlib as plot
 
 """PASSWORD IN THIS DOCUMENT are saved as enviroment variable at slowcontrol machine
@@ -136,7 +137,24 @@ class mydatabase():
         self.mycursor.execute(query)
         for (ID,Instrument,Time, Value) in self.mycursor:
             print(str("DataStorage"+"| {} | {} | {}".format(Instrument,Time, Value)))
+    def select_export_data_datastorage(self,instrument, start_time, end_time,filename):
+        query = "SELECT * FROM DataStorage WHERE Instrument=%s AND Time BETWEEN %s AND %s;"
+        data = (instrument,start_time,end_time)
+        self.mycursor.execute(query,data)
+        rows = self.mycursor.fetchall()
+        column_names = [i[0] for i in self.mycursor.description]
+        # Define the output CSV file path
+        output_file = '~/Downloads/'+filename
 
+        # Write the data to a CSV file
+        with open(output_file, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            # Write the column names as the first row
+            writer.writerow(column_names)
+            # Write the rows
+            writer.writerows(rows)
+
+        self.close_database()
     def show_data_metadatastorage(self):
         query = "SELECT * FROM MetaDataStorage"
         self.mycursor.execute(query)
