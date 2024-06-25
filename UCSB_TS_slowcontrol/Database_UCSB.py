@@ -132,7 +132,7 @@ class mydatabase():
         rows = self.mycursor.fetchall()
         column_names = [i[0] for i in self.mycursor.description]
         # Define the output CSV file path
-        output_file = '~/Downloads/'+filename
+        output_file = '/home/hep/Downloads/'+filename
 
         # Write the data to a CSV file
         with open(output_file, mode='w', newline='') as file:
