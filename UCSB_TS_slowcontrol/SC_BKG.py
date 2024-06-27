@@ -2091,7 +2091,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_PT = 0
         self.rate_PT = 3
         self.para_REAL = 0
-        self.rate_REAL = 3
+        self.rate_REAL = 1
         self.para_Din = 0
         self.rate_Din = 90
         # c is for valve status
