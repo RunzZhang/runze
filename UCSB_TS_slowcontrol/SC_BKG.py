@@ -2725,7 +2725,7 @@ class UpdatePLC(QtCore.QObject):
         # self.alarm_db = COUPP_database()
         # self.message_manager = message_manager()
         self.Running = False
-        self.period = 0.1
+        self.period = 1
         # every pid should have one unique para and rate
         self.TT_AD1_para = sec.TT_AD1_PARA
         self.TT_AD1_rate = sec.TT_AD1_RATE
@@ -2760,10 +2760,10 @@ class UpdatePLC(QtCore.QObject):
                 try:
                     print("PLC updating", datetime.datetime.now())
                     self.PLC.ReadAll()
-                    # self.PLC.Read_AD()
+                    self.PLC.Read_AD()
                     # self.PLC.Read_LS()
-                    # self.PLC.Read_LS_slow()
-                    # self.PLC.Read_LL()
+                    self.PLC.Read_LS_slow()
+                    self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
                     print("finished")
                     # test signal
