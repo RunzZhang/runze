@@ -2541,16 +2541,16 @@ class UpdateDataBase(QtCore.QObject):
         self.status= status
 
     def write_data(self):
-        # if self.para_TT >= self.rate_TT:
-        #     for key in self.TT_AD1_dic:
-        #         self.db.insert_data_into_stack(key, self.dt, self.TT_AD1_dic[key])
-        #     for key in self.TT_AD2_dic:
-        #         self.db.insert_data_into_stack(key, self.dt, self.TT_AD2_dic[key])
-        #     for key in self.HTRTD_dic:
-        #         self.db.insert_data_into_stack(key, self.dt, self.HTRTD_dic[key])
-        #     # print("write RTDS")
-        #     self.commit_bool = True
-        #     self.para_TT = 0
+        if self.para_TT >= self.rate_TT:
+            for key in self.TT_AD1_dic:
+                self.db.insert_data_into_stack(key, self.dt, self.TT_AD1_dic[key])
+            for key in self.TT_AD2_dic:
+                self.db.insert_data_into_stack(key, self.dt, self.TT_AD2_dic[key])
+            for key in self.HTRTD_dic:
+                self.db.insert_data_into_stack(key, self.dt, self.HTRTD_dic[key])
+            # print("write RTDS")
+            self.commit_bool = True
+            self.para_TT = 0
         #
         # if self.para_PT >= self.rate_PT:
         #     for key in self.PT_dic:
@@ -2759,8 +2759,8 @@ class UpdatePLC(QtCore.QObject):
             while self.Running:
                 try:
                     print("PLC updating", datetime.datetime.now())
-                    # self.PLC.ReadAll()
-                    # self.PLC.Read_AD()
+                    self.PLC.ReadAll()
+                    self.PLC.Read_AD()
                     # self.PLC.Read_LS()
                     # self.PLC.Read_LS_slow()
                     # self.PLC.Read_LL()
