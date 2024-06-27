@@ -2816,6 +2816,7 @@ class UpdatePLC(QtCore.QObject):
                     pass
 
                 time.sleep(self.period)
+                print("PLC sleep", self.period)
 
 
 
