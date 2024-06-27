@@ -2759,7 +2759,7 @@ class UpdatePLC(QtCore.QObject):
             while self.Running:
                 try:
                     print("PLC updating", datetime.datetime.now())
-                    self.PLC.ReadAll()
+                    # self.PLC.ReadAll()
                     # self.PLC.Read_AD()
                     # self.PLC.Read_LS()
                     # self.PLC.Read_LS_slow()
