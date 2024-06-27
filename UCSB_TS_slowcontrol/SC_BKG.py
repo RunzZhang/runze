@@ -2078,7 +2078,7 @@ class UpdateDataBase(QtCore.QObject):
         self.Running_pointer = 0
         self.longsleep = 60
 
-        self.base_period = 1
+        self.base_period = 0.5
 
         self.COUPP_ERROR = False
         self.COUPP_ALARM = "k"
@@ -2091,7 +2091,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_PT = 0
         self.rate_PT = 3
         self.para_REAL = 0
-        self.rate_REAL = 0
+        self.rate_REAL = 1
         self.para_Din = 0
         self.rate_Din = 90
         # c is for valve status
@@ -2725,7 +2725,7 @@ class UpdatePLC(QtCore.QObject):
         # self.alarm_db = COUPP_database()
         # self.message_manager = message_manager()
         self.Running = False
-        self.period = 1
+        self.period = 0.5
         # every pid should have one unique para and rate
         self.TT_AD1_para = sec.TT_AD1_PARA
         self.TT_AD1_rate = sec.TT_AD1_RATE
