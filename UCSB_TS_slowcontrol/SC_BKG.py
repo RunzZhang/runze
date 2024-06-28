@@ -2089,7 +2089,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_TT = 0
         self.rate_TT = 3
         self.para_PT = 0
-        self.rate_PT = 3
+        self.rate_PT = 0
         self.para_REAL = 0
         self.rate_REAL = 0
         self.para_Din = 0
