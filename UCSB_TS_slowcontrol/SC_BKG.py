@@ -2085,44 +2085,44 @@ class UpdateDataBase(QtCore.QObject):
         self.COUPP_HOLD = True
 
         self.para_alarm = 0
-        self.rate_alarm = 10
+        self.rate_alarm = 1000
         self.para_TT = 0
-        self.rate_TT = 3
+        self.rate_TT = 300
         self.para_PT = 0
-        self.rate_PT = 3
+        self.rate_PT = 300
         self.para_REAL = 0
         self.rate_REAL = 0
         self.para_Din = 0
-        self.rate_Din = 90
+        self.rate_Din = 9000
         # c is for valve status
         self.para_Valve = 0
-        self.rate_Valve = 90
+        self.rate_Valve = 9000
         self.para_Switch = 0
-        self.rate_Switch = 90
+        self.rate_Switch = 9000
         self.para_LOOPPID = 0
-        self.rate_LOOPPID = 5
+        self.rate_LOOPPID = 500
         self.para_LOOP2PT = 0
-        self.rate_LOOP2PT = 90
+        self.rate_LOOP2PT = 9000
         self.para_FLAG=0
-        self.rate_FLAG=90
+        self.rate_FLAG=9000
         self.para_INTLK_A=0
-        self.rate_INTLK_A = 90
+        self.rate_INTLK_A = 9000
         self.para_INTLK_D = 0
-        self.rate_INTLK_D = 90
+        self.rate_INTLK_D = 9000
         self.para_FF = 0
-        self.rate_FF = 90
+        self.rate_FF = 9000
         self.para_PARAM_F = 0
-        self.rate_PARAM_F = 90
+        self.rate_PARAM_F = 9000
         self.para_PARAM_I = 0
-        self.rate_PARAM_I = 90
+        self.rate_PARAM_I = 9000
         self.para_PARAM_B = 0
-        self.rate_PARAM_B = 90
+        self.rate_PARAM_B = 9000
         self.para_PARAM_T = 0
-        self.rate_PARAM_T = 90
+        self.rate_PARAM_T = 9000
         self.para_TIME = 0
-        self.rate_TIME = 90
+        self.rate_TIME = 9000
         self.para_LL = 0
-        self.rate_LL = 90
+        self.rate_LL = 9000
 
         #status initialization
         self.status = False
@@ -2759,8 +2759,8 @@ class UpdatePLC(QtCore.QObject):
             while self.Running:
                 try:
                     print("PLC updating", datetime.datetime.now())
-                    # self.PLC.ReadAll()
-                    self.PLC.Read_AD()
+                    self.PLC.ReadAll()
+                    # self.PLC.Read_AD()
                     # self.PLC.Read_LS()
                     # self.PLC.Read_LS_slow()
                     # self.PLC.Read_LL()
