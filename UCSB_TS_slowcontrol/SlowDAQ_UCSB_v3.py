@@ -262,17 +262,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1000 = PressureIndicator(self.ThermosyphonTab)
         self.PT1000.Label.setText("PT1000")
         self.PT1000.move(145 * R, 30 * R)
-        self.PT1000.SetUnit(" bar")
+        self.PT1000.SetUnit(" psi")
 
         self.PT1001 = PressureIndicator(self.ThermosyphonTab)
         self.PT1001.Label.setText("PT1001")
         self.PT1001.move(155 * R, 975 * R)
-        self.PT1001.SetUnit(" bar")
+        self.PT1001.SetUnit(" psi")
 
         self.PT1002 = PressureIndicator(self.ThermosyphonTab)
         self.PT1002.Label.setText("PT1002")
         self.PT1002.move(160 * R, 1160 * R)
-        self.PT1002.SetUnit(" bar")
+        self.PT1002.SetUnit(" psi")
 
         # Gas Panel Widgets
 
@@ -293,22 +293,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT001 = PressureIndicator(self.GasTab)
         self.PT001.Label.setText("PT001")
         self.PT001.move(190 * R, 560 * R)
-        self.PT001.SetUnit(" bar")
+        self.PT001.SetUnit(" psi")
 
         self.PT002 = PressureIndicator(self.GasTab)
         self.PT002.Label.setText("PT002")
         self.PT002.move(1073 * R, 445 * R)
-        self.PT002.SetUnit(" bar")
+        self.PT002.SetUnit(" psi")
 
         self.PT003 = PressureIndicator(self.GasTab)
         self.PT003.Label.setText("PT003")
         self.PT003.move(1091 * R, 740 * R)
-        self.PT003.SetUnit(" bar")
+        self.PT003.SetUnit(" psi")
 
         self.PT004 = PressureIndicator(self.GasTab)
         self.PT004.Label.setText("PT004")
         self.PT004.move(1455 * R, 440 * R)
-        self.PT004.SetUnit(" bar")
+        self.PT004.SetUnit(" psi")
 
         """
         self.IDPV1 = PnID_Alone(self.GasTab)

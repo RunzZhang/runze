@@ -6,8 +6,8 @@ TT_AD1_ADDRESS = {"RTD7": 31, "RTD8":33, "RTD9": 35, "RTD10": 37}
 
 TT_AD2_ADDRESS = { "RTD13": 31}
 
-HTRTD_ADDRESS = {"RTD1":(0,0,0),"RTD2":(0,0,1),"RTD3":(0,1,0),
-                 "RTD4":(1,0,0),"RTD5":(1,0,1),"RTD6":(1,1,0), "RTD11":(1,1,1)}
+HTRTD_ADDRESS = {"RTD4":(0,0,0),"RTD5":(0,0,1),"RTD6":(0,1,0),
+                 "RTD1":(1,0,0),"RTD2":(1,0,1),"RTD3":(1,1,0), "RTD11":(1,1,1)}
 # first digit the number of Lakeshore, second didgit the number of Heater, the 3rd digit the number of feedback RTD
 # only 6 RTD conneceted to LS now
 LL_ADDRESS = {"LL":"10.111.19.108"}
@@ -346,7 +346,7 @@ HTRTD_PARA = {"RTD1":0,"RTD2":0,"RTD3":0,
                  "RTD4":0,"RTD5":0,"RTD6":0, "RTD11":0}
 
 HTRTD_RATE = {"RTD1":30,"RTD2":30,"RTD3":30,
-                 "RTD4":30,"RTD5":30,"RTD6":3, "RTD11":3}
+                 "RTD4":30,"RTD5":30,"RTD6":30, "RTD11":30}
 TT_AD2_PARA = { "RTD13": 0}
 
 
