@@ -1285,7 +1285,7 @@ class PLC(QtCore.QObject):
                 Raw_BO_REAL[key] = self.Client_BO.read_holding_registers(self.LEFT_REAL_address[key], count=2, unit=0x01)
                 self.LEFT_REAL_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
-                                                    Raw_BO_REAL[key].getRegister(0)))[0], 3)
+                                                    Raw_BO_REAL[key].getRegister(0)))[0], 0)
 
             print("MFC1008", self.LEFT_REAL_dic["MFC1008"])
             # print(self.LEFT_REAL_dic)
