@@ -571,6 +571,7 @@ class PLC(QtCore.QObject):
             self.NewData_Display = True
             self.NewData_Database = True
             self.NewData_ZMQ = True
+            print("Server update true")
 
     def LS_test(self):
         # test part
@@ -1574,7 +1575,7 @@ class PLC(QtCore.QObject):
             # # print(True,'\n',True,"\n",True,"\n")
             # self.NewData_Display = True
             # self.NewData_Database = True
-            self.NewData_ZMQ = True
+            # self.NewData_ZMQ = True
             self.BO_updatesignal = True
 
             return 0
