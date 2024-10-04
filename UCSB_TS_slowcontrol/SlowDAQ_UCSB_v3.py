@@ -3919,7 +3919,7 @@ class UpdateClient(QtCore.QObject):
                 # # wait until command read from the main thread
                 while not self.readcommand:
                     print("read command from GUI...")
-                    time.sleep(0.1)
+                    time.sleep(0.5)
                 self.readcommand = False
 
                 # self.commands({})
