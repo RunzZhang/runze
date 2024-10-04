@@ -3922,7 +3922,7 @@ class UpdateClient(QtCore.QObject):
                     time.sleep(0.1)
                 self.readcommand = False
 
-                # self.commands({})
+                self.commands({})
                 # print(self.receive_dic)
                 message = pickle.loads(self.socket.recv())
 
