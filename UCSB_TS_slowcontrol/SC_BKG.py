@@ -562,7 +562,7 @@ class PLC(QtCore.QObject):
         self.Client_BO.close()
 
     def UpdateSignal(self):
-        # print("udpate signal")
+        print("udpate signal1  \n")
         if self.AD1_updatesignal or self.AD2_updatesignal or self.LS1_updatesignal or self.LS2_updatesignal or self.BO_updatesignal or self.LL_updatesignal:
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
             self.DATA_TRI_SIGNAL.emit(True)
