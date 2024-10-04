@@ -3922,12 +3922,12 @@ class UpdateClient(QtCore.QObject):
                     time.sleep(0.1)
                 self.readcommand = False
 
-                self.commands({})
+                # self.commands({})
                 # print(self.receive_dic)
                 message = pickle.loads(self.socket.recv())
 
                 # print(f"Received reply [ {message} ]")
-                # self.update_data(message)
+                self.update_data(message)
                 time.sleep(self.period)
             except:
                 (type, value, traceback) = sys.exc_info()
