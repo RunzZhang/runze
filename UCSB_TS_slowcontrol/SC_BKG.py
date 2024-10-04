@@ -562,7 +562,7 @@ class PLC(QtCore.QObject):
         self.Client_BO.close()
 
     def UpdateSignal(self):
-        print("udpate signal1  \n")
+
         if self.AD1_updatesignal or self.AD2_updatesignal or self.LS1_updatesignal or self.LS2_updatesignal or self.BO_updatesignal or self.LL_updatesignal:
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
             self.DATA_TRI_SIGNAL.emit(True)
@@ -571,7 +571,6 @@ class PLC(QtCore.QObject):
             self.NewData_Display = True
             self.NewData_Database = True
             self.NewData_ZMQ = True
-            print("Server update true\n")
 
     def LS_test(self):
         # test part
@@ -2763,8 +2762,8 @@ class UpdatePLC(QtCore.QObject):
                     self.PLC.ReadAll()
                     self.PLC.Read_AD()
                     # self.PLC.Read_LS()
-                    self.PLC.Read_LS_slow()
-                    self.PLC.Read_LL()
+                    # self.PLC.Read_LS_slow()
+                    # self.PLC.Read_LL()
                     self.PLC.UpdateSignal()
                     print("finished")
                     # test signal
