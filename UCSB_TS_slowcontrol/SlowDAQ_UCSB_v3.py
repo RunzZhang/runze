@@ -3919,7 +3919,7 @@ class UpdateClient(QtCore.QObject):
                 # # wait until command read from the main thread
                 while not self.readcommand:
                     print("read command from GUI...")
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                 self.readcommand = False
 
                 # self.commands({})
@@ -3927,7 +3927,7 @@ class UpdateClient(QtCore.QObject):
                 message = pickle.loads(self.socket.recv())
 
                 # print(f"Received reply [ {message} ]")
-                self.update_data(message)
+                # self.update_data(message)
                 time.sleep(self.period)
             except:
                 (type, value, traceback) = sys.exc_info()
