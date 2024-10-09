@@ -944,7 +944,7 @@ class PLC(QtCore.QObject):
                 Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD1_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
                 read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1), Raw_RTDs_AD1[key].getRegister(0)))[0], 3)
-                # print(key, read_value)
+                print(key, read_value)
                 if read_value < 201:
 
                     self.TT_AD1_dic[key] = round(273.15 + read_value+bias,3)
