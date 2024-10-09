@@ -178,7 +178,7 @@ class PLC(QtCore.QObject):
         self.LL_updatesignal = False
 
 
-        self.TT_AD1_address = {"RTD7": 31, "RTD8":33, "RTD9": 35, "RTD10": 77}
+        self.TT_AD1_address = {"RTD7": 31, "RTD8":33, "RTD9": 35, "RTD10": 37}
         self.TT_AD2_address = copy.copy(sec.TT_AD2_ADDRESS)
         self.HTRTD_address = copy.copy(sec.HTRTD_ADDRESS)
         self.PT_address = copy.copy(sec.PT_ADDRESS)
@@ -947,9 +947,9 @@ class PLC(QtCore.QObject):
                 # print(key, read_value)
                 if read_value < 201:
 
-                    self.TT_AD1_dic[key] = round(273.15 + read_value+bias,2)
+                    self.TT_AD1_dic[key] = round(273.15 + read_value+bias,3)
                 else:
-                    self.TT_AD1_dic[key] = round(read_value+bias,2)
+                    self.TT_AD1_dic[key] = round(read_value+bias,3)
             self.AD1_updatesignal = True
         else:
             print("AD1 lost connection to PLC")
