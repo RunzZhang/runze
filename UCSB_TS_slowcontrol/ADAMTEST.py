@@ -4325,7 +4325,7 @@ if __name__ == "__main__":
     # Update.run()
 
 
-    # PLC=PLC()
+    PLC=PLC()
     # PLC.Read_LL()
     # PLC.LS_test()
     # PLC.LS_test_v2()
