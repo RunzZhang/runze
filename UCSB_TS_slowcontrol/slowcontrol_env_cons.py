@@ -2,9 +2,9 @@ BASE_ADDRESS= 12288
 # real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
 
-TT_AD1_ADDRESS = {"RTD7": 31, "RTD8":33, "RTD9": 35, "RTD10": 37}
+TT_AD1_ADDRESS = {"RTD7": 0, "RTD8":1, "RTD9": 2, "RTD10": 3}
 
-TT_AD2_ADDRESS = { "RTD13": 31}
+TT_AD2_ADDRESS = { "RTD13": 0}
 
 HTRTD_ADDRESS = {"RTD4":(0,0,0),"RTD5":(0,0,1),"RTD6":(0,1,0),
                  "RTD1":(1,0,0),"RTD2":(1,0,1),"RTD3":(1,1,0), "RTD11":(1,1,1)}

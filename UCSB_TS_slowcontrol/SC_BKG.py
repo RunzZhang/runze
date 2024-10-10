@@ -941,9 +941,10 @@ class PLC(QtCore.QObject):
 
             for key in self.TT_AD1_address:
                 bias = self.TT_AD1_cali[key]
-                Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD1_address[key], count=2, unit=0x01)
+                Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD1_address[key], count=1, unit=0x01)
                 # also transform C into K if value is not NULL
-                read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1), Raw_RTDs_AD1[key].getRegister(0)))[0], 3)
+                # read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1), Raw_RTDs_AD1[key].getRegister(0)))[0], 3)
+                read_value = -200+400*Raw_RTDs_AD1[key].getRegister(0)/2**16
                 # print(key, read_value)
                 if read_value < 201:
 
