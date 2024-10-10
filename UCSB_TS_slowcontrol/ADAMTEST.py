@@ -179,6 +179,7 @@ class PLC(QtCore.QObject):
 
 
         self.TT_AD1_address = {"RTD7": 31, "RTD8":33, "RTD9": 35, "RTD10": 37}
+        self.TT_AD1_address_v2 = {"RTD7": 1, "RTD8": 2, "RTD9": 3, "RTD10": 4}
         self.TT_AD2_address = copy.copy(sec.TT_AD2_ADDRESS)
         self.HTRTD_address = copy.copy(sec.HTRTD_ADDRESS)
         self.PT_address = copy.copy(sec.PT_ADDRESS)
@@ -1034,7 +1035,50 @@ class PLC(QtCore.QObject):
         # print("decode data", data.decode('unicode_escape'))
 
 
+    def Read_AD_v2(self):
 
+        Raw_RTDs_AD1 = {}
+        Raw_RTDs_AD2 = {}
+        if self.Connected_AD1:
+            # Reading all the RTDs
+
+            for key in self.TT_AD1_address_v2:
+                bias = self.TT_AD1_cali[key]
+                # Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD1_address[key], count=2, unit=0x01)
+                Raw_RTDs_AD1[key] = self.Client_AD1.read_input_registers(self.TT_AD1_address[key], count=1, unit=0x01)
+                # also transform C into K if value is not NULL
+                raw_value = hex(Raw_RTDs_AD1[key].getRegister(0))
+                read_value = round(struct.unpack("<f", struct.pack("<H", Raw_RTDs_AD1[key].getRegister(0)))[0], 5)
+                print(key, read_value, raw_value)
+                if read_value < 201:
+
+                    self.TT_AD1_dic[key] = round(273.15 + read_value+bias,3)
+                else:
+                    self.TT_AD1_dic[key] = round(read_value+bias,3)
+            self.AD1_updatesignal = True
+        else:
+            print("AD1 lost connection to PLC")
+            self.PLC_DISCON_SIGNAL.emit()
+            self.AD1_updatesignal = False
+        print("AD1", self.TT_AD1_dic)
+
+        if self.Connected_AD2:
+            # Reading all the RTDs
+
+            for key in self.TT_AD2_address:
+                Raw_RTDs_AD2[key] = self.Client_AD2.read_holding_registers(self.TT_AD2_address[key], count=2, unit=0x01)
+                # also transform C into K if value is not NULL
+                read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD2[key].getRegister(1), Raw_RTDs_AD2[key].getRegister(0)))[0], 3)
+
+                if read_value < 201:
+
+                    self.TT_AD2_dic[key] = round(273.15 + read_value,1)
+                else:
+                    self.TT_AD2_dic[key] = round(read_value,1)
+            self.AD2_updatesignal = True
+        else:
+            print("AD2 lost connection to PLC")
+            self.AD2_updatesignal = False
 
 
     def __del__(self):
@@ -4332,7 +4376,8 @@ if __name__ == "__main__":
     # PLC.LS_test()
     # PLC.LS_test_v2()
     # PLC.Read_LS()
-    PLC.Read_AD()
+    # PLC.Read_AD()
+    PLC.Read_AD_v2()
     # PLC.ReadAll()
 
 
