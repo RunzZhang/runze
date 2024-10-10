@@ -1042,13 +1042,13 @@ class PLC(QtCore.QObject):
         if self.Connected_AD1:
             # Reading all the RTDs
 
-            for key in self.TT_AD1_address_v2:
+            for key in self.TT_AD1_address:
                 bias = self.TT_AD1_cali[key]
-                # Raw_RTDs_AD1[key] = self.Client_AD1.read_holding_registers(self.TT_AD1_address[key], count=2, unit=0x01)
-                Raw_RTDs_AD1[key] = self.Client_AD1.read_input_registers(self.TT_AD1_address[key], count=1, unit=0x01)
+                Raw_RTDs_AD1[key] = self.Client_AD1.read_input_registers(self.TT_AD1_address[key], count=2, unit=0x01)
                 # also transform C into K if value is not NULL
-                raw_value = hex(Raw_RTDs_AD1[key].getRegister(0))
-                read_value = round(Raw_RTDs_AD1[key].getRegister(0))
+                raw_value = (hex(Raw_RTDs_AD1[key].getRegister(1)), hex(Raw_RTDs_AD1[key].getRegister(0)))
+                read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_AD1[key].getRegister(1),
+                                                                   Raw_RTDs_AD1[key].getRegister(0)))[0], 5)
                 print(key, read_value, raw_value)
                 if read_value < 201:
 
