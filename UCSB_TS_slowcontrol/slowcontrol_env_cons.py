@@ -1,7 +1,7 @@
 BASE_ADDRESS= 12288
 # real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
-
+# 40001 is actually address 0
 TT_AD1_ADDRESS = {"RTD7": 0, "RTD8":1, "RTD9": 2, "RTD10": 3}
 
 TT_AD2_ADDRESS = { "RTD13": 0}
