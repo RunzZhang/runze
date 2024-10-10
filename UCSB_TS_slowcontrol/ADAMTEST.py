@@ -178,7 +178,7 @@ class PLC(QtCore.QObject):
         self.LL_updatesignal = False
 
 
-        self.TT_AD1_address = {"RTD7": 1, "RTD8":2, "RTD9": 3, "RTD10": 4}
+        self.TT_AD1_address = {"RTD7": 0, "RTD8":1, "RTD9": 2, "RTD10": 3}
         self.TT_AD1_address_v2 = {"RTD7": 1, "RTD8": 2, "RTD9": 3, "RTD10": 4}
         self.TT_AD2_address = copy.copy(sec.TT_AD2_ADDRESS)
         self.HTRTD_address = copy.copy(sec.HTRTD_ADDRESS)
