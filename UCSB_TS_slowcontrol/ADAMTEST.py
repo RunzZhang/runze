@@ -4376,8 +4376,8 @@ if __name__ == "__main__":
 
     PLC=PLC()
     # PLC.Read_LL()
-    # PLC.LS_test()
-    PLC.LS_test_v2()
+    PLC.LS_test()
+    # PLC.LS_test_v2()
     PLC.Read_LS_slow()
     # PLC.Read_LS()
     # PLC.Read_AD()
