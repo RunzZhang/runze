@@ -95,31 +95,31 @@ class PLC(QtCore.QObject):
     LS_DISCON_SIGNAL = QtCore.Signal(str)
     def __init__(self):
         super().__init__()
-        self.IP_LS1 = "10.111.19.109"
-        # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
-        self.PORT_LS1 = 7777
-        self.BUFFER_SIZE = 1024
-
-        self.Client_LS1 = ModbusTcpClient(self.IP_LS1, port=self.PORT_LS1)
-        self.Connected_LS1 = self.Client_LS1.connect()
-        print("LS1 connected: " + str(self.Connected_LS1))
-
-        self.LS1_updatesignal = False
-
-        # self.IP_LS2 = "10.111.19.100"
-        self.IP_LS2 = "10.111.19.102"
-
-        # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
-        self.PORT_LS2 = 7777
-        self.BUFFER_SIZE = 1024
-
-        self.Client_LS2 = ModbusTcpClient(self.IP_LS2, port=self.PORT_LS2)
-        self.Connected_LS2 = self.Client_LS2.connect()
-        print("LS2 connected: " + str(self.Connected_LS2))
-        # if self.Connected_LS2:
-        #     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        #     self.socket_LS2.connect((IP_LS2, PORT_LS2))
-        self.LS2_updatesignal = False
+        # self.IP_LS1 = "10.111.19.109"
+        # # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
+        # self.PORT_LS1 = 7777
+        # self.BUFFER_SIZE = 1024
+        #
+        # self.Client_LS1 = ModbusTcpClient(self.IP_LS1, port=self.PORT_LS1)
+        # self.Connected_LS1 = self.Client_LS1.connect()
+        # print("LS1 connected: " + str(self.Connected_LS1))
+        #
+        # self.LS1_updatesignal = False
+        #
+        # # self.IP_LS2 = "10.111.19.100"
+        # self.IP_LS2 = "10.111.19.102"
+        #
+        # # Lakeshore1 10.111.19.100 and lakeshore 2 10.111.19.102
+        # self.PORT_LS2 = 7777
+        # self.BUFFER_SIZE = 1024
+        #
+        # self.Client_LS2 = ModbusTcpClient(self.IP_LS2, port=self.PORT_LS2)
+        # self.Connected_LS2 = self.Client_LS2.connect()
+        # print("LS2 connected: " + str(self.Connected_LS2))
+        # # if self.Connected_LS2:
+        # #     self.socket_LS2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # #     self.socket_LS2.connect((IP_LS2, PORT_LS2))
+        # self.LS2_updatesignal = False
 
         # Adam
         IP_AD1 = "10.111.19.101"
