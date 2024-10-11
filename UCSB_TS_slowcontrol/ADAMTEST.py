@@ -591,6 +591,7 @@ class PLC(QtCore.QObject):
         self.socket_LS.send(cm_code)
         print("sp1")
         # receive = self.socket_LS.recv(self.BUFFER_SIZE).decode('utf-8')
+        time.sleep(5)
         receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
         print("decode", receive)
         self.socket_LS.close()
