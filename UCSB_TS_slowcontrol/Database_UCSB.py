@@ -65,6 +65,7 @@ class mydatabase():
 
         self.mycursor = self.db.cursor()
         self.stack= pd.DataFrame(columns=['Instrument', 'Time', 'Value'])
+        self.stack_v2 = pd.DataFrame(columns=['Instrument', 'Time', 'Value', 'GMT'])
 
     def query(self,statement):
         try:
@@ -118,13 +119,19 @@ class mydatabase():
         # value is a decimal from -9999.999 to 9999.999
         # name must be consistent with P&ID
 
-        new_df=pd.DataFrame({'Instrument':instrument,"Time":time,"Value": value,"GMT": gmt_time},index=[len(self.stack)])
-        self.stack = pd.concat((self.stack,new_df), axis=0,ignore_index= True)
+        new_df=pd.DataFrame({'Instrument':instrument,"Time":time,"Value": value,"GMT": gmt_time},index=[len(self.stack_v2)])
+        self.stack_v2 = pd.concat((self.stack_v2,new_df), axis=0,ignore_index= True)
     def sort_stack(self):
         self.stack = self.stack.sort_values(by=['Time'])
         self.stack = self.stack.reset_index(drop=True)
         # print("first", self.stack.iloc[:5])
         # print("last",self.stack.iloc[-5:])
+
+    def sort_stack_v2(self):
+        self.stack_v2 = self.stack_v2.sort_values(by=['Time'])
+        self.stack_v2 = self.stack_v2.reset_index(drop=True)
+        # print("first", self.stack_v2.iloc[:5])
+        # print("last",self.stack_v2.iloc[-5:])
 
     def convert_stack_into_queries(self):
         for idx in self.stack.index:
@@ -133,11 +140,22 @@ class mydatabase():
 
             self.mycursor.execute(
                 "INSERT INTO DataStorage (Instrument, Time, Value) VALUES(%s, %s, %s);", newdata)
+    def convert_stack_into_queries_v2(self):
+        for idx in self.stack_v2.index:
+            newdata = (self.stack_v2['Instrument'][idx], self.stack_v2['Time'][idx], self.stack_v2['Value'][idx], self.stack_v2["GMT"][idx])
+            # print(newdata)
+
+            self.mycursor.execute(
+                "INSERT INTO DataStorage (Instrument, Time, Value, GMT) VALUES(%s, %s, %s, %s);", newdata)
 
     def drop_stack(self):
         self.stack = self.stack.iloc[0:0]
         # print(self.stack)
 
+
+    def drop_stack_v2(self):
+        self.stack_v2 = self.stack_v2.iloc[0:0]
+        # print(self.stack_v2)
     def insert_data_into_metadata(self,instrument, Description,Unit):
         # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
         # value is a decimal from -9999.999 to 9999.999

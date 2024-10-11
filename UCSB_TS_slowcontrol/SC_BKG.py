@@ -2856,9 +2856,9 @@ class UpdateDataBase(QtCore.QObject):
         # commit the changes at last step only if it is time to write
         if self.commit_bool:
             # put alll commands into stack which is a pandas dataframe, reorder it by timestamp and then transform them into mysql queries
-            self.db.sort_stack()
-            self.db.convert_stack_into_queries()
-            self.db.drop_stack()
+            self.db.sort_stack_v2()
+            self.db.convert_stack_into_queries_v2()
+            self.db.drop_stack_v2()
             self.db.db.commit()
         print("Wrting PLC data to database...")
         self.para_alarm += 1
