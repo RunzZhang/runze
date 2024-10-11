@@ -585,15 +585,16 @@ class PLC(QtCore.QObject):
         print("connection success!2")
 
         # command = "*RST\r\n"
-        command = "*idn?\r\n"
+        # command = "*idn?\r\n"
+        command = "*CLS\r\n"
         # command = "KRDG?0\r\n"
         cm_code = command.encode('utf-8')
         self.socket_LS.send(cm_code)
         print("sp1")
         # receive = self.socket_LS.recv(self.BUFFER_SIZE).decode('utf-8')
         time.sleep(15)
-        receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
-        print("decode", receive)
+        # receive = self.socket_LS.recv(self.BUFFER_SIZE).decode()
+        # print("decode", receive)
         self.socket_LS.close()
         print("connection success!3")
 
