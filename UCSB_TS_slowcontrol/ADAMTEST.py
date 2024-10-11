@@ -4378,9 +4378,10 @@ if __name__ == "__main__":
     # PLC.Read_LL()
     # PLC.LS_test()
     # PLC.LS_test_v2()
+    PLC.Read_LS_slow()
     # PLC.Read_LS()
     # PLC.Read_AD()
-    PLC.Read_AD_v2()
+    # PLC.Read_AD_v2()
     # PLC.ReadAll()
 
 
