@@ -585,8 +585,8 @@ class PLC(QtCore.QObject):
         print("connection success!2")
 
         # command = "*RST\r\n"
-        command = "*idn?\r\n"
-        # command = "KRDG?0\r\n"
+        # command = "*idn?\r\n"
+        command = "KRDG?0\r\n"
         cm_code = command.encode('utf-8')
         self.socket_LS.send(cm_code)
         receive = self.socket_LS.recv(self.BUFFER_SIZE).decode('utf-8')
