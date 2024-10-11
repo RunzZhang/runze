@@ -968,9 +968,9 @@ class PLC(QtCore.QObject):
                 read_value = -200 + 400 * Raw_RTDs_AD2[key].getRegister(0) / 2 ** 16
                 if read_value < 201:
 
-                    self.TT_AD2_dic[key] = round(273.15 + read_value,1)
+                    self.TT_AD2_dic[key] = round(273.15 + read_value,2)
                 else:
-                    self.TT_AD2_dic[key] = round(read_value,1)
+                    self.TT_AD2_dic[key] = round(read_value,2)
             self.AD2_updatesignal = True
         else:
             print("AD2 lost connection to PLC")
@@ -2299,6 +2299,7 @@ class UpdateDataBase(QtCore.QObject):
             try:
                 self.dt = datetime_in_1e5micro()
                 self.early_dt = early_datetime()
+                self.gmt_dt = datetime_in_1e5micro_gmt()
                 print("Database Updating", self.dt)
                 print("earlytime", self.early_dt)
 
@@ -2360,7 +2361,8 @@ class UpdateDataBase(QtCore.QObject):
 
 
                 try:
-                    self.write_data()
+                    # self.write_data()
+                    self.write_data_v2()
                 except Exception as e:
                     # self.DB_ERROR_SIG.emit(e)
                     print(e)
@@ -2676,6 +2678,175 @@ class UpdateDataBase(QtCore.QObject):
             for key in self.LEFT_REAL_address:
                 # print(key, self.LEFT_REAL_dic[key])
                 self.db.insert_data_into_stack(key, self.dt, self.LEFT_REAL_dic[key])
+                # print("write pressure transducer")
+                self.commit_bool = True
+            self.para_REAL = 0
+
+
+
+        # commit the changes at last step only if it is time to write
+        if self.commit_bool:
+            # put alll commands into stack which is a pandas dataframe, reorder it by timestamp and then transform them into mysql queries
+            self.db.sort_stack()
+            self.db.convert_stack_into_queries()
+            self.db.drop_stack()
+            self.db.db.commit()
+        print("Wrting PLC data to database...")
+        self.para_alarm += 1
+
+        self.para_TT += 1
+        self.para_PT += 1
+        self.para_Valve += 1
+        # self.para_Switch += 1
+        self.para_LOOPPID += 1
+        self.para_LOOP2PT += 1
+        self.para_REAL += 1
+        self.para_Din += 1
+        self.para_FLAG += 1
+        self.para_FF += 1
+        self.para_PARAM_T += 1
+        self.para_PARAM_I += 1
+        self.para_PARAM_B += 1
+        self.para_PARAM_F += 1
+        self.para_TIME += 1
+        self.para_LL +=1
+        # self.PLC.NewData_Database = False
+
+    def write_data_v2(self):
+        if self.para_TT >= self.rate_TT:
+            for key in self.TT_AD1_dic:
+                self.db.insert_data_into_stack_v2(key, self.dt, self.TT_AD1_dic[key], self.gmt_dt)
+            for key in self.TT_AD2_dic:
+                self.db.insert_data_into_stack_v2(key, self.dt, self.TT_AD2_dic[key], self.gmt_dt)
+            for key in self.HTRTD_dic:
+                self.db.insert_data_into_stack_v2(key, self.dt, self.HTRTD_dic[key], self.gmt_dt)
+            # print("write RTDS")
+            self.commit_bool = True
+            self.para_TT = 0
+
+        if self.para_PT >= self.rate_PT:
+            for key in self.PT_dic:
+                self.db.insert_data_into_stack_v2(key, self.dt, self.PT_dic[key], self.gmt_dt)
+            # print("write pressure transducer")
+            self.commit_bool = True
+            self.para_PT = 0
+        # print(2)
+        for key in self.Valve_OUT:
+            if self.Valve_OUT[key] != self.Valve_buffer[key]:
+                self.db.insert_data_into_stack_v2(key + '_OUT', self.early_dt, self.Valve_buffer[key], self.gmt_dt)
+                self.db.insert_data_into_stack_v2(key + '_OUT', self.dt, self.Valve_OUT[key], self.gmt_dt)
+                self.Valve_buffer[key] = self.Valve_OUT[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key], self.gmt_dt)
+            else:
+                pass
+
+        if self.para_Valve >= self.rate_Valve:
+            for key in self.Valve_OUT:
+                self.db.insert_data_into_stack_v2(key + '_OUT', self.dt, self.Valve_OUT[key], self.gmt_dt)
+                self.Valve_buffer[key] = self.Valve_OUT[key]
+                self.commit_bool = True
+            self.para_Valve = 0
+
+        if self.para_LL >= self.rate_LL:
+            for key in self.LL_dic:
+                self.db.insert_data_into_stack_v2(key, self.dt, self.LL_dic[key], self.gmt_dt)
+            # print("write pressure transducer")
+            self.commit_bool = True
+            self.para_LL = 0
+
+
+        # if state of bool variable changes, write the data into database
+        # print(5)
+        for key in self.LOOPPID_EN:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key], self.gmt_dt)
+            if self.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
+                self.db.insert_data_into_stack_v2(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key], self.gmt_dt)
+                self.db.insert_data_into_stack_v2(key + '_EN', self.dt, self.LOOPPID_EN[key], self.gmt_dt)
+                self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key], self.gmt_dt)
+            else:
+                pass
+
+        for key in self.LOOPPID_MODE0:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key], self.gmt_dt)
+            if self.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
+                self.db.insert_data_into_stack_v2(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key], self.gmt_dt)
+                self.db.insert_data_into_stack_v2(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key], self.gmt_dt)
+                self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key], self.gmt_dt)
+            else:
+                pass
+
+        for key in self.LOOPPID_MODE1:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key], self.gmt_dt)
+            if self.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
+                self.db.insert_data_into_stack_v2(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key], self.gmt_dt)
+                self.db.insert_data_into_stack_v2(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key], self.gmt_dt)
+                self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key], self.gmt_dt)
+            else:
+                pass
+
+        for key in self.LOOPPID_MODE2:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key], self.gmt_dt)
+            if self.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
+                self.db.insert_data_into_stack_v2(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key], self.gmt_dt)
+                self.db.insert_data_into_stack_v2(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key], self.gmt_dt)
+                self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key], self.gmt_dt)
+            else:
+                pass
+
+        for key in self.LOOPPID_MODE3:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key], self.gmt_dt)
+            if self.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
+                self.db.insert_data_into_stack_v2(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key], self.gmt_dt)
+                self.db.insert_data_into_stack_v2(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key], self.gmt_dt)
+                self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key], self.gmt_dt)
+            else:
+                pass
+
+        # if no changes, write the data every fixed time interval
+        # print(6)
+        if self.para_LOOPPID >= self.rate_LOOPPID:
+            for key in self.LOOPPID_EN:
+                self.db.insert_data_into_stack_v2(key + '_EN', self.dt, self.LOOPPID_EN[key], self.gmt_dt)
+                self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+            for key in self.LOOPPID_MODE0:
+                self.db.insert_data_into_stack_v2(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key], self.gmt_dt)
+                self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+            for key in self.LOOPPID_MODE1:
+                self.db.insert_data_into_stack_v2(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key], self.gmt_dt)
+                self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+            for key in self.LOOPPID_MODE2:
+                self.db.insert_data_into_stack_v2(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key], self.gmt_dt)
+                self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+            for key in self.LOOPPID_MODE3:
+                self.db.insert_data_into_stack_v2(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key], self.gmt_dt)
+                self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+            # write float data.
+            for key in self.LOOPPID_OUT:
+                self.db.insert_data_into_stack_v2(key + '_OUT', self.dt, self.LOOPPID_OUT[key], self.gmt_dt)
+                self.LOOPPID_OUT_buffer[key] = self.LOOPPID_OUT[key]
+            for key in self.LOOPPID_IN:
+                self.db.insert_data_into_stack_v2(key + '_IN', self.dt, self.LOOPPID_IN[key], self.gmt_dt)
+                self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
+            self.commit_bool = True
+            self.para_LOOPPID = 0
+        # print(7)
+
+
+        if self.para_REAL >= self.rate_REAL:
+            for key in self.LEFT_REAL_address:
+                # print(key, self.LEFT_REAL_dic[key], self.gmt_dt)
+                self.db.insert_data_into_stack_v2(key, self.dt, self.LEFT_REAL_dic[key], self.gmt_dt)
                 # print("write pressure transducer")
                 self.commit_bool = True
             self.para_REAL = 0

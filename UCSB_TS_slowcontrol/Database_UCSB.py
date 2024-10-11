@@ -7,7 +7,7 @@ import time as tm
 import paramiko, pymysql
 import random
 import pandas as pd
-import csv
+import csv, pytz
 # import matplotlib as plot
 
 def datetime_in_s():
@@ -23,6 +23,21 @@ def datetime_in_1e5micro():
     delta=datetime.timedelta(microseconds=timeR)
     x=d-delta
     return x
+
+def datetime_in_1e5micro_gmt():
+    la_tz = pytz.timezone('America/Los_Angeles')
+
+    # Get the current time in America/Los_Angeles
+    current_time_la = datetime.datetime.now(la_tz)
+
+    # Convert the current time to GMT (UTC)
+    current_time_gmt = current_time_la.astimezone(pytz.utc)
+
+    timeR = int(current_time_gmt.microsecond%1e5)
+    delta=datetime.timedelta(microseconds=timeR)
+    x=current_time_gmt-delta
+    return x
+
 
 def early_datetime():
     d = datetime.datetime.now()
@@ -98,6 +113,13 @@ class mydatabase():
         new_df=pd.DataFrame({'Instrument':instrument,"Time":time,"Value": value},index=[len(self.stack)])
         self.stack = pd.concat((self.stack,new_df), axis=0,ignore_index= True)
 
+    def insert_data_into_stack_v2(self,instrument, time,value, gmt_time):
+        # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
+        # value is a decimal from -9999.999 to 9999.999
+        # name must be consistent with P&ID
+
+        new_df=pd.DataFrame({'Instrument':instrument,"Time":time,"Value": value,"GMT": gmt_time},index=[len(self.stack)])
+        self.stack = pd.concat((self.stack,new_df), axis=0,ignore_index= True)
     def sort_stack(self):
         self.stack = self.stack.sort_values(by=['Time'])
         self.stack = self.stack.reset_index(drop=True)
