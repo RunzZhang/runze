@@ -2761,7 +2761,7 @@ class LOOPPID_v2(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 50 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 370 * R, 70 * R))
         self.setSizePolicy(sizePolicy)
 
 
@@ -2810,7 +2810,7 @@ class LOOPPID_v2(QtWidgets.QWidget):
         self.content_area = QtWidgets.QScrollArea(
             maximumHeight=0, minimumHeight=0
         )
-        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 40 * R))
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 370 * R, 60 * R))
         # self.content_area.setMinimumSize()
         # self.content_area.setSizePolicy(
         #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
@@ -5482,25 +5482,25 @@ class Control_v2(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("Control")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
-        self.setMinimumSize(70*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 100*R, 60*R))
+        self.setMinimumSize(100*R, 60*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 100*R, 60*R))
         self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Control")
-        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 100*R, 30*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet("QLabel {" +FONT+"}")
 
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
-        self.Button.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
+        self.Button.setGeometry(QtCore.QRect(0*R, 30*R, 100*R, 30*R))
         self.Button.setProperty("State",True)
         self.Button.setStyleSheet("QPushButton {" +C_BLUE + C_WHITE + FONT + BORDER_RADIUS + "} QWidget[State = true]{" + C_BLUE
                                  + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")

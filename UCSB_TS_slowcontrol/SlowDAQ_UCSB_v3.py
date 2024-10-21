@@ -256,6 +256,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1008 = LOOPPID_v2(self.ThermosyphonTab)
         self.MFC1008.move(1795 * R, 700 * R)
         self.MFC1008.Label.setText("MFC1008")
+        self.MFC1008.Power
         self.MFC1008.LOOPPIDWindow.setWindowTitle("MFC1008")
         self.MFC1008.LOOPPIDWindow.Label.setText("MFC1008")
 
