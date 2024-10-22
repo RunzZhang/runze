@@ -899,7 +899,7 @@ class PLC(QtCore.QObject):
                     value = dataN2.decode()
                     trimed_value = value.replace("\r\n", "")
                     # print("fetched data N2", trimed_value)
-                    self.LL_dic[key]= float(trimed_value)+ 1.323
+                    self.LL_dic[key]= float(trimed_value)+ 0.521
                     # offset of leveler sensro in cm =0.521 inch
 
                     # commandHE = "MEASure:HE:LEVel?\n"
