@@ -467,7 +467,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LiqLev = Indicator(self.TubeTab)
         self.LiqLev.Label.setText("Liq Lev")
         self.LiqLev.move(145 * R, 450 * R)
-        self.LiqLev.SetUnit(" cm")
+        self.LiqLev.SetUnit(' "')
 
         self.HTR1001 = LOOPPID_v2(self.TubeTab)
         self.HTR1001.move(295 * R, 30 * R)
